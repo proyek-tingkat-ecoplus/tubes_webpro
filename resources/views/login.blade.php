@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="asset/login.css">
+    <link rel="stylesheet" href="{{ asset('asset/login.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
+
 </head>
 <body>
     <div class="card">
@@ -20,9 +20,9 @@
                 <div class="input-group">
                     <i class="fa-solid fa-user icon"></i>
                     <input type="text" placeholder="username">
-                    
+
                 </div>
-                <div class="input-group"> 
+                <div class="input-group">
                     <i class="fa-solid fa-lock icon"></i>
                     <input type="text" placeholder="password">
                 </div>
@@ -38,10 +38,10 @@
             </div>
             <div class="bottom-section">
                 <div><a href="">Forgot Password?</a></div>
-                <div>Belum punya akun? <a href="register.html">Daftar</a></div>
+                <div>Belum punya akun? <a href="/register">Daftar</a></div>
             </div>
         </div>
-        
+
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
