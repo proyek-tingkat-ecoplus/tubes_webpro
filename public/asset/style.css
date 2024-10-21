@@ -22,7 +22,9 @@ html {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-
+input {
+    pointer-events: auto; /* Pastikan pointer bisa berinteraksi dengan input */
+}
 img {
     max-width: 100%;
 }
@@ -58,29 +60,7 @@ h6 {
     margin: 0px;
 }
 
-h1 {
-    font-size: 48px;
-}
 
-h2 {
-    font-size: 36px;
-}
-
-h3 {
-    font-size: 28px;
-}
-
-h4 {
-    font-size: 22px;
-}
-
-h5 {
-    font-size: 18px;
-}
-
-h6 {
-    font-size: 16px;
-}
 
 ul,
 ol {
@@ -212,7 +192,7 @@ p {
     display: block;
     border: 0;
     border-radius: 0;
-    background: #164687;
+    background: #003030;
     top: 46px
 }
 
@@ -230,10 +210,10 @@ p {
     line-height: 12px;
     letter-spacing: 0.02em;
     padding: 15px;
-    border-bottom: 1px solid #406392 !important;
+    border-bottom: 1px solid #003030 !important;
     border: 0;
     border-radius: 0;
-    background: #164687;
+    background: #003030;
 }
 
 .navbar-area .dropdown-item:hover {
@@ -252,7 +232,7 @@ p {
 
 .navbar-area .nav-link:hover {
     color: #fff !important;
-    background-color: #164687;
+    background-color: #003030;
 }
 
 .navbar-area .navbar-nav {
@@ -348,6 +328,12 @@ p {
     font-size: 20px;
 }
 
+.img-hero{
+    width: 100%;
+    height: 600px;
+    object-fit: fill;
+}
+
 @media only screen and (max-width: 576px) {
     .carousel-area .swiper-button-prev,
     .carousel-area .swiper-button-next {
@@ -362,7 +348,7 @@ p {
 
 .data-area {
     height: 446px;
-    background-color: #164687;
+    background-color: #003030;
 }
 
 @media only screen and (max-width: 1200px) {
@@ -509,7 +495,7 @@ p {
     font-size: 12px;
     line-height: 12px;
     letter-spacing: 0.02em;
-    color: #164687;
+    color: #003030;
     margin: 20px 0 10px 0px;
     cursor: pointer;
     -webkit-transition: all 0.3s ease-out 0s;
@@ -547,7 +533,7 @@ p {
 } */
 
 .search-area .search-left {
-    background-color: #164687;
+    background-color: #003030;
 }
 
 .search-area .search-right {
@@ -656,375 +642,6 @@ p {
 }
 
 
-/*===========================
-    06. LOWONGAN css
-===========================*/
-
-.lowongan-area {
-    padding: 60px 0px 60px 0px;
-    background-color: #f0f0f0;
-}
-
-.lowongan-area .lowongan-main-title {
-    font-weight: bold;
-    font-size: 40px;
-    line-height: 44px;
-    display: flex;
-    align-items: center;
-    text-transform: capitalize;
-    color: #27272A;
-}
-
-.lowongan-area .lowongan-text {
-    font-style: italic;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 18px;
-    /* or 150% */
-    display: flex;
-    align-items: center;
-    color: #C4C4C4;
-}
-
-.lowongan-area .lowongan-title1 {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 14px;
-    line-height: 20px;
-    align-items: center;
-    text-align: center;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: #27272A;
-}
-
-.lowongan-area .lowongan-content .lowongan-title2 {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 16px;
-    align-items: center;
-    text-align: center;
-    text-transform: uppercase;
-    color: #4272C4;
-}
-
-.lowongan-area .lowongan-content .lowongan-text1 p {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    /* or 150% */
-    display: flex;
-    align-items: center;
-    color: #71717A;
-}
-
-.lowongan-area .lowongan-card {
-    background: #FFFFFF;
-    box-shadow: 0px 5px 25px rgba(0, 0, 0, 0.1), 0px 2px 5px rgba(0, 0, 0, 0.04);
-    border: 0;
-    padding: 10px 20px 10px;
-}
-
-.lowongan-area .lowongan-btn1 {
-    color: #fff;
-    background-color: #FF7B14;
-    border-color: #FF7B14 !important;
-    border: 2px solid;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 12px;
-    letter-spacing: 0.12em;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    padding: 10px 68px;
-    text-align: center;
-    text-transform: uppercase;
-    -webkit-transition: all 0.3s ease-out 0s;
-    -moz-transition: all 0.3s ease-out 0s;
-    -ms-transition: all 0.3s ease-out 0s;
-    -o-transition: all 0.3s ease-out 0s;
-    transition: all 0.3s ease-out 0s;
-}
-
-.lowongan-area .lowongan-btn1:hover {
-    color: #FFf;
-    background-color: #164687;
-    border-color: #164687 !important;
-    /* border: 2px solid; */
-}
-
-.lowongan-area .lowongan-btn2 {
-    color: #FF7B14;
-    background-color: transparent;
-    border-color: #FF7B14;
-    border: 2px solid;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 12px;
-    letter-spacing: 0.12em;
-    margin-top: 5px;
-    margin-bottom: 10px;
-    padding: 10px 64px;
-    text-align: center;
-    text-transform: uppercase;
-    -webkit-transition: all 0.3s ease-out 0s;
-    -moz-transition: all 0.3s ease-out 0s;
-    -ms-transition: all 0.3s ease-out 0s;
-    -o-transition: all 0.3s ease-out 0s;
-    transition: all 0.3s ease-out 0s;
-}
-
-.lowongan-area .lowongan-btn2:hover {
-    color: #fff;
-    background-color: #FF7B14;
-    border-color: #FF7B14;
-}
-
-.lowongan-area .lowongan-btn3 {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 15px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #27272A;
-    text-transform: uppercase;
-    -webkit-transition: all 0.3s ease-out 0s;
-    -moz-transition: all 0.3s ease-out 0s;
-    -ms-transition: all 0.3s ease-out 0s;
-    -o-transition: all 0.3s ease-out 0s;
-    transition: all 0.3s ease-out 0s;
-}
-
-.lowongan-area .lowongan-btn3:hover {
-    color: #FF7B14;
-}
-
-
-/*===========================
-    07. PELATIHAN css
-===========================*/
-
-.pelatihan-area {
-    padding: 60px 0px 60px 0px;
-    background-color: #164687;
-}
-
-.pelatihan-area .pelatihan-main-title {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 40px;
-    line-height: 44px;
-    display: flex;
-    align-items: center;
-    text-transform: capitalize;
-    color: #E5E5E5;
-}
-
-.pelatihan-area .pelatihan-title {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 24px;
-    line-height: 16px;
-    align-items: center;
-    color: #E5E5E5;
-    margin-top: 20px;
-}
-
-.pelatihan-area .pelatihan-text {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 14px;
-    display: flex;
-    align-items: center;
-    color: #FFFFFF;
-    margin-top: 20px;
-}
-
-.pelatihan-area .pelatihan-btn1 {
-    color: #FFf;
-    background-color: #FF7B14;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 12px;
-    letter-spacing: 0.12em;
-    margin-top: 20px;
-    padding: 10px 30px;
-    text-align: center;
-    text-transform: uppercase;
-    -webkit-transition: all 0.3s ease-out 0s;
-    -moz-transition: all 0.3s ease-out 0s;
-    -ms-transition: all 0.3s ease-out 0s;
-    -o-transition: all 0.3s ease-out 0s;
-    transition: all 0.3s ease-out 0s;
-}
-
-.pelatihan-area .pelatihan-btn1:hover {
-    color: #FF7B14;
-    background-color: #fff;
-}
-
-.pelatihan-area .pelatihan-btn2 {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 15px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #E5E5E5;
-    text-transform: uppercase;
-    -webkit-transition: all 0.3s ease-out 0s;
-    -moz-transition: all 0.3s ease-out 0s;
-    -ms-transition: all 0.3s ease-out 0s;
-    -o-transition: all 0.3s ease-out 0s;
-    transition: all 0.3s ease-out 0s;
-}
-
-.pelatihan-area .pelatihan-btn2:hover {
-    color: #FF7B14;
-}
-
-
-/*===========================
-    08. BERITA css
-===========================*/
-
-.berita-area {
-    padding: 60px 0px 60px 0px;
-    background-color: #f0f0f0;
-}
-
-@media (min-width: 600px) {
-    .hide-mobile {
-        display: none;
-    }
-}
-
-.berita-slide {
-    padding: 10px;
-    cursor: pointer;
-    background-color: #FFF;
-}
-
-.berita-slide .berita-img {
-    overflow: hidden;
-}
-
-.berita-slide .berita-img img {
-    width: 100%;
-    height: auto;
-    /* filter: grayscale(100%); */
-    opacity: 0.9;
-    transform: scale(1.1, 1.1);
-    transition: all 0.3s ease-in-out 0s;
-}
-
-.berita-slide:hover .berita-img img {
-    transform: scale(1.2, 1.2);
-    /* filter: none; */
-    filter: grayscale(100%);
-    opacity: 1;
-}
-
-.berita-slide .berita-content {
-    /* padding: 20px; */
-    font-weight: 700;
-    position: relative;
-}
-
-.berita-slide .berita-date {
-    min-width: 28px;
-    min-height: 28px;
-    line-height: 28px;
-    text-align: center;
-    background: #4272C4;
-    position: absolute;
-    top: 10px;
-}
-
-.berita-slide .month {
-    display: block;
-    font-size: 12px;
-    font-weight: 700;
-    color: #fff;
-    padding: 0 10px;
-    background: #FF7B14;
-    text-transform: uppercase;
-}
-
-.berita-slide .date {
-    font-size: 14px;
-    color: #fff;
-}
-
-.berita-slide .berita-cate {
-    font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 12px;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    color: #000000;
-    margin: 15px 0px 5px 0px;
-}
-
-.berita-slide .berita-title {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 18px;
-    line-height: normal;
-    color: #000000;
-    margin: 10px 0px 5px 0px;
-}
-
-.berita-slide .berita-title a {
-    color: #27272A;
-    font-size: 14px;
-    text-transform: uppercase;
-    transition: all 0.50s ease 0s;
-}
-
-.berita-slide .berita-description {
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 24px;
-    color: #71717A;
-    margin: 15px 0px 5px 0px;
-}
-
-.berita-area .berita-main-title {
-    font-weight: bold;
-    font-size: 40px;
-    line-height: 44px;
-    display: flex;
-    align-items: center;
-    text-transform: capitalize;
-    color: #27272A;
-}
-
-.berita-area .berita-btn1 {
-    font-style: normal;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 15px;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    color: #27272A;
-    text-transform: uppercase;
-    -webkit-transition: all 0.3s ease-out 0s;
-    -moz-transition: all 0.3s ease-out 0s;
-    -ms-transition: all 0.3s ease-out 0s;
-    -o-transition: all 0.3s ease-out 0s;
-    transition: all 0.3s ease-out 0s;
-}
-
-.berita-area .berita-btn1:hover {
-    color: #FF7B14;
-}
-
 
 /*===========================
     09. KONTAK css
@@ -1032,7 +649,7 @@ p {
 
 .kontak-area {
     padding: 60px 0px 20px 0px;
-    background-color: #164687;
+    background-color: #003030;
     height: 300px;
 }
 
@@ -1168,7 +785,7 @@ p {
 
 .footer-area {
     padding: 60px 0px 30px 0px;
-    background-color: #164687;
+    background-color: #003030;
 }
 
 .footer-area .footer-title {
@@ -1217,6 +834,10 @@ p {
     width: 40px;
     position: relative;
     z-index: 2;
+}
+
+.img-kota{
+    width: 100%;
 }
 
 .footer-area .footer-hr2 {

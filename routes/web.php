@@ -3,15 +3,9 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
-Route::get('/login', function () {
-    return view('login');
+Route::get('/kontak', function () {
+    return view('kontak');
 });
-
-Route::get('/register', function () {
-    return view('register');
-});
-
-//url.com/login
