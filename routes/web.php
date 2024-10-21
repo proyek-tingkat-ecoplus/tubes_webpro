@@ -14,4 +14,9 @@ Route::get('/register', function () {
     return view('register');
 });
 
+Route::get('/kontak', function () {
+    return view('kontak');
+});
+
+
 //url.com/login
