@@ -1,4 +1,4 @@
-<section class="navbar-area">
+<section class="navbar-area rounded-circle">
     <div class="">
         <nav class="navbar1 navbar-expand-lg navbar-light bg-light mx-auto">
             <div class="row justify-content-center">
@@ -19,11 +19,11 @@
                             class="bi bi-envelope-fill me-2" viewBox="0 0 16 16">
                             <path
                                 d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z" />
-                        </svg> disnaker@cimahikota.go.id</p>
+                        </svg> admin.ecopulse@gmail.com</p>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12" style="background: #003030;">
                     <div class="navbar-btn-area">
-                        <a class="navbar-btn1" href="">Login</a>
+                        <a class="navbar-btn1 rounded" href="">Login</a>
                     </div>
                 </div>
             </div>
@@ -35,58 +35,26 @@
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="border: 0px; margin-top: 8px;
                     margin-bottom: 8px;">
                     <span class="navbar-toggler-icon"></span>
-                </button>
+                </button>f
                 <div class="collapse navbar-collapse" id="navbarNav" style="text-align: center">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Beranda</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Profil Dinas
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                                <li><a class="dropdown-item" href="#">Profil Disnaker Cimahi</a></li>
-                                <li><a class="dropdown-item" href="#">Profil Kepala Dinas dan Kepala Bidang</a></li>
-                                <li><a class="dropdown-item" href="#">Kepala Dinas Dari Masa Ke Masa</a></li>
-                                <li><a class="dropdown-item" href="#">Profil Kepala Dinas dan Kepala Bidang</a></li>
-                                <li><a class="dropdown-item" href="#">Struktur Organisasi</a></li>
-                                <li><a class="dropdown-item" href="#">Kekuatan Personil</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Bidang Kerja
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
-                                <li><a class="dropdown-item" href="#">Sekretaris</a></li>
-                                <li><a class="dropdown-item" href="#">P2TKT</a></li>
-                                <li><a class="dropdown-item" href="#">PHI - JAMSOS</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Informasi
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                <li><a class="dropdown-item" href="#">Berita Ketenagakerjaan</a></li>
-                                <li><a class="dropdown-item" href="#">Agenda Kegiatan</a></li>
-                                <li><a class="dropdown-item" href="#">Faqs</a></li>
-                                <li><a class="dropdown-item" href="#">LPK</a></li>
-                                <li><a class="dropdown-item" href="#">BKK</a></li>
-                            </ul>
+                            <a class="nav-link" href="#">BERANDA</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Galeri Foto</a>
+                            <a class="nav-link" href="#">INFORMASI</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Produk Hukum</a>
+                            <a class="nav-link" href="#">PEMETAAN ENERGI BERSIH</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Hubungi Kami</a>
+                            <a class="nav-link" href="#">FORUM</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">FORUM DINAS</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">HUBUNGI KAMI</a>
                         </li>
                     </ul>
                 </div>
