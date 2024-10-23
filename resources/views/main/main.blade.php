@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="{{asset('asset/style.css')}}">
     <link rel="stylesheet" href="asset/js/script.css">
     <link rel="stylesheet" href="{{ asset('asset/css/typeahead.css') }}">
+    <link rel="stylesheet" href="{{asset('asset/css/pages/form.css')}}">
     <link rel="stylesheet" href="{{asset('asset/css/pages/kontakDetails.css')}}">
     <title>Disnaker</title>
     <style>

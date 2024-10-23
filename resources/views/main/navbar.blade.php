@@ -3,7 +3,7 @@
         <nav class="navbar1 navbar-expand-lg navbar-light bg-light mx-auto">
             <div class="row justify-content-center">
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
-                    <img src="{{asset('asset/image/fixbgt.png')}}" alt="Logo" class="navbar-image">
+                    <img src="{{asset('asset/image/logo.png')}}" alt="Logo" class="navbar-image">
                 </div>
                 <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5" style="background: #003030;">
                     <p class="navbar-text">
@@ -35,7 +35,7 @@
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation" style="border: 0px; margin-top: 8px;
                     margin-bottom: 8px;">
                     <span class="navbar-toggler-icon"></span>
-                </button>f
+                </button>
                 <div class="collapse navbar-collapse" id="navbarNav" style="text-align: center">
                     <ul class="navbar-nav">
                         <li class="nav-item">
