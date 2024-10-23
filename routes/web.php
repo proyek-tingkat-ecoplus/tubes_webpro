@@ -9,3 +9,11 @@ Route::get('/', function () {
 Route::get('/kontak', function () {
     return view('kontak');
 });
+
+Route::get('/kontak', function () {
+    return view('kontak');
+});
+
+Route::get('/form', function () {
+    return view('form');
+});
