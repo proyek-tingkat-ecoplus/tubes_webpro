@@ -17,3 +17,15 @@ Route::get('/kontak', function () {
 Route::get('/form', function () {
     return view('form');
 });
+
+
+Route::get('/dashboard', function () {
+    return view('admin.pages.dashboard');
+});
+
+Route::get('/pages/user/', function () {
+    return view('admin.pages.user.index');
+});
+Route::get('/pages/user/add', function () {
+    return view('admin.pages.user.add');
+});
