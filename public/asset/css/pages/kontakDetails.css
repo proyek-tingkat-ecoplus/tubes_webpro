@@ -1,0 +1,28 @@
+.card-style {
+    width: 80%;
+    top: -200px;
+}
+
+.social-media-style {
+    background-color: #003030;
+}
+
+
+.fs-icon {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    margin-top: 0.75rem;
+}
+
+.ratio-style {
+    margin-bottom: 1.5rem;
+}
+
+.btn-icon {
+    font-size: 50px;
+}
+
+.telegram-btn {
+    background-color: transparent;
+    border: none;
+}

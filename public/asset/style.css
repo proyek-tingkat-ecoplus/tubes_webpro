@@ -1,0 +1,920 @@
+/*===========================
+    00. COMMON css
+===========================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+body {
+    font-family: "Poppins", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    color: #121212;
+    background-color: #f0f0f0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+input {
+    pointer-events: auto; /* Pastikan pointer bisa berinteraksi dengan input */
+}
+img {
+    max-width: 100%;
+}
+
+a:focus,
+input:focus,
+textarea:focus,
+button:focus {
+    text-decoration: none;
+    outline: none;
+}
+
+a:focus,
+a:hover {
+    text-decoration: none;
+}
+
+i,
+span,
+a {
+    display: inline-block;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    color: #121212;
+    margin: 0px;
+}
+
+
+
+ul,
+ol {
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    color: #121212;
+    margin: 0px;
+}
+
+
+/*===========================
+    01. NAVBAR css
+===========================*/
+
+
+/* Top Navbar */
+
+.navbar-area {
+    padding: 30px 90px 30px 90px;
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar-area {
+        padding: 0px;
+        position: static;
+        z-index: 2;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+.navbar-area .navbar-image {
+    height: 60px;
+    width: auto;
+    margin-top: 20px;
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar-area .navbar-image {
+        height: auto;
+        width: 100px;
+        margin-bottom: 20px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .navbar-area .navbar-image {
+        height: 40px;
+        width: 100px;
+        margin-bottom: 20px;
+    }
+}
+
+.navbar-area .navbar1 {
+    padding: 0px 15px;
+}
+
+.navbar-area .col {
+    padding: 20px;
+    align-items: center;
+    text-align: center;
+}
+
+.navbar-area .navbar-text {
+    padding: 20px;
+    margin-top: 12px;
+    align-items: center;
+    text-align: center;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 14px;
+    /* identical to box height, or 100% */
+    color: #FFFFFF;
+}
+
+.navbar-area .navbar-btn-area {
+    padding: 10px;
+    margin-top: 12px;
+}
+
+.navbar-area .navbar-btn-area .navbar-btn1 {
+    color: #FFf;
+    background-color: #FF7B14;
+    padding: 10px 15px;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+}
+
+.navbar-area .navbar-btn1:hover {
+    color: #FF7B14;
+    background-color: #fff;
+}
+
+
+/* Bottom Navbar */
+
+.navbar-area .navbar2 {
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.navbar-area .dropdown:hover>.dropdown-menu {
+    display: block;
+    border: 0;
+    border-radius: 0;
+    background: #003030;
+    top: 46px
+}
+
+.navbar-area .dropdown-menu {
+    padding: 0px;
+    border: 0px;
+    top: 46px
+}
+
+.navbar-area .dropdown-item {
+    color: #Fff;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: 0.02em;
+    padding: 15px;
+    border-bottom: 1px solid #003030 !important;
+    border: 0;
+    border-radius: 0;
+    background: #003030;
+}
+
+.navbar-area .dropdown-item:hover {
+    background-color: #928f8f;
+}
+
+.navbar-area .nav-link {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 15px 0px;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #222222;
+}
+
+.navbar-area .nav-link:hover {
+    color: #fff !important;
+    background-color: #003030;
+}
+
+.navbar-area .navbar-nav {
+    flex: 1;
+    margin: auto !important;
+    display: flex;
+    justify-content: space-around;
+}
+
+.navbar-area .navbar-title-menu {
+    color: #222222;
+}
+
+.navbar-area .navbar-title-menu:hover {
+    color: #FFF;
+}
+
+.navbar-area .navbar-text-menu {
+    color: #FFF;
+}
+
+
+/*===========================
+    02. CAROUSEL css
+===========================*/
+
+
+/* .carousel-area {
+    padding: 60px 0px 60px 0px;
+} */
+
+.carousel-area .swiper,
+.carousel-area img {
+    height: 700px;
+    width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+    .carousel-area .swiper,
+    .carousel-area img {
+        height: 500px;
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    .carousel-area .swiper,
+    .carousel-area img {
+        height: 300px;
+        width: 100%;
+    }
+}
+
+.carousel-area .swiper-button-next,
+.swiper-button-prev {
+    background-color: #FF7B14;
+    width: 50px;
+    height: 50px;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+}
+
+.carousel-area .swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: #Fff;
+}
+
+.carousel-area .swiper-button-prev {
+    left: 80px;
+    right: auto;
+    color: #fff;
+}
+
+.carousel-area .swiper-button-prev:hover {
+    color: #FF7B14;
+}
+
+.carousel-area .swiper-button-next {
+    right: 80px;
+    left: auto;
+    color: #fff;
+}
+
+.carousel-area .swiper-button-next:hover {
+    color: #FF7B14;
+}
+
+.carousel-area .swiper-button-prev:after,
+.carousel-area .swiper-button-next::after {
+    font-size: 20px;
+}
+
+.img-hero{
+    width: 100%;
+    height: 600px;
+    object-fit: fill;
+}
+
+@media only screen and (max-width: 576px) {
+    .carousel-area .swiper-button-prev,
+    .carousel-area .swiper-button-next {
+        display: none;
+    }
+}
+
+
+/*===========================
+    03. DATA css
+===========================*/
+
+.data-area {
+    height: 446px;
+    background-color: #003030;
+}
+
+@media only screen and (max-width: 1200px) {
+    .data-area {
+        height: 482px !important;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    .data-area {
+        height: 566px !important;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .data-area {
+        height: auto !important;
+    }
+}
+
+.data-area .data-col2 {
+    z-index: 1;
+    top: -100px;
+}
+
+@media only screen and (max-width: 768px) {
+    .data-area .data-col2 {
+        z-index: none !important;
+        top: auto !important;
+    }
+}
+
+.data-area .data-title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 36px;
+    /* or 180% */
+    display: flex;
+    align-items: center;
+    color: #E5E5E5;
+    padding: 120px 30px 60px 0px;
+}
+
+@media only screen and (max-width: 768px) {
+    .data-area .data-title {
+        padding: 60px 30px 60px 0px;
+    }
+}
+
+.data-area .card {
+    border-radius: 0px;
+    border-color: transparent;
+    padding: 10px;
+}
+
+.data-area .data-card1 {
+    background: #FF8323;
+}
+
+.data-area .data-card2 {
+    background: #FF913A;
+}
+
+.data-area .card img {
+    height: 60px;
+    width: auto;
+}
+
+.data-area .data-card-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 24px;
+    /* identical to box height, or 100% */
+    text-align: center;
+    color: #FFFFFF;
+}
+
+.data-area .data-card-text {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 10px;
+    line-height: 12px;
+    /* or 120% */
+    text-align: center;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+
+/*===========================
+    04. PROFIL css
+===========================*/
+
+.profil-area {
+    padding: 60px 0px 60px 0px;
+    background-color: #f0f0f0;
+}
+
+#more {
+    display: none;
+}
+
+.profil-area .profil-img {
+    float: right;
+    max-height: 200px;
+    margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .profil-area .profil-img {
+        float: none;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.profil-area .profil-title {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 36px;
+    /* text-align: center; */
+    color: #000000;
+    margin: 10px 0px 5px 0px;
+}
+
+.profil-area .profil-text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.02em;
+    color: #27272A;
+    margin: 20px 0 10px 0px;
+}
+
+.profil-area .profil-btn1 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 12px;
+    letter-spacing: 0.02em;
+    color: #003030;
+    margin: 20px 0 10px 0px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+}
+
+.profil-area .profil-btn1:hover {
+    color: #FF7B14;
+}
+
+
+/*===========================
+    05. SEARCH css
+===========================*/
+
+.search-area {
+    padding: 60px 0px 60px 0px;
+}
+
+.search-area .search-left,
+.search-area .search-right {
+    height: 450px;
+    width: 100%;
+}
+
+
+/* @media screen and (min-width: 768px) {
+    .search-area .search-left,
+    .search-area .search-right {
+        height: 100vh;
+    }
+} */
+
+.search-area .search-left {
+    background-color: #003030;
+}
+
+.search-area .search-right {
+    background-color: #FFF;
+}
+
+.search-area .search-left,
+.search-area .search-right {
+    display: flex;
+    justify-content: space-around;
+    /* align-items: center; */
+}
+
+.search-area .search-container {
+    width: 75%;
+    padding: 60px 0px 60px 0px;
+}
+
+@media screen and (max-width: 768px) {
+    .search-area .search-container {
+        width: 95%;
+        padding: 60px 0px 60px 0px;
+    }
+}
+
+.search-area .search-title1 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 44px;
+    align-items: center;
+    text-transform: capitalize;
+    color: #E5E5E5;
+}
+
+.search-area .search-title2 {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 24px;
+    text-transform: capitalize;
+    color: #27272A;
+}
+
+.search-area button {
+    border-radius: 0px;
+}
+
+.search-area button.button1 {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    text-align: center;
+    color: #E5E5E5;
+    border-color: #fff;
+}
+
+.search-area button.button2 {
+    border-radius: 0px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 14px;
+    text-align: center;
+    color: #FFFF;
+    background-color: #FF7B14;
+}
+
+.search-area button.button3 {
+    font-style: normal;
+    font-weight: 900;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    letter-spacing: 0.04em;
+    color: #FFFFFF;
+    background-color: #FF7B14;
+    padding: 0px 20px;
+}
+
+.search-area span,
+.search-area input {
+    border-radius: 0px;
+}
+
+.search-area .search-popular a {
+    margin-right: 15px;
+    margin-bottom: 15px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    padding: 5px 10px;
+    /* identical to box height, or 150% */
+    color: #27272A;
+}
+
+.search-area .search-popular a:hover {
+    color: #FFf;
+    background-color: #FF7B14;
+}
+
+.search-area .search-popular a.active {
+    color: #FFf;
+    background-color: #FF7B14;
+}
+
+
+
+/*===========================
+    09. KONTAK css
+===========================*/
+
+.kontak-area {
+    padding: 60px 0px 20px 0px;
+    background-color: #003030;
+    height: 300px;
+}
+
+@media (max-width: 960px) {
+    .kontak-area {
+        height: auto;
+    }
+}
+
+.kontak-area .kontak-main-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 40px;
+    /* or 100% */
+    /* display: flex; */
+    align-items: center;
+    text-align: center;
+    text-transform: capitalize;
+    color: #FFFFFF;
+}
+
+.kontak-area .kontak-text {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+    text-align: center;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+}
+
+.kontak-area .kontak-card-group {
+    width: 800px;
+}
+
+@media (max-width: 992px) {
+    .kontak-area .kontak-card-group {
+        width: auto;
+    }
+}
+
+.kontak-area .kontak-card {
+    background: #FFFFFF;
+    border: 0;
+    padding: 30px 10px 10px;
+    text-align: center !important;
+    /* width: 100px !important; */
+}
+
+.kontak-area .kontak-title1 {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    /* identical to box height, or 117% */
+    text-align: center;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #27272A;
+}
+
+.kontak-area .kontak-text1 {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    align-items: center;
+    text-align: center;
+    color: #27272A;
+}
+
+
+/*===========================
+    10. MAP css
+===========================*/
+
+.map-area iframe {
+    width: 100%;
+    height: 550px;
+}
+
+.map-area.container {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+@media (max-width: 767px) {
+    .map-area iframe {
+        height: 350px;
+    }
+}
+
+
+/*===========================
+    11. LINK css
+===========================*/
+
+.link-area {
+    padding: 60px 0px 60px 0px;
+    background-color: #f0f0f0;
+}
+
+.link-padding.container {
+    padding: 0px 50px 0px 50px;
+}
+
+.link-area .link-main-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #27272A;
+}
+
+.link-area .link-image {
+    /* display: block; */
+    margin-left: auto;
+    margin-right: auto;
+    max-height: 95px;
+    width: auto;
+}
+
+
+/*===========================
+    12. FOOTER css
+===========================*/
+
+.footer-area {
+    padding: 60px 0px 30px 0px;
+    background-color: #003030;
+}
+
+.footer-area .footer-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 16px;
+    align-items: center;
+    color: #E5E5E5;
+}
+
+.footer-area .footer-card {
+    position: relative;
+    z-index: 2;
+    top: -65px;
+    border-radius: 0px !important;
+    padding: 15px;
+    z-index: 1;
+    border: o;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .footer-area .footer-card {
+        top: -60px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .footer-area .footer-card {
+        top: -55px;
+    }
+}
+
+.footer-area .footer-text {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 24px;
+    align-items: center;
+    color: #FFFFFF;
+    bottom: 200px !important;
+}
+
+.footer-area .footer-hr1 {
+    border: 4px solid #FF7B14;
+    width: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.img-kota{
+    width: 100%;
+    height: 600px;
+}
+
+.footer-area .footer-hr2 {
+    border: 2px solid #406392;
+    width: 243px;
+    position: absolute;
+    z-index: 1;
+    top: 18px;
+}
+
+@media only screen and (min-width: 992px) and (max-width: 1200px) {
+    .footer-area .footer-hr2 {
+        width: 180px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .footer-area .footer-hr2 {
+        width: 140px;
+    }
+}
+
+.footer-area ul li a {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    /* or 133% */
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+}
+
+.footer-area ul li a:hover {
+    color: #FF7B14;
+}
+
+.footer-area .footer-main-title {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 14px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+}
+
+
+/*===========================
+    13. Scroll Back To Top
+===========================*/
+
+#totop {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #FF7B14;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+    transition: all 0.3s ease-out 0s;
+}
+
+#totop:hover {
+    color: #FF7B14;
+    background-color: #fff;
+}
