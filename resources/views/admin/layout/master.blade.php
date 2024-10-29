@@ -11,6 +11,8 @@
     <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content="" />
+    <meta name="csrf_token" content="{{csrf_token()}}" />
+
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{asset('asset/admin/img/favicon/favicon.ico')}}" />

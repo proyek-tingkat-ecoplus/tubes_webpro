@@ -1,0 +1,39 @@
+{
+    "data": [{
+        "id": "1",
+        "name": "joko",
+        "email": "email@email.com",
+        "role": "Admin",
+        "status": "Active"
+    }, {
+        "id": "2",
+        "name": "eko",
+        "email": "email@email.com",
+        "role": "Admin",
+        "status": "Not Active"
+    }, {
+        "id": "3",
+        "name": "budi",
+        "email": "email@email.com",
+        "role": "Admin",
+        "status": "Active"
+    }, {
+        "id": "4",
+        "name": "andi",
+        "email": "email@email.com",
+        "role": "Admin",
+        "status": "Active"
+    }, {
+        "id": "5",
+        "name": "test",
+        "email": "email@email.com",
+        "role": "admin",
+        "status": "Active"
+    }, {
+        "id": "6",
+        "name": "fewfwef",
+        "email": "fwefweffw@gmail.com",
+        "role": "admin",
+        "status": null
+    }]
+}
