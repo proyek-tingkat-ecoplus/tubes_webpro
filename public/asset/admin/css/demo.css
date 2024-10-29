@@ -137,10 +137,3 @@
     border-color: #000 !important;
 }
 
-.dataTables_wrapper .dataTables_paginate .paginate_button.current,
-.dataTables_wrapper .dataTables_paginate .paginate_button.current:hover
-{
-    color: #fff !important;
-    background-color: #000 !important;
-    border-color: #000 !important;
-}
