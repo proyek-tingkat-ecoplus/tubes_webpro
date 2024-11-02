@@ -89,17 +89,17 @@
                     @if($errors->has('role'))
                         has-error
                     @endif">
-                        <label for="role">Status</label>
-                        <select name="role" class="form-control">
+                        <label for="status">Status</label>
+                        <select name="status" class="form-control">
                             <option value="admin">Aktif</option>
                             <option value="user">Non active</option>
                         </select>
-                        @if($errors->has('role'))
+                        @if($errors->has('status'))
                         <span class="help-block
-                            @if($errors->has('role'))
+                            @if($errors->has('status'))
                                 has-error
                             @endif">
-                            {{ $errors->first('role') }}
+                            {{ $errors->first('status') }}
                         </span>
                         @endif
                     </div>
@@ -137,7 +137,7 @@ $.ajax({
 $('.form').submit(function (e) {
     e.preventDefault();
     var form = new FormData(this);
-    form.append('id', lastId + 1);
+    form.append('id', parseInt(lastId) + 1);
     // var name = form.get('name');
     $.ajax({
         headers: {
@@ -150,6 +150,7 @@ $('.form').submit(function (e) {
         data: form,
         success: function (data) {
             console.log(data);
+            window.location = "{{ url('pages/user') }}"
         },
         error: function (jqxhr, textStatus, error) {
             var err = textStatus + ", " + error;

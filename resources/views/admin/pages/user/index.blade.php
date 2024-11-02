@@ -96,8 +96,8 @@
                                     <div class="dropdown-menu">
                                         <a class="dropdown-item" href="javascript:void(0);"><i
                                                 class="bx bx-edit-alt me-2"></i> Edit</a>
-                                        <a class="dropdown-item" href="javascript:void(0);"><i
-                                                class="bx bx-trash me-2"></i> Delete</a>
+                                        <button class="dropdown-item" onclick="${console.log('hello world')}"><i
+                                                class="bx bx-trash me-2"></i> Delete</button>
                                     </div>
                                 </div>
                             </td>
@@ -169,7 +169,8 @@
             },
             {
                 data: null,
-                render: function (data, type, row) {
+                render: function (data, type, row) { // buat render di column aksi
+                    console.log(row)
                     return `
                 <div class="dropdown">
                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -177,10 +178,10 @@
                         <i class="bx bx-dots-vertical-rounded"></i>
                     </button>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" href="javascript:void(0);"><i
+                        <a class="dropdown-item" href="{{ url('pages/user/${data.id}/edit') }}"><i
                                 class="bx bx-edit-alt me-1"></i> Edit</a>
-                        <a class="dropdown-item" href="javascript:void(0);"><i
-                                class="bx bx-trash me-1"></i> Delete</a>
+                        <a class="dropdown-item" onclick="hapus(${data.id})">
+                                <i class="bx bx-trash me-1"></i> Delete</a>
                     </div>
                 </div>
             `;
@@ -192,6 +193,24 @@
             $(".paginate_button.current").addClass("btn-primary text_white"); // cannot add backgrodun color
         }
     });
+
+    hapus = (id) => {
+        $.ajax({
+            // headers: {
+            //     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+            // },
+            type: "delete",
+            url: "/api/user/" + id+"/delete",
+            success: function (data) {
+
+                table.ajax.reload()
+            },
+            error: function (jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                console.log("Request Failed: " + err);
+            }
+        })
+    }
     // search engine
     // $("#search").keyup(function () {
     //     table.search(this.value).draw();

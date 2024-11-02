@@ -29,3 +29,7 @@ Route::get('/pages/user/', function () {
 Route::get('/pages/user/add', function () {
     return view('admin.pages.user.add');
 });
+
+Route::get('/pages/user/{id}/edit', function($id){
+    return view('admin.pages.user.edit' ,["id" => $id]);
+});
