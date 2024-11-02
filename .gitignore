@@ -20,4 +20,7 @@ yarn-error.log
 /.idea
 /.vscode
 /.zed
+<<<<<<< HEAD
+=======
 /nbproject/private/
+>>>>>>> dd8911df4f60864765d5511cc99b9e4b3fd29438

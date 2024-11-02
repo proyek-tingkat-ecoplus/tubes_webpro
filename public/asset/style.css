@@ -783,11 +783,14 @@ p {
     12. FOOTER css
 ===========================*/
 
+<<<<<<< HEAD
+=======
 
 .footer-area .footer-judul{
     color: #Fff;
 }
 
+>>>>>>> dd8911df4f60864765d5511cc99b9e4b3fd29438
 .footer-area {
     padding: 60px 0px 30px 0px;
     background-color: #003030;
@@ -843,6 +846,10 @@ p {
 
 .img-kota{
     width: 100%;
+<<<<<<< HEAD
+    height: 600px;
+=======
+>>>>>>> dd8911df4f60864765d5511cc99b9e4b3fd29438
 }
 
 .footer-area .footer-hr2 {
