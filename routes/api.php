@@ -11,5 +11,7 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix("user")->group(function(){
     Route::post('/add', [UserController::class, 'post']);
+    Route::patch('/{id}/edit', [UserController::class, 'update']);
+    Route::delete('/{id}/delete', [UserController::class, 'deletes']);
 });
 

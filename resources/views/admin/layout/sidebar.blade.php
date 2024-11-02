@@ -26,7 +26,7 @@
         <li class="menu-header small text-uppercase">
             <span class="menu-header-text">Master Data</span>
         </li>
-        <li class="menu-item @if (Request::is('pages/user')) active @endif">
+        <li class="menu-item @if (Request::is('pages/user', 'pages/user/*')) active @endif">
             <a href="/pages/user"  class="menu-link ">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="User Management">Data Pengguna</div>
