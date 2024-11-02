@@ -71,7 +71,7 @@
                         <label for="email">Lat Long</label>
                         <input type="email" id="email" name="email" class="form-control" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Kirim</button>
+                    <button type="submit" class="ms-1 btn btn-primary">Kirim</button>
                 </form>
             </div>
         </div>

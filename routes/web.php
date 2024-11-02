@@ -3,11 +3,15 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('landingPage');
 });
 
-Route::get('/kontak', function () {
-    return view('kontak');
+Route::get('/login', function () {
+    return view('auth.login');
+});
+
+Route::get('/register', function () {
+    return view('auth.register');
 });
 
 Route::get('/kontak', function () {

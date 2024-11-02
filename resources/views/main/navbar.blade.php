@@ -23,7 +23,7 @@
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12" style="background: #003030;">
                     <div class="navbar-btn-area">
-                        <a class="navbar-btn1 rounded" href="">Login</a>
+                        <a class="navbar-btn1 rounded" href="/login">Login</a>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav" style="text-align: center">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">BERANDA</a>
+                            <a class="nav-link" href="/">BERANDA</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">INFORMASI</a>
@@ -48,13 +48,13 @@
                             <a class="nav-link" href="#">PEMETAAN ENERGI BERSIH</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">FORUM</a>
+                            <a class="nav-link" href="/form">FORUM</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">FORUM DINAS</a>
+                            <a class="nav-link" href="#">PROFILE DINAS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">HUBUNGI KAMI</a>
+                            <a class="nav-link" href="/kontak">HUBUNGI KAMI</a>
                         </li>
                     </ul>
                 </div>
