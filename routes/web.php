@@ -21,6 +21,9 @@ Route::get('/kontak', function () {
 Route::get('/form', function () {
     return view('form');
 });
+Route::get('/profil', function ():mixed{
+    return view('profil');
+});
 
 
 Route::get('/dashboard', function () {
