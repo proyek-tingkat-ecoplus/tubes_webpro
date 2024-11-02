@@ -20,14 +20,15 @@
             </div>
             <div class="col-md-3 col-sm-6 mb-3">
                 <p class="footer-title">Telephone</p>
-
+                <br>
                 <ul>
-                    <p>+22-3214458</p>
+                    <p class="footer-judul">+22-3214458</p>
                 </ul>
             </div>
             <div class="col-md-3 col-sm-6 mb-3">
                 <p class="footer-title">Surel</p>
-                    <p>admin.Ecopulse@gmail.com</p>
+                <br>
+                    <p class="footer-judul">admin.Ecopulse@gmail.com</p>
             </div>
         </div>
         <div class="row my-3">

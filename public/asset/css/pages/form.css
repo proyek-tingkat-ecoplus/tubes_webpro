@@ -1,0 +1,106 @@
+.main {
+    background-color: #004d40;
+    margin-bottom: 200%;
+
+  }
+
+  .form {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1500px; /* Adjust this value as needed */
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .post-item {
+    margin: 20px 0 0 0;
+    padding: 10px;
+    background-color: #004d40;
+    padding: 15px;
+  }
+
+  .pos h2 {
+    color: #ffffff;
+    font-size: 2em;
+  }
+
+  .post-item {
+    margin-top: 20px;
+    background-color: #004d40;
+    padding: 15px;
+    border-radius: 0;
+    color: #ffffff;
+  }
+
+  .profile{
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+    margin-right: 20px;
+  }
+  /* .post-item .profile {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+    background-image: url("assets/image/icon-data.png");
+  } */
+
+  .content h3 {
+    margin-bottom: 5px;
+    color: #ffffff;
+  }
+  .isi{
+    margin-left: -60px;
+  }
+  .nama{
+    font-weight: bold;
+    color: white;
+  }
+  .jam-pengisian{
+    color: white;
+    font-weight: 200;
+  }
+  .isi{
+    margin-bottom: 5px;
+    color: #ffffff;
+    margin-top: 10px;
+  }
+
+ .isi span{
+    font-weight: bolder;
+ }
+  .actions button {
+    background-color: #00c853;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  .search-bar{
+   background-color: #004d40 ;
+   color: #ffffff;
+  }
+  .btn{
+    margin-left: -60px;
+  }
+
+  .btn:hover{
+    color: #004d40;
+    background-color: #c6e6bd;
+  }
+
+  .balas-pesan{
+    background-color: #ffffff ;
+    color: #004d40;
+  }
+
+  .pesan{
+    margin-top: 20px;
+    padding-right: 200px;
+    width: 50%;
+  }
+
+
