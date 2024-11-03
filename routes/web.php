@@ -25,6 +25,9 @@ Route::get('/profil', function ():mixed{
     return view('profil');
 });
 
+Route::get('/pemetaan', function () {
+    return view('pemetaan');
+});
 
 Route::get('/dashboard', function () {
     return view('admin.pages.dashboard');
