@@ -39,7 +39,7 @@
                 <div class="collapse navbar-collapse" id="navbarNav" style="text-align: center">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="/">BERANDA</a>
+                            <a class="nav-link @if(Request::is('/')) active @endif" href="/">BERANDA</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">INFORMASI</a>
@@ -48,13 +48,13 @@
                             <a class="nav-link" href="#">PEMETAAN ENERGI BERSIH</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/form">FORUM</a>
+                            <a class="nav-link @if(Request::is('forum')) active @endif" href="/forum">FORUM</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">PROFILE DINAS</a>
+                            <a class="nav-link @if(Request::is('profil')) active @endif" href="/profil">PROFILE DINAS</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/kontak">HUBUNGI KAMI</a>
+                        <li class="nav-item ">
+                            <a class="nav-link @if(Request::is('kontak')) active @endif"  href="/kontak">HUBUNGI KAMI</a>
                         </li>
                     </ul>
                 </div>

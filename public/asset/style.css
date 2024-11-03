@@ -235,6 +235,11 @@ p {
     background-color: #003030;
 }
 
+.navbar-area .active {
+    color: #fff !important;
+    background-color: #003030 !important;
+}
+
 .navbar-area .navbar-nav {
     flex: 1;
     margin: auto !important;

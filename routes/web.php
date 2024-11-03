@@ -18,11 +18,12 @@ Route::get('/kontak', function () {
     return view('kontak');
 });
 
-Route::get('/form', function () {
+Route::get('/forum', function () {
     return view('form');
 });
+
 Route::get('/profil', function ():mixed{
-    return view('profil');
+    return view('profilKepdes');
 });
 
 
