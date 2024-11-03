@@ -26,6 +26,9 @@ Route::get('/profil', function (){
     return view('profilKepdes');
 });
 
+Route::get('/pemetaan', function () {
+    return view('pemetaan');
+});
 
 Route::get('/dashboard', function () {
     return view('admin.pages.dashboard');
