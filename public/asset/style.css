@@ -4,7 +4,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 body {
-    font-family: "Poppins", sans-serif;
+    font-family: "Poppins";
     font-weight: normal;
     font-style: normal;
     color: #121212;
@@ -54,7 +54,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Poppins", sans-serif;
+    font-family: "Poppins";
     font-weight: 600;
     color: #121212;
     margin: 0px;
@@ -848,10 +848,7 @@ p {
 
 .img-kota{
     width: 100%;
-<<<<<<< HEAD
     height: 600px;
-=======
->>>>>>> dd8911df4f60864765d5511cc99b9e4b3fd29438
 }
 
 .footer-area .footer-hr2 {
