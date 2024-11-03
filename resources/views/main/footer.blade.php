@@ -11,11 +11,11 @@
                     <p class="footer-text">Ecopulse merupakan suatu lembaga yang bergerak di bidang energi bersih terbaharukan, fokus ecopulse disini itu sediri menjadikan desa desa di lingkup bandung raya menjadi mempunyai energi yang bisa di pakai untung generasi generasi kedepannya.</p>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 mb-3">
-                <p class="footer-title">EcoPulse</p>
+            <div class="col-md-3 col-sm-6 mb-3 ">
+                <p class="footer-title mb-4 ">EcoPulse</p>
 
                 <ul>
-                    <p>Kompleks Tahura, Jl. Ir. H. Juanda No.99, Ciburial, Kec. Cimenyan, Kabupaten Bandung, Jawa Barat 40198</p>
+                    <p class="text-white">Kompleks Tahura, Jl. Ir. H. Juanda No.99, Ciburial, Kec. Cimenyan, Kabupaten Bandung, Jawa Barat 40198</p>
                 </ul>
             </div>
             <div class="col-md-3 col-sm-6 mb-3">

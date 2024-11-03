@@ -22,7 +22,7 @@ Route::get('/forum', function () {
     return view('form');
 });
 
-Route::get('/profil', function ():mixed{
+Route::get('/profil', function (){
     return view('profilKepdes');
 });
 
