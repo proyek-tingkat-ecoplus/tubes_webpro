@@ -30,6 +30,10 @@ Route::get('/pemetaan', function () {
     return view('pemetaan');
 });
 
+Route::get('/informasi', function () {
+    return view('informasi');
+});
+
 Route::get('/dashboard', function () {
     return view('admin.pages.dashboard');
 });
