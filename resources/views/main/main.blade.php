@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="asset/js/script.css">
     <link rel="stylesheet" href="{{ asset('asset/css/typeahead.css') }}">
     <link rel="stylesheet" href="{{asset('asset/css/pages/kontakDetails.css')}}">
+    <link rel="stylesheet" href="{{asset('asset/css/pages/kontakCards.css')}}">
+    <link rel="stylesheet" href="{{asset('asset/css/pages/form.css')}}">
+    <link rel="stylesheet" href="{{asset('asset/css/pages/kontakDetails.css')}}">
     <title>Disnaker</title>
     <style>
         span.twitter-typeahead{
@@ -32,6 +35,7 @@
 
 <body>
 
+    @stack ('styles')
     <!-- Navbar -->
     @include('main.navbar') <!-- buat include navbar -->
 
