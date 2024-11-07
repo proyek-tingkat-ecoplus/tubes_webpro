@@ -71,29 +71,29 @@
 
         <!-- Proposal Section -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Proposal</span></li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
+        <li class="menu-item  @if (Request::is('pages/proposal', 'pages/proposal/*')) active @endif">
+            <a href="/pages/proposal" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div data-i18n="Proposal Data">Data Proposal</div>
             </a>
         </li>
-        <li class="menu-item">
+        {{-- <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-check-circle"></i>
                 <div data-i18n="Proposal Status">Status Proposal</div>
             </a>
-        </li>
+        </li> --}}
 
         <!-- Mapping Section -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Pemetaan</span></li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
+        <li class="menu-item @if (Request::is('pages/inventaris', 'pages/inventaris/*')) active @endif">
+            <a href="/pages/inventaris" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Inventory Data">Inventaris Alat</div>
             </a>
         </li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
+        <li class="menu-item  @if (Request::is('pages/pemetaanalat', 'pages/pemetaanalat/*')) active @endif"">
+            <a href="/pages/pemetaanalat" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-map"></i>
                 <div data-i18n="Mapping Data">Pemetaan Alat</div>
             </a>
