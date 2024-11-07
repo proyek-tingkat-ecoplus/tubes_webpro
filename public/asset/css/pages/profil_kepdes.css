@@ -1,4 +1,3 @@
-/* Style container card */
 .card-style {
     width: 80%;
     margin: auto;
@@ -6,15 +5,16 @@
     background-color: transparent;
 }
 
-/* Style profile card */
 .profile-card {
     color: #ffffff;
     border-radius: 10px;
     text-align: center;
     padding: 20px;
-    width: 100%; 
+    width: 100%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.5s ease; 
 }
+
 
 .profile-card:nth-child(odd) {
     background-color: #2b592a;
@@ -35,7 +35,6 @@
     gap: 0; 
 }
 
-/*  gambar profil */
 .profile-card img {
     width: 150px;
     height: 150px;

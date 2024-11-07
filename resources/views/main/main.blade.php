@@ -45,6 +45,7 @@
 
     <!-- Swiper -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Optional JavaScript; choose one of the two! -->
 
@@ -62,6 +63,8 @@
     <script type="module" src="{{ asset('asset/js/costom.js') }}"></script>
     <script type="text/javascript" src="{{ asset('asset/js/typeahead/typeahead.jquery.js') }}"></script>
     <script type="text/javascript" src="{{ asset('asset/js/typeahead/bloodhound.min.js') }}"></script>
+
+    @stack ('scripts')
 
     <script>
         // Read More
