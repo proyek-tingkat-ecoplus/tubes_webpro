@@ -1,11 +1,18 @@
 @extends('main.main')
 @section('content')
+<!-- jQuery dan Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Profil Kepdes JS -->
+<script src="{{ asset('asset/js/profil_kepdes.js') }}"></script>
+
 <div class="container-fluid">
     <img src="{{asset('asset/image/pabrik.jpeg')}}" class="img-fluid img-hero" alt="Responsive image">
     <div class="card mx-auto card-style">
         <div class="row">
             <div class="col-md-8">
-                <form action="" class="p-5">
+                <form action="" class="p-5" id="contactForm">
                     <div class="fs-3 fw-bold mb-3">Form Hubungi Kami</div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -34,7 +41,7 @@
                             <hr>
                         </div>
                         <div class="col-md-1">
-                            <button type="submit" class="telegram-btn">
+                            <button type="submit" class="telegram-btn" id="submitButton">
                                 <i class="fa-brands fa-telegram me-2 btn-icon"></i>
                             </button>
                         </div>
@@ -72,4 +79,19 @@
         </div>
     </div>
 </div>
+
 @endsection
+
+@push('scripts')
+<script src="{{asset('asset/js/custom.js')}}"></script>
+{{-- <script>
+    document.getElementById('submitButton').addEventListener('click', function(event) {
+        event.preventDefault(); // Prevent the form from actually submitting
+
+        // Here you can handle form validation or submission via AJAX, if needed
+
+        // Show a success message when the button is clicked
+        alert('Pesan Anda berhasil terkirim');
+    });
+</script> --}}
+@endpush
