@@ -98,6 +98,50 @@ Route::prefix('pages')->group(function(){
     Route::get('comment/{id}/edit', function($id){
         return view('admin.pages.comment.edit', ["id" => $id]);
     });
+
+    Route::get('proposal', function(){
+        return view('admin.pages.proposal.index');
+    });
+
+    Route::get('proposal/add', function(){
+        return view('admin.pages.proposal.add');
+    });
+
+    Route::get('proposal/{id}/edit', function($id){
+        return view('admin.pages.proposal.edit', ["id" => $id]);
+    });
+
+    Route::get('inventaris', function(){
+        return view('admin.pages.inventaris.index');
+    });
+
+    Route::get('inventaris/add', function(){
+        return view('admin.pages.inventaris.add');
+    });
+
+    Route::get('inventaris/{id}/edit', function($id){
+        return view('admin.pages.inventaris.edit', ["id" => $id]);
+    });
+
+    Route::get('pemetaanalat', function(){
+        return view('admin.pages.pemetaanalat.index');
+    });
+
+    Route::get('pemetaanalat/add', function(){
+        return view('admin.pages.pemetaanalat.add');
+    });
+
+    Route::get('pemetaanalat/{id}/edit', function($id){
+        return view('admin.pages.pemetaanalat.edit', ["id" => $id]);
+    });
 });
 
 
+Route::get('/proposal/{path}', function($path){
+    $fullPath = public_path($path);
+    if (file_exists($fullPath)) {
+        return response()->file($fullPath);
+    } else {
+        abort(404, 'File not found.');
+    }
+})->where('path', '.*');

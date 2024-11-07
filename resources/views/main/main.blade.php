@@ -63,6 +63,8 @@
     <script type="text/javascript" src="{{ asset('asset/js/typeahead/typeahead.jquery.js') }}"></script>
     <script type="text/javascript" src="{{ asset('asset/js/typeahead/bloodhound.min.js') }}"></script>
 
+    @stack('scripts')
+
     <script>
         // Read More
         function myFunction() {
