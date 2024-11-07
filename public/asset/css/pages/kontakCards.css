@@ -1,0 +1,94 @@
+/* About Section */
+.about-section {
+    background: #003030;
+    text-align: justify;
+}
+
+.about-section p {
+    color: white;
+    margin: 3rem;
+    margin-right: 4rem;
+}
+
+/* Energi Info Section */
+.energi-info-section {
+    background-color: white;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+.energi-info-section h4 {
+    text-align: center;
+    margin-bottom: 5%;
+    color: #003030;
+}
+
+.energi-info-section form {
+    margin-left: 15%;
+    text-align: left;
+    color: #003030;
+}
+
+.energi-info-section .btn-primary {
+    margin-top: 1rem;
+    background-color: #003030;
+    color: white;
+    border: 0;
+}
+
+/* Kontak Info Section */
+.kontak-info-section {
+    background-color: white;
+}
+
+.kontak-background {
+    width: 100%;
+    background-color: #003030;
+    text-align: center;
+    padding: 10%;
+    padding-bottom: 20%;
+    padding-top: 5%;
+}
+
+.kontak-background h3,
+.kontak-background p {
+    color: white;
+}
+
+.maps-background {
+    margin-bottom: 10%;
+}
+
+.maps-background iframe {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.card-style {
+    margin: 0;
+}
+
+.card-style .card {
+    border-radius: 0;
+    border: none;
+    text-align: center;
+}
+
+.card-style .card h6,
+.card-style .card p {
+    color: #003030;
+}
+
+.card-style h6 {
+    padding: 10%;
+}
+
+.card-style p {
+    font-size: small;
+}
