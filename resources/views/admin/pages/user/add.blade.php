@@ -7,101 +7,42 @@
             <div class="col-md-12">
                 <form action="" method="POST" class="form">
                     @csrf
-                    <div class="form-group mt-2
-                        @if($errors->has('name'))
-                            has-error
-                        @endif">
+                    <div class="form-group mt-2 ">
                         <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control" value="{{ old('name') }}">
-                        @if($errors->has('name'))
-                        <span class="help-block
-                                @if($errors->has('name'))
-                                    has-error
-                                @endif">
-                            {{ $errors->first('name') }}
+                        <input type="text" name="name" class="form-control " value="">
+                        <span class="invalid-feedback">
                         </span>
-                        @endif
                     </div>
-                    <div class="form-group mt-2
-                        @if($errors->has('email'))
-                            has-error
-                        @endif">
+                    <div class="form-group mt-2">
                         <label for="email">Email</label>
-                        <input type="email" name="email" class="form-control" value="{{ old('email') }}">
-                        @if($errors->has('email'))
-                        <span class="help-block
-                                @if($errors->has('email'))
-                                    has-error
-                                @endif">
-                            {{ $errors->first('email') }}
-                        </span>
-                        @endif
+                        <input type="email" name="email" class="form-control" value="">
+                        <span class="invalid-feedback"></span>
                     </div>
-                    <div class="form-group mt-2
-                        @if($errors->has('password'))
-                            has-error
-                        @endif">
+                    <div class="form-group mt-2">
                         <label for="password">Password</label>
                         <input type="password" name="password" class="form-control">
-                        @if($errors->has('password'))
-                        <span class="help-block
-                                @if($errors->has('password'))
-                                    has-error
-                                @endif">
-                            {{ $errors->first('password') }}
-                        </span>
-                        @endif
+                        <span class="invalid-feedback"></span>
                     </div>
-                    <div class="form-group mt-2
-                        @if($errors->has('password_confirmation'))
-                            has-error
-                        @endif">
+                    <div class="form-group mt-2">
                         <label for="password_confirmation">Password Confirmation</label>
                         <input type="password" name="password_confirmation" class="form-control">
-                        @if($errors->has('password_confirmation'))
-                        <span class="help-block
-                                @if($errors->has('password_confirmation'))
-                                    has-error
-                                @endif">
-                            {{ $errors->first('password_confirmation') }}
-                        </span>
-                        @endif
+                        <span class="invalid-feedback"></span>
                     </div>
-                    <div class="form-group mt-2
-                        @if($errors->has('role'))
-                            has-error
-                        @endif">
+                    <div class="form-group mt-2">
                         <label for="role">Peran</label>
                         <select name="role" class="form-control">
                             <option value="admin">Admin</option>
                             <option value="user">User</option>
                         </select>
-                        @if($errors->has('role'))
-                        <span class="help-block
-                                @if($errors->has('role'))
-                                    has-error
-                                @endif">
-                            {{ $errors->first('role') }}
-                        </span>
-                        @endif
+                        <span class="invalid-feedback"></span>
                     </div>
-                    <div class="form-group mt-2
-                    @if($errors->has('role'))
-                        has-error
-                    @endif">
+                    <div class="form-group mt-2">
                         <label for="status">Status</label>
                         <select name="status" class="form-control">
                             <option value="admin">Aktif</option>
                             <option value="user">Non active</option>
                         </select>
-                        @if($errors->has('status'))
-                        <span class="help-block
-                            @if($errors->has('status'))
-                                has-error
-                            @endif">
-                            {{ $errors->first('status') }}
-                        </span>
-                        @endif
+                        <span class="invalid-feedback"></span>
                     </div>
                     <div class="text-start">
                         <a href="/pages/user" class="btn btn-danger mt-3">Kembali</a>
@@ -134,8 +75,58 @@ $.ajax({
     }
 });
 
+var validation = () => {
+    console.log('validation');
+    $('input, select').removeClass('is-invalid');
+    let isValid = true;
+    const name = $('input[name="name"]');
+    if (!name.val()) {
+        name.addClass('is-invalid');
+        name.next().text('Name is required');
+        isValid = false;
+    }
+    const email = $('input[name="email"]');
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email.val() || !emailPattern.test(email.val())) {
+        email.addClass('is-invalid');
+        email.next().text('Email is required');
+        isValid = false;
+    }
+    const password = $('input[name="password"]');
+    if (!password.val()) {
+        password.addClass('is-invalid');
+        password.next().text('Password is required');
+        isValid = false;
+    }
+    const passwordConfirmation =  $('input[name="password_confirmation"]');
+    if (!passwordConfirmation.val() || passwordConfirmation.val() !== password.val()) {
+        passwordConfirmation.addClass('is-invalid');
+        passwordConfirmation.next().text('Password confirmation is required');
+        isValid = false;
+    }
+    const role = $('select[name="role"]');
+    if (!role.val()) {
+        role.addClass('is-invalid');
+        role.next().text('Role is required');
+        isValid = false;
+    }
+    const status = $('select[name="status"]');
+    if (!status.val()) {
+        status.addClass('is-invalid');
+        status.next().text('Status is required');
+        isValid = false;
+    }
+
+    console.log(isValid);
+    return isValid;
+}
 $('.form').submit(function (e) {
     e.preventDefault();
+
+    if(validation() === false) {
+        return;
+    }
+
     var form = new FormData(this);
     form.append('id', parseInt(lastId) + 1);
     // var name = form.get('name');

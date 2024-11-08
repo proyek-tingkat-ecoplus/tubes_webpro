@@ -7,56 +7,27 @@
             <div class="col-md-12">
                 <form class="forms">
                     @method('put')
-                    <div class="form-group mt-2
-                        @if($errors->has('name'))
-                            has-error
-                        @endif">
+                    <div class="form-group mt-2 ">
                         <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control" value="{{ old('name') }}">
-                        @if($errors->has('name'))
-                        <span class="help-block
-                                @if($errors->has('name'))
-                                    has-error
-                                @endif">
-                            {{ $errors->first('name') }}
+                        <input type="text" name="name" class="form-control " value="{{ old('name') }}">
+                        <span class="invalid-feedback">
                         </span>
-                        @endif
                     </div>
-                    <div class="form-group mt-2
-                        @if($errors->has('location'))
-                            has-error
-                        @endif">
-                        <label for="location">location Alat</label>
-                        <input type="location" id="location-input" name="location" class="form-control"
+                    <div class="form-group mt-2">
+                        <label for="location">Location Alat</label>
+                        <input type="text" id="location-input" name="location" class="form-control"
                             value="{{ old('location') }}">
                         <input type="hidden" name="address_latitude" id="address-latitude" value="0" />
                         <input type="hidden" name="address_longitude" id="address-longitude" value="0" />
-                        @if($errors->has('location'))
-                        <span class="help-block
-                                @if($errors->has('location'))
-                                    has-error
-                                @endif">
-                            {{ $errors->first('location') }}
-                        </span>
-                        @endif
+                        <span class="invalid-feedback"></span>
                     </div>
-                    <div class="form-group mt-2
-                    @if($errors->has('status'))
-                        has-error
-                    @endif">
+                    <div class="form-group mt-2">
                         <label for="status">Status</label>
                         <select name="status" class="form-control">
                             <option value="1">Aktif</option>
                             <option value="0">Non active</option>
                         </select>
-                        @if($errors->has('status'))
-                        <span class="help-block
-                            @if($errors->has('status'))
-                                has-error
-                            @endif">
-                            {{ $errors->first('status') }}
-                        </span>
-                        @endif
+                        <span class="invalid-feedback"></span>
                     </div>
                     <div class="text-start">
                         <a href="/pages/pemetaanalat" class="btn btn-danger mt-3">Kembali</a>
@@ -110,9 +81,34 @@
             }
         });
 
+        var validation = () => {
+            let isValid = true;
+            $('input, select').removeClass('is-invalid'); // Remove any previous invalid styles
+            const name = $('input[name="name"]');
+            if (!name.val()) {
+                name.addClass('is-invalid');
+                name.next().text('Name is required');
+                isValid = false;
+            }
+            const location = $('input[name="location"]');
+            if (!location.val()) {
+                location.addClass('is-invalid');
+                location.next().text('Location is required');
+                isValid = false;
+            }
+            const status = $('select[name="status"]');
+            if (!status.val()) {
+                status.addClass('is-invalid');
+                status.next().text('Status is required');
+                isValid = false;
+            }
+
+            return isValid;
+        };
+
         $('.forms').submit(function (e) {
-            console.log("here")
             e.preventDefault();
+            if (!validation()) return;
             var form = new FormData(this);
             form.append('id', id);
             form.append('name', $('input[name="name"]').val());

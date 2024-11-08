@@ -1,44 +1,25 @@
 @extends('admin.layout.master')
 @section('content')
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master / Data Role /</span> Tambah</h4>
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master / Data Comment /</span> Tambah</h4>
 <div class="card">
     <div class="container pe-3 ps-3 pb-3">
         <div class="row">
             <div class="col-md-12">
-                <form  method="POST" class="form">
+                <form method="POST" class="form">
                     @csrf
-                    <div class="form-group mt-2
-                        @if($errors->has('author'))
-                            has-error
-                        @endif">
+                    <div class="form-group mt-2">
                         <label for="author">Name</label>
                         <input type="text" name="author" class="form-control" value="{{ old('author') }}">
-                        @if($errors->has('author'))
-                        <span class="help-block
-                                @if($errors->has('author'))
-                                    has-error
-                                @endif">
-                            {{ $errors->first('author') }}
-                        </span>
-                        @endif
+                        <span class="invalid-feedback">{{ $errors->first('author') }}</span>
                     </div>
-                    <div class="form-group mt-2
-                        @if($errors->has('comment'))
-                            has-error
-                        @endif">
+                    <div class="form-group mt-2">
                         <label for="comment">Comment</label>
-                        <input type="comment" name="comment" class="form-control" value="{{ old('comment') }}">
-                        @if($errors->has('comment'))
-                        <span class="help-block
-                                @if($errors->has('comment'))
-                                    has-error
-                                @endif">
-                            {{ $errors->first('comment') }}
-                        </span>
-                        @endif
+                        <textarea name="comment" class="form-control" rows="3">{{ old('comment') }}</textarea>
+                        <span class="invalid-feedback">{{ $errors->first('comment') }}</span>
                     </div>
+
                     <div class="text-start">
-                        <a href="/pages/user" class="btn btn-danger mt-3">Kembali</a>
+                        <a href="/pages/comment" class="btn btn-danger mt-3">Kembali</a>
                         <button type="submit" class="btn btn-primary mt-3">Simpan</button>
                     </div>
                 </form>
@@ -46,53 +27,72 @@
         </div>
     </div>
 </div>
-<input type="text" hidden value="{{asset('asset/admin/json/comment.json')}}" id="path">
+<input type="text" hidden value="{{ asset('asset/admin/json/comment.json') }}" id="path">
 @endsection
+
 @push('scripts')
 <script>
-$(document).ready(function(){
+$(document).ready(function() {
     var path = document.getElementById('path').value;
     var lastId = 0;
-$.ajax({
-    url: path,
-    type: 'GET',
-    dataType: 'json',
-    success: function (data) {
-        if (data.data && data.data.length > 0) {
-            lastId = data.data[data.data.length - 1].id;
-        }
-    },
-    error: function (jqxhr, textStatus, error) {
-        var err = textStatus + ", " + error;
-        console.log("Initial Request Failed: " + err);
-    }
-});
-
-$('.form').submit(function (e) {
-    e.preventDefault();
-    var form = new FormData(this);
-    form.append('id', parseInt(lastId) + 1);
-    // var name = form.get('name');
     $.ajax({
-        headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
-    },
-        url: "/api/comment/add",
-        type: 'POST',
-        processData: false,
-        contentType: false,
-        data: form,
-        success: function (data) {
-            console.log(data);
-            window.location = "{{ url('pages/comment') }}"
+        url: path,
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            if (data.data && data.data.length > 0) {
+                lastId = data.data[data.data.length - 1].id;
+            }
         },
-        error: function (jqxhr, textStatus, error) {
-            var err = textStatus + ", " + error;
-            console.log("Request Failed: " + err);
+        error: function(jqxhr, textStatus, error) {
+            console.error("Initial Request Failed: " + textStatus + ", " + error);
         }
     });
-});
-})
-</script>
 
+    // Validation Function
+    var validation = () => {
+        let isValid = true;
+        $('input, textarea').removeClass('is-invalid'); // Remove any previous invalid styles
+        const author = $('input[name="author"]');
+        if (!author.val()) {
+            author.addClass('is-invalid');
+            author.next().text('Name is required');
+            isValid = false;
+        }
+        const comment = $('textarea[name="comment"]');
+        if (!comment.val()) {
+            comment.addClass('is-invalid');
+            comment.next().text('Comment is required');
+            isValid = false;
+        }
+
+        return isValid;
+    };
+
+    $('.form').submit(function(e) {
+        e.preventDefault();
+        if (!validation()) return;
+        var form = new FormData(this);
+        form.append('id', parseInt(lastId) + 1);
+
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+            },
+            url: "/api/comment/add",
+            type: 'POST',
+            processData: false,
+            contentType: false,
+            data: form,
+            success: function(data) {
+                console.log(data);
+                window.location = "{{ url('pages/comment') }}";
+            },
+            error: function(jqxhr, textStatus, error) {
+                console.error("Request Failed: " + textStatus + ", " + error);
+            }
+        });
+    });
+});
+</script>
 @endpush

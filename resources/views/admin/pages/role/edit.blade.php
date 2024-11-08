@@ -1,39 +1,22 @@
 @extends('admin.layout.master')
 @section('content')
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master / Data Role /</span> Edit Role</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master / Data Peran /</span> Edit Peran</h4>
     <div class="card">
         <div class="container pe-3 ps-3 pb-3">
             <div class="row">
                 <div class="col-md-12">
                     <form class="forms">
                         @method('put')
-                        <div
-                            class="form-group mt-2
-                        @if ($errors->has('name')) has-error @endif">
-                            <label for="name">Nama Role</label>
+                        <div class="form-group mt-2">
+                            <label for="name">Name</label>
                             <input type="text" name="name" class="form-control" value="{{ old('name') }}">
-                            @if ($errors->has('name'))
-                                <span
-                                    class="help-block
-                                @if ($errors->has('name')) has-error @endif">
-                                    {{ $errors->first('name') }}
-                                </span>
-                            @endif
+                            <span class="invalid-feedback"></span>
                         </div>
-                        <div
-                            class="form-group mt-2
-                        @if ($errors->has('description')) has-error @endif">
+                        <div class="form-group mt-2">
                             <label for="description">Deskripsi Role</label>
-                            <input type="description" name="description" class="form-control" value="{{ old('description') }}">
-                            @if ($errors->has('description'))
-                                <span
-                                    class="help-block
-                                @if ($errors->has('description')) has-error @endif">
-                                    {{ $errors->first('description') }}
-                                </span>
-                            @endif
+                            <input type="text" name="description" class="form-control" value="{{ old('description') }}">
+                            <span class="invalid-feedback"></span>
                         </div>
-
                         <div class="text-start">
                             <a href="/pages/role" class="btn btn-danger mt-3">Kembali</a>
                             <button type="submit" class="btn btn-primary mt-3">Simpan</button>
@@ -68,9 +51,28 @@
                 }
             });
 
+            var validation = () => {
+        let isValid = true;
+        $('input').removeClass('is-invalid'); // Remove any previous invalid styles
+        const name = $('input[name="name"]');
+        if (!name.val()) {
+            name.addClass('is-invalid');
+            name.next().text('Name is required');
+            isValid = false;
+        }
+        const description = $('input[name="description"]');
+        if (!description.val()) {
+            description.addClass('is-invalid');
+            description.next().text('Description is required');
+            isValid = false;
+        }
+
+        return isValid;
+    };
+
             $('.forms').submit(function(e) {
-                console.log("here")
                 e.preventDefault();
+                if (!validation()) return;
                 var form = new FormData(this);
                 form.append('id', id);
                 form.append('name', $('input[name="name"]').val());
