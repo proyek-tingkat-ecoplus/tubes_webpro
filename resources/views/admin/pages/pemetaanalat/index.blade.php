@@ -72,7 +72,7 @@
             },
             {
                 data: 'status',
-                render: function(data, type, row) {
+                render: function (data, type, row) {
                     if (data == 1) {
                         return '<div class="badge bg-success">Aktif</div>'
                     } else {
@@ -108,20 +108,43 @@
     });
 
     hapus = (id) => {
-        $.ajax({
-            // headers: {
-            //     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
-            // },
-            type: "delete",
-            url: "/api/pemetaanalat/" + id+"/delete",
-            success: function (data) {
-                table.ajax.reload()
-            },
-            error: function (jqxhr, textStatus, error) {
-                var err = textStatus + ", " + error;
-                console.log("Request Failed: " + err);
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    // headers: {
+                    //     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+                    // },
+                    type: "delete",
+                    url: "/api/pemetaanalat/" + id + "/delete",
+                    success: function (data) {
+                        table.ajax.reload()
+                        Swal.fire({
+                            title: "Success!",
+                            text: "Data Berhasil Di hapus",
+                            icon: "success"
+                        });
+                    },
+                    error: function (jqxhr, textStatus, error) {
+                        var err = textStatus + ", " + error;
+                        Swal.fire({
+                            title: "Failed!",
+                            text: "Data Gagal Di hapus",
+                            icon: "error"
+                        });
+                    }
+                })
+                //
             }
-        })
+        });
     }
     // search engine
     // $("#search").keyup(function () {
