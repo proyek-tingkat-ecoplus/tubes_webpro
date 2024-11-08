@@ -5,9 +5,9 @@
     <section class="pos">
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="tambah diskusi baru" aria-label="tambah diskusi baru" aria-describedby="button-addon2">
-            <button class="btn search-bar" type="button" id="button-addon2">
+            <a class="btn search-bar" type="button" id="button-addon2" href="/tambahpesan">
                 <i class="fa-solid fa-plus"></i>
-            </button>
+            </a>
           </div>
         <div class="post-item rounded-3">
             <h3 class="d-blok mb-3" style="color: white">Infastruktur terbaru</h3>

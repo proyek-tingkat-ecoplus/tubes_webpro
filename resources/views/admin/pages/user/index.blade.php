@@ -161,7 +161,7 @@
                 render: function (data, type, row) {
                     if (data == 'Active') {
                         return `<span class="badge bg-primary me-1">${data}</span>`;
-                    } else if (data === 'Not Active') {
+                    } else if (data === 'Non Aktif') {
                         return `<span class="badge bg-danger me-1">${data}</span>`;
                     } else {
                         return `<span class="badge bg-warning me-1">${data}</span>`;

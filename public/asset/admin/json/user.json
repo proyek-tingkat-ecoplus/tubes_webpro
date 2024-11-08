@@ -1,1 +1,74 @@
-{"data":[{"id":"1","name":"Rafie aydin ihsan","email":"rferf@gmail.com","role":"admin","status":"Non Aktif"},{"id":"2","name":"nasya","email":"rferf@gmail.com","role":"admin","status":"admin"}]}
+{
+    "data": [
+        {
+            "id": "1",
+            "name": "Nabila",
+            "email": "example1@gmail.com",
+            "role": "admin",
+            "status": "Aktif"
+        },
+        {
+            "id": "2",
+            "name": "Ayu",
+            "email": "example5@gmail.com",
+            "role": "admin",
+            "status": "Aktif"
+        },
+        {
+            "id": "3",
+            "name": "Fahri",
+            "email": "example5@gmail.com",
+            "role": "admin",
+            "status": "Non Aktif"
+        },
+        {
+            "id": "4",
+            "name": "Nasya",
+            "email": "example3@gmail.com",
+            "role": "user",
+            "status": "Non Aktif"
+        },
+        {
+            "id": "5",
+            "name": "Rafie Aydin Ihsan",
+            "email": "example4@gmail.com",
+            "role": "Kepala Desa",
+            "status": "Non Aktif"
+        },
+        {
+            "id": "6",
+            "name": "Nabila",
+            "email": "example1@gmail.com",
+            "role": "admin",
+            "status": "Aktif"
+        },
+        {
+            "id": "7",
+            "name": "Ayu",
+            "email": "example2@gmail.com",
+            "role": "admin",
+            "status": "Aktif"
+        },
+        {
+            "id": "8",
+            "name": "Fahri",
+            "email": "example5@gmail.com",
+            "role": "admin",
+            "status": "Non Aktif"
+        },
+        {
+            "id": "9",
+            "name": "Dina",
+            "email": "example2@gmail.com",
+            "role": "admin",
+            "status": "Aktif"
+        },
+        {
+            "id": "10",
+            "name": "Rafie Aydin Ihsan",
+            "email": "example3@gmail.com",
+            "role": "Kepala Desa",
+            "status": "Non Aktif"
+        }
+    ]
+}
