@@ -49,27 +49,6 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="/profile">
-                            <i class="bx bx-user me-2"></i>
-                            <span class="align-middle">Profile</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="/settings">
-                            <i class="bx bx-cog me-2"></i>
-                            <span class="align-middle">Settings</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="/help">
-                            <i class="bx bx-help-circle me-2"></i>
-                            <span class="align-middle">Help</span>
-                        </a>
-                    </li>
-                    <li>
-                        <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
                         <a class="dropdown-item" onclick="logout()">
                             <i class="bx bx-power-off me-2"></i>
                             <span class="align-middle">Log Out</span>
