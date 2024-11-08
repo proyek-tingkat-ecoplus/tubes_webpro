@@ -32,9 +32,6 @@
                 <div data-i18n="User Management">Data Pengguna</div>
             </a>
         </li>
-
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
         <li class="menu-item @if (Request::is('pages/role', 'pages/role/*')) active @endif">
             <a href="/pages/role" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-lock"></i>
@@ -44,24 +41,18 @@
 
         <!-- Form Section -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Formulir</span></li>
-        <li class="menu-item">
-            <a href="cards-basic.html" class="menu-link">
         <li class="menu-item @if (Request::is('pages/tag', 'pages/tag/*')) active @endif">
             <a href="/pages/tag" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Tags">Data Tag</div>
             </a>
         </li>
-        <li class="menu-item">
-            <a href="cards-basic.html" class="menu-link">
         <li class="menu-item @if (Request::is('pages/forum', 'pages/forum/*')) active @endif">
             <a href="/pages/forum" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-comment-dots"></i>
                 <div data-i18n="Forum Data">Data Forum</div>
             </a>
         </li>
-        <li class="menu-item">
-            <a href="cards-basic.html" class="menu-link">
         <li class="menu-item @if (Request::is('pages/comment', 'pages/comment/*')) active @endif">
             <a href="/pages/comment" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-chat"></i>

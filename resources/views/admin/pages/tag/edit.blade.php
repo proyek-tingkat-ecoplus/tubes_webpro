@@ -7,33 +7,16 @@
                 <div class="col-md-12">
                     <form class="forms">
                         @method('put')
-                        <div
-                            class="form-group mt-2
-                        @if ($errors->has('name')) has-error @endif">
-                            <label for="name">Nama Tag</label>
+                        <div class="form-group mt-2">
+                            <label for="name">Name</label>
                             <input type="text" name="name" class="form-control" value="{{ old('name') }}">
-                            @if ($errors->has('name'))
-                                <span
-                                    class="help-block
-                                @if ($errors->has('name')) has-error @endif">
-                                    {{ $errors->first('name') }}
-                                </span>
-                            @endif
+                            <span class="invalid-feedback"></span>
                         </div>
-                        <div
-                            class="form-group mt-2
-                        @if ($errors->has('description')) has-error @endif">
+                        <div class="form-group mt-2">
                             <label for="description">Deskripsi Tag</label>
-                            <input type="description" name="description" class="form-control" value="{{ old('description') }}">
-                            @if ($errors->has('description'))
-                                <span
-                                    class="help-block
-                                @if ($errors->has('description')) has-error @endif">
-                                    {{ $errors->first('description') }}
-                                </span>
-                            @endif
+                            <input type="text" name="description" class="form-control" value="{{ old('description') }}">
+                            <span class="invalid-feedback"></span>
                         </div>
-
                         <div class="text-start">
                             <a href="/pages/tag" class="btn btn-danger mt-3">Kembali</a>
                             <button type="submit" class="btn btn-primary mt-3">Simpan</button>
@@ -68,9 +51,30 @@
                 }
             });
 
+            var validation = () => {
+        let isValid = true;
+        $('input').removeClass('is-invalid');
+        const name = $('input[name="name"]');
+        if (!name.val()) {
+            name.addClass('is-invalid');
+            name.next().text('Name is required');
+            isValid = false;
+        }
+        const description = $('input[name="description"]');
+        if (!description.val()) {
+            description.addClass('is-invalid');
+            description.next().text('Description is required');
+            isValid = false;
+        }
+
+        return isValid;
+    };
+
+
             $('.forms').submit(function(e) {
                 console.log("here")
                 e.preventDefault();
+                if (!validation()) return;
                 var form = new FormData(this);
                 form.append('id', id);
                 form.append('name', $('input[name="name"]').val());

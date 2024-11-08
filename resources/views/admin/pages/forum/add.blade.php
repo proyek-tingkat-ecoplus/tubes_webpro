@@ -7,58 +7,32 @@
                 <div class="col-md-12">
                     <form action="" method="POST" class="form">
                         @csrf
-                        <div
-                            class="form-group mt-2
-                        @if ($errors->has('author')) has-error @endif">
-                            <label for="author">author</label>
+                        <div class="form-group mt-2">
+                            <label for="author">Author</label>
                             <input type="text" name="author" class="form-control" value="{{ old('author') }}">
-                            @if ($errors->has('author'))
-                                <span
-                                    class="help-block
-                                @if ($errors->has('author')) has-error @endif">
-                                    {{ $errors->first('author') }}
-                                </span>
-                            @endif
+                            <span class="invalid-feedback">{{ $errors->first('author') }}</span>
                         </div>
-                        <div
-                            class="form-group mt-2
-                        @if ($errors->has('tag')) has-error @endif">
-                            <label for="tag">tag</label>
-                            <input type="tag" name="tag" class="form-control" value="{{ old('tag') }}">
-                            @if ($errors->has('tag'))
-                                <span
-                                    class="help-block
-                                @if ($errors->has('tag')) has-error @endif">
-                                    {{ $errors->first('tag') }}
-                                </span>
-                            @endif
+
+                        <div class="form-group mt-2">
+                            <label for="tag">Tag</label>
+                            <input type="text" name="tag" class="form-control" value="{{ old('tag') }}">
+                            <span class="invalid-feedback">{{ $errors->first('tag') }}</span>
                         </div>
-                        <div class="form-group mt-2
-                    @if ($errors->has('title')) has-error @endif">
-                            <label for="title">title</label>
-                            <input type="title" name="title" class="form-control" value="{{ old('title') }}">
-                            @if ($errors->has('title'))
-                                <span
-                                    class="help-block
-                            @if ($errors->has('title')) has-error @endif">
-                                    {{ $errors->first('title') }}
-                                </span>
-                            @endif
+
+                        <div class="form-group mt-2">
+                            <label for="title">Title</label>
+                            <input type="text" name="title" class="form-control" value="{{ old('title') }}">
+                            <span class="invalid-feedback">{{ $errors->first('title') }}</span>
                         </div>
-                        <div class="form-group mt-2
-                @if ($errors->has('content')) has-error @endif">
-                            <label for="content">content</label>
-                            <input type="content" name="content" class="form-control" value="{{ old('content') }}">
-                            @if ($errors->has('content'))
-                                <span
-                                    class="help-block
-                        @if ($errors->has('content')) has-error @endif">
-                                    {{ $errors->first('content') }}
-                                </span>
-                            @endif
+
+                        <div class="form-group mt-2">
+                            <label for="content">Content</label>
+                            <textarea name="content" class="form-control" rows="4">{{ old('content') }}</textarea>
+                            <span class="invalid-feedback">{{ $errors->first('content') }}</span>
                         </div>
+
                         <div class="text-start">
-                            <a href="/pages/user" class="btn btn-danger mt-3">Kembali</a>
+                            <a href="/pages/forum" class="btn btn-danger mt-3">Kembali</a>
                             <button type="submit" class="btn btn-primary mt-3">Simpan</button>
                         </div>
                     </form>
@@ -68,50 +42,83 @@
     </div>
     <input type="text" hidden value="{{ asset('asset/admin/json/forum.json') }}" id="path">
 @endsection
+
 @push('scripts')
-    <script>
-        $(document).ready(function() {
-            var path = document.getElementById('path').value;
-            var lastId = 0;
+<script>
+    $(document).ready(function() {
+        var path = document.getElementById('path').value;
+        var lastId = 0;
+
+        // AJAX Request to Get Last ID
+        $.ajax({
+            url: path,
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                if (data.data && data.data.length > 0) {
+                    lastId = data.data[data.data.length - 1].id;
+                }
+            },
+            error: function(jqxhr, textStatus, error) {
+                console.error("Initial Request Failed: " + textStatus + ", " + error);
+            }
+        });
+
+        var validation = () => {
+            let isValid = true;
+            $('input, textarea').removeClass('is-invalid');
+            const author = $('input[name="author"]');
+            if (!author.val()) {
+                author.addClass('is-invalid');
+                author.next().text('Author is required');
+                isValid = false;
+            }
+            const tag = $('input[name="tag"]');
+            if (!tag.val()) {
+                tag.addClass('is-invalid');
+                tag.next().text('Tag is required');
+                isValid = false;
+            }
+            const title = $('input[name="title"]');
+            if (!title.val()) {
+                title.addClass('is-invalid');
+                title.next().text('Title is required');
+                isValid = false;
+            }
+            const content = $('textarea[name="content"]');
+            if (!content.val()) {
+                content.addClass('is-invalid');
+                content.next().text('Content is required');
+                isValid = false;
+            }
+
+            return isValid;
+        };
+
+        $('.form').submit(function(e) {
+            e.preventDefault();
+            if (!validation()) return;
+            var form = new FormData(this);
+            form.append('id', parseInt(lastId) + 1);
+
             $.ajax({
-                url: path,
-                type: 'GET',
-                dataType: 'json',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+                },
+                url: "/api/forum/add",
+                type: 'POST',
+                processData: false,
+                contentType: false,
+                data: form,
                 success: function(data) {
-                    if (data.data && data.data.length > 0) {
-                        lastId = data.data[data.data.length - 1].id;
-                    }
+                    console.log(data);
+                    window.location = "{{ url('pages/forum') }}";
                 },
                 error: function(jqxhr, textStatus, error) {
-                    var err = textStatus + ", " + error;
-                    console.log("Initial Request Failed: " + err);
+                    console.error("Request Failed: " + textStatus + ", " + error);
                 }
             });
-
-            $('.form').submit(function(e) {
-                e.preventDefault();
-                var form = new FormData(this);
-                form.append('id', parseInt(lastId) + 1);
-                // var name = form.get('name');
-                $.ajax({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
-                    },
-                    url: "/api/forum/add",
-                    type: 'POST',
-                    processData: false,
-                    contentType: false,
-                    data: form,
-                    success: function(data) {
-                        console.log(data);
-                        window.location = "{{ url('pages/forum') }}"
-                    },
-                    error: function(jqxhr, textStatus, error) {
-                        var err = textStatus + ", " + error;
-                        console.log("Request Failed: " + err);
-                    }
-                });
-            });
-        })
-    </script>
+        });
+    });
+</script>
 @endpush

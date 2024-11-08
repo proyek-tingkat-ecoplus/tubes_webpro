@@ -7,55 +7,28 @@
                 <div class="col-md-12">
                     <form class="forms">
                         @method('put')
-                        <div
-                            class="form-group mt-2
-                        @if ($errors->has('author')) has-error @endif">
-                            <label for="author">author</label>
+                        <div class="form-group mt-2">
+                            <label for="author">Author</label>
                             <input type="text" name="author" class="form-control" value="{{ old('author') }}">
-                            @if ($errors->has('author'))
-                                <span
-                                    class="help-block
-                                @if ($errors->has('author')) has-error @endif">
-                                    {{ $errors->first('author') }}
-                                </span>
-                            @endif
+                            <span class="invalid-feedback"></span>
                         </div>
-                        <div
-                            class="form-group mt-2
-                        @if ($errors->has('tag')) has-error @endif">
-                            <label for="tag">tag</label>
-                            <input type="tag" name="tag" class="form-control" value="{{ old('tag') }}">
-                            @if ($errors->has('tag'))
-                                <span
-                                    class="help-block
-                                @if ($errors->has('tag')) has-error @endif">
-                                    {{ $errors->first('tag') }}
-                                </span>
-                            @endif
+
+                        <div class="form-group mt-2">
+                            <label for="tag">Tag</label>
+                            <input type="text" name="tag" class="form-control" value="{{ old('tag') }}">
+                            <span class="invalid-feedback"></span>
                         </div>
-                        <div class="form-group mt-2
-                    @if ($errors->has('title')) has-error @endif">
-                            <label for="title">title</label>
-                            <input type="title" name="title" class="form-control" value="{{ old('title') }}">
-                            @if ($errors->has('title'))
-                                <span
-                                    class="help-block
-                            @if ($errors->has('title')) has-error @endif">
-                                    {{ $errors->first('title') }}
-                                </span>
-                            @endif
+
+                        <div class="form-group mt-2">
+                            <label for="title">Title</label>
+                            <input type="text" name="title" class="form-control" value="{{ old('title') }}">
+                            <span class="invalid-feedback"></span>
                         </div>
-                        <div class="form-group mt-2
-                @if ($errors->has('content')) has-error @endif">
-                            <label for="content">content</label>
-                            <input type="content" name="content" class="form-control" value="{{ old('content') }}">
-                            @if ($errors->has('content'))
-                                <span
-                                    class="help-block
-                        @if ($errors->has('content')) has-error @endif">
-                                    {{ $errors->first('content') }}
-                                </span>
-                            @endif
+
+                        <div class="form-group mt-2">
+                            <label for="content">Content</label>
+                            <textarea name="content" class="form-control" rows="4">{{ old('content') }}</textarea>
+                            <span class="invalid-feedback"></span>
                         </div>
                         <div class="text-start">
                             <a href="/pages/forum" class="btn btn-danger mt-3">Kembali</a>
@@ -84,7 +57,7 @@
                         $('input[name="author"]').val(dataById.author)
                         $('input[name="tag"]').val(dataById.tag)
                         $('input[name="title"]').val(dataById.title)
-                        $('input[name="content"]').val(dataById.content)
+                        $('textarea[name="content"]').val(dataById.content)
                     }
                 },
                 error: function(jqxhr, textStatus, error) {
@@ -93,15 +66,47 @@
                 }
             });
 
+            var validation = () => {
+            let isValid = true;
+            $('input, textarea').removeClass('is-invalid');
+            const author = $('input[name="author"]');
+            if (!author.val()) {
+                author.addClass('is-invalid');
+                author.next().text('Author is required');
+                isValid = false;
+            }
+            const tag = $('input[name="tag"]');
+            if (!tag.val()) {
+                tag.addClass('is-invalid');
+                tag.next().text('Tag is required');
+                isValid = false;
+            }
+            const title = $('input[name="title"]');
+            if (!title.val()) {
+                title.addClass('is-invalid');
+                title.next().text('Title is required');
+                isValid = false;
+            }
+            const content = $('textarea[name="content"]');
+            if (!content.val()) {
+                content.addClass('is-invalid');
+                content.next().text('Content is required');
+                isValid = false;
+            }
+
+            return isValid;
+        };
+
+
             $('.forms').submit(function(e) {
-                console.log("here")
                 e.preventDefault();
+                if (!validation()) return;
                 var form = new FormData(this);
                 form.append('id', id);
                 form.append('author', $('input[name="author"]').val());
                 form.append('tag', $('input[name="tag"]').val());
                 form.append('title', $('input[name="title"]').val());
-                form.append('content', $('input[name="content"]').val());
+                form.append('content', $('textarea[name="content"]').val());
                 form.append('_method', 'PATCH'); // kalau patch harus make ini
                 form.append('_token', $('meta[name="csrf_token"]').attr('content')); // CSRF token
 
