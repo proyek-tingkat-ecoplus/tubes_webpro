@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
+@section('title', 'Forum')
 @section('content')
-    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master / Data Forum /</span> Tambah Forum</h4>
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">FORMULIR / Data Forum /</span> Tambah Forum</h4>
     <div class="card">
         <div class="container pe-3 ps-3 pb-3">
             <div class="row">
@@ -10,25 +11,25 @@
                         <div class="form-group mt-2">
                             <label for="author">Author</label>
                             <input type="text" name="author" class="form-control" value="{{ old('author') }}">
-                            <span class="invalid-feedback">{{ $errors->first('author') }}</span>
+                            <span class="invalid-feedback"></span>
                         </div>
 
                         <div class="form-group mt-2">
                             <label for="tag">Tag</label>
                             <input type="text" name="tag" class="form-control" value="{{ old('tag') }}">
-                            <span class="invalid-feedback">{{ $errors->first('tag') }}</span>
+                            <span class="invalid-feedback"></span>
                         </div>
 
                         <div class="form-group mt-2">
                             <label for="title">Title</label>
                             <input type="text" name="title" class="form-control" value="{{ old('title') }}">
-                            <span class="invalid-feedback">{{ $errors->first('title') }}</span>
+                            <span class="invalid-feedback"></span>
                         </div>
 
                         <div class="form-group mt-2">
                             <label for="content">Content</label>
                             <textarea name="content" class="form-control" rows="4">{{ old('content') }}</textarea>
-                            <span class="invalid-feedback">{{ $errors->first('content') }}</span>
+                            <span class="invalid-feedback">}</span>
                         </div>
 
                         <div class="text-start">

@@ -1,8 +1,9 @@
 @extends('admin.layout.master')
+@section('title', 'Comment')
 @section('content')
 <div class="content-wrapper">
     <div class="container ">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master /</span> Data Comment</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">FORMULIR /</span> Data Comment</h4>
 
         <div class="card">
             <div class=" text-nowrap p-3">

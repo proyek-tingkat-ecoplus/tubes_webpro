@@ -90,7 +90,7 @@
             </a>
         </li>
 
-        <!-- Reports Section -->
+        {{-- <!-- Reports Section -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Laporan</span></li>
         <li class="menu-item">
             <a href="javascript:void(0);" class="menu-link">
@@ -133,6 +133,6 @@
                 <i class="menu-icon tf-icons bx bx-book-open"></i>
                 <div data-i18n="Documentation">Dokumentasi</div>
             </a>
-        </li>
+        </li> --}}
     </ul>
 </aside>

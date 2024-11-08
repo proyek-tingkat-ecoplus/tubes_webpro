@@ -1,8 +1,9 @@
 @extends('admin.layout.master')
+@section('title', 'Pemetaan Alat')
 @section('content')
 <div class="content-wrapper">
     <div class="container ">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master /</span> Data Pemetaan</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">PEMETAAN /</span> Data Pemetaan</h4>
 
         <div class="card">
             <div class=" text-nowrap p-3">

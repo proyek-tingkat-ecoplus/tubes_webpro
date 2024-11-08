@@ -1,8 +1,9 @@
 @extends('admin.layout.master')
+@section('title', 'Data Tag')
 @section('content')
 <div class="content-wrapper">
     <div class="container ">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Masster /</span> Data Tag</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">FORMULIR /</span> Data Tag</h4>
 
         <div class="card">
             <div class=" text-nowrap p-3">
