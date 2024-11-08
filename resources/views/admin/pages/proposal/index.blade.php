@@ -1,8 +1,9 @@
 @extends('admin.layout.master')
+@section('title', 'Proposal')
 @section('content')
 <div class="content-wrapper">
     <div class="container ">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Masster /</span> Data Forum</h4>
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">PROPOSAL /</span> Data Forum</h4>
 
         <div class="card">
             <div class=" text-nowrap p-3">

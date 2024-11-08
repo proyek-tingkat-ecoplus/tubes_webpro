@@ -1,4 +1,5 @@
 @extends('admin.layout.master')
+@section('title', 'Dashboard')
 @section('content')
 <div class="row">
     <div class="col-lg-3 col-md-3 col-6 mb-4">

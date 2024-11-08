@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
+@section('title', 'Comment')
 @section('content')
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master / Data Comment /</span> Tambah</h4>
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">FORMULIR / Data Comment /</span> Tambah Comment</h4>
 <div class="card">
     <div class="container pe-3 ps-3 pb-3">
         <div class="row">
@@ -10,12 +11,12 @@
                     <div class="form-group mt-2">
                         <label for="author">Name</label>
                         <input type="text" name="author" class="form-control" value="{{ old('author') }}">
-                        <span class="invalid-feedback">{{ $errors->first('author') }}</span>
+                        <span class="invalid-feedback"></span>
                     </div>
                     <div class="form-group mt-2">
                         <label for="comment">Comment</label>
                         <textarea name="comment" class="form-control" rows="3">{{ old('comment') }}</textarea>
-                        <span class="invalid-feedback">{{ $errors->first('comment') }}</span>
+                        <span class="invalid-feedback"></span>
                     </div>
 
                     <div class="text-start">
@@ -49,10 +50,9 @@ $(document).ready(function() {
         }
     });
 
-    // Validation Function
     var validation = () => {
         let isValid = true;
-        $('input, textarea').removeClass('is-invalid'); // Remove any previous invalid styles
+        $('input, textarea').removeClass('is-invalid');
         const author = $('input[name="author"]');
         if (!author.val()) {
             author.addClass('is-invalid');

@@ -1,6 +1,7 @@
 @extends('admin.layout.master')
+@section('title', 'Inventaris')
 @section('content')
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master / Data Alat /</span> Tambah Alat</h4>
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Master / Data Inventaris /</span> Tambah Inventaris</h4>
 <div class="card">
     <div class="container pe-3 ps-3 pb-3">
         <div class="row">
