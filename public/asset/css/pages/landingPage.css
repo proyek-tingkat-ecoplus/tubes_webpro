@@ -4,7 +4,7 @@
     text-align: justify;
 }
 
-.about-section p {
+.description {
     color: white;
     margin: 3rem;
     margin-right: 4rem;
@@ -29,6 +29,29 @@
     color: #003030;
 }
 
+.placeholder {
+    color: gray;
+    /* Warna abu-abu */
+}
+
+/* Tambahkan aturan untuk input tanggal */
+.energi-info-section input[type="date"] {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    width: 100%;
+}
+
+
+/* Energi Info Section */
+.energi-info-section select {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.375rem 0.75rem;
+    width: 100%;
+}
+
+/* Tombol Kirim */
 .energi-info-section .btn-primary {
     margin-top: 1rem;
     background-color: #003030;
@@ -55,23 +78,20 @@
     color: white;
 }
 
-.maps-background {
-    margin-bottom: 10%;
-}
-
 .maps-background iframe {
     width: 100vw;
     height: 100vh;
-    margin: 0;
-    padding: 0;
     border: 0;
     position: relative;
     left: 50%;
     transform: translateX(-50%);
+    top: -20%;
+    z-index: 0;
 }
 
 .card-style {
     margin: 0;
+    border: none;
 }
 
 .card-style .card {
@@ -81,8 +101,13 @@
 }
 
 .card-style .card h6,
-.card-style .card p {
+.card-style .card p,
+.card-style .card i {
     color: #003030;
+}
+
+.card-style i {
+    margin: 10%;
 }
 
 .card-style h6 {
@@ -91,4 +116,8 @@
 
 .card-style p {
     font-size: small;
+}
+
+.z-index {
+    z-index: 3 !important;
 }
