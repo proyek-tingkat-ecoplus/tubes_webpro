@@ -22,6 +22,10 @@ Route::get('/forum', function () {
     return view('form');
 });
 
+Route::get('/tambahpesan', function () {
+    return view('tambahpesan');
+});
+
 Route::get('/profil', function (){
     return view('profilKepdes');
 });
