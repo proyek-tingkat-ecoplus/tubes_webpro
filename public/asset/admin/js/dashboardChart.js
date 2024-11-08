@@ -54,20 +54,20 @@ document.addEventListener('DOMContentLoaded', function () {
         eventsData: [{
                 id: 1,
                 name: "Community Meeting",
-                start: "2024-10-23",
-                end: "2024-10-23"
+                start: "2024-11-23",
+                end: "2024-11-23"
             },
             {
                 id: 2,
                 name: "Workshop on Empowerment",
-                start: "2024-10-25",
-                end: "2024-10-25"
+                start: "2024-11-25",
+                end: "2024-11-25"
             },
             {
                 id: 3,
                 name: "Empowerment Campaign",
-                start: "2024-10-24",
-                end: "2024-10-26"
+                start: "2024-11-24",
+                end: "2024-11-26"
             }
         ],
         dateChanged: (currentDate, events) => {
@@ -118,3 +118,9 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
+
+
+var logout = () => {
+    localStorage.clear();
+    window.location.href = 'login.html';
+}

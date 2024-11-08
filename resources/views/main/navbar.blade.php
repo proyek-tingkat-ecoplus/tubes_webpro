@@ -42,10 +42,10 @@
                             <a class="nav-link @if(Request::is('/')) active @endif" href="/">BERANDA</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">INFORMASI</a>
+                            <a class="nav-link @if(Request::is('informasi')) active @endif" href="/informasi">INFORMASI</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">PEMETAAN ENERGI BERSIH</a>
+                            <a class="nav-link @if(Request::is('pemetaan')) active @endif" href="/pemetaan">PEMETAAN ENERGI BERSIH</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link @if(Request::is('forum')) active @endif" href="/forum">FORUM</a>
