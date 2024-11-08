@@ -26,36 +26,37 @@
                     @csrf
                     <h4>Informasi Energi Terbarukan</h4>
                     <div class="form-group">
-                        <label for="nama">Nama Energi Terbarukan</label>
-                        <input type="text" id="nama" name="nama" class="form-control" required>
+                        <label for="energi">Nama Energi Terbarukan</label>
+                        <input type="text" id="energi" name="energi" class="form-control" required>
+                        <div id="error-energi" style="color: red; display: none;"></div>
                     </div>
                     <div class="form-group">
-                        <label for="email">Nama Penanggungjawab</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
+                        <label for="penanggungJawab">Nama Penanggungjawab</label>
+                        <input type="text" id="penanggungJawab" name="penanggungJawab" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Tanggal Binwas</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
+                        <label for="binwas">Tanggal Binwas</label>
+                        <input type="text" id="binwas" name="binwas" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Area Cabang ESDM</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
+                        <label for="cabang">Area Cabang ESDM</label>
+                        <input type="text" id="cabang" name="cabang" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Kapasitas (kW/kWp/m3)</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
+                        <label for="kapasitas">Kapasitas (kW/kWp/m3)</label>
+                        <input type="text" id="kapasitas" name="kapasitas" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Tahun Operasi</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
+                        <label for="thnOperasi">Tahun Operasi</label>
+                        <input type="text" id="thnOperasi" name="thnOperasi" class="form-control" required>
                     </div>
                     <div class="form-group">
-                        <label for="email">Lat Long</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
+                        <label for="latLong">Lat Long</label>
+                        <input type="text" id="latLong" name="latLong" class="form-control" required>
                     </div>
+                    <button type="submit" class="ms-1 btn btn-primary">Kirim</button>
                 </form>
             </div>
         </div>
     </div>
 </section>
-
