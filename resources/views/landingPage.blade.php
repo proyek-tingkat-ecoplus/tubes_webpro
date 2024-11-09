@@ -44,56 +44,18 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <form id="energiForm">
+                <form id="energiForm" nonvalidate>
                     @csrf
                     <h4>Informasi Energi Terbarukan</h4>
                     <div class="form-group">
                         <label for="energi">Nama Energi Terbarukan</label>
                         <input type="text" id="energi" name="energi" class="form-control" required>
-                        <div id="error-energi" style="color: red; display: none;"></div>
-                        <script>
-                            document.getElementById('submitBtn').addEventListener('click', function (event)) {
-                                var energiInput = document.getElementById('energi');
-                                var errorEnergiDiv = document.getElementById('error-energi');
-
-                                errorEnergiDiv.style.display = 'none';
-                                errorEnergiDiv.textContent = '';
-
-                                if (energiInput.value.length < 5) {
-                                    errorEnergiDiv.textContent = 'Nama Energi Terbarukan harus terdiri dari minimal 5 karakter.';
-                                    errorEnergiDiv.style.display = 'block';
-                                    energiInput.classList.add('is-invalid');
-                                    event.preventDefault();
-                                } else {
-                                    energiInput.classList.remove('is-invalid');
-                                }
-                            }
-                        </script>
+                        <small id="energiError" class="text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label for="penanggungJawab">Nama Penanggungjawab</label>
                         <input type="text" id="penanggungJawab" name="penanggungJawab" class="form-control" required>
-                        <div id="error-penanggungJawa" style="color: red; display: none;"></div>
-
-                        <script>
-                            document.getElementById('submitBtn').addEventListener('click', function (event)) {
-                                var penanggungJawabInput = document.getElementById('penanggungJawab');
-                                var errorPJDiv = document.getElementById('error-penanggungJawab');
-
-                                errorPJDiv.style.display = 'none';
-                                errorPJDiv.textContent = '';
-
-                                if (penanggungJawabInput.value.length < 5) {
-                                    errorPJDiv.textContent = 'Nama Penanggungjawab harus terdiri dari minimal 5 karakter.';
-                                    errorPJDiv.style.display = 'block';
-                                    penanggungJawabInput.classList.add('is-invalid');
-                                    event.preventDefault();
-                                } else {
-                                    penanggungJawabInput.classList.remove('is-invalid');
-                                }
-
-                            }
-                        </script>
+                        <small id="pjError" class="text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label for="binwas">Tanggal Binwas</label>
@@ -106,6 +68,7 @@
                     <div class="form-group">
                         <label for="kapasitas">Kapasitas (kW/kWp/m3)</label>
                         <input type="text" id="kapasitas" name="kapasitas" class="form-control" required>
+                        <small id="kapasitasError" class="text-danger"></small>
                     </div>
                     <div class="form-group">
                         <label for="thnOperasi">Tahun Operasi</label>
@@ -122,9 +85,12 @@
                     <div class="form-group">
                         <label for="latLong">Lat Long</label>
                         <input type="text" id="latLong" name="latLong" class="form-control" required>
+                        <small id="latLongError" class="text-danger"></small>
                     </div>
+
                     <button type="submit" class="ms-1 btn btn-primary">Kirim</button>
                 </form>
+
             </div>
         </div>
     </div>
@@ -175,3 +141,69 @@
         </div>
     </div>
 </section>
+
+<script>
+    document.getElementById('energiForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        let isValid = true;
+
+        const energi = document.getElementById('energi');
+        const penanggungJawab = document.getElementById('penanggungJawab');
+        const kapasitas = document.getElementById('kapasitas');
+        const latLong = document.getElementById('latLong');
+
+        const energiError = document.getElementById('energiError');
+        const pjError = document.getElementById('pjError');
+        const kapasitasError = document.getElementById('kapasitasError');
+        const latLongError = document.getElementById('latLongError');
+
+        energiError.textContent = '';
+        pjError.textContent = '';
+        kapasitasError.textContent = '';
+        latLongError.textContent = '';
+
+        const noNumberPattern = /^[^\d]+$/;
+
+        if (energi.value.trim() === '') {
+            isValid = false;
+            energiError.textContent = 'Energi wajib diisi.';
+        } else if (!noNumberPattern.test(energi.value.trim())) {
+            isValid = false;
+            energiError.textContent = 'Energi tidak valid.';
+        }
+
+        if (penanggungJawab.value.trim() === '') {
+            isValid = false;
+            pjError.textContent = 'Penanggung Jawab wajib diisi.';
+        } else if (!noNumberPattern.test(penanggungJawab.value.trim())) {
+            isValid = false;
+            pjError.textContent = 'Penanggung Jawab tidak valid';
+        } else if (penanggungJawab.value.trim().length < 5) {
+            isValid = false;
+            pjError.textContent = 'Penanggung Jawab harus memiliki minimal 5 karakter.';
+        }
+
+        if (kapasitas.value.trim() === '') {
+            isValid = false;
+            kapasitasError.textContent = 'Kapasitas wajib diisi.';
+        } else if (isNaN(kapasitas.value) || Number(kapasitas.value) <= 0) {
+            isValid = false;
+            kapasitasError.textContent = 'Kapasitas tidak valid.';
+        }
+
+        const latLongPattern = /^-?\d+(\.\d+)?,\s?-?\d+(\.\d+)?$/;
+        if (latLong.value.trim() === '') {
+            isValid = false;
+            latLongError.textContent = 'LatLong wajib diisi.';
+        } else if (!latLongPattern.test(latLong.value.trim())) {
+            isValid = false;
+            latLongError.textContent = 'Format LatLong tidak valid. Contoh: -1.123123, 123.123123';
+        }
+
+        if (isValid) {
+            alert('Form berhasil divalidasi!');
+        }
+    });
+
+</script>
