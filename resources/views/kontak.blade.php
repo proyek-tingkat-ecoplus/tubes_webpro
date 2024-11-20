@@ -9,9 +9,37 @@
 
 <div class="container-fluid">
     <img src="{{asset('asset/image/pabrik.jpeg')}}" class="img-fluid img-hero" alt="Responsive image">
-    <div class="card mx-auto card-style">
+    <div class="card mx-auto card-style" style="z-index: 2">
         <div class="row">
+            <!-- Kontak Information Section (Pindahkan ke kiri) -->
+            <div class="col-md-4">
+                <div class="social-media social-media-style">
+                    <div class="container-fluid p-4 text-white">
+                        <div class="fs-2 fw-bold">Kontak</div>
+                        <div class="fs-text">
+                            <div class="mt-2-text">EcoPulse</div>
+                            <div class="p-3">Kompleks Tahura, Jl. Ir. H. Juanda No.99, Ciburial, Kec. Cimsnyan, Kabupaten Bandung, Jawa Barat 40198</div>
+                            <div><i class="fa-solid fa-phone pe-2"></i>Telephone</div>
+                            <div class="p-3">+22-3214458</div>
+                            <div><i class="fa-solid fa-envelope pe-2"></i>Surel</div>
+                            <div class="p-3">admin.Ecopulse@gmail.com</div>
+                            <div><i class="fa-solid fa-globe pe-2"></i>Social Media</div>
+                            <div class="ps-4 pt-3">
+                                <div class="row">
+                                    <div class="col-2"><i class="fa-brands fa-instagram"></i></div>
+                                    <div class="col-2"><i class="fa-brands fa-facebook"></i></div>
+                                    <div class="col-2"><i class="fa-brands fa-youtube"></i></div>
+                                    <div class="col-2"><i class="fa-solid fa-x"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form and Map Section (Pindahkan form ke kanan dan di atas peta) -->
             <div class="col-md-8">
+                <!-- Form Section -->
                 <form action="" class="p-5" id="contactForm">
                     <div class="fs-3 fw-bold mb-3">Form Hubungi Kami</div>
                     <div class="row">
@@ -47,31 +75,9 @@
                         </div>
                     </div>
                 </form>
-            </div>
-            <div class="col-md-4">
-                <div class="social-media social-media-style">
-                    <div class="container-fluid p-4 text-white">
-                        <div class="fs-2 fw-bold">Kontak</div>
-                        <div class="fs-text">
-                            <div class="mt-2-text">EcoPulse</div>
-                            <div class="p-3">Kompleks Tahura, Jl. Ir. H. Juanda No.99, Ciburial, Kec. Cimsnyan, Kabupaten Bandung, Jawa Barat 40198</div>
-                            <div><i class="fa-solid fa-phone pe-2"></i>Telephone</div>
-                            <div class="p-3">+22-3214458</div>
-                            <div><i class="fa-solid fa-envelope pe-2"></i>Surel</div>
-                            <div class="p-3">admin.Ecopulse@gmail.com</div>
-                            <div><i class="fa-solid fa-globe pe-2"></i>Social Media</div>
-                            <div class="ps-4 pt-3">
-                                <div class="row">
-                                    <div class="col-2"><i class="fa-brands fa-instagram"></i></div>
-                                    <div class="col-2"><i class="fa-brands fa-facebook"></i></div>
-                                    <div class="col-2"><i class="fa-brands fa-youtube"></i></div>
-                                    <div class="col-2"><i class="fa-solid fa-x"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="ratio ratio-21x9 ratio-style">
+
+                <!-- Google Maps Section -->
+                <div class="ratio ratio-21x9 ratio-style mt-4">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2883.4031134895417!2d10.396597!3d43.722952!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d591a6c44e88cd%3A0x32eca9b1d554fc03!2sTower%20of%20Pisa!5e0!3m2!1sen!2sid!4v1729254277951!5m2!1sen!2sid"
                         allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
@@ -84,14 +90,5 @@
 
 @push('scripts')
 <script src="{{asset('asset/js/custom.js')}}"></script>
-{{-- <script>
-    document.getElementById('submitButton').addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent the form from actually submitting
 
-        // Here you can handle form validation or submission via AJAX, if needed
-
-        // Show a success message when the button is clicked
-        alert('Pesan Anda berhasil terkirim');
-    });
-</script> --}}
 @endpush

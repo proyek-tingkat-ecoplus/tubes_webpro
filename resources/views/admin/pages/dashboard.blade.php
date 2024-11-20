@@ -13,7 +13,7 @@
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="row">
                                 <span class="fw-semibold d-block mb-1 mt-2">Total User</span>
-                                <h3 class="card-title mb-2">$12,628</h3>
+                                <h3 class="card-title mb-2 total_user">0</h3>
                             </div>
                             <div class="dropdown ms-3">
                                 <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
@@ -44,7 +44,7 @@
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="row">
                                 <span class="fw-semibold d-block mb-1 mt-2">Total Forum</span>
-                                <h3 class="card-title mb-2">$12,628</h3>
+                                <h3 class="card-title mb-2 total_forum">0</h3>
                             </div>
                             <div class="dropdown ms-3">
                                 <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
@@ -75,7 +75,7 @@
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="row">
                                 <span class="fw-semibold d-block mb-1 mt-2">Proposal</span>
-                                <h3 class="card-title mb-2">20</h3>
+                                <h3 class="card-title mb-2 total_proposal">0</h3>
                             </div>
                             <div class="dropdown ms-3">
                                 <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
@@ -106,7 +106,7 @@
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="row">
                                 <span class="fw-semibold d-block mb-1 mt-2">Pemetaan</span>
-                                <h3 class="card-title mb-2">20</h3>
+                                <h3 class="card-title mb-2 total_pemetaan"></h3>
                             </div>
                             <div class="dropdown ms-3">
                                 <button class="btn p-0" type="button" id="cardOpt3" data-bs-toggle="dropdown"
@@ -147,6 +147,6 @@
 </div>
 @endsection
 @push('scripts')
-<script src="https://cdn.jsdelivr.net/npm/color-calendar/dist/bundle.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/color-calendar/dist/bundle.js" ></script>
     <script src="{{asset('asset/admin/js/dashboardChart.js')}}"></script>
 @endpush

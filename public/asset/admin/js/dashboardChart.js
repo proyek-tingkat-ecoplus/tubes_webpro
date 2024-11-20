@@ -1,37 +1,70 @@
+// Provided JSON data
+var json = {
+    "totalUser": 50,
+    "TotalForum": 52,
+    "TotalProposal": 21,
+    "TotalPemetaan": 11,
+    "chart": [
+        {
+            "name": "Disubmit",
+            "data": [1, 2, 3, 4, 5]
+        },
+        {
+            "name": "Diapprove",
+            "data": [13, 18, 9, 14, 5]
+        }
+    ],
+    "event": [
+        {
+            "id": 1,
+            "name": "Community Meeting",
+            "start": "2024-11-23",
+            "end": "2024-11-23"
+        },
+        {
+            "id": 2,
+            "name": "Workshop on Empowerment",
+            "start": "2024-11-25",
+            "end": "2024-11-25"
+        },
+        {
+            "id": 3,
+            "name": "Empowerment Campaign",
+            "start": "2024-11-24",
+            "end": "2024-11-26"
+        },
+        {
+            "id": 4,
+            "name": "Empowerment Campaign",
+            "start": "2024-11-27",
+            "end": "2024-11-27"
+        }
+    ]
+};
+
+// Chart colors
 var color1 = '#264417';
+var color2 = '#437c4f';
+document.querySelector('.total_forum').innerHTML = json.TotalForum;
+document.querySelector('.total_user').innerHTML = json.totalUser;
+document.querySelector('.total_proposal').innerHTML = json.TotalProposal;
+document.querySelector('.total_pemetaan').innerHTML = json.TotalPemetaan;
+
 
 var options = {
     chart: {
         height: 350,
         type: 'bar',
         background: '#ffff',
-        foreground: '#333',
+        foreColor: '#333',
     },
-    series: [{
-            name: 'Disubmit',
-            data: [18, 7, 15, 29, 18, 12, 9]
-        },
-        {
-            name: 'D    iapprove',
-            data: [13, 18, 9, 14, 5, 17, 15]
-        }
-    ],
+    series: json.chart, // Use data from JSON
     xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
     },
-    // plotOptions: {
-    //     bar: {
-    //         horizontal: false,
-    //         columnWidth: '33%',
-    //         borderRadius: 12,
-    //         startingShape: 'rounded',
-    //         endingShape: 'rounded'
-    //     }
-    // },
-
     fill: {
         opacity: 1,
-        colors: [color1, '#437c4f'],
+        colors: [color1, color2],
     },
     legend: {
         show: true,
@@ -40,8 +73,8 @@ var options = {
         },
     },
 };
-const chart = new ApexCharts(document.querySelector('.bar_chart'), options);
 
+const chart = new ApexCharts(document.querySelector('.bar_chart'), options);
 chart.render();
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -51,41 +84,19 @@ document.addEventListener('DOMContentLoaded', function () {
         calendarSize: 'small',
         primaryColor: '#1a472a',
         headerBackgroundColor: 'white',
-        eventsData: [{
-                id: 1,
-                name: "Community Meeting",
-                start: "2024-11-23",
-                end: "2024-11-23"
-            },
-            {
-                id: 2,
-                name: "Workshop on Empowerment",
-                start: "2024-11-25",
-                end: "2024-11-25"
-            },
-            {
-                id: 3,
-                name: "Empowerment Campaign",
-                start: "2024-11-24",
-                end: "2024-11-26"
-            }
-        ],
+        eventsData: json.event, // disni
         dateChanged: (currentDate, events) => {
-            // Handle date changes
             showEventLabel(events);
-            // show label
         },
         monthChanged: (currentDate, events) => {
-            // Handle month changes
             console.log('Current month:', currentDate);
             console.log('Events:', events);
         }
     });
 
     function showEventLabel(events) {
-        // Get or create the label container
+
         let labelContainer = $('#eventLabels');
-        // If container doesn't exist, create it
         if (labelContainer.length === 0) {
             $('#calendar').after('<div id="eventLabels"></div>');
             labelContainer = $('#eventLabels');
@@ -94,10 +105,8 @@ document.addEventListener('DOMContentLoaded', function () {
         labelContainer.addClass('card mt-3 p-3');
         labelContainer.empty();
 
-        // ${''} // ini buat ngambil atau membuat tag baru
-        $('<h5>', {text: 'Events',class: 'mt-3'}).appendTo(labelContainer);
+        $('<h5>', { text: 'Events', class: 'mt-3' }).appendTo(labelContainer);
 
-        // ini buat loop label
         if (events && events.length > 0) {
             events.forEach(event => {
                 $('<span>', {
@@ -107,10 +116,11 @@ document.addEventListener('DOMContentLoaded', function () {
                         fontSize: '14px',
                         padding: '8px 12px',
                         backgroundColor: '#1a472a',
+                        color: '#fff',
                     }
                 }).appendTo(labelContainer);
             });
-        } else { // jika ga ada event pasang yang ini
+        } else {
             $('<p>', {
                 text: 'No events for this date',
                 class: 'text-muted mt-2'
@@ -118,9 +128,3 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 });
-
-
-var logout = () => {
-    localStorage.clear();
-    window.location.href = 'login.html';
-}

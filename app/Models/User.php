@@ -45,4 +45,37 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function roles(){
+        $this->belongsTo(Role::class, 'role_id', 'id');
+    }
+
+    public function user_details(){
+        $this->hasOne(UserDetails::class, 'user_id');
+    }
+
+    public function proposals(){
+        $this->hasMany(Proposal::class, 'user_id', 'id');
+    }
+
+    public function forums(){
+        $this->hasMany(Forum::class, 'user_id', 'id');
+    }
+
+    public function comments(){
+        $this->hasMany(Comment::class, 'user_id', 'id');
+    }
+
+    public function alat(){
+        $this->hasMany(Alat::class, 'user_id', 'id');
+    }
+
+    public function reportAlat(){
+        $this->belongsToMany(Alat::class, 'report_alat', 'user_id', 'alat_id',)
+        ->withPivot('judul_report', 'deskripsi', 'latidude','longitude','address','status', 'tanggal', 'rejected_at', 'approved_at', 'approved_by', 'rejected_by', 'approved_reason', 'rejected_reason');
+    }
+
+
+
+
 }
