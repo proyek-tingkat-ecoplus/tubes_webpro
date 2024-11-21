@@ -8,8 +8,10 @@
         "php": "^8.2",
         "fakerphp/faker": "^1.24",
         "laravel/framework": "^11.9",
+        "laravel/passport": "^12.0",
         "laravel/sanctum": "^4.0",
-        "laravel/tinker": "^2.9"
+        "laravel/tinker": "^2.9",
+        "ovac/idoc": "^1.7"
     },
     "require-dev": {
         "laravel/pail": "^1.1",
