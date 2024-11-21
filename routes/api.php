@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\authController;
 use App\Http\Controllers\ComentForumController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ForumController;
@@ -12,9 +13,12 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::middleware("auth:api")->prefix("auth")->group(function(){
+    Route::post('/login', [authController::class, 'login']);
+    Route::get('/me', [authController::class, 'me']);
+    Route::post('/logout', [authController::class, 'logout']);
+    Route::post('/refresh', [authController::class, 'refresh']);
+});
 
 
 Route::prefix("user")->group(function(){
@@ -64,7 +68,6 @@ Route::prefix('pemetaanalat')->group(callback: function(){
     Route::patch('/{id}/edit', [PemetaanController::class, 'update']);
     Route::delete('/{id}/delete', [PemetaanController::class, 'deletes']);
 });
-
 
 
 

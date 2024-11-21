@@ -1,18 +1,1 @@
-{
-    "data": [
-        {
-            "id": "1",
-            "name": "Nabila",
-            "email": "example1@gmail.com",
-            "role": "admin",
-            "status": "Aktif"
-        },
-        {
-            "id": "2",
-            "name": "Nabila",
-            "email": "",
-            "role": "admin",
-            "status": "Aktif"
-        }
-    ]
-}
+{"data":{"1":{"id":"2","name":"Nabila","email":"","role":"admin","status":"Aktif"},"2":{"id":null,"name":null,"email":null,"role":null,"status":null},"3":{"id":null,"name":null,"email":null,"role":null,"status":null},"4":{"id":null,"name":null,"email":null,"role":null,"status":null},"5":{"id":null,"name":null,"email":null,"role":null,"status":null},"6":{"id":null,"name":null,"email":null,"role":null,"status":null},"7":{"id":null,"name":null,"email":null,"role":null,"status":null},"8":{"id":null,"name":null,"email":null,"role":null,"status":null},"9":{"id":null,"name":null,"email":null,"role":null,"status":null},"10":{"id":null,"name":null,"email":null,"role":null,"status":null},"11":{"id":null,"name":null,"email":null,"role":null,"status":null},"12":{"id":null,"name":null,"email":null,"role":null,"status":null}}}
