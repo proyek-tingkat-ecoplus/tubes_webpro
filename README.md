@@ -9,7 +9,7 @@ Alternative installation is possible without local dependencies relying on [Dock
 
 Clone the repository
 
-    git clone https://github.com/mfauzanprmna/ubes_webpro.git
+    git clone https://github.com/proyek-tingkat-ecoplus/tubes_webpro.git
 
 Switch to the repo folder
 
@@ -49,7 +49,7 @@ You can now access the server at http://localhost:8000
 
 **TL;DR command list**
 
-    git clone https://github.com/mfauzanprmna/tubes_webpro.git
+    git clone https://github.com/proyek-tingkat-ecoplus/tubes_webpro.git
     cd tubes_webpro
     composer install
     npm install
