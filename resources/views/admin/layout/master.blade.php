@@ -111,29 +111,7 @@
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 
     @stack('scripts')
-    <script>
-        var logout = () => {
-            Swal.fire({
-                title: "Logout?",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes"
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    Swal.fire({
-                        title: "Success",
-                        text: "anda bershasil logout.",
-                        icon: "success"
-                    });
-                    window.location.href = '/';
-                }
-            });
-
-        }
-
-    </script>
+    @vite(['resources/js/dashboard.js'])
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

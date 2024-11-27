@@ -19,4 +19,19 @@ class Comment extends Model
         'deleted_at',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function form(){
+        return $this->belongsTo(Forum::class,'forum_id','id');
+    }
+
+    public function parent(){
+        return $this->belongsTo(Comment::class,'parent_id','id');
+    }
+
+
+
 }

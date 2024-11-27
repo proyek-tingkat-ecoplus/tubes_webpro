@@ -36,8 +36,8 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">John Doe</span>
-                                    <small class="text-muted">Administrator</small>
+                                    <span class="fw-semibold d-block nav_profile">John Doe</span>
+                                    <small class="text-muted nav_role">Administrator</small>
                                 </div>
                             </div>
                         </a>
@@ -46,7 +46,7 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" onclick="logout()">
+                        <a class="dropdown-item" id="logout">
                             <i class="bx bx-power-off me-2"></i>
                             <span class="align-middle">Log Out</span>
                         </a>

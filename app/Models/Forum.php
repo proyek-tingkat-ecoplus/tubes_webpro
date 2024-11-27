@@ -28,4 +28,9 @@ class Forum extends Model
     {
         return $this->hasMany(Comment::class, "forum_id", "id");
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, "category_forum", "forum_id", "category_id");
+    }
 }

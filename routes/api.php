@@ -13,8 +13,9 @@ use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+Route::post('/login', [authController::class, 'login']);
+
 Route::middleware("auth:api")->prefix("auth")->group(function(){
-    Route::post('/login', [authController::class, 'login']);
     Route::get('/me', [authController::class, 'me']);
     Route::post('/logout', [authController::class, 'logout']);
     Route::post('/refresh', [authController::class, 'refresh']);
