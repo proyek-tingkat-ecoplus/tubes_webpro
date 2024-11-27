@@ -11,7 +11,8 @@
         "laravel/passport": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
-        "ovac/idoc": "^1.7"
+        "ovac/idoc": "^1.7",
+        "yajra/laravel-datatables-oracle": "11.0"
     },
     "require-dev": {
         "laravel/pail": "^1.1",

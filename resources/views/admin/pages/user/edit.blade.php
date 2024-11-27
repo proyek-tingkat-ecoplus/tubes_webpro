@@ -5,7 +5,7 @@
     <div class="container pe-3 ps-3 pb-3">
         <div class="row">
             <div class="col-md-12">
-                <form class="forms">
+                <form class="form">
                     @method('put')
                     <div class="form-group mt-2"></div>
                      <div class="form-group mt-2 ">
@@ -55,116 +55,5 @@
     </div>
 </div>
 <input type="text" hidden value="{{ $id }}" id="idx">
-<input type="text" hidden value="{{ asset('asset/admin/json/user.json') }}" id="path">
+@vite(['resources/js/pages/admin/user/EditData.js'])
 @endsection
-@push('scripts')
-<script>
-    $(document).ready(function () {
-        var id = document.getElementById('idx').value;
-        var path = document.getElementById('path').value;
-        $.ajax({
-            url: path,
-            type: 'GET',
-            dataType: 'json',
-            success: function (data) {
-                if (data.data && data.data.length > 0) {
-                    dataById = data.data.filter((dt) => parseInt(dt.id) == parseInt(id))[0]
-                    $('input[name="name"]').val(dataById.name)
-                    $('input[name="email"]').val(dataById.email)
-                    $('select[name="role"]').val(dataById.role).change()
-                    $('select[name="status"]').val(dataById.status).change()
-                }
-            },
-            error: function (jqxhr, textStatus, error) {
-                var err = textStatus + ", " + error;
-                console.log("Initial Request Failed: " + err);
-            }
-        });
-
-        var validation = () => {
-            console.log('validation');
-            $('input, select').removeClass('is-invalid');
-            let isValid = true;
-            const name = $('input[name="name"]');
-            if (!name.val()) {
-                name.addClass('is-invalid');
-                name.next().text('Name is required');
-                isValid = false;
-            }
-            const email = $('input[name="email"]');
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!email.val() || !emailPattern.test(email.val())) {
-                email.addClass('is-invalid');
-                email.next().text('Email is required');
-                isValid = false;
-            }
-            const password = $('input[name="password"]');
-            if (!password.val()) {
-                password.addClass('is-invalid');
-                password.next().text('Password is required');
-                isValid = false;
-            }
-            const passwordConfirmation = $('input[name="password_confirmation"]');
-            if (!passwordConfirmation.val() || passwordConfirmation.val() !== password.val()) {
-                passwordConfirmation.addClass('is-invalid');
-                passwordConfirmation.next().text('Password confirmation is required');
-                isValid = false;
-            }
-            const role = $('select[name="role"]');
-            if (!role.val()) {
-                role.addClass('is-invalid');
-                role.next().text('Role is required');
-                isValid = false;
-            }
-            const status = $('select[name="status"]');
-            if (!status.val()) {
-                status.addClass('is-invalid');
-                status.next().text('Status is required');
-                isValid = false;
-            }
-
-            console.log(isValid);
-            return isValid;
-        }
-
-        $('.forms').submit(function (e) {
-            console.log("here")
-            e.preventDefault();
-
-            if (validation() === false) {
-                return;
-            }
-
-            var form = new FormData(this);
-            form.append('id', id);
-            form.append('name', $('input[name="name"]').val());
-            form.append('email', $('input[name="email"]').val());
-            form.append('role', $('select[name="role"]').val());
-            form.append('status', $('select[name="status"]').val());
-            form.append('_method', 'PATCH'); // kalau patch harus make ini
-            form.append('_token', $('meta[name="csrf_token"]').attr('content')); // CSRF token
-
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
-                },
-                url: "/api/user/" + id + "/edit",
-                method: 'POST',
-                processData: false,
-                contentType: false,
-                data: form,
-                success: function (data) {
-                    console.log(data);
-                    window.location = "{{ url('pages/user') }}"
-
-                },
-                error: function (jqxhr, textStatus, error) {
-                    var err = textStatus + ", " + error;
-                    console.log("Request Failed: " + err);
-                }
-            });
-        });
-    });
-
-</script>
-@endpush

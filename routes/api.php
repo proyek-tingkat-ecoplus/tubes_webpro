@@ -23,12 +23,15 @@ Route::middleware("auth:api")->prefix("auth")->group(function(){
 
 
 Route::prefix("user")->group(function(){
+    Route::get("/",[UserController::class, 'index']);
+    Route::get("/{id}",[UserController::class, 'find']);
     Route::post('/add', [UserController::class, 'post']);
     Route::patch('/{id}/edit', [UserController::class, 'update']);
     Route::delete('/{id}/delete', [UserController::class, 'deletes']);
 });
 
 Route::prefix("role")->group(function(){
+    Route::get("/",[RoleController::class, 'index']);
     Route::post('/add', [RoleController::class, 'post']);
     Route::patch('/{id}/edit', [RoleController::class, 'update']);
     Route::delete('/{id}/delete', [RoleController::class, 'deletes']);
