@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Role;
 use Illuminate\Http\Request;
 
 class RoleController extends Controller
 {
+
+    public function index(){
+        return response()->json(["data" => Role::all()]);
+    }
     public function post(Request $request){
 
         $asset = public_path('asset/admin/json/role.json');

@@ -2,53 +2,72 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
 {
+    public function index(){
+        // ini make yajra datatables
+        return DataTables::of(User::all())
+        ->addColumn("role", function($column){
+            return $column->role->name ?? null;
+        })
+        ->addColumn("status", function($column){
+            return "Active";
+        })
+        ->make(true);
+    }
     public function post(Request $request){
 
-        $asset = public_path('asset/admin/json/user.json');
-        $data = json_decode(file_get_contents($asset), true); // get file ini
-        $data['data'][] = [ // masukin ke "data" : []
-            "id" => $request->id,
-            "name" => $request->name,
-            "email" => $request->email,
-            "role" => $request->role,
-            "status" => $request->status
-        ];
+        $request->validate([
+            "name" => "required",
+            "email" => "required",
+            "role" => "required",
+            "password" => "required"
+        ]);
 
-        file_put_contents($asset, json_encode($data)); // set file ini
+        $data = User::create([
+            "username" => $request->name,
+            "password" => Hash::make($request->password),
+            "email" => $request->email,
+            "role_id" => $request->role,
+        ]);
         return response()->json($data);
     }
 
-    public function update(Request $request, $id){
-        $asset = public_path('asset/admin/json/user.json');
-        $data = json_decode(file_get_contents($asset), true); // get file ini
-        $ids =  collect($data['data'])->where("id", $id)->keys()[0];
-        // return response()->json($request->all());
-        $data['data'][$ids] = [ // edit ["data"]["id"]
-            "id" => $request->id,
-            "name" => $request->name,
-            "email" => $request->email,
-            "role" => $request->role,
-            "status" => $request->status
-        ];
+    public function find($id){
+        if(empty($id)){
+            return response()->json(['error' => 'Invalid id'], 402);
+        }
+        return response()->json(["data" => User::where("id", $id)->with("role")->first()]);
+    }
 
-        file_put_contents($asset, json_encode($data)); // set file ini
+    public function update(Request $request, $id){
+        $request->validate([
+            "name" => "required",
+            "email" => "required",
+            "role" => "required",
+            "password" => "required"
+        ]);
+
+        $data = User::where("id", $id)->update([
+            "username" => $request->name,
+            "password" => Hash::make($request->password),
+            "email" => $request->email,
+            "role_id" => $request->role,
+        ]);
         return response()->json($data);
     }
 
     public function deletes($id){
-        $asset = public_path('asset/admin/json/user.json');
-        $data = json_decode(file_get_contents($asset), true); // get file ini
-        $getDataById = collect($data['data'])->where("id", $id)->keys();
-        foreach ($getDataById as $key => $value) {
-            unset($data['data'][$value]);
+        if(empty($id)){
+            return response()->json(['error' => 'Invalid id'], 402);
         }
-
-        file_put_contents($asset, json_encode($data)); // set file ini
-        return response()->json($data);
+        User::where("id", $id)->delete();
+        return response()->json(["success" => "data berhasil di hapus"], 202);
     }
 
 
