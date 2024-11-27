@@ -1,6 +1,6 @@
 @extends('admin.layout.master')
 @section('content')
-<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Formulir / Data Tag /</span> Tambah Tag</h4>
+<h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">FORMULIR / Data Tag /</span> Tambah Tag</h4>
 <div class="card">
     <div class="container pe-3 ps-3 pb-3">
         <div class="row">

@@ -28,7 +28,6 @@ class UserSeeder extends Seeder
                 'role_id' => 1,
             ]);
 
-
             $address = AddressDetails::create([
                 'city' => $faker->city,
                 'state' => $faker->state,

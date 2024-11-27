@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,7 +54,7 @@ class authController extends Controller
 
             return $this->respondWithToken([
                 'token' => $accessToken,
-                'user' => Auth::user(),
+                'user' => User::find(Auth()->id())->with("role")->first(),
                 'expires_at' => $expiresAt,
                 'expires_in' => $expiresIn,
             ]);

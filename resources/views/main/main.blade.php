@@ -19,6 +19,8 @@
     <!-- Swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
+    <meta name="csrf-token" content="@csrf">
+
     <!-- Local CSS -->
     <link rel="stylesheet" href="{{asset('asset/style.css')}}">
     <link rel="stylesheet" href="asset/js/script.css">
@@ -62,11 +64,11 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- script -->
-    <script type="module" src="{{ asset('asset/js/lannding_pagejs.js') }}"></script>
-    <script type="module" src="{{ asset('asset/js/costom.js') }}"></script>
+    <script type="module" src="{{ asset('asset/js/client/lannding_pagejs.js') }}"></script>
+    <script type="module" src="{{ asset('asset/js/client/costom.js') }}"></script>
     <script type="text/javascript" src="{{ asset('asset/js/typeahead/typeahead.jquery.js') }}"></script>
     <script type="text/javascript" src="{{ asset('asset/js/typeahead/bloodhound.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/landingPage.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('asset/js/client/landingPage.js') }}"></script>
 
     @stack ('scripts')
 

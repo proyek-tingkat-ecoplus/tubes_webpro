@@ -19,9 +19,9 @@
             <form id="loginForm" class="form-group" action="/dashboard">
                 <div class="input-group">
                     <i class="fa-solid fa-user icon"></i>
-                    <input type="text" id="username" placeholder="Username" >
+                    <input type="text" id="email" placeholder="email" >
                 </div>
-                <div id="usernameError" class="error-message"></div>
+                <div id="emailError" class="error-message"></div>
                 <div class="input-group">
                     <i class="fa-solid fa-lock icon"></i>
                     <input type="password" id="password" placeholder="Password" >
@@ -45,48 +45,8 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script>
-        document.getElementById("loginForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            document.getElementById("usernameError").textContent = "";
-            document.getElementById("passwordError").textContent = "";
-
-
-            const username = document.getElementById("username").value.trim();
-            const password = document.getElementById("password").value.trim();
-            let isValid = true;
-
-            if (!username) {
-                document.getElementById("usernameError").textContent = "Username is required.";
-                document.getElementById("username").style.borderBottom = "1px solid red";
-                isValid = false;
-            }
-
-            if (!password) {
-                document.getElementById("passwordError").textContent = "Password is required.";
-                document.getElementById("password").style.borderBottom = "1px solid red";
-                isValid = false;
-            }
-
-            if (isValid) {
-                window.location.href = "/dashboard";
-            }
-        });
-
-        document.getElementById("username").addEventListener("input", function() {
-            if (this.value.trim()) {
-                document.getElementById("username").style.borderBottom = "1px solid grey";
-                document.getElementById("usernameError").textContent = "";
-            }
-        });
-
-        document.getElementById("password").addEventListener("input", function() {
-            if (this.value.trim()) {
-                document.getElementById("password").style.borderBottom = "1px solid grey";
-                document.getElementById("passwordError").textContent = "";
-            }
-        });
-    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @vite(['resources/js/auth.js'])
 
     <style>
         .error-message {

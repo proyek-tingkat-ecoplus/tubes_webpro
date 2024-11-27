@@ -145,8 +145,8 @@
 
 </div>
 </div>
+
 @endsection
 @push('scripts')
 <script type="module" src="https://cdn.jsdelivr.net/npm/color-calendar/dist/bundle.js" ></script>
-    <script src="{{asset('asset/admin/js/dashboardChart.js')}}"></script>
 @endpush
