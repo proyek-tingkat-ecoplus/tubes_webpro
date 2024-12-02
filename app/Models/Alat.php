@@ -10,7 +10,7 @@ class Alat extends Model
         'user_id',
         'kode_alat',
         'nama_alat',
-        'photo',
+        'foto',
         'jenis',
         'kondisi',
         'keterangan',

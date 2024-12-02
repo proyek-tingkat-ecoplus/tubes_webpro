@@ -6,24 +6,52 @@
     <div class="container pe-3 ps-3 pb-3">
         <div class="row">
             <div class="col-md-12">
-                <form method="POST" class="form">
+                <form method="POST" class="form" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group mt-2">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control" value="{{ old('name') }}">
-                        <span class="invalid-feedback"></span>
-                    </div>
-                    <div class="form-group mt-2">
-                        <label for="description">Deskripsi Alat</label>
-                        <input type="text" name="description" class="form-control" value="{{ old('description') }}">
-                        <span class="invalid-feedback"></span>
-                    </div>
-                    <div class="form-group mt-2">
-                        <label for="status">Status</label>
-                        <select name="status" class="form-control">
-                            <option value="1">Aktif</option>
-                            <option value="0">Non Active</option>
+                        <label for="user">user</label>
+                        <select name="user" class="form-control" >
+
                         </select>
+                        <span class="invalid-feedback"></span>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="nama_alat">nama</label>
+                        <input type="text" name="nama_alat" class="form-control" value="{{ old('nama_alat') }}" >
+                        <span class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="foto">Foto</label>
+                        <input type="file" name="foto" class="form-control" accept="image/*" >
+                        <span class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="jenis">Jenis</label>
+                        <input type="text" name="jenis" class="form-control" value="{{ old('jenis') }}" >
+                        <span class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="kondisi">Kondisi</label>
+                        <select name="kondisi" class="form-control" >
+                            <option value="">Pilih Kondisi</option>
+                            <option value="baru">baru</option>
+                            <option value="bekas">bekas</option>
+                        </select>
+                        <span class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="jumlah">Jumlah Barang</label>
+                        <input type="number" name="jumlah" class="form-control" value="{{ old('jumlah') }}" >
+                        <span class="invalid-feedback"></span>
+                    </div>
+
+                    <div class="form-group mt-2">
+                        <label for="deskripsi_barang">Deskripsi</label>
+                        <textarea name="deskripsi_barang" class="form-control" rows="3" >{{ old('deskripsi_barang') }}</textarea>
                         <span class="invalid-feedback"></span>
                     </div>
 
@@ -36,80 +64,5 @@
         </div>
     </div>
 </div>
-<input type="text" hidden value="{{ asset('asset/admin/json/inventaris.json') }}" id="path">
+@vite(['resources/js/pages/admin/inventaris/AddData.js'])
 @endsection
-
-@push('scripts')
-<script>
-$(document).ready(function() {
-    var path = document.getElementById('path').value;
-    var lastId = 0;
-
-    $.ajax({
-        url: path,
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            if (data.data && data.data.length > 0) {
-                lastId = data.data[data.data.length - 1].id;
-            }
-        },
-        error: function(jqxhr, textStatus, error) {
-            console.error("Initial Request Failed: " + textStatus + ", " + error);
-        }
-    });
-
-    var validation = () => {
-        let isValid = true;
-        $('input, select').removeClass('is-invalid');
-        const name = $('input[name="name"]');
-        if (!name.val()) {
-            name.addClass('is-invalid');
-            name.next().text('Name is required');
-            isValid = false;
-        }
-        const description = $('input[name="description"]');
-        if (!description.val()) {
-            description.addClass('is-invalid');
-            description.next().text('Description is required');
-            isValid = false;
-        }
-
-        const status = $('select[name="status"]');
-        if (!status.val()) {
-            status.addClass('is-invalid');
-            status.next().text('Status is required');
-            isValid = false;
-        }
-
-        return isValid;
-    };
-
-    $('.form').submit(function(e) {
-        e.preventDefault();
-        if (!validation()) return;
-        var form = new FormData(this);
-        form.append('id', parseInt(lastId) + 1);
-
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
-            },
-            url: "/api/inventaris/add",
-            type: 'POST',
-            processData: false,
-            contentType: false,
-            data: form,
-            success: function(data) {
-                console.log(data);
-                window.location = "{{ url('pages/inventaris') }}";
-            },
-            error: function(jqxhr, textStatus, error) {
-                var err = textStatus + ", " + error;
-                console.error("Request Failed: " + err);
-            }
-        });
-    });
-});
-</script>
-@endpush

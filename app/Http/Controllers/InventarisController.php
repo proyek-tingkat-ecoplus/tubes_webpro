@@ -2,55 +2,97 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Alat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\File;
 
 class InventarisController extends Controller
 {
+    public function index(){
+    return DataTables::of(Alat::all())
+        ->addColumn("images", function ($data) {
+          return "<img src=".asset("image/$data->foto")." width='100' height='100' />";
+        })
+        ->rawColumns(["images"])
+        ->make(true);
+    }
+
+    public function find($id){
+        return response()->json(['data' => Alat::find($id)]);
+    }
     public function post(Request $request){
+        $request->validate([
+            "user" => "required",
+            "foto" => "required|image",
+            "jenis" => "required",
+            "jumlah" => "required",
+            "kondisi" => "required",
+            'deskripsi_barang' => "required"
+        ]);
+        $foto = $request->file('foto');
+        $nama = $request->nama_alat.'-'.Carbon::now()->format("Y-m-d-H-i-s").".".$foto->getClientOriginalExtension();
+        $foto->move(public_path("\image"),$nama );
 
-        $asset = public_path('asset/admin/json/inventaris.json');
-        $data = json_decode(file_get_contents($asset), true); // get file ini
-        $data['data'][] = [ // masukin ke "data" : []
-            "id" => $request->id,
-            "name" => $request->name,
-            "description" => $request->description,
-            "status" => $request->status,
-            "created_at" => Carbon::now()->format('Y-m-d H:i:s'),
-            "updated_at" => "",
-        ];
+        Alat::create([
+            "user_id" => $request->user,
+            "kode_alat" => $request->nama_alat .'-'.Str::random(8) ,
+            "nama_alat" => $request->nama_alat,
+            "foto" =>  $nama ,
+            "jenis" => $request->jenis,
+            "jumlah" => $request->jumlah,
+            "deskripsi_barang" => $request->deskripsi_barang,
+        ]);
+        return response()->json($request->all());
+    }
 
-        file_put_contents($asset, json_encode($data)); // set file ini
-        return response()->json($data);
+    public function edit($id){
+        if(empty($id)){
+            return response()->json(['error' => 'Invalid id'], 402);
+        }
+        return view('admin.pages.inventaris.edit', ["id" => $id]);
     }
 
     public function update(Request $request, $id){
-        $asset = public_path('asset/admin/json/inventaris.json');
-        $data = json_decode(file_get_contents($asset), true); // get file ini
-        $ids =  collect($data['data'])->where("id", $id)->keys()[0];
-        // return response()->json($request->all());
-        $data['data'][$ids] = [ // edit ["data"]["id"]
-            "id" => $request->id,
-            "name" => $request->name,
-            "description" => $request->description,
-            "status" => $request->status,
-            "created_at" => $data['data'][$ids]['created_at'],
-            "updated_at" =>  Carbon::now()->format('Y-m-d H:i:s'),
-        ];
+        $request->validate([
+                "user" => "required",
+                "foto" => "required|image",
+                "jenis" => "required",
+                "jumlah" => "required",
+                "kondisi" => "required",
+                'deskripsi_barang' => "required"
+        ]);
+        $alat = Alat::find($id);
+        if (File::exists(public_path('image/' . $alat->foto))) {
+            File::delete(public_path('image/' . $alat->foto));  // Delete the file if it exists
+        }
+        $foto = $request->file('foto');
+        $nama = $request->nama_alat.'-'.Carbon::now()->format("Y-m-d-H-i-s").".".$foto->getClientOriginalExtension();
+        $foto->move(public_path("\image"), $nama);
 
-        file_put_contents($asset, json_encode($data)); // set file ini
-        return response()->json($data);
+        $alat->update([
+            "user_id" => $request->user,
+            "kode_alat" => $request->nama_alat .'-'.Str::random(8) ,
+            "nama_alat" => $request->nama_alat,
+            "foto" =>  $nama ,
+            "jenis" => $request->jenis,
+            "jumlah" => $request->jumlah,
+            "deskripsi_barang" => $request->deskripsi_barang,
+        ]);
+        return response()->json($request->all());
     }
 
     public function deletes($id){
-        $asset = public_path('asset/admin/json/inventaris.json');
-        $data = json_decode(file_get_contents($asset), true); // get file ini
-        $getDataById = collect($data['data'])->where("id", $id)->keys(); // get data by id
-        foreach ($getDataById as $key => $value) {
-            unset($data['data'][$value]);
+        if(empty($id)){
+            return response()->json(['error' => 'Invalid id'], 402);
         }
-
-        file_put_contents($asset, json_encode($data)); // update file ini
-        return response()->json($data);
+        $alat = Alat::find($id);
+        if(File::exists(public_path('image/' . $alat->foto))) {
+            File::delete(public_path('image/' . $alat->foto));  // Delete the file if it exists
+        }
+        $alat->delete();
+        return response()->json(["success" => "data berhasil di hapus"], 202);
     }
 }

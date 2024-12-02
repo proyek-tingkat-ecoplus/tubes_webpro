@@ -62,6 +62,8 @@ Route::prefix('proposal')->group(callback: function(){
 });
 
 Route::prefix('inventaris')->group(callback: function(){
+    Route::get('/',[InventarisController::class, 'index']);
+    Route::get("/{id}",[InventarisController::class, 'find']);
     Route::post('/add', [InventarisController::class, 'post']);
     Route::patch('/{id}/edit', [InventarisController::class, 'update']);
     Route::delete('/{id}/delete', [InventarisController::class, 'deletes']);
