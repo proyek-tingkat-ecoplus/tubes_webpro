@@ -1,19 +1,10 @@
-import {
-    isLogin
-} from "../../../Authentication";
-import { selectRole } from "../helper/handleSelectRequest";
+import { isLogin } from "../../../Authentication"
+import { selectUser } from "../helper/handleSelectRequest"
 import { userValidation } from "../helper/inputValidation";
 
-
 $(document).ready(function () {
-    if (isLogin("Petugas")) {
-
-        // ini buat select request
-        try {
-            selectRole()
-        } catch (err) {
-            console.log(err);
-        }
+    if(isLogin('Petugas')){
+        selectUser();
         $('.form').submit(function (e) {
             e.preventDefault();
 
@@ -22,13 +13,16 @@ $(document).ready(function () {
             }
 
             var form = new FormData(this);
+            // for (var pair of form.entries()) {
+            //     console.log(pair[0]+ ', ' + pair[1]);
+            //     }
             //form.append('id', parseInt(lastId) + 1);
             // var name = form.get('name');
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
                 },
-                url: "/api/user/add",
+                url: "/api/inventaris/add",
                 type: 'POST',
                 processData: false,
                 contentType: false,
@@ -39,7 +33,7 @@ $(document).ready(function () {
                         "status": "success",
                         "message": "data user berhasil di tambahkan"
                     }]));
-                    window.location.href = "/pages/user"
+                    window.location.href = "/pages/inventaris"
                 },
                 error: function (jqxhr, textStatus, error) {
                     var err = textStatus + ", " + error;
@@ -48,4 +42,5 @@ $(document).ready(function () {
             });
         });
     }
+
 })
