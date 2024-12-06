@@ -8,10 +8,7 @@ import {
     selectRole,
     selectUser
 } from "../helper/handleSelectRequest";
-import {
-    userValidation
-} from "../helper/inputValidation";
-
+import { userValidation } from "../../validation/inputValidation";
 
 $(document).ready(function () {
     if (isLogin("Petugas")) {

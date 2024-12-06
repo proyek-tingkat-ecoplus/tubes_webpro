@@ -1,14 +1,14 @@
 import {
     isLogin
 } from "../../../Authentication";
+
+import { userValidation } from "../../validation/inputValidation";
 import { selectRole } from "../helper/handleSelectRequest";
-import { userValidation } from "../helper/inputValidation";
 
 
 $(document).ready(function () {
     if (isLogin("Petugas")) {
 
-        // ini buat select request
         try {
             selectRole()
         } catch (err) {
@@ -41,9 +41,19 @@ $(document).ready(function () {
                     }]));
                     window.location.href = "/pages/user"
                 },
-                error: function (jqxhr, textStatus, error) {
-                    var err = textStatus + ", " + error;
-                    console.log("Request Failed: " + err);
+                error: function (xhr) {
+                    if(xhr.status == 422){
+                        var errors = xhr.responseJSON.errors;
+                        console.log(errors);
+                        console.log(Object.keys(errors));
+                        // dapertin semua keys error lalu tampilkan sesuai dengan name
+                        Object.keys(errors).forEach((key) => {
+                            var input = $(`input[name="${key}"]`);
+                            input.addClass("is-invalid");
+                            var errorMessage = errors[key].join(', ');
+                            input.next().text(`${key.charAt(0).toUpperCase() + key.slice(1)}: ${errorMessage}`);
+                        });
+                    }
                 }
             });
         });
