@@ -4,51 +4,54 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class RoleController extends Controller
 {
 
     public function index(){
-        return response()->json(["data" => Role::all()]);
+        return DataTables::of(Role::all())->make(true);
     }
     public function post(Request $request){
 
-        $asset = public_path('asset/admin/json/role.json');
-        $data = json_decode(file_get_contents($asset), true); // get file ini
-        $data['data'][] = [ // masukin ke "data" : []
-            "id" => $request->id,
+        $request->validate([
+            "name" => "required",
+            "description" => "required",
+        ]);
+
+        $data = Role::create([
             "name" => $request->name,
             "description" => $request->description,
-        ];
-
-        file_put_contents($asset, json_encode($data)); // set file ini
+        ]);
         return response()->json($data);
     }
 
+    public function find($id){
+        if(empty($id)){
+            return response()->json(['error' => 'Invalid id'], 402);
+        }
+        return response()->json(["data" => Role::where("id", $id)->first()]);
+    }
+
     public function update(Request $request, $id){
-        $asset = public_path('asset/admin/json/role.json');
-        $data = json_decode(file_get_contents($asset), true); // get file ini
-        $ids =  collect($data['data'])->where("id", $id)->keys()[0];
-        // return response()->json($request->all());
-        $data['data'][$ids] = [ // edit ["data"]["id"]
-            "id" => $request->id,
+        $request->validate([
+            "name" => "required",
+            "description" => "required",
+        ]);
+
+        $data = Role::where("id", $id)->update([
             "name" => $request->name,
             "description" => $request->description,
-        ];
-
-        file_put_contents($asset, json_encode($data)); // set file ini
+        ]);
         return response()->json($data);
     }
 
     public function deletes($id){
-        $asset = public_path('asset/admin/json/role.json');
-        $data = json_decode(file_get_contents($asset), true); // get file ini
-        $getDataById = collect($data['data'])->where("id", $id)->keys(); // get data by id
-        foreach ($getDataById as $key => $value) {
-            unset($data['data'][$value]);
+        if(empty($id)){
+            return response()->json(['error' => 'Invalid id'], 402);
         }
-
-        file_put_contents($asset, json_encode($data)); // update file ini
-        return response()->json($data);
+        Role::where("id", $id)->delete();
+        return response()->json(["success" => "dat"]);
     }
+
 }

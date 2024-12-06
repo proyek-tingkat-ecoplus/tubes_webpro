@@ -1,14 +1,7 @@
-import {
-    data
-} from "jquery";
-import {
-    isLogin
-} from "../../../Authentication";
-import {
-    selectRole,
-    selectUser
-} from "../helper/handleSelectRequest";
-import { userValidation } from "../../validation/inputValidation";
+import {isLogin} from "../../../Authentication";
+import {selectUser} from "../helper/handleSelectRequest";
+import { inventarisValidation } from "../validation/inventarisValidation";
+import { userValidation } from "../validation/userValidation";
 
 $(document).ready(function () {
     if (isLogin("Petugas")) {
@@ -41,7 +34,7 @@ $(document).ready(function () {
         $('.forms').submit(function (e) {
             e.preventDefault();
 
-            if (userValidation() === false) {
+            if (inventarisValidation() === false) {
                 return;
             }
 

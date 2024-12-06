@@ -53,6 +53,5 @@
         </div>
     </div>
 </div>
-<input type="text" hidden value="{{asset('asset/admin/json/user.json')}}" id="path">
 @vite(['resources/js/pages/admin/user/AddData.js'])
 @endsection

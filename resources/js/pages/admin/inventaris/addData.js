@@ -1,7 +1,7 @@
 import { isLogin } from "../../../Authentication"
 
-import { userValidation } from "../../validation/inputValidation";
 import { selectUser } from "../helper/handleSelectRequest";
+import { inventarisValidation } from "../validation/inventarisValidation";
 
 $(document).ready(function () {
     if(isLogin('Petugas')){
@@ -9,7 +9,7 @@ $(document).ready(function () {
         $('.form').submit(function (e) {
             e.preventDefault();
 
-            if (userValidation() === false) {
+            if (inventarisValidation() === false) {
                 return;
             }
 
