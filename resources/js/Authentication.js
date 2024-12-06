@@ -53,6 +53,36 @@ export const me = () => {
 }
 
 export const Logout = () => {
-    localStorage.removeItem("authenticate")
-    window.location.href = "/login"
+
+
+
+    Swal.fire({
+        title: "Logout?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const authData = JSON.parse(localStorage.getItem("authenticate"));
+            console.log(authData.access_token)
+            $.ajax({
+                url: '/api/auth/logout',
+                type: "POST",
+                headers: { 'Authorization': 'Bearer ' + authData.access_token },
+                success: function () {
+                    Swal.fire({
+                        title: "Success",
+                        text: "anda bershasil logout.",
+                        icon: "success"
+                    });
+                    localStorage.removeItem("authenticate")
+                    window.location.href = "/login"
+                },
+                error: function(xhr, status, error) { Swal.fire({ title: "Fail", text: "Anda gagal logout. Error: " + xhr.responseText, icon: "error" }); }
+            });
+        }
+    });
+
 }
