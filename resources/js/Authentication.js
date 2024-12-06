@@ -17,13 +17,19 @@ export const isLogin = (role) => {
     try {
         const authData = JSON.parse(localStorage.getItem("authenticate"));
         if (!authData) {
-            window.location.href = "/login";
+            console.log(window.location.pathname);
+            if(window.location.pathname != "/login"){
+                redirect('/login')
+            }
         } else {
-            if (redirect) {
+            if (authData) {
+                if(window.location.pathname == "/login"){
+                    window.history.back();
+                }
                 if(me()["role"]["name"] == role){
-                    return true;
+                    return true
                 }else{
-                    redirect("/");
+                    return true
                 }
             } else {
                 return true;

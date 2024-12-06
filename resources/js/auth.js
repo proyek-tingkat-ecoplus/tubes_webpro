@@ -1,6 +1,8 @@
 import { isLogin, redirect, me } from "./Authentication";
+import { authValidation } from "./pages/validation/helper/inputValidation";
 
 $(document).ready(function () {
+    isLogin()
     $("#loginForm").submit(function (e) {
         console.log("clicked");
         e.preventDefault();
@@ -10,17 +12,12 @@ $(document).ready(function () {
         $("input").css("border-bottom", "1px solid grey");
 
         let formData = {};
-        $($("input")).each(function () {
-            if (!$(this).val()) {
-                isValid = false;
-                $(this).css("border-bottom", "1px solid red");
-                $(`#${$(this).attr("id")}Error`).text($(this).attr("id") + " is required.");
-            } else {
-                $(this).css("border-bottom", "1px solid grey");
-                $(`#${$(this).attr("id")}Error`).text("");
+
+        if(authValidation() == true){
+            $($("input")).each(function () {
                 formData[$(this).attr("id")] = $(this).val().trim();
-            }
-        });
+            });
+        }
 
         if (isValid && formData) {
             // Make an API POST request
