@@ -32,6 +32,7 @@ Route::prefix("user")->group(function(){
 
 Route::prefix("role")->group(function(){
     Route::get("/",[RoleController::class, 'index']);
+    Route::get("/{id}",[RoleController::class, 'find']);
     Route::post('/add', [RoleController::class, 'post']);
     Route::patch('/{id}/edit', [RoleController::class, 'update']);
     Route::delete('/{id}/delete', [RoleController::class, 'deletes']);

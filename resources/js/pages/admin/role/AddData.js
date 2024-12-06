@@ -2,33 +2,25 @@ import {
     isLogin
 } from "../../../Authentication";
 
-import { userValidation } from "../validation/userValidation";
 import { selectRole } from "../helper/handleSelectRequest";
+import { roleValidation } from "../validation/roleValidation";
 
 
 $(document).ready(function () {
     if (isLogin("Petugas")) {
-
-        try {
-            selectRole()
-        } catch (err) {
-            console.log(err);
-        }
         $('.form').submit(function (e) {
             e.preventDefault();
 
-            if (userValidation() === false) {
+            if (roleValidation() === false) {
                 return;
             }
 
             var form = new FormData(this);
-            //form.append('id', parseInt(lastId) + 1);
-            // var name = form.get('name');
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
                 },
-                url: "/api/user/add",
+                url: "/api/role/add",
                 type: 'POST',
                 processData: false,
                 contentType: false,
@@ -37,9 +29,9 @@ $(document).ready(function () {
                     console.log(data);
                     localStorage.setItem("alert", JSON.stringify([{
                         "status": "success",
-                        "message": "data user berhasil di tambahkan"
+                        "message": "data role berhasil di tambahkan"
                     }]));
-                    window.location.href = "/pages/user"
+                    window.location.href = "/pages/role"
                 },
                 error: function (xhr) {
                     if(xhr.status == 422){

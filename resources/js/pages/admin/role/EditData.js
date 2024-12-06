@@ -1,5 +1,5 @@
 import { isLogin } from "../../../Authentication";
-import { userValidation } from "../validation/userValidation";
+import { roleValidation } from "../validation/roleValidation";
 import { selectRole } from "../helper/handleSelectRequest";
 
 
@@ -9,16 +9,14 @@ $(document).ready(function(){
 
     // set data by idx
     $.ajax({
-        url: "/api/user/"+idx,
+        url: "/api/role/"+idx,
         type: 'GET',
         dataType: 'json',
         success: function (response) {
             if (response.data) {
                 var dataById = response.data;
-                $('input[name="name"]').val(dataById.username)
-                $('input[name="email"]').val(dataById.email)
-                selectRole(dataById.role.id)
-                $('select[name="status"]').val("admin").change()
+                $('input[name="name"]').val(dataById.name)
+                $('input[name="description"]').val(dataById.description)
             }
         },
         error: function (xhr) {
@@ -38,30 +36,28 @@ $(document).ready(function(){
         }
     });
 
-$('.form').submit(function (e) {
+$('.forms').submit(function (e) {
     e.preventDefault();
 
-    if(userValidation() === false) {
+    if(roleValidation() === false) {
         return;
     }
 
     var form = new FormData(this);
     form.append('_method', 'PATCH'); // kalau patch harus make ini
     form.append('_token', $('meta[name="csrf_token"]').attr('content')); // CSRF token
-    //form.append('id', parseInt(lastId) + 1);
-    // var name = form.get('name');
     $.ajax({
         headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
     },
-        url: `/api/user/${idx}/edit`,
+        url: `/api/role/${idx}/edit`,
         type: 'POST',
         processData: false,
         contentType: false,
         data: form,
         success: function (data) {
-            localStorage.setItem("alert",JSON.stringify([{"status":"success","message":"data user berhasil di update"}]));
-            window.location.href = "/pages/user"
+            localStorage.setItem("alert",JSON.stringify([{"status":"success","message":"data role berhasil di update"}]));
+            window.location.href = "/pages/role"
         },
         error: function (jqxhr, textStatus, error) {
             var err = textStatus + ", " + error;

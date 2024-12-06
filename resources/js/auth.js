@@ -1,5 +1,6 @@
 import { isLogin, redirect, me } from "./Authentication";
-import { authValidation } from "./pages/validation/helper/inputValidation";
+import { authValidation } from "./pages/admin/validation/authValidation";
+
 
 $(document).ready(function () {
     isLogin()
