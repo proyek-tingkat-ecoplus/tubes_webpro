@@ -2,30 +2,47 @@
 @section('title', 'Pemetaan Alat')
 @section('content')
 <div class="content-wrapper">
-    <div class="container ">
-        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">PEMETAAN /</span> Data Pemetaan</h4>
+    <div class="container">
+        <div class="card mt-4">
+            <div class="row mt-2 ms-2">
+                <div class="col-md-7">
+                    heelo
+                </div>
+                <div class="col-md-3">
+                    <input type="text" id="location-input" class="form-control">
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary">search</button>
+                </div>
+            </div>
+            <div id="googleMap" class="mt-2" style="width:100%; height:380px;"></div>
+        </div>
 
-        <div class="card">
-            <div class=" text-nowrap p-3">
-                <table class="table" id="table-pemetaanalat">
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>Nama Alat</th>
-                            <th>location Alat</th>
-                            <th>Status</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+    </div>
+</div>
 
-                    </tbody>
-                </table>
+<!-- Modal -->
+<div class="modal fade" id="markerModal" tabindex="-1" aria-labelledby="markerModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="markerModalLabel">Location Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h3 id="modal-location-name"></h3>
+                <p id="modal-location-description"></p>
+                <p><strong>Latitude:</strong> <span id="modal-location-lat"></span></p>
+                <p><strong>Longitude:</strong> <span id="modal-location-lng"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">delete</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
-<input type="text" hidden value="{{asset('asset/admin/json/pemetaanalat.json')}}" id="path">
+
 @endsection
 
 @push('styles')
@@ -41,118 +58,243 @@
 </style>
 @endpush
 @push('scripts')
+<script
+    src="https://maps.gomaps.pro/maps/api/js?key=AlzaSyppXnhCOMVxkzPe4k6sJ4rmYn7uApemyJu&libraries=places,geometry&callback=initialize"
+    async defer></script>
 <script>
-    let path = document.getElementById('path').value;
-    console.log(path);
-    let table = new DataTable('#table-pemetaanalat', {
-        dom: "<'row'<'col-sm-12 col-md-5 btn-table'><'col-sm-12 col-md-3'<'ms-4'f>><'col-sm-12 col-md-4 pdf-button'>>" +
-            "<'row mt-3'<'col-sm-12'tr>>" +
-            "<'row mt-2'<'col-md-8 col-12'i><'col-md-4 col-12'p>>",
-        ordering: false,
-        info: true,
-        filtering: false,
-        searching: true,
-        serverside: true,
-        processing: true,
-        responsive: true,
-        autoWidth: false,
-        ajax: {
-            url: path,
-            method: 'GET',
-            dataSrc: 'data'
+    var map;
+    var marks = []; // Array to store all the marks apapun yang menting isinya google mark
+
+    // Dummy data for bulk location request (this can be replaced with an actual API call)
+    var locations = [{
+            lat: -8.5830695,
+            lng: 116.3202515,
+            name: "Location 1",
+            description: "Description for Location 1"
         },
-        columns: [{
-                data: 'id'
-            },
-            {
-                data: 'name'
-            },
-            {
-                data: 'location'
-            },
-            {
-                data: 'status',
-                render: function (data, type, row) {
-                    if (data == 1) {
-                        return '<div class="badge bg-success">Aktif</div>'
-                    } else {
-                        return '<div class="badge bg-danger">Non Aktif</div>'
-                    }
-                }
-            },
-            {
-                data: null,
-                render: function (data, type, row) { // buat render di column aksi
-                    console.log(row)
-                    return `
-                <div class="dropdown">
-                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                        data-bs-toggle="dropdown">
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="{{ url('pages/pemetaanalat/${data.id}/edit') }}"><i
-                                class="bx bx-edit-alt me-1"></i> Edit</a>
-                        <a class="dropdown-item" onclick="hapus(${data.id})">
-                                <i class="bx bx-trash me-1"></i> Delete</a>
-                    </div>
-                </div>
-            `;
-                }
-            }
-        ],
-        drawCallback: function () {
-            // Add your class to the current page button
-            $(".paginate_button.current").addClass("btn-primary text_white"); // cannot add backgrodun color
+        {
+            lat: -8.5831200,
+            lng: 116.3220000,
+            name: "Location 2",
+            description: "Description for Location 2"
+        },
+        {
+            lat: -8.5840000,
+            lng: 116.3230000,
+            name: "Location 3",
+            description: "Description for Location 3"
+        },
+        {
+            lat: -6.917463, // Latitude for Bandung city center
+            lng: 107.619123, // Longitude for Bandung city center
+            name: "Bandung City Center",
+            description: "This is the city center of Bandung."
         }
-    });
+    ];
+    // Initialize the map
+    function initialize() {
+        var defaultLocation = new google.maps.LatLng(-6.921229357282421, 107.60953903198242); // Default center location
+        var mapOptions = {
+            center: defaultLocation,
+            zoom: 12,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
 
-    hapus = (id) => {
+        // Create the map
+        map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
 
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    // headers: {
-                    //     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
-                    // },
-                    type: "delete",
-                    url: "/api/pemetaanalat/" + id + "/delete",
-                    success: function (data) {
-                        table.ajax.reload()
-                        Swal.fire({
-                            title: "Success!",
-                            text: "Data Berhasil Di hapus",
-                            icon: "success"
-                        });
-                    },
-                    error: function (jqxhr, textStatus, error) {
-                        var err = textStatus + ", " + error;
-                        Swal.fire({
-                            title: "Failed!",
-                            text: "Data Gagal Di hapus",
-                            icon: "error"
-                        });
-                    }
-                })
-                //
+        google.maps.event.addListener(map, 'click', function (event) {
+            taruhMarker(this, event.latLng);
+        });
+
+        // Create marks for each location
+        locations.forEach(function (location) {
+            var marker = new google.maps.Marker({
+                position: new google.maps.LatLng(location.lat, location.lng),
+                map: map,
+                title: location.name
+            });
+
+            // Add a click listener to show details in an InfoWindow and save the data
+            var infoWindow = new google.maps.InfoWindow({
+                content: "<h3>" + location.name + "</h3><p>" + location.description + "</p>"
+            });
+
+            google.maps.event.addListener(marker, 'click', function () {
+                infoWindow.open(map, marker);
+                map.setZoom(14); // Zoom to the marker
+                map.setCenter(marker.getPosition()); // Center the map on the marker
+            });
+
+            // Store the marker in the marks array for future reference (if needed)
+            marks.push(marker);
+        });
+
+
+        // Enable search location
+        const locationInput = document.getElementById('location-input');
+        const autocomplete = new google.maps.places.Autocomplete(locationInput);
+        autocomplete.addListener('place_changed', function () {
+            place = autocomplete.getPlace();
+            // Ensure that the place contains a geometry (latitude and longitude)
+            if (place.geometry) {
+                map.setCenter(place.geometry.location);
+                map.setZoom(14); // Adjust zoom level as needed
+            } else {
+                console.log("No geometry data available for this place.");
             }
         });
     }
-    // search engine
-    // $("#search").keyup(function () {
-    //     table.search(this.value).draw();
-    // })
-    $(".btn-table").append('<a href="/pages/pemetaanalat/add" class="btn btn-primary">Tambah Pengguna</a>');
-    $(".pdf-button").append('<button class="btn btn-danger mt-md-0 mt-3 me-2">Export PDF</button>' +
-        '<button class="btn btn-primary mt-md-0 mt-3 me-2">Export Excel</button>');
+
+    // Function to save the marker data (e.g., send to an API)
+    function saveMarkerData(location) {
+        console.log("Saving marker data...");
+        console.log("Marker Name: " + location.name);
+        console.log("Latitude: " + location.lat);
+        console.log("Longitude: " + location.lng);
+
+        locations.forEach(function (marker) {
+            google.maps.event.addListener(marker, 'click', function () {
+                infoWindow.open(map, marker);
+                map.setZoom(14); // Zoom to the marker
+                map.setCenter(marker.getPosition()); // Center the map on the marker
+
+                // Call the function to save the marker data
+                saveMarkerData(location);
+            });
+
+            // Store the marker in the marks array for future reference (if needed)
+            marks.push(marker);
+        });
+
+        // You can replace the following code with an actual API call to save the data
+        // Example using fetch to send the data to the server (for example purposes):
+        /*
+        fetch('https://your-api-endpoint.com/save', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: location.name,
+                lat: location.lat,
+                lng: location.lng,
+                description: location.description
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Marker data saved successfully:", data);
+        })
+        .catch(error => {
+            console.error("Error saving marker data:", error);
+        });
+        */
+    }
+
+    // Function to add a new marker dynamically with Reverse Geocoding
+    function taruhMarker(peta, posisiTitik) {
+        var geocoder = new google.maps.Geocoder();
+
+        // Reverse geocode to get location name
+        geocoder.geocode({
+            'location': posisiTitik
+        }, function (results, status) {
+            if (status === google.maps.GeocoderStatus.OK) {
+                if (results[0]) {
+                    var locationName = results[0].formatted_address; // Get the location name/address
+                    var marker = new google.maps.Marker({
+                        position: posisiTitik,
+                        map: peta,
+                        title: locationName // Set the title to the location name
+                    });
+
+                    // Create an InfoWindow with the location name as content
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: "<h3>" + locationName + "</h3><p>Latitude: " + posisiTitik.lat() +
+                            "<br>Longitude: " + posisiTitik.lng() + "</p>"
+                    });
+
+                    google.maps.event.addListener(marker, 'click', function () {
+                        // infoWindow.open(peta, marker); // this only for normal marker
+
+                        // Populate modal with marker data
+                        // you can adjust anything in click dikarenakan ini trigger model in the top
+                        document.getElementById("modal-location-name").innerText = locationName;
+                        document.getElementById("modal-location-description").innerText =
+                            "Description for " + locationName;
+                        document.getElementById("modal-location-lat").innerText = posisiTitik.lat();
+                        document.getElementById("modal-location-lng").innerText = posisiTitik.lng();
+
+                        // Show the modal
+                        var modal = new bootstrap.Modal(document.getElementById('markerModal'));
+                        modal.show();
+
+                        peta.setZoom(14); // Zoom to the marker
+                        peta.setCenter(marker.getPosition()); // Center the map on the marker
+
+                        // Save the new marker data
+                        saveMarkerData({
+                            name: locationName,
+                            lat: posisiTitik.lat(),
+                            lng: posisiTitik.lng(),
+                            description: locationName // Optionally add more description
+                        });
+                    });
+
+                    // Store the new marker in the marks array for future reference (if needed)
+                    marks.push(marker);
+                } else {
+                    alert("No address found for this location.");
+                }
+            } else {
+                alert("Geocoder failed due to: " + status);
+            }
+        });
+    }
+
+    // Function to delete a marker
+    function deleteMarker(marker) {
+        // Remove the marker from the map
+        marker.setMap(null);
+
+        // Remove the marker from the marks array
+        var index = marks.indexOf(marker);
+        if (index !== -1) {
+            marks.splice(index, 1);
+        }
+
+        console.log("Marker deleted");
+    }
+
+    // Add a click event listener to the delete button in the modal
+// document.getElementById('deleteMarkerBtn').addEventListener('click', function() {
+//     if (currentMarker) {
+//         // Remove the marker from the map
+//         currentMarker.setMap(null);
+
+//         // Optionally, remove it from the marks array if you're tracking markers
+//         var index = marks.indexOf(currentMarker);
+//         if (index !== -1) {
+//             marks.splice(index, 1);
+//         }
+
+//         console.log("Marker deleted");
+
+//         // Close the modal after deletion
+//         var modal = new bootstrap.Modal(document.getElementById('markerModal'));
+//         modal.hide();
+
+//         // Reset the current marker to null
+//         currentMarker = null;
+//     } else {
+//         console.log("No marker selected to delete.");
+//     }
+// });
+    // Trigger map initialization on window load
+    google.maps.event.addDomListener(window, 'load', initialize);
 
 </script>
+
+@vite(['resources/js/pages/admin/map/index.js'])
 @endpush

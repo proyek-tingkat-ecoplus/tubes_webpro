@@ -16,28 +16,25 @@ export const redirect = (redirect) => {
 export const isLogin = (role) => {
     try {
         const authData = JSON.parse(localStorage.getItem("authenticate"));
-        if (!authData) {
-            console.log(window.location.pathname);
+        if (!authData || !authData.access_token) {
             if(window.location.pathname != "/login"){
                 redirect('/login')
             }
-        } else {
-            if (authData) {
-                if(window.location.pathname == "/login"){
-                    window.history.back();
-                }
-                if(me()["role"]["name"] == role){
-                    return true
-                }else{
-                    return true
-                }
-            } else {
-                return true;
+        }
+        if (authData) {
+            if (window.location.pathname === "/login") {
+                window.history.back();  // Navigate back if logged in
+            }
+
+            if(me()["role"]["name"] == role){
+                return true
             }
         }
+        return true;
     } catch (e) {
         console.error('Error parsing authentication data:', e);
-        window.location.href = "/login"; // Redirect if JSON parsing fails
+        window.location.href = "/login";  // Redirect if parsing fails
+        return false;
     }
 };
 
@@ -53,9 +50,6 @@ export const me = () => {
 }
 
 export const Logout = () => {
-
-
-
     Swal.fire({
         title: "Logout?",
         icon: "warning",
