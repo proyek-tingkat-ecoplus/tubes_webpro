@@ -1,5 +1,5 @@
 
-export const roleValidation = () =>{
+export const pemetaanValidation = () =>{
     var isValid = true;
     $(".form-group input").each(function () {
         const input = $(this);

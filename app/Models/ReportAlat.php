@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReportAlat extends Model
 {
-    protected $table = 'report_alat';
+    protected $table = 'report_alats';
 
     protected $fillable = [
         'alat_id',
         'user_id',
         'desripsi',
+        'binwas',
+        'tahun_operasi',
         'latitude',
         'longitude',
         'address',
@@ -43,7 +45,7 @@ class ReportAlat extends Model
         return $this->belongsTo(User::class,'user_id','id');
     }
 
-    public function report_alat(){
-        return $this->belongsToMany(ReportAlat::class,'report_alat','alat_id','id');
-    }
+    // public function report_alat(){
+    //     return $this->belongsToMany(ReportAlat::class,'report_alat','alat_id','id');
+    // }
 }
