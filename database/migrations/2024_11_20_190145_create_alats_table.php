@@ -31,6 +31,8 @@ return new class extends Migration
             $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
             $table->string("judul_report");
             $table->text("deskripsi");
+            $table->string("binwas");
+            $table->string("tahun_operasi");
             $table->text("latitude");
             $table->text("longitude");
             $table->text("address");

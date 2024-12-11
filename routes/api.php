@@ -71,6 +71,7 @@ Route::prefix('inventaris')->group(callback: function(){
 });
 
 Route::prefix('pemetaanalat')->group(callback: function(){
+    Route::get('/', [PemetaanController::class, 'index']);
     Route::post('/add', [PemetaanController::class, 'post']);
     Route::patch('/{id}/edit', [PemetaanController::class, 'update']);
     Route::delete('/{id}/delete', [PemetaanController::class, 'deletes']);

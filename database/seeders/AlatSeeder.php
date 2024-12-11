@@ -26,7 +26,19 @@ class AlatSeeder extends Seeder
                 "jumlah" => $faker->randomNumber(2),
                 "deskripsi_barang" => $faker->sentence,
             ]);
-            $alat->report_alat()->attach($i, ['judul_report'=> $faker->sentence,'latitude' => $faker->latitude(), 'longitude' => $faker->longitude(), 'address' => $faker->address, 'photo' => $faker->imageUrl(), 'status' => "pending", 'tanggal' => now(), 'deskripsi' => $faker->sentence, 'created_at' => now(), 'updated_at' => now()]);
+            $alat->report_alat()->attach($i, // i itu user id
+                        ['judul_report'=> $faker->sentence,
+                        'deskripsi' => $faker->sentence,
+                        'latitude' => $faker->latitude(),
+                        'longitude' => $faker->longitude(),
+                        'tahun_operasi' => "2024",
+                        'binwas' => "",
+                        'address' => $faker->address,
+                        'photo' => $faker->imageUrl(),
+                        'status' => "pending",
+                        'tanggal' => now(),
+                        'created_at' => now(),
+                        'updated_at' => now()]);
 
 
         }
