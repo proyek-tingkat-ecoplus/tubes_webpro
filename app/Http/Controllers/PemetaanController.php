@@ -66,7 +66,7 @@ class PemetaanController extends Controller
         $reportAlaat = ReportAlat::where('id', $id)->first();
         if(!empty($reportAlaat)){
             $foto = $request->file('photo');
-            $nama = $request->nama_alat.'-'.Carbon::now()->format("Y-m-d-H-i-s").".".$foto->getClientOriginalExtension();
+            $nama = $request->judul_report.'-'.Carbon::now()->format("Y-m-d-H-i-s").".".$foto->getClientOriginalExtension();
             $foto->move(public_path("\image/pemetaan"),$nama );
             $reportAlaat->update([
                 "judul_report" => $request->judul_report,

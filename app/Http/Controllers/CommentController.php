@@ -2,48 +2,76 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    public function index(){
+        return response()->json(["data"=> Comment::with(['user','form','parent'])->get()]);
+    }
+
     public function post(Request $request){
+        $request->validate([
+            "user_id" => "required",
+            "post_id" => "required",
+            "comment" => "required",
+            "parent_id" => "required",
+        ]);
 
-        $asset = public_path('asset/admin/json/comment.json');
-        $data = json_decode(file_get_contents($asset), true); // get file ini
-        $data['data'][] = [ // masukin ke "data" : []
-            "id" => $request->id,
-            "author" => $request->author,
+        if($request->parent_id != 0){
+            $parent = Comment::where("id", $request->parent_id)->first();
+            if(empty($parent)){
+                return response()->json(['error' => 'Invalid parent id'], 402);
+            }
+        }
+
+        $comment = Comment::create([
+            "user_id" => $request->user_id,
+            "post_id" => $request->post_id,
             "comment" => $request->comment,
-        ];
+            "parent_id" => $request->parent_id,
+        ]);
+        return response()->json($comment);
+    }
 
-        file_put_contents($asset, json_encode($data)); // set file ini
-        return response()->json($data);
+    public function find($id){
+        if(empty($id)){
+            return response()->json(['error' => 'Invalid id'], 402);
+        }
+        return response()->json(["data" => Comment::where("id", $id)->with(['user','form','parent'])->first()]);
     }
 
     public function update(Request $request, $id){
-        $asset = public_path('asset/admin/json/comment.json');
-        $data = json_decode(file_get_contents($asset), true); // get file ini
-        $ids =  collect($data['data'])->where("id", $id)->keys()[0];
-        // return response()->json($request->all());
-        $data['data'][$ids] = [ // edit ["data"]["id"]
-            "id" => $request->id,
-            "author" => $request->author,
-            "comment" => $request->comment,
-        ];
+        $request->validate([
+            "user_id" => "required",
+            "post_id" => "required",
+            "comment" => "required",
+            "parent_id" => "required",
+        ]);
 
-        file_put_contents($asset, json_encode($data)); // set file ini
-        return response()->json($data);
+        $comment = Comment::where("id", $id)->first();
+        $comment->update([
+            "user_id" => $request->user_id,
+            "post_id" => $request->post_id,
+            "comment" => $request->comment,
+            "parent_id" => $request->parent_id,
+        ]);
+        return response()->json($comment);
     }
 
     public function deletes($id){
-        $asset = public_path('asset/admin/json/comment.json');
-        $data = json_decode(file_get_contents($asset), true); // get file ini
-        $getDataById = collect($data['data'])->where("id", $id)->keys(); // get data by id
-        foreach ($getDataById as $key => $value) {
-            unset($data['data'][$value]);
+        if(empty($id)){
+            return response()->json(['error' => 'Invalid id'], 402);
         }
+        $comment = Comment::where("id", $id)->delete();
+        return response()->json($comment);
+    }
 
-        file_put_contents($asset, json_encode($data)); // update file ini
-        return response()->json($data);
+    public function getCommentByPost($id){
+        if(empty($id)){
+            return response()->json(['error' => 'Invalid id'], 402);
+        }
+        return response()->json(["data" => Comment::where("post_id", $id)->with(['user','form','parent'])->get()]);
     }
 }

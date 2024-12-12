@@ -2,66 +2,82 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Proposal;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ProposalController extends Controller
 {
-    public function post(Request $request){
+    public function index(){
+        return response()->json(["data"=> Proposal::with(['user','approved_by','rejected_by'])->get()]);
+    }
 
-        $asset = public_path('asset/admin/json/proposal.json');
-        $data = json_decode(file_get_contents($asset), true); // get file ini
-        $filename = $request->name . '_' . uniqid() . '.' . $request->file('file')->extension();
-        $path = $request->file('file')->move(public_path('asset/admin/proposal'), $filename);
-        $data['data'][] = [ // masukin ke "data" : []
-            "id" => $request->id,
-            "name" => $request->name,
+    public function post(Request $request){
+        $request->validate([
+            "user_id" => "required",
+            "title" => "required",
+            "description" => "required",
+            "attachment" => "required",
+            "delivery_time" => "required",
+            "start_date" => "required",
+            "end_date" => "required",
+        ]);
+
+        $name = $request->title.'-'.Carbon::now()->format("Y-m-d-H-i-s").".".$request->attachment->getClientOriginalExtension();
+        $request->attachment->move(public_path('attachment'), $name);
+        $proposal = Proposal::create([
+            "user_id" => $request->user_id,
+            "title" => $request->title,
             "description" => $request->description,
-            "status" => $request->status,
-            "file" => 'asset/admin/proposal/' . $filename,
-            "created_at" => Carbon::now()->format('Y-m-d H:i:s'),
-            "updated_at" => "",
-        ];
-        file_put_contents($asset, json_encode($data)); // set file ini
-        return response()->json($data);
+            "attachment" => $name,
+            "delivery_time" => $request->delivery_time,
+            "start_date" => $request->start_date,
+            "end_date" => $request->end_date,
+            "status" => "pending",
+            "created_at" => Carbon::now()
+        ]);
+        return response()->json($proposal);
+    }
+
+    public function find($id){
+        if(empty($id)){
+            return response()->json(['error' => 'Invalid id'], 402);
+        }
+        return response()->json(["data" => Proposal::where("id", $id)->with(['user','approved_by','rejected_by'])->first()]);
     }
 
     public function update(Request $request, $id){
-        $asset = public_path('asset/admin/json/proposal.json');
-        $data = json_decode(file_get_contents($asset), true); // get file ini
-        $ids =  collect($data['data'])->where("id", $id)->keys()[0];
-        if(file_exists(public_path($data['data'][$ids]['file']))){
-            unlink(public_path($data['data'][$ids]['file']));
-        }
-        $filename = $request->name . '_' . uniqid() . '.' . $request->file('file')->extension();
-        $path = $request->file('file')->move(public_path('asset/admin/proposal'), $filename);
-        $data['data'][$ids] = [ // edit ["data"]["id"]
-          "id" => $request->id,
-            "name" => $request->name,
-            "description" => $request->description,
-            "status" => $request->status,
-            "file" => 'asset/admin/proposal/' . $filename,
-            "created_at" => $data['data'][$ids]['created_at'],
-            "updated_at" =>  Carbon::now()->format('Y-m-d H:i:s'),
-        ];
+        $request->validate([
+            "user_id" => "required",
+            "title" => "required",
+            "description" => "required",
+            "attachment" => "required",
+            "delivery_time" => "required",
+            "start_date" => "required",
+            "end_date" => "required",
+        ]);
 
-        file_put_contents($asset, json_encode($data)); // set file ini
-        return response()->json($data);
+        $name = $request->title.'-'.Carbon::now()->format("Y-m-d-H-i-s").".".$request->attachment->getClientOriginalExtension();
+        $request->attachment->move(public_path('attachment'), $name);
+        $proposal = Proposal::where("id", $id)->update([
+            "user_id" => $request->user_id,
+            "title" => $request->title,
+            "description" => $request->description,
+            "attachment" => $name,
+            "delivery_time" => $request->delivery_time,
+            "start_date" => $request->start_date,
+            "end_date" => $request->end_date,
+            "status" => "pending",
+            "created_at" => Carbon::now()
+        ]);
+        return response()->json($proposal);
     }
 
     public function deletes($id){
-        $asset = public_path('asset/admin/json/proposal.json');
-        $data = json_decode(file_get_contents($asset), true); // get file ini
-        $getDataById = collect($data['data'])->where("id", $id)->keys(); // get data by id
-
-        foreach ($getDataById as $key => $value) {
-            if(file_exists(public_path($data['data'][$value]['file']))){
-                unlink(public_path($data['data'][$value]['file']));
-            }
-            unset($data['data'][$value]);
+        if(empty($id)){
+            return response()->json(['error' => 'Invalid id'], 402);
         }
-
-        file_put_contents($asset, json_encode($data)); // update file ini
-        return response()->json($data);
+        $proposal = Proposal::where("id", $id)->delete();
+        return response()->json($proposal);
     }
 }
