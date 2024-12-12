@@ -33,7 +33,6 @@ $(document).ready(function () {
                     console.log("here")
                     localStorage.setItem("authenticate", JSON.stringify(response));
                     //console.log(JSON.parse(localStorage.getItem("authenticate"))["access_token"]);
-                    // redirect tergantung role nya gimana
                     if(me()["role"]["name"] == "Petugas"){
                         redirect("/dashboard");
                     }else{

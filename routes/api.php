@@ -39,24 +39,33 @@ Route::prefix("role")->group(function(){
 });
 
 Route::prefix("tag")->group(function(){
+    Route::get("/",[TagController::class, 'index']);
+    Route::get("/{id}", [TagController::class, 'find']);
     Route::post('/add', [TagController::class, 'post']);
     Route::patch('/{id}/edit', [TagController::class, 'update']);
     Route::delete('/{id}/delete', [TagController::class, 'deletes']);
 });
 
 Route::prefix("forum")->group(function(){
+    Route::get("/", [ForumController::class, 'index']);
+    Route::get("/{id}", [ForumController::class, 'find']);
     Route::post('/add', [ForumController::class, 'post']);
     Route::patch('/{id}/edit', [ForumController::class, 'update']);
     Route::delete('/{id}/delete', [ForumController::class, 'deletes']);
 });
 
 Route::prefix("comment")->group(function(){
+    Route::get("/", [CommentController::class, 'index']);
+    Route::get("/{id}", [CommentController::class, 'find']);
     Route::post('/add', [CommentController::class, 'post']);
     Route::patch('/{id}/edit', [CommentController::class, 'update']);
     Route::delete('/{id}/delete', [CommentController::class, 'deletes']);
+    Route::get("/{id}/post", [CommentController::class, 'getCommentByPost']);
 });
 
 Route::prefix('proposal')->group(callback: function(){
+    Route::get('/', [ProposalController::class, 'index']);
+    Route::get("/{id}", [ProposalController::class, 'find']);
     Route::post('/add', [ProposalController::class, 'post']);
     Route::patch('/{id}/edit', [ProposalController::class, 'update']);
     Route::delete('/{id}/delete', [ProposalController::class, 'deletes']);
@@ -75,7 +84,11 @@ Route::prefix('pemetaanalat')->group(callback: function(){
     Route::post('/add', [PemetaanController::class, 'post']);
     Route::patch('/{id}/edit', [PemetaanController::class, 'update']);
     Route::delete('/{id}/delete', [PemetaanController::class, 'deletes']);
+    Route::get("/photo/{filename}", function($filename){
+        return response()->file(public_path('image/pemetaan/'.$filename));
+    });
 });
+
 
 
 

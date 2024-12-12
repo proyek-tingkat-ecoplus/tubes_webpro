@@ -51,3 +51,30 @@
             }
         });
     }
+
+    export const selectAlat = (id) => {
+        $.ajax({
+            url: "/api/inventaris",
+            method: "GET",
+            success: function (response) {
+                console.log(response)
+                if (response && response.data) {
+                    const data = response.data;
+                    const selectElement = $('select[name="alat_id"]');
+                    selectElement.empty();
+                    selectElement.append('<option value="">Select a alat</option>');
+                    data.forEach(function (data) {
+                        selectElement.append('<option value="' + data.id + '">' + data.nama_alat + " " + data.jenis  + '</option>');
+                    });
+
+                    // selected when change
+                    if(id){
+                        selectElement.val(id).change();
+                    }
+                }
+            },
+            error: function (error) {
+                console.error("Error fetching roles:", error);
+            }
+        });
+    }

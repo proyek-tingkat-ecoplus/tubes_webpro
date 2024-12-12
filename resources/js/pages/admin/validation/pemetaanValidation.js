@@ -1,13 +1,14 @@
 
 export const pemetaanValidation = () =>{
     var isValid = true;
-    $(".form-group input").each(function () {
+    $("#addLocationForm input").each(function () {
         const input = $(this);
         const inputName = input.attr("name");
+        console.log(input);
 
         if (!input.val()) {
             input.addClass("is-invalid");
-            input.next().text(`${inputName.charAt(0).toUpperCase() + inputName.slice(1)} is required`);
+            input.next().text(`${inputName} is required`);
             isValid = false
         } else {
             input.removeClass("is-invalid");
@@ -17,7 +18,15 @@ export const pemetaanValidation = () =>{
     });
 
     // validation
-    $(".form-group select").each(function () {
+    $("#addLocationForm select").each(function () {
+        if (!$(this).val()) {
+            $(this).addClass("is-invalid");
+            $(this).next().html(`${$(this).attr("name")} is required`);
+            isValid = false;
+        }
+    })
+
+    $("#addLocationForm textarea").each(function () {
         if (!$(this).val()) {
             $(this).addClass("is-invalid");
             $(this).next().html(`${$(this).attr("name")} is required`);
