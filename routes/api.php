@@ -75,7 +75,11 @@ Route::prefix('pemetaanalat')->group(callback: function(){
     Route::post('/add', [PemetaanController::class, 'post']);
     Route::patch('/{id}/edit', [PemetaanController::class, 'update']);
     Route::delete('/{id}/delete', [PemetaanController::class, 'deletes']);
+    Route::get("/photo/{filename}", function($filename){
+        return response()->file(public_path('image/pemetaan/'.$filename));
+    });
 });
+
 
 
 

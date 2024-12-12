@@ -1,3 +1,6 @@
+import { selectAlat } from "../helper/handleSelectRequest";
+import { pemetaanValidation } from "../validation/pemetaanValidation";
+
 var map;
 var marks = [];
 var currentMarker = null;
@@ -48,6 +51,26 @@ function initialize() {
     });
 }
 
+function findAdress(lat, lng) {
+    var geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(lat, lng); // fing lat ling
+    var address = "";
+    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            if (results[1]) {
+                address = results[1].formatted_address; // get adress
+            }else{
+                address = "Address not found";
+            }
+        }else{
+            address = "Geocoder failed due to: " + status;
+        }
+        document.getElementById('location-address').value = address;
+    });
+
+    return "Loading...";
+}
+
 // Add marker to the map
 function addMarker(location, index) {
     var marker = new google.maps.Marker({
@@ -87,21 +110,25 @@ function fetchGetData() {
 }
 
 // Open modal for adding a new location
-function openAddLocationModal(lat, lng) {
+function openAddLocationModal(lat, lng)  {
     document.getElementById('location-lat').value = lat;
     document.getElementById('location-lng').value = lng;
+    document.getElementById('location-address').value = findAdress(lat, lng);
+    selectAlat();
     var modal = new bootstrap.Modal(document.getElementById('addLocationModal'));
     modal.show();
 }
 
 // Show location details in the modal
 function showMarkerDetails(location, marker, index) {
-    $('#modal-location-name').text(location.judul_report);
+    $('#modal-judul-report').text(location.judul_report);
     $('#modal-location-description').text(location.deskripsi);
     $('#modal-location-lat').text(location.latitude);
     $('#modal-location-lng').text(location.longitude);
     $('#modal-location-address').text(location.address);
-
+    $("#image").html(`
+        <img src="/api/pemetaanalat/photo/${location.photo}" alt="" id="modal-location-photo" style="width: 150px; height: 250px;object-fit: cover;">
+    `);
     currentMarker = marker; // Store the current marker
 
     var modal = new bootstrap.Modal(document.getElementById('markerModal'));
@@ -120,7 +147,7 @@ function showMarkerDetails(location, marker, index) {
 // Open modal for editing location
 function openEditLocationModal(location, index) {
     $('#id').val(location.id);
-    $('#location-name').val(location.judul_report);
+    $('#judul-report').val(location.judul_report);
     $('#location-description').val(location.deskripsi);
     $('#location-binwas').val(location.binwas);
     $('#location-tahun_operasi').val(location.tahun_operasi);
@@ -128,6 +155,7 @@ function openEditLocationModal(location, index) {
     $('#location-lng').val(location.longitude);
     $('#location-address').val(location.address);
     $('#location-status').val(location.status);
+    selectAlat(location.alat_id);
 
     var modal = new bootstrap.Modal(document.getElementById('addLocationModal'));
     modal.show();
@@ -136,71 +164,86 @@ function openEditLocationModal(location, index) {
 // Handle form submission for adding/editing location
 document.getElementById('addLocationForm').addEventListener('submit', function (event) {
     event.preventDefault();
+    console.log(pemetaanValidation());
 
-    var name = $('#location-name').val();
-    var description = $('#location-description').val();
-    var binwas = $('#location-binwas').val();
-    var tahun_operasi = $('#location-tahun_operasi').val();
-    var lat = parseFloat($('#location-lat').val());
-    var lng = parseFloat($('#location-lng').val());
-    var address = $('#location-address').val();
-    var photo = $('#location-photo')[0].files[0];
-    var status = $('#location-status').val();
-    var id = $('#id').val();
-    var formData = new FormData();
+    if(pemetaanValidation() == false){
+        return;
+    }else{
+        var name = $('#judul-report').val();
+        var description = $('#location-description').val();
+        var binwas = $('#location-binwas').val();
+        var tahun_operasi = $('#location-tahun_operasi').val();
+        var lat = parseFloat($('#location-lat').val());
+        var lng = parseFloat($('#location-lng').val());
+        var address = $('#location-address').val();
+        var photo = $('#location-photo')[0].files[0];
+        var status = $('#location-status').val();
+        var alat_id = $('#location-alat').val();
+        var id = $('#id').val();
+        var formData = new FormData();
 
-    formData.append('judul_report', name);
-    formData.append('deskripsi', description);
-    formData.append('binwas', binwas);
-    formData.append('tahun_operasi', tahun_operasi);
-    formData.append('latitude', lat);
-    formData.append('longitude', lng);
-    formData.append('address', address);
-    formData.append('photo', photo);
-    formData.append('status', status);
-    formData.append('tanggal', new Date().toISOString());
-    formData.append('id_alat', 1);
-    formData.append('user_id', JSON.parse(localStorage.getItem("authenticate"))["user"]["id"]);
-    if(id) {
-        formData.append('_method', 'PATCH');
-        formData.append('id', id);
-        formData.append('_token', $('meta[name="csrf_token"]').attr('content'));
-    }
-    var method = 'POST';
-    console.log(id);
-
-    var url = id ? '/api/pemetaanalat/' + id +'/edit' : '/api/pemetaanalat/add';
-
-    $.ajax({
-        url: url,
-        type: method,
-        data: formData,
-        contentType: false,
-        processData: false,
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function (data) {
-            console.log('Location saved successfully:', data);
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Location saved successfully'
-            });
-            $("#addLocationModal").modal('hide');
-            document.getElementById('location-photo').value = "";
-            fetchGetData();
-            $("#modal-backdrop").remove();
-        },
-        error: function (err) {
-            console.log('Error saving location:', err);
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Failed to save location'
-            });
+        formData.append('judul_report', name);
+        formData.append('deskripsi', description);
+        formData.append('binwas', binwas);
+        formData.append('tahun_operasi', tahun_operasi);
+        formData.append('latitude', lat);
+        formData.append('longitude', lng);
+        formData.append('address', address);
+        formData.append('photo', photo);
+        formData.append('status', status);
+        formData.append('tanggal', new Date().toISOString());
+        formData.append('id_alat', alat_id);
+        formData.append('user_id', JSON.parse(localStorage.getItem("authenticate"))["user"]["id"]);
+        if(id) {
+            formData.append('_method', 'PATCH');
+            formData.append('id', id);
+            formData.append('_token', $('meta[name="csrf_token"]').attr('content'));
         }
-    });
+        var method = 'POST';
+        console.log(id);
+
+        var url = id ? '/api/pemetaanalat/' + id +'/edit' : '/api/pemetaanalat/add';
+
+        $.ajax({
+            url: url,
+            type: method,
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {
+                console.log('Location saved successfully:', data);
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: 'Location saved successfully'
+                });
+                $("#addLocationModal").modal('hide');
+                document.getElementById('location-photo').value = "";
+                fetchGetData();
+                $("#modal-backdrop").remove();
+            },
+            error: function (err) {
+                console.log('Error saving location:', err);
+                if(err.status == 422){
+                    var errors = err.responseJSON.errors;
+                    Object.keys(errors).forEach((key) => {
+                        var input = $(`input[name="${key}"]`);
+                        input.addClass("is-invalid");
+                        var errorMessage = errors[key].join(', ');
+                        input.next().text(`${key.charAt(0).toUpperCase() + key.slice(1)}: ${errorMessage}`);
+                    });
+                }
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Failed to save location'
+                });
+            }
+        });
+    }
 });
 
 // Handle location deletion

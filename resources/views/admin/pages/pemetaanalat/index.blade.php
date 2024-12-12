@@ -32,62 +32,75 @@
                 <input type="text" id="id" hidden>
 
                 <form id="addLocationForm">
+                    <!-- Select alat -->
+                    <div class="mb-3">
+                        <label for="location-alat" class="form-label">Alat</label>
+                        <select class="form-select" id="location-alat" name="alat_id">
+                        </select>
+                        <span class="invalid-feedback"></span>
+                    </div>
                     <!-- Location Name -->
                     <div class="mb-3">
-                        <label for="location-name" class="form-label">Location Name</label>
-                        <input type="text" class="form-control" id="location-name" required>
+                        <label for="judul-report" class="form-label">Judul report</label>
+                        <input type="text" class="form-control" id="judul-report" name="judul_report" >
+                        <span class="invalid-feedback"></span>
                     </div>
 
                     <!-- Description -->
                     <div class="mb-3">
                         <label for="location-description" class="form-label">Description</label>
-                        <textarea class="form-control" id="location-description" rows="3" required></textarea>
+                        <textarea class="form-control" id="location-description" rows="3" name="deskripsi"></textarea>
+                        <span class="invalid-feedback"></span>
                     </div>
 
                     <!-- Binwas -->
                     <div class="mb-3">
                         <label for="location-binwas" class="form-label">Binwas</label>
-                        <input type="text" class="form-control" id="location-binwas" required>
+                        <input type="text" class="form-control" id="location-binwas" name="binwas" >
+                        <span class="invalid-feedback"></span>
                     </div>
 
                     <!-- Year of Operation -->
                     <div class="mb-3">
                         <label for="location-tahun_operasi" class="form-label">Year of Operation</label>
-                        <input type="number" class="form-control" id="location-tahun_operasi" required>
+                        <input type="number" class="form-control" id="location-tahun_operasi" name="tahun_operasi" >
+                        <span class="invalid-feedback"></span>
                     </div>
 
                     <!-- Latitude -->
                     <div class="mb-3">
                         <label for="location-lat" class="form-label">Latitude</label>
-                        <input type="text" class="form-control" id="location-lat" required readonly>
+                        <input type="text" class="form-control" id="location-lat"  readonly>
                     </div>
 
                     <!-- Longitude -->
                     <div class="mb-3">
                         <label for="location-lng" class="form-label">Longitude</label>
-                        <input type="text" class="form-control" id="location-lng" required readonly>
+                        <input type="text" class="form-control" id="location-lng"  readonly>
                     </div>
 
                     <!-- Address -->
                     <div class="mb-3">
                         <label for="location-address" class="form-label">Address</label>
-                        <input type="text" class="form-control" id="location-address" required>
+                        <input type="text" class="form-control" id="location-address" name="address" readonly>
+                        <span class="invalid-feedback"></span>
                     </div>
 
                     <!-- Photo -->
                     <div class="mb-3">
                         <label for="location-photo" class="form-label">Photo</label>
-                        <input type="file" class="form-control" id="location-photo" accept="image/*">
+                        <input type="file" class="form-control" id="location-photo" accept="image/*" name="photo">
                     </div>
 
                     <!-- Status -->
                     <div class="mb-3">
                         <label for="location-status" class="form-label">Status</label>
-                        <select class="form-select" id="location-status" required>
+                        <select class="form-select" id="location-status" name="status" >
                             <option value="pending">Pending</option>
                             <option value="approved">Approved</option>
                             <option value="rejected">Rejected</option>
                         </select>
+                        <span class="invalid-feedback"></span>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Save Location</button>
@@ -106,7 +119,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h3 id="modal-location-name"></h3>
+                <h3 id="modal-judul-report"></h3>
+                <div id="image">
+
+                </div>
                 <p id="modal-location-description"></p>
                 <p><strong>Latitude:</strong> <span id="modal-location-lat"></span></p>
                 <p><strong>Longitude:</strong> <span id="modal-location-lng"></span></p>

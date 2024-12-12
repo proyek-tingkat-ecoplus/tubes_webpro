@@ -88,6 +88,10 @@ class PemetaanController extends Controller
     public function deletes($id)
     {
         $alat = ReportAlat::where('id', $id)->first();
+
+        if(File::exists(public_path('image/pemetaan/'.$alat->photo))) {
+            File::delete(public_path('image/pemetaan/'.$alat->photo));  // Delete the file if it exists
+        }
         if(!empty($alat)){
             $alat->delete();
         }
