@@ -43,6 +43,11 @@ Run the npm for vite confifig
 
     npm run dev
 
+jika ada kenala login di token service nya
+
+    php artisan Passport:client --personal
+
+
 
 You can now access the server at http://localhost:8000
 
