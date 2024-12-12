@@ -11,6 +11,7 @@ class ReportAlat extends Model
     protected $fillable = [
         'alat_id',
         'user_id',
+        'judul_report',
         'desripsi',
         'binwas',
         'tahun_operasi',
