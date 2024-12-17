@@ -137,7 +137,7 @@
     </div>
 </div>
 {{-- <script src="https://maps.gomaps.pro/maps/api/js?key=AlzaSyppXnhCOMVxkzPe4k6sJ4rmYn7uApemyJu&libraries=places,geometry&callback=initialize&language=id&region=ID"></script> --}}
-@vite('resources/js/pages/admin/map/index')
+
 @endsection
 
 @push('styles')
@@ -149,4 +149,5 @@
         border-color: #264417 !important;
     }
 </style>
+@vite('resources/js/pages/admin/maps/index.js')
 @endpush
