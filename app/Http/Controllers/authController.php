@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @group Authentication
@@ -61,6 +62,24 @@ class authController extends Controller
         }
 
         return response()->json(['error' => 'Invalid credentials'], 401);
+    }
+
+    public function register(Request $request){
+
+        $request->validate([
+            "username" => "required",
+            "email" => "required|email|unique:users,email",
+            "role" => "required",
+            "password" => "required"
+        ]);
+
+        $data = User::create([
+            "username" => $request->username,
+            "password" => Hash::make($request->password),
+            "email" => $request->email,
+            "role_id" => $request->role,
+        ]);
+        return response()->json($data);
     }
 
     /**
