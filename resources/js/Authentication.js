@@ -13,22 +13,24 @@ export const redirect = (redirect) => {
     }
 }
 
-export const isLogin = (role) => {
+export const isLogin = async (role) =>  {
     me()
     try {
         const authData = JSON.parse(localStorage.getItem("authenticate"));
         if (!authData || !authData.access_token) {
             if(window.location.pathname != "/login"){
-                //redirect('/login')
+                redirect('/login')
             }
         }
         if (authData) {
             if (window.location.pathname === "/login") {
-                //window.history.back();  // Navigate back if logged in
+                window.history.back();  // Navigate back if logged in
             }
-
-            if(me()["role"]["name"] == role){
-                return true
+            const user = await me();
+            if (user && user.role && user.role.name === role) {
+                return true;
+            } else {
+                return false; // User is logged in but does not have the required role
             }
         }
         return true;
@@ -40,38 +42,36 @@ export const isLogin = (role) => {
 };
 
 
-export const me = () => {
-    if (localStorage.getItem("authenticate") === null) {
+export const me = async () => {
+    const authData = localStorage.getItem("authenticate");
+    if (!authData) {
+        console.error('No authentication data found in localStorage.');
         return null;
     }
 
-    let user = null;
-
-    $.ajax({
-        url: "/api/auth/me",
-        method: "GET",
-        async: false,
-        headers: {
-            "Authorization": "Bearer " + JSON.parse(localStorage.getItem("authenticate"))["access_token"],
-        },
-        success: function (response) {
-            try {
-                user = JSON.parse(localStorage.getItem("authenticate"))["user"];
-            } catch (e) {
-                console.error('Error parsing authentication data:', e);
-                user = null;
+    let data = null;
+    try {
+        const parsedData = JSON.parse(authData);
+        const response = await $.ajax({
+            url: "/api/auth/me",
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + parsedData.access_token,
+                "Accept": "Application/json"
             }
-        },
-        error: function (xhr) {
-            if (xhr.status == 401) {
-                localStorage.removeItem("authenticate");
-                window.location.href = "/login";
+        });
+        if (!response) {
+                console.error('Error fetching user data:');
+                return parsedData.user || null;
             }
-        },
-    });
-
-    return user;
+        data = parsedData.user || null;
+    } catch (e) {
+        console.error('Error parsing authentication data:', e);
+        data = null;
+    }
+    return data;
 };
+
 
 export const Logout = () => {
     Swal.fire({

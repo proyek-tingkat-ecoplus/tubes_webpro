@@ -9,13 +9,13 @@ import {
 import {
     initializeCalendar
 } from "./lib/calendarDashboard";
-$(document).ready(function () {
-    if (isLogin("Petugas")) {
-        var user = me();
+$(document).ready(async function  ()  {
+    if (isLogin("Petugas"))  {
+        var user = await me();
         console.log(user);
         // set username and desc
         $(`.nav_profile`).html(user["username"]);
-        $(`.nav_role`).html(user["role"]["description"]);
+        $(`.nav_role`).html(user["role"]["name"]);
 
         // if dashboard route render char nya
         if (window.location.pathname == "/dashboard") {

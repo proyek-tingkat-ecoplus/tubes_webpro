@@ -8,7 +8,7 @@ var currentMarker = null;
 function loadGoogleMapsScript() {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
-        script.src = "https://maps.gomaps.pro/maps/api/js?key=AlzaSyppXnhCOMVxkzPe4k6sJ4rmYn7uApemyJu&libraries=places,geometry";
+        script.src = "https://maps.gomaps.pro/maps/api/js?key=AlzaSyNmabnuTR_4Obw2W3bQYOogkNhLVF779_C&libraries=places,geometry";
         script.async = true;
         script.defer = true;
         script.onload = resolve;

@@ -4,7 +4,7 @@ import { authValidation } from "./pages/admin/validation/authValidation";
 
 $(document).ready(function () {
     isLogin()
-    $("#loginForm").submit(function (e) {
+    $("#loginForm").submit(async function (e) {
         console.log("clicked");
         e.preventDefault();
         let isValid = true;
@@ -20,6 +20,7 @@ $(document).ready(function () {
             });
         }
 
+
         if (isValid && formData) {
             // Make an API POST request
             $.ajax({
@@ -30,14 +31,15 @@ $(document).ready(function () {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 },
                 success: function (response) {
-                    console.log("here")
                     localStorage.setItem("authenticate", JSON.stringify(response));
-                    //console.log(JSON.parse(localStorage.getItem("authenticate"))["access_token"]);
-                    if(me()["role"]["name"] == "Petugas"){
-                        redirect("/dashboard");
-                    }else{
-                        redirect("/");
-                    }
+
+                    me().then(user => {
+                        if (user && user.role.name === "Petugas") {
+                            redirect("/dashboard");
+                        } else {
+                            redirect("/");
+                        }
+                    });
 
                 },
                 error: function (xhr) {
