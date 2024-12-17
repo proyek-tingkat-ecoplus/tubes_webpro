@@ -16,7 +16,12 @@
         <div class="input-section">
             <div class="title">EchoPulse</div>
             <div class="title">Register Your Account</div>
-            <form id="registerForm" action="/dashboard" class="form-group">
+            <form id="registerForm" action="/login" class="form-group">
+                <div class="input-group">
+                    <i class="fa-solid fa-user icon"></i>
+                    <input type="text" id="username" placeholder="Username" name="username">
+                </div>
+                <small id="usernameError" class="error-message"></small>
                 <div class="input-group">
                     <i class="fa-solid fa-user icon"></i>
                     <input type="text" id="first_name" placeholder="First Name" name="first_name">
@@ -60,8 +65,10 @@
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/js/all.min.js" integrity="sha512-6sSYJqDreZRZGkJ3b+YfdhB3MzmuP9R7X1QZ6g5aIXhRvR1Y/N/P47jmnkENm7YL3oqsmI6AK+V6AD99uWDnIw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @vite(['resources\js\pages\admin\auth\register.js'])
 
-    <script>
+    {{-- <script>
         document.getElementById("registerForm").addEventListener("submit", function(event) {
             event.preventDefault();
             let isValid = true;
@@ -118,7 +125,7 @@
                 window.location.href = "/dashboard";
             }
         });
-    </script>
+    </script> --}}
 
     <style>
         .error-message {
