@@ -42,6 +42,10 @@ Route::get('/dashboard', function () {
     return view('admin.pages.dashboard');
 });
 
+Route::get('/edit-profile', function () {
+    return view('admin.pages.edit-profile');
+});
+
 
 Route::prefix('pages')->group(function(){
     Route::get('/user', function () {

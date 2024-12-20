@@ -50,6 +50,10 @@
                             <i class="bx bx-power-off me-2"></i>
                             <span class="align-middle">Log Out</span>
                         </a>
+                        <a class="dropdown-item" id="logout" href="/edit-profile">
+                            <i class="bx bx-user me-2"></i>
+                            <span class="align-middle">Edit Profile</span>
+                        </a>
                     </li>
                 </ul>
             </li>
