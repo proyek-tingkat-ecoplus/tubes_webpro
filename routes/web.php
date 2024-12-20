@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -144,6 +145,7 @@ Route::prefix('pages')->group(function(){
     });
 });
 
+Route::post('/user/edit', [UserController::class,'editProfile']);
 
 Route::get('/proposal/{path}', function($path){
     $fullPath = public_path($path);

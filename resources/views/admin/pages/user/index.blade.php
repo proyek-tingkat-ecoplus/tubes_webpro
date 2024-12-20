@@ -16,6 +16,7 @@
                     <thead>
                         <tr>
                             <th>id</th>
+                            <th>Aavatar</th>
                             <th>Nama Pengguna</th>
                             <th>Email</th>
                             <th>Peran</th>

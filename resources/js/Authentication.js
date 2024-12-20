@@ -5,11 +5,17 @@ export const redirect = (redirect) => {
         if (token) {
             window.location.href = redirect;
         } else {
-            window.location.href = "/login"
+            if (window.location.pathname == "/") {
+                window.location.href = redirect;
+            }else{
+                window.location.href = "/login";
+            }
         }
     } catch (e) {
         console.error('Error parsing authentication data:', e);
-        window.location.href = "/login"; // Redirect if JSON parsing fails
+        if (window.location.pathname != "/") {
+            window.location.href = "/login"; // Redirect if JSON parsing fails
+        }
     }
 }
 
@@ -18,12 +24,17 @@ export const isLogin = async (role) =>  {
     try {
         const authData = JSON.parse(localStorage.getItem("authenticate"));
         if (!authData || !authData.access_token) {
+
             if(window.location.pathname != "/login"){
-                redirect('/login')
+                if(role == "guest"){
+                    redirect('/')
+                }else{
+                    redirect('/login')
+                }
             }
         }
         if (authData) {
-            if (window.location.pathname === "/login") {
+            if (window.location.pathname === "/login" || window.location.pathname === "/") {
                 window.history.back();  // Navigate back if logged in
             }
             const user = await me();
@@ -41,18 +52,29 @@ export const isLogin = async (role) =>  {
     }
 };
 
+export const getTokens = () => {
+    const authData = JSON.parse(localStorage.getItem("authenticate"));
+    if (!authData) {
+        console.error('No authentication data found in localStorage.');
+        return null;
+    }
+    return authData['access_token'];
+}
+
 
 export const me = async () => {
     const authData = localStorage.getItem("authenticate");
     if (!authData) {
         console.error('No authentication data found in localStorage.');
+        //redirect('/login')
         return null;
     }
 
     let data = null;
+    let response = null;
     try {
         const parsedData = JSON.parse(authData);
-        const response = await $.ajax({
+        response = await $.ajax({
             url: "/api/auth/me",
             method: "GET",
             headers: {
@@ -60,11 +82,17 @@ export const me = async () => {
                 "Accept": "Application/json"
             }
         });
+        console.log("here")
+        console.log(response)
+        if(response.status == 401){
+            localStorage.removeItem("authenticate")
+            redirect('/login')
+        }
         if (!response) {
                 console.error('Error fetching user data:');
                 return parsedData.user || null;
             }
-        data = parsedData.user || null;
+        data = response || parsedData.user || null;
     } catch (e) {
         console.error('Error parsing authentication data:', e);
         data = null;

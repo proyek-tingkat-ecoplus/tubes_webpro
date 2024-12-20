@@ -1,7 +1,12 @@
+import { getTokens } from "../../../Authentication";
+
     export const selectRole = (id) => {
         $.ajax({
             url: "/api/role",
             method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + getTokens()
+            },
             success: function (response) {
                 console.log(response)
                 if (response && response.data) {
@@ -29,6 +34,9 @@
         $.ajax({
             url: "/api/user",
             method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + getTokens()
+            },
             success: function (response) {
                 console.log(response)
                 if (response && response.data) {
@@ -56,6 +64,9 @@
         $.ajax({
             url: "/api/inventaris",
             method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + getTokens()
+            },
             success: function (response) {
                 console.log(response)
                 if (response && response.data) {

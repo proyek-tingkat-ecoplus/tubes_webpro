@@ -1,4 +1,4 @@
-import { isLogin } from "../../../Authentication";
+import { getTokens, isLogin } from "../../../Authentication";
 import { roleValidation } from "../validation/roleValidation";
 import { selectRole } from "../helper/handleSelectRequest";
 
@@ -49,6 +49,7 @@ $('.forms').submit(function (e) {
     $.ajax({
         headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+        'Authorization': 'Bearer ' + getTokens()
     },
         url: `/api/role/${idx}/edit`,
         type: 'POST',

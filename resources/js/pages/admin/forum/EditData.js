@@ -1,4 +1,4 @@
-import { isLogin } from "../../../Authentication";
+import { getTokens, isLogin } from "../../../Authentication";
 import { selectRole, selectUser } from "../helper/handleSelectRequest";
 import { forumValidation } from "../../admin/validation/forumValidation"
 
@@ -41,6 +41,7 @@ $('.forms').submit(function (e) {
     $.ajax({
         headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+        'Authorization': 'Bearer ' + getTokens()
     },
         url: `/api/forum/${idx}/edit`,
         type: 'POST',

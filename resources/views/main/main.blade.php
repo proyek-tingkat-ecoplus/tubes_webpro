@@ -71,6 +71,7 @@
     <script type="text/javascript" src="{{ asset('asset/js/client/landingPage.js') }}"></script>
 
     @stack ('scripts')
+    @vite(['resources/js/pages/user/dashboard.js'])
 
     <script>
         // Read More

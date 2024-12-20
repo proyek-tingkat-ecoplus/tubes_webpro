@@ -20,12 +20,36 @@ class UserSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
 
+        $user = User::create([
+            'username' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('password'),
+            'role_id' => 1,
+            "photo" => 'image/profile/default.png',
+        ]);
+
+        $address = AddressDetails::create([
+            'city' => $faker->city,
+            'state' => $faker->state,
+            'zip' => $faker->postcode,
+            'country' => $faker->country,
+        ]);
+
+        UserDetails::create([
+            'user_id' => $user->id,
+            'phone' => $faker->phoneNumber,
+            'nik' => $faker->randomNumber(9),
+            'bio' => $faker->sentence,
+            'address_id' => $address->id,
+        ]);
+
         for ($i = 0; $i < 10; $i++) {
             $user = User::create([
                 'username' => $faker->name,
                 'email' => $faker->email,
                 'password' => Hash::make('password'),
                 'role_id' => 1,
+                "photo" => 'image/profile/default.png',
             ]);
 
             $address = AddressDetails::create([
@@ -41,7 +65,6 @@ class UserSeeder extends Seeder
                 'phone' => $faker->phoneNumber,
                 'nik' => $faker->randomNumber(9),
                 'bio' => $faker->sentence,
-                'photo' => $faker->imageUrl(),
                 'address_id' => $address->id,
             ]);
         }

@@ -1,4 +1,6 @@
+import { data } from "jquery";
 import {
+    getTokens,
     isLogin
 } from "../../../Authentication";
 
@@ -37,10 +39,16 @@ $(document).ready(function () {
             ajax: {
                 url: "/api/user",
                 method: 'GET',
-                dataSrc: 'data'
+                dataSrc: 'data',
+                headers: {
+                    'Authorization': 'Bearer ' + getTokens()
+                }
             },
             columns: [{
                     data: 'id'
+                },
+                {
+                    data:'avatar',
                 },
                 {
                     data: 'username'
@@ -101,6 +109,9 @@ $(document).ready(function () {
                     $.ajax({
                         type: "DELETE",
                         url: `/api/user/${userId}/delete`,
+                        headers : {
+                            'Authorization': 'Bearer ' + getTokens()
+                        },
                         success: function (data) {
                             table.ajax.reload(); // ini buat reload table
                             Swal.fire({

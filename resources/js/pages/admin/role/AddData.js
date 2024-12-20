@@ -1,4 +1,5 @@
 import {
+    getTokens,
     isLogin
 } from "../../../Authentication";
 
@@ -19,6 +20,7 @@ $(document).ready(function () {
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+                    'Authorization': 'Bearer ' + getTokens()
                 },
                 url: "/api/role/add",
                 type: 'POST',

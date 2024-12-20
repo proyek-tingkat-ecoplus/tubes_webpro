@@ -1,4 +1,5 @@
 import {
+    getTokens,
     isLogin
 } from "../../../Authentication";
 import { selectUser } from "../helper/handleSelectRequest"
@@ -26,6 +27,7 @@ $(document).ready(function () {
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+                    'Authorization': 'Bearer ' + getTokens()
                 },
                 url: "/api/forum/add",
                 type: 'POST',
