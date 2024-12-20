@@ -16,14 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [authController::class, 'login']);
 Route::post('/register', [authController::class, 'register']);
 
-Route::middleware("auth:api")->prefix("auth")->group(function(){
+Route::prefix("auth")->middleware("auth:api")->group(function(){
     Route::get('/me', [authController::class, 'me']);
     Route::post('/logout', [authController::class, 'logout']);
     Route::post('/refresh', [authController::class, 'refresh']);
 });
 
 
-Route::prefix("user")->group(function(){
+Route::prefix("user")->middleware(["auth:api"])->group(function(){
     Route::get("/",[UserController::class, 'index']);
     Route::get("/{id}",[UserController::class, 'find']);
     Route::post('/add', [UserController::class, 'post']);
@@ -31,7 +31,7 @@ Route::prefix("user")->group(function(){
     Route::delete('/{id}/delete', [UserController::class, 'deletes']);
 });
 
-Route::prefix("role")->group(function(){
+Route::prefix("role")->middleware(["auth:api"])->group(function(){
     Route::get("/",[RoleController::class, 'index']);
     Route::get("/{id}",[RoleController::class, 'find']);
     Route::post('/add', [RoleController::class, 'post']);
@@ -39,15 +39,7 @@ Route::prefix("role")->group(function(){
     Route::delete('/{id}/delete', [RoleController::class, 'deletes']);
 });
 
-Route::prefix("tag")->group(function(){
-    Route::get("/",[TagController::class, 'index']);
-    Route::get("/{id}", [TagController::class, 'find']);
-    Route::post('/add', [TagController::class, 'post']);
-    Route::patch('/{id}/edit', [TagController::class, 'update']);
-    Route::delete('/{id}/delete', [TagController::class, 'deletes']);
-});
-
-Route::prefix("forum")->group(function(){
+Route::prefix("forum")->middleware(["auth:api"])->group(function(){
     Route::get("/", [ForumController::class, 'index']);
     Route::get("/{id}", [ForumController::class, 'find']);
     Route::post('/add', [ForumController::class, 'post']);
@@ -55,7 +47,7 @@ Route::prefix("forum")->group(function(){
     Route::delete('/{id}/delete', [ForumController::class, 'deletes']);
 });
 
-Route::prefix("comment")->group(function(){
+Route::prefix("comment")->middleware(["auth:api"])->group(function(){
     Route::get("/", [CommentController::class, 'index']);
     Route::get("/{id}", [CommentController::class, 'find']);
     Route::post('/add', [CommentController::class, 'post']);
@@ -64,7 +56,7 @@ Route::prefix("comment")->group(function(){
     Route::get("/{id}/post", [CommentController::class, 'getCommentByPost']);
 });
 
-Route::prefix('proposal')->group(callback: function(){
+Route::prefix('proposal')->middleware(["auth:api"])->group(callback: function(){
     Route::get('/', [ProposalController::class, 'index']);
     Route::get("/{id}", [ProposalController::class, 'find']);
     Route::post('/add', [ProposalController::class, 'post']);
@@ -72,7 +64,7 @@ Route::prefix('proposal')->group(callback: function(){
     Route::delete('/{id}/delete', [ProposalController::class, 'deletes']);
 });
 
-Route::prefix('inventaris')->group(callback: function(){
+Route::prefix('inventaris')->middleware(["auth:api"])->group(callback: function(){
     Route::get('/',[InventarisController::class, 'index']);
     Route::get("/{id}",[InventarisController::class, 'find']);
     Route::post('/add', [InventarisController::class, 'post']);
@@ -80,7 +72,7 @@ Route::prefix('inventaris')->group(callback: function(){
     Route::delete('/{id}/delete', [InventarisController::class, 'deletes']);
 });
 
-Route::prefix('pemetaanalat')->group(callback: function(){
+Route::prefix('pemetaanalat')->middleware(["auth:api"])->group(callback: function(){
     Route::get('/', [PemetaanController::class, 'index']);
     Route::post('/add', [PemetaanController::class, 'post']);
     Route::patch('/{id}/edit', [PemetaanController::class, 'update']);

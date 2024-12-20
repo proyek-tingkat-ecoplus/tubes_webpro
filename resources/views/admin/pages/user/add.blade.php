@@ -5,8 +5,13 @@
     <div class="container pe-3 ps-3 pb-3">
         <div class="row">
             <div class="col-md-12">
-                <form action="" method="POST" class="form">
+                <form  method="POST" class="form">
                     @csrf
+                    <div class="form-group mt-2">
+                        <label for="foto">Foto</label>
+                        <input type="file" name="avatar" class="form-control" accept="image/*" >
+                        <span class="invalid-feedback"></span>
+                    </div>
                     <div class="form-group mt-2 ">
                         <label for="name">Name</label>
                         <input type="text" name="name" class="form-control " value=" ">

@@ -1,4 +1,4 @@
-import { isLogin } from "../../../Authentication";
+import { getTokens, isLogin } from "../../../Authentication";
 import { userValidation } from "../validation/userValidation";
 import { selectRole } from "../helper/handleSelectRequest";
 
@@ -12,6 +12,9 @@ $(document).ready(function(){
         url: "/api/user/"+idx,
         type: 'GET',
         dataType: 'json',
+        headers: {
+            'Authorization': 'Bearer ' + getTokens()
+        },
         success: function (response) {
             if (response.data) {
                 var dataById = response.data;
@@ -53,6 +56,7 @@ $('.form').submit(function (e) {
     $.ajax({
         headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+        'Authorization': 'Bearer ' + getTokens()
     },
         url: `/api/user/${idx}/edit`,
         type: 'POST',

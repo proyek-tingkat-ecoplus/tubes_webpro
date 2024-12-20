@@ -5,11 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Forum;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ForumController extends Controller
 {
     public function index(){
-        return response()->json(["data"=> Forum::with(['user','comments','categories'])->get()]);
+      return DataTables::of(Forum::with(['user'])->get())
+        ->addColumn('author', function($forum){
+            return $forum->user->username;
+        })->make(true);
     }
 
     public function post(Request $request){

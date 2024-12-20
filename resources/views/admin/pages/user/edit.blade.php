@@ -8,6 +8,11 @@
                 <form class="form">
                     @method('put')
                     <div class="form-group mt-2"></div>
+                    <div class="form-group mt-2">
+                        <label for="foto">Foto</label>
+                        <input type="file" name="avatar" class="form-control" accept="image/*" >
+                        <span class="invalid-feedback"></span>
+                    </div>
                      <div class="form-group mt-2 ">
                         <label for="name">Name</label>
                         <input type="text" name="name" class="form-control " value="{{ old('name') }}">

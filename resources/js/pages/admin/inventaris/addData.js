@@ -1,4 +1,4 @@
-import { isLogin } from "../../../Authentication"
+import { getTokens, isLogin } from "../../../Authentication"
 
 import { selectUser } from "../helper/handleSelectRequest";
 import { inventarisValidation } from "../validation/inventarisValidation";
@@ -22,6 +22,7 @@ $(document).ready(function () {
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+                    'Authorization': 'Bearer ' + getTokens()
                 },
                 url: "/api/inventaris/add",
                 type: 'POST',

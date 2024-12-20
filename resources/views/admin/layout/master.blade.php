@@ -111,7 +111,7 @@
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
 
     @stack('scripts')
-    @vite(['resources/js/dashboard.js'])
+    @vite(['resources/js/pages/admin/dashboard.js'])
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>

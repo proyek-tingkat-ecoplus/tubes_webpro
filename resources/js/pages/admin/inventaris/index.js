@@ -1,4 +1,5 @@
 import {
+    getTokens,
     isLogin
 } from "../../../Authentication";
 
@@ -37,7 +38,10 @@ $(document).ready(function () {
             ajax: {
                 url: "/api/inventaris",
                 method: 'GET',
-                dataSrc: 'data'
+                dataSrc: 'data',
+                headers: {
+                    'Authorization': 'Bearer ' + getTokens()
+                }
             },
             columns: [{
                     data: 'id'
@@ -96,6 +100,9 @@ $(document).ready(function () {
                     $.ajax({
                         type: "DELETE",
                         url: `/api/inventaris/${inventarisId}/delete`,
+                        headers: {
+                            'Authorization': 'Bearer ' + getTokens()
+                        },
                         success: function (data) {
                             table.ajax.reload(); // ini buat reload table
                             Swal.fire({

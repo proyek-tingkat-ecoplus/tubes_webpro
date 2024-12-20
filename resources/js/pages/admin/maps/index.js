@@ -1,3 +1,4 @@
+import { getTokens } from "../../../Authentication";
 import { selectAlat } from "../helper/handleSelectRequest";
 import { pemetaanValidation } from "../validation/pemetaanValidation";
 
@@ -98,6 +99,10 @@ function fetchGetData() {
     $.ajax({
         url: '/api/pemetaanalat',
         type: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            'Authorization': 'Bearer ' + getTokens()
+        },
         success: function (data) {
             data.data.forEach(function (location, index) {
                 addMarker(location, index);
@@ -211,7 +216,8 @@ document.getElementById('addLocationForm').addEventListener('submit', function (
             contentType: false,
             processData: false,
             headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                'Authorization': 'Bearer ' + getTokens()
             },
             success: function (data) {
                 console.log('Location saved successfully:', data);
@@ -223,7 +229,7 @@ document.getElementById('addLocationForm').addEventListener('submit', function (
                 $("#addLocationModal").modal('hide');
                 document.getElementById('location-photo').value = "";
                 fetchGetData();
-                $("#modal-backdrop").remove();
+                $("#modal-backdrop").removeClass("modal-backdrop");
             },
             error: function (err) {
                 console.log('Error saving location:', err);
@@ -264,7 +270,8 @@ const funcDelButton = (location) => {
                     url: '/api/pemetaanalat/' + location.id + '/delete',
                     type: 'DELETE',
                     headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                        'Authorization': 'Bearer ' + getTokens()
                     },
                     success: function (data) {
                         Swal.fire('Deleted!', 'Your marker has been deleted.', 'success');

@@ -1,4 +1,5 @@
 import {
+    getTokens,
     isLogin
 } from "../../../Authentication";
 
@@ -37,7 +38,10 @@ $(document).ready(function () {
             ajax: {
                 url: "/api/forum",
                 method: 'GET',
-                dataSrc: 'data'
+                dataSrc: 'data',
+                headers: {
+                    'Authorization': 'Bearer ' + getTokens()
+                }
             },
             columns: [{
                     data: 'id'
@@ -48,12 +52,12 @@ $(document).ready(function () {
                 {
                     data: 'name'
                 },
-                // {
-                //     data: 'description'
-                // },
                 {
-                    data: 'slug'
+                    data: 'description'
                 },
+                // {
+                //     data: 'slug'
+                // },
                 {
                     data: null,
                     render: function (data, type, row) { // buat render di column aksi
@@ -92,6 +96,9 @@ $(document).ready(function () {
                     $.ajax({
                         type: "DELETE",
                         url: `/api/forum/${userId}/delete`,
+                        headers: {
+                            'Authorization': 'Bearer ' + getTokens()
+                        },
                         success: function (data) {
                             table.ajax.reload(); // ini buat reload table
                             Swal.fire({

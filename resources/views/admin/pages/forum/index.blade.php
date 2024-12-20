@@ -13,7 +13,7 @@
                             <th>id</th>
                             <th>author</th>
                             <th>title</th>
-                            <th>Tag</th>
+                            {{-- <th>Tag</th> --}}
                             <th>Content</th>
                             <th>Aksi</th>
                         </tr>

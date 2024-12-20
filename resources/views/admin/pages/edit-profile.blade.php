@@ -13,21 +13,47 @@
                     <!-- Input for Name -->
                     <div class="mb-3">
                         <label for="name" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
+                        <input type="text" class="form-control @error('name')
+                            is-invalid
+                        @enderror" id="dash-name" name="name" placeholder="Enter your name">
+                        @error('name')
+                            <div class="invalid-validated">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <!-- Input for Email -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email">
+                        <input type="email" class="form-control @error('email')
+                            is-invalid
+                        @enderror" id="dash-email" name="email" placeholder="Enter your email">
+                        @error('email')
+                            <div class="invalid-validated">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     <!-- Input for Password -->
                     <div class="mb-3">
                         <label for="password" class="form-label">Password baru</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Enter new password">
+                        <input type="password" class="form-control @error('password')
+                            is-invalid
+                        @enderror" id="dash-password" name="password" placeholder="Enter new password">
+                        @error('password')
+                            <div class="invalid-validated">{{ $message }}</div>
+                        @enderror
                     </div>
-                    <input type="text" id="user_id" name="user_id" >
+
+                    <!-- Input for Password Confirmation -->
+                    <div class="mb-3">
+                        <label for="password_confirmation" class="form-label">Konfirmasi Password</label>
+                        <input type="password" class="form-control @error('password_confirmation')
+                            is-invalid
+                        @enderror" id="dash-password_confirmation" name="password_confirmation" placeholder="Confirm your password">
+                        @error('password_confirmation')
+                            <div class="invalid-validated">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <input type="text"  id="dash-id" name="user_id" hidden >
 
                     <div class="text-end">
                         <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -38,7 +64,3 @@
     </div>
 </div>
 @endsection
-
-@push('scripts')
-<script type="module" src="https://cdn.jsdelivr.net/npm/color-calendar/dist/bundle.js"></script>
-@endpush
