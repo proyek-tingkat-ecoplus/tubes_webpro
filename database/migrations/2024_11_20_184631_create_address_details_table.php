@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('address_details', function (Blueprint $table) {
             $table->id();
+            $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('zip')->nullable();

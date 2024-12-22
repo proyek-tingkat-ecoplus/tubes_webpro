@@ -82,6 +82,10 @@ $(document).ready(function () {
                             <i class="bx bx-dots-vertical-rounded"></i>
                         </button>
                         <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/pages/user/${data.id}/editpass"><i
+                                    class='bx bxs-lock-open-alt'></i> Change Password</a>
+                            <a class="dropdown-item" href="/pages/user/${data.id}/detail"><i
+                                    class='bx bxs-user-detail'></i> Detail</a>
                             <a class="dropdown-item" href="/pages/user/${data.id}/edit"><i
                                     class="bx bx-edit-alt me-1"></i> Edit</a>
                             <a class="dropdown-item delete-btn" data-id="${data.id}">

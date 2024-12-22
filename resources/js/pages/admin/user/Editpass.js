@@ -19,19 +19,7 @@ $(document).ready(function(){
             console.log("fwefwefwf", response.data);
             if (response.data) {
                 var dataById = response.data;
-                $('input[name="name"]').val(dataById.username)
-                $('input[name="first_name"]').val(dataById.user_details.first_name)
-                $('input[name="last_name"]').val(dataById.user_details.last_name)
-                $('input[name="nik"]').val(dataById.user_details.nik)
-                $('input[name="address"]').val(dataById.user_details.address.address)
-                $('input[name="phone"]').val(dataById.user_details.phone)
-                $('input[name="city"]').val(dataById.user_details.address.city)
-                $('input[name="state"]').val(dataById.user_details.address.state)
-                $('input[name="country"]').val(dataById.user_details.address.country)
-                $('input[name="email"]').val(dataById.email)
-                $('input[name="avatar"]').val(dataById.avatar)
-                $('input[name="status"]').val(dataById.status)
-                selectRole(dataById.role.id)
+                ('select')
                 //$('select[name="status"]').val("admin").change()
             }
         },
@@ -69,7 +57,7 @@ $('.form').submit(function (e) {
         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
         'Authorization': 'Bearer ' + getTokens()
     },
-        url: `/api/user/${idx}/edit`,
+        url: `/api/user/${idx}/editpass`,
         type: 'POST',
         processData: false,
         contentType: false,

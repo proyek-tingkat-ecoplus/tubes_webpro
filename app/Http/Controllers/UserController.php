@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\File;
+use App\Models\AddressDetails;
+use App\Models\UserDetails;
 
 class UserController extends Controller
 {
@@ -32,6 +34,14 @@ class UserController extends Controller
             "email" => "required|email|unique:users,email",
             "role" => "required",
             "password" => "required",
+            "first_name" => "required",
+            "last_name" => "required",
+            "nik" => "required",
+            "address" => "required",
+            "phone" => "required",
+            "city" => "required",
+            "state" => "required",
+            "country" => "required",
             "avatar" => "required|image",
         ]);
 
@@ -40,36 +50,70 @@ class UserController extends Controller
         $path = "image/profile/".$photo;
         $foto->move(public_path("\image\profile"),$photo );
 
-        $data = User::create([
+        $user = User::create([
             "username" => $request->name,
             "password" => Hash::make($request->password),
             "email" => $request->email,
             "role_id" => $request->role,
             "photo" => $path
         ]);
-        return response()->json($data);
+
+        $address = AddressDetails::create([
+            "address" => $request->address,
+            "city" => $request->city,
+            "state" => $request->state,
+            "country" => $request->country,
+        ]);
+
+        $userdet = UserDetails::create([
+            "first_name" => $request->first_name,
+            "last_name" => $request->last_name,
+            "phone" => $request->phone,
+            "nik" => $request->nik,
+            "address_id" => $address->id,
+            "user_id" => $user->id
+        ]);
+
+        $userdet->address_id = $address->id;
+        $userdet->save();
+
+        return response()->json(["message" => "Data berhasil ditambahkan"]);
     }
 
     public function find($id){
         if(empty($id)){
             return response()->json(['error' => 'Invalid id'], 402);
         }
-        return response()->json(["data" => User::where("id", $id)->with("role")->first()]);
+        return response()->json(["data" => User::where("id", $id)->with(["role","user_details"=>fn($query) => $query->with('address')])->first()]);
+    }
+
+    public function edit($id){
+        if(empty($id)){
+            return response()->json(['error' => 'Invalid id'], 402);
+        }
+        return view('admin.pages.user.edit', ["id" => $id]);
     }
 
     public function update(Request $request, $id){
         $request->validate([
             "name" => "required",
-            "email" => "required",
+            "email" => "required|email",
             "role" => "required",
-            "password" => "required",
+            "first_name" => "required",
+            "last_name" => "required",
+            "nik" => "required",
+            "address" => "required",
+            "phone" => "required",
+            "city" => "required",
+            "state" => "required",
+            "country" => "required",
             "avatar" => "required|image",
         ]);
 
         $user = User::where('id', $id)->first();
 
         if(empty($user)){
-            return response()->json(['error' => 'Invalid alat id'], 402);
+            return response()->json(['error' => 'Invalid user id'], 402);
         }
         if(File::exists(public_path('image/profile/' . $user->foto))){
             File::delete(public_path('image/profile/' . $user->foto));  // Delete the file if it exists
@@ -79,15 +123,31 @@ class UserController extends Controller
         $photo = $request->name.'-'.Carbon::now()->format("Y-m-d-H-i-s").".".$foto->getClientOriginalExtension();
         $path = "image/profile/".$photo;
         $foto->move(public_path("\image\profile"),$photo );
+        $userdetail = UserDetails::where("id", $id)->first();
 
-        $data = User::where("id", $id)->update([
+        $user = User::where("id", $id)->update([
             "username" => $request->name,
-            "password" => Hash::make($request->password),
             "email" => $request->email,
             "role_id" => $request->role,
             "photo" => $path
         ]);
-        return response()->json($data);
+
+        AddressDetails::where("id", $userdetail->address_id)->update([
+            "address" => $request->address,
+            "city" => $request->city,
+            "state" => $request->state,
+            "country" => $request->country,
+        ]);
+
+
+        $userdet = UserDetails::where("user_id", $id)->update([
+            "first_name" => $request->first_name,
+            "last_name" => $request->last_name,
+            "phone" => $request->phone,
+            "nik" => $request->nik,
+        ]);
+
+        return response()->json(["message" => "Data berhasil diedit"]);
     }
 
     public function deletes($id){
@@ -96,6 +156,21 @@ class UserController extends Controller
         }
         User::where("id", $id)->delete();
         return response()->json(["success" => "data berhasil di hapus"], 202);
+    }
+
+
+
+    public function editpass(Request $request, $id){
+        $request->validate([
+            "password" => "required",
+            "password_confirmation" => "required|same:password"
+        ]);
+        $user = User::where('id', $id)->first();
+
+        $user = User::where("id", $id)->update([
+            "password"=> Hash::make($request->password)
+        ]);
+        return response()->json(["message" => "Password berhasil di update"]);
     }
 
     public function editProfile(Request $request){

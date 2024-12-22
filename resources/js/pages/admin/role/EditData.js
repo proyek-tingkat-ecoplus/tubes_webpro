@@ -12,6 +12,9 @@ $(document).ready(function(){
         url: "/api/role/"+idx,
         type: 'GET',
         dataType: 'json',
+        headers: {
+            'Authorization': 'Bearer ' + getTokens()
+        },
         success: function (response) {
             if (response.data) {
                 var dataById = response.data;

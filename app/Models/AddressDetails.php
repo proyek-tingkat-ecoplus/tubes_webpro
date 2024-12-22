@@ -9,6 +9,7 @@ class AddressDetails extends Model
     protected $fillable = [
         'city',
         'state',
+        'address',
         'zip',
         'country',
     ];
