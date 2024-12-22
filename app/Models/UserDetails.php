@@ -11,7 +11,7 @@ class UserDetails extends Model
         'first_name',
         'last_name',
         'phone',
-        'address',
+        'nik',
         'city',
         'state',
         'zip',
@@ -33,6 +33,6 @@ class UserDetails extends Model
 
     public function address(){
 
-        return $this->hasOne(AddressDetails::class,'address_id','id');
+        return $this->hasOne(AddressDetails::class,'id','address_id');
     }
 }

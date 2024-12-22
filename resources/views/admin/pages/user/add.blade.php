@@ -7,16 +7,50 @@
             <div class="col-md-12">
                 <form  method="POST" class="form">
                     @csrf
-                    <div class="form-group mt-2">
-                        <label for="foto">Foto</label>
-                        <input type="file" name="avatar" class="form-control" accept="image/*" >
+                    <div class="form-group mt-2 ">
+                        <label for="name">Username</label>
+                        <input type="text" name="name" class="form-control" value=" ">
                         <span class="invalid-feedback"></span>
                     </div>
                     <div class="form-group mt-2 ">
-                        <label for="name">Name</label>
-                        <input type="text" name="name" class="form-control " value=" ">
-                        <span class="invalid-feedback">
-                        </span>
+                        <label for="first_name">First Name</label>
+                        <input type="text" name="first_name" class="form-control" value=" ">
+                        <span class="invalid-feedback"></span>
+                    </div>
+                    <div class="form-group mt-2 ">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" name="last_name" class="form-control" value=" ">
+                        <span class="invalid-feedback"></span>
+                    </div>
+                    <div class="form-group mt-2 ">
+                        <label for="nik">NIK</label>
+                        <input type="text" name="nik" class="form-control" value=" ">
+                        <span class="invalid-feedback"></span>
+                    </div>
+                    <div class="form-group mt-2 ">
+                        <label for="address">Alamat</label>
+                        <input type="text" name="address" class="form-control" value=" ">
+                        <span class="invalid-feedback"></span>
+                    </div>
+                    <div class="form-group mt-2 ">
+                        <label for="phone">No. Handphone</label>
+                        <input type="text" name="phone" class="form-control" value=" ">
+                        <span class="invalid-feedback"></span>
+                    </div>
+                    <div class="form-group mt-2 ">
+                        <label for="city">Kabupaten</label>
+                        <input type="text" name="city" class="form-control" value=" ">
+                        <span class="invalid-feedback"></span>
+                    </div>
+                    <div class="form-group mt-2 ">
+                        <label for="state">Provinsi</label>
+                        <input type="text" name="state" class="form-control" value=" ">
+                        <span class="invalid-feedback"></span>
+                    </div>
+                    <div class="form-group mt-2 ">
+                        <label for="country">Negara</label>
+                        <input type="text" name="country" class="form-control" value=" ">
+                        <span class="invalid-feedback"></span>
                     </div>
                     <div class="form-group mt-2">
                         <label for="email">Email</label>
@@ -31,6 +65,11 @@
                     <div class="form-group mt-2">
                         <label for="password_confirmation">Password Confirmation</label>
                         <input type="password" name="password_confirmation" class="form-control">
+                        <span class="invalid-feedback"></span>
+                    </div>
+                    <div class="form-group mt-2">
+                        <label for="foto">Foto</label>
+                        <input type="file" name="avatar" class="form-control" accept="image/*" >
                         <span class="invalid-feedback"></span>
                     </div>
                     <div class="form-group mt-2">

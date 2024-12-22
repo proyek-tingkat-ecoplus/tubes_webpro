@@ -66,9 +66,10 @@ export const me = async () => {
     const authData = localStorage.getItem("authenticate");
     if (!authData) {
         console.error('No authentication data found in localStorage.');
-        //redirect('/login')
+        // redirect('/login')
         return null;
     }
+    const parsedData = JSON.parse(authData);
 
     let data = null;
     let response = null;
@@ -95,6 +96,8 @@ export const me = async () => {
         data = response || parsedData.user || null;
     } catch (e) {
         console.error('Error parsing authentication data:', e);
+        localStorage.removeItem("authenticate")
+            redirect('/login')
         data = null;
     }
     return data;

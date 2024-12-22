@@ -52,8 +52,21 @@ Route::prefix('pages')->group(function(){
     Route::get('/user', function () {
         return view('admin.pages.user.index');
     });
+
     Route::get('/user/add', function () {
         return view('admin.pages.user.add');
+    });
+
+    Route::post('/user/add', function () {
+        return view('admin.pages.user.add');
+    });
+
+    Route::get('/user/{id}/editpass', function($id){
+        return view('admin.pages.user.editpass', ["id" => $id]);
+    });
+
+    Route::get('/user/{id}/detail', function($id){
+        return view('admin.pages.user.detail' ,["id" => $id]);
     });
 
     Route::get('/user/{id}/edit', function($id){

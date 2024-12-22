@@ -28,6 +28,7 @@ Route::prefix("user")->middleware(["auth:api"])->group(function(){
     Route::get("/{id}",[UserController::class, 'find']);
     Route::post('/add', [UserController::class, 'post']);
     Route::patch('/{id}/edit', [UserController::class, 'update']);
+    Route::patch('/{id}/editpass', [UserController::class, 'editpass']);
     Route::delete('/{id}/delete', [UserController::class, 'deletes']);
 });
 
