@@ -150,6 +150,7 @@ class UserController extends Controller
         return response()->json(["message" => "Data berhasil diedit"]);
     }
 
+
     public function deletes($id){
         if(empty($id)){
             return response()->json(['error' => 'Invalid id'], 402);
