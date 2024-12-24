@@ -26,6 +26,7 @@ Route::prefix("auth")->middleware("auth:api")->group(function(){
 Route::prefix("user")->middleware(["auth:api"])->group(function(){
     Route::get("/",[UserController::class, 'index']);
     Route::get("/{id}",[UserController::class, 'find']);
+    Route::get('/{id}/detail', [UserController::class, 'detail']);
     Route::post('/add', [UserController::class, 'post']);
     Route::patch('/{id}/edit', [UserController::class, 'update']);
     Route::patch('/{id}/editpass', [UserController::class, 'editpass']);
