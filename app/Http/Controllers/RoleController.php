@@ -8,8 +8,11 @@ use Yajra\DataTables\DataTables;
 
 class RoleController extends Controller
 {
-
     public function index(){
+        return response()->json(["data" => Role::all()]);
+    }
+
+    public function table(){
         return DataTables::of(Role::all())->make(true);
     }
     public function post(Request $request){

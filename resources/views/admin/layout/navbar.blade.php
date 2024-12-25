@@ -20,9 +20,9 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                     data-bs-toggle="dropdown" aria-expanded="false">
-                    <div class="avatar avatar-online">
-                        <img src="https://th.bing.com/th/id/OIP.IGNf7GuQaCqz_RPq5wCkPgHaLH?rs=1&pid=ImgDetMain" alt="User Profile Picture"
-                            class="w-px-30 h-auto rounded-pill" />
+                    <div class="avatar avatar-online profile-img" id="">
+                        {{-- <img src="https://th.bing.com/th/id/OIP.IGNf7GuQaCqz_RPq5wCkPgHaLH?rs=1&pid=ImgDetMain" alt="User Profile Picture"
+                            class="w-px-30 h-auto rounded-pill" /> --}}
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -30,9 +30,9 @@
                         <a class="dropdown-item" href="#">
                             <div class="d-flex align-items-center">
                                 <div class="flex-shrink-0 me-3">
-                                    <div class="avatar avatar-online">
-                                        <img src="https://th.bing.com/th/id/OIP.IGNf7GuQaCqz_RPq5wCkPgHaLH?rs=1&pid=ImgDetMain" alt="User Profile Picture"
-                                            class="w-px-30 h-auto rounded-pill" />
+                                    <div class="avatar avatar-online profile-img">
+                                        {{-- <img src="https://th.bing.com/th/id/OIP.IGNf7GuQaCqz_RPq5wCkPgHaLH?rs=1&pid=ImgDetMain" alt="User Profile Picture"
+                                            class="w-px-30 h-auto rounded-pill" /> --}}
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
@@ -46,13 +46,13 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
+                        <a class="dropdown-item" href="/edit-profile">
+                            <i class="bx bx-user me-2"></i>
+                            <span class="align-middle">Edit Profile</span>
+                        </a>
                         <a class="dropdown-item" id="logout">
                             <i class="bx bx-power-off me-2"></i>
                             <span class="align-middle">Log Out</span>
-                        </a>
-                        <a class="dropdown-item" id="logout" href="/edit-profile">
-                            <i class="bx bx-user me-2"></i>
-                            <span class="align-middle">Edit Profile</span>
                         </a>
                     </li>
                 </ul>

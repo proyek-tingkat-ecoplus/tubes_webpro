@@ -14,6 +14,9 @@ use App\Models\UserDetails;
 class UserController extends Controller
 {
     public function index(){
+        return response()->json(["data" => User::with(["role","user_details"=>fn($query) => $query->with('address')])->get()]);
+    }
+    public function table(){
         // ini make yajra datatables
         return DataTables::of(User::all())
         ->addColumn("role", function($column){

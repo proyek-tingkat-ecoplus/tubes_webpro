@@ -25,6 +25,7 @@ Route::prefix("auth")->middleware("auth:api")->group(function(){
 
 Route::prefix("user")->middleware(["auth:api"])->group(function(){
     Route::get("/",[UserController::class, 'index']);
+    Route::get("/table",[UserController::class, 'table']);
     Route::get("/{id}",[UserController::class, 'find']);
     Route::get('/{id}/detail', [UserController::class, 'detail']);
     Route::post('/add', [UserController::class, 'post']);
@@ -35,6 +36,7 @@ Route::prefix("user")->middleware(["auth:api"])->group(function(){
 
 Route::prefix("role")->middleware(["auth:api"])->group(function(){
     Route::get("/",[RoleController::class, 'index']);
+    Route::get("/table",[RoleController::class, 'table']);
     Route::get("/{id}",[RoleController::class, 'find']);
     Route::post('/add', [RoleController::class, 'post']);
     Route::patch('/{id}/edit', [RoleController::class, 'update']);
@@ -43,6 +45,7 @@ Route::prefix("role")->middleware(["auth:api"])->group(function(){
 
 Route::prefix("forum")->middleware(["auth:api"])->group(function(){
     Route::get("/", [ForumController::class, 'index']);
+    Route::get("/table", [ForumController::class, 'table']);
     Route::get("/{id}", [ForumController::class, 'find']);
     Route::post('/add', [ForumController::class, 'post']);
     Route::patch('/{id}/edit', [ForumController::class, 'update']);
@@ -51,6 +54,7 @@ Route::prefix("forum")->middleware(["auth:api"])->group(function(){
 
 Route::prefix("comment")->middleware(["auth:api"])->group(function(){
     Route::get("/", [CommentController::class, 'index']);
+    Route::get("/table", [CommentController::class, 'table']);
     Route::get("/{id}", [CommentController::class, 'find']);
     Route::post('/add', [CommentController::class, 'post']);
     Route::patch('/{id}/edit', [CommentController::class, 'update']);
@@ -60,6 +64,7 @@ Route::prefix("comment")->middleware(["auth:api"])->group(function(){
 
 Route::prefix('proposal')->middleware(["auth:api"])->group(callback: function(){
     Route::get('/', [ProposalController::class, 'index']);
+    Route::get("/table", [ProposalController::class, 'table']);
     Route::get("/{id}", [ProposalController::class, 'find']);
     Route::post('/add', [ProposalController::class, 'post']);
     Route::patch('/{id}/edit', [ProposalController::class, 'update']);
@@ -68,6 +73,7 @@ Route::prefix('proposal')->middleware(["auth:api"])->group(callback: function(){
 
 Route::prefix('inventaris')->middleware(["auth:api"])->group(callback: function(){
     Route::get('/',[InventarisController::class, 'index']);
+    Route::get('/table',[InventarisController::class, 'table']);
     Route::get("/{id}",[InventarisController::class, 'find']);
     Route::post('/add', [InventarisController::class, 'post']);
     Route::patch('/{id}/edit', [InventarisController::class, 'update']);
