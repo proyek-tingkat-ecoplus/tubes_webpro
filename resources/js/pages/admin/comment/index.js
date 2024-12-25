@@ -1,4 +1,3 @@
-import { data } from "jquery";
 import {
     getTokens,
     isLogin
@@ -24,7 +23,7 @@ $(document).ready(function () {
         }
 
 
-        let table = new DataTable('#table-user', {
+        let table = new DataTable('#table-comment', {
             dom: "<'row'<'col-sm-12 col-md-5 btn-table'><'col-sm-12 col-md-3'<'ms-4'f>><'col-sm-12 col-md-4 pdf-button'>>" +
                 "<'row mt-3'<'col-sm-12'tr>>" +
                 "<'row mt-2'<'col-md-8 col-12'i><'col-md-4 col-12'p>>",
@@ -37,7 +36,7 @@ $(document).ready(function () {
             responsive: true,
             autoWidth: false,
             ajax: {
-                url: "/api/user/table",
+                url: "/api/comment/table",
                 method: 'GET',
                 dataSrc: 'data',
                 headers: {
@@ -48,29 +47,17 @@ $(document).ready(function () {
                     data: 'id'
                 },
                 {
-                    data:'avatar',
+                    data:"post"
                 },
                 {
-                    data: 'username'
+                    data: 'author'
                 },
                 {
-                    data: 'email'
+                    data: 'content'
                 },
-                {
-                    data: 'role'
-                },
-                {
-                    data: 'status',
-                    render: function (data, type, row) {
-                        if (data == 'Active') {
-                            return `<span class="badge bg-primary me-1">${data}</span>`;
-                        } else if (data === 'Non Aktif') {
-                            return `<span class="badge bg-danger me-1">${data}</span>`;
-                        } else {
-                            return `<span class="badge bg-warning me-1">${data}</span>`;
-                        }
-                    }
-                },
+                // {
+                //     data: 'created_at'
+                // },
                 {
                     data: null,
                     render: function (data, type, row) { // buat render di column aksi
@@ -82,11 +69,7 @@ $(document).ready(function () {
                             <i class="bx bx-dots-vertical-rounded"></i>
                         </button>
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="/pages/user/${data.id}/editpass"><i
-                                    class='bx bxs-lock-open-alt'></i> Change Password</a>
-                            <a class="dropdown-item" href="/pages/user/${data.id}/detail"><i
-                                    class='bx bxs-user-detail'></i> Detail</a>
-                            <a class="dropdown-item" href="/pages/user/${data.id}/edit"><i
+                            <a class="dropdown-item" href="/pages/commment/${data.id}/edit"><i
                                     class="bx bx-edit-alt me-1"></i> Edit</a>
                             <a class="dropdown-item delete-btn" data-id="${data.id}">
                                     <i class="bx bx-trash me-1"></i> Delete</a>
@@ -112,8 +95,8 @@ $(document).ready(function () {
                 if (result.isConfirmed) {
                     $.ajax({
                         type: "DELETE",
-                        url: `/api/user/${userId}/delete`,
-                        headers : {
+                        url: `/api/comment/${userId}/delete`,
+                        headers: {
                             'Authorization': 'Bearer ' + getTokens()
                         },
                         success: function (data) {
@@ -143,7 +126,7 @@ $(document).ready(function () {
             table.search(this.value).draw();
         })
         // ini buat nambah button
-        $(".btn-table").append('<a href="/pages/user/add" class="btn btn-primary">Tambah Pengguna</a>');
+        $(".btn-table").append('<a href="/pages/comment/add" class="btn btn-primary">Tambah Comment</a>');
         $(".pdf-button").append('<button class="btn btn-danger mt-md-0 mt-3 me-2">Export PDF</button>' +
             '<button class="btn btn-primary mt-md-0 mt-3 me-2">Export Excel</button>');
     }

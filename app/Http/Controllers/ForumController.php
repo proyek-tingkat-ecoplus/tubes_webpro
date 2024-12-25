@@ -6,10 +6,14 @@ use App\Models\Forum;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Str;
 
 class ForumController extends Controller
 {
     public function index(){
+        return response()->json(["data" => Forum::with(['user'])->get()]);
+    }
+    public function table(){
       return DataTables::of(Forum::with(['user'])->get())
         ->addColumn('author', function($forum){
             return $forum->user->username;
@@ -18,21 +22,19 @@ class ForumController extends Controller
 
     public function post(Request $request){
         $request->validate([
-            "user_id" => "required",
+            "user" => "required",
             "name" => "required",
             "description" => "required",
-            "slug" => "required",
-            "categories" => "required",
         ]);
 
         $forum = Forum::create([
-            "user_id" => $request->user_id,
+            "user_id" => $request->user,
             "name" => $request->name,
             "description" => $request->description,
-            "slug" => $request->slug,
+            "slug" => Str::slug($request->name),
             "created_at" => Carbon::now()
         ]);
-        $forum->categories()->attach($request->categories);
+        //$forum->categories()->attach($request->categories);
         return response()->json($forum);
     }
 
@@ -45,21 +47,23 @@ class ForumController extends Controller
 
     public function update(Request $request, $id){
         $request->validate([
-            "user_id" => "required",
+            "user" => "required",
             "name" => "required",
             "description" => "required",
-            "slug" => "required",
-            "categories" => "required",
         ]);
+        if(empty($id)){
+            return response()->json(['error' => 'Invalid id'], 402);
+        }
         $forum = Forum::where("id", $id)->first();
         $forum->update([
-            "user_id" => $request->user_id,
+            "user_id" => $request->user,
             "name" => $request->name,
             "description" => $request->description,
-            "slug" => $request->slug,
+            "slug" => Str::slug($request->name),
+            "updated_at" => Carbon::now()
         ]);
 
-        $forum->categories()->sync($request->categories);
+        // $forum->categories()->sync($request->categories);
         return response()->json($forum);
     }
 

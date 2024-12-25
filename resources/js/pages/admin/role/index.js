@@ -36,7 +36,7 @@ $(document).ready(function () {
             responsive: true,
             autoWidth: false,
             ajax: {
-                url: "/api/role",
+                url: "/api/role/table",
                 method: 'GET',
                 dataSrc: 'data',
                 headers: {

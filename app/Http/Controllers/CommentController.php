@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class CommentController extends Controller
 {
@@ -11,12 +12,23 @@ class CommentController extends Controller
         return response()->json(["data"=> Comment::with(['user','form','parent'])->get()]);
     }
 
+    public function table (){
+        return DataTables::of(Comment::all())
+        ->addColumn('author', function($comment){
+            return $comment->user->username;
+        })
+        ->addColumn('post', function($comment){
+            return $comment->form->name;
+        })
+        ->make(true);
+    }
+
     public function post(Request $request){
         $request->validate([
             "user_id" => "required",
-            "post_id" => "required",
+            "forum_id" => "required",
             "comment" => "required",
-            "parent_id" => "required",
+            //"parent_id" => "required",
         ]);
 
         if($request->parent_id != 0){
@@ -28,8 +40,8 @@ class CommentController extends Controller
 
         $comment = Comment::create([
             "user_id" => $request->user_id,
-            "post_id" => $request->post_id,
-            "comment" => $request->comment,
+            "forum_id" => $request->forum_id,
+            "content" => $request->comment,
             "parent_id" => $request->parent_id,
         ]);
         return response()->json($comment);
@@ -45,17 +57,17 @@ class CommentController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             "user_id" => "required",
-            "post_id" => "required",
+            "forum_id" => "required",
             "comment" => "required",
-            "parent_id" => "required",
+            //"parent_id" => "required",
         ]);
 
         $comment = Comment::where("id", $id)->first();
         $comment->update([
             "user_id" => $request->user_id,
-            "post_id" => $request->post_id,
-            "comment" => $request->comment,
-            "parent_id" => $request->parent_id,
+            "forum_id" => $request->forum_id,
+            "content" => $request->comment,
+            //"parent_id" => $request->parent_id,
         ]);
         return response()->json($comment);
     }

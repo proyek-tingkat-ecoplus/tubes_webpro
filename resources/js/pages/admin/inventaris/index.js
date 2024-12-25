@@ -36,7 +36,7 @@ $(document).ready(function () {
             responsive: true,
             autoWidth: false,
             ajax: {
-                url: "/api/inventaris",
+                url: "/api/inventaris/table",
                 method: 'GET',
                 dataSrc: 'data',
                 headers: {

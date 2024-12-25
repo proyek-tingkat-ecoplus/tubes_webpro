@@ -2,7 +2,7 @@
     <div class="">
         <nav class="navbar1 navbar-expand-lg navbar-light bg-light mx-auto">
             <div class="row justify-content-center">
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12">
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12" >
                     <img src="{{asset('asset/image/fixbgt.png')}}" alt="Logo" class="navbar-image">
                 </div>
                 <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5" style="background: #003030;">

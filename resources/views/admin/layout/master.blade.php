@@ -109,7 +109,11 @@
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <!-- DataTables Responsive JS -->
     <script src="https://cdn.datatables.net/responsive/2.2.9/js/dataTables.responsive.min.js"></script>
-
+    <script>
+        window.Laravel = {!! json_encode([
+            'asset_url' => asset('')
+        ]) !!};
+    </script>
     @stack('scripts')
     @vite(['resources/js/pages/admin/dashboard.js'])
 

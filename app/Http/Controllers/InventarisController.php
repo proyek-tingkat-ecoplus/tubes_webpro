@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\File;
 class InventarisController extends Controller
 {
     public function index(){
+        return response()->json(["data" => Alat::all()]);
+    }
+    public function table(){
     return DataTables::of(Alat::all())
         ->addColumn("images", function ($data) {
           return "<img src=".asset("image/$data->foto")." width='100' height='100' />";
