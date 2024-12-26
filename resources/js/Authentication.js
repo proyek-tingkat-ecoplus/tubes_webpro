@@ -4,50 +4,45 @@ export const redirect = (redirect) => {
         console.log(token);
         if (token) {
             window.location.href = redirect;
-        } else {
-            if (window.location.pathname == "/") {
-                window.location.href = redirect;
-            }else{
-                window.location.href = "/login";
-            }
         }
     } catch (e) {
         console.error('Error parsing authentication data:', e);
-        if (window.location.pathname != "/") {
-            window.location.href = "/login"; // Redirect if JSON parsing fails
-        }
+        window.location.href = redirect;
     }
 }
 
 export const isLogin = async (role) =>  {
-    me()
     try {
         const authData = JSON.parse(localStorage.getItem("authenticate"));
         if (!authData || !authData.access_token) {
 
-            if(window.location.pathname != "/login"){
-                if(role == "guest"){
-                    redirect('/')
-                }else{
-                    redirect('/login')
-                }
-            }
+
         }
         if (authData) {
-            if (window.location.pathname === "/login" || window.location.pathname === "/") {
-                window.history.back();  // Navigate back if logged in
-            }
             const user = await me();
             if (user && user.role && user.role.name === role) {
                 return true;
             } else {
+
+                if (document.referrer === window.location.href) {
+                    if(role != "guest"){
+                        window.location.href = "/dashboard";
+                    }
+                } else {
+                    window.history.back();
+                }
                 return false; // User is logged in but does not have the required role
             }
         }
-        return true;
     } catch (e) {
         console.error('Error parsing authentication data:', e);
-        //window.location.href = "/login";  // Redirect if parsing fails
+        if(window.location.pathname != "/login"){
+            if(role == "guest"){
+                redirect('/')
+            }else{
+                redirect('/login')
+            }
+        }
         return false;
     }
 };
@@ -66,7 +61,10 @@ export const me = async () => {
     const authData = localStorage.getItem("authenticate");
     if (!authData) {
         console.error('No authentication data found in localStorage.');
-        // redirect('/login')
+        if(window.location.pathname != "/login"){
+            redirect('/login')
+        }
+
         return null;
     }
     const parsedData = JSON.parse(authData);

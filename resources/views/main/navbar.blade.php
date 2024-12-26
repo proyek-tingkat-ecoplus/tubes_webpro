@@ -22,8 +22,8 @@
                         </svg> admin.ecopulse@gmail.com</p>
                 </div>
                 <div class="col-xl-2 col-lg-2 col-md-2 col-sm-12" style="background: #003030;">
-                    <div class="navbar-btn-area">
-                        <a class="navbar-btn1 rounded" href="/login">Login</a>
+                    <div class="navbar-btn-area" id="btn-area">
+
                     </div>
                 </div>
             </div>

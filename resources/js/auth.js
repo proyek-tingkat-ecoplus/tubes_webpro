@@ -36,7 +36,9 @@ $(document).ready(function () {
                     me().then(user => {
                         if (user && user.role.name === "Petugas") {
                             redirect("/dashboard");
-                        } else {
+                        }
+
+                        if (user && user.role.name === "Guest") {
                             redirect("/");
                         }
                     });
