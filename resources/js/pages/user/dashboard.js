@@ -11,9 +11,10 @@ $(document).ready(async function  ()  {
         if(user){
             $("#btn-area").append(`<a href="/user/dashboard" class="btn btn-primary">${user["username"]}</a>`);
         }else{
-            $("#btn-area").append(`<a href="/login" class="btn btn-primary">Login</a>`);
+
         }
     }else{
+        $("#btn-area").html(`<a href="/login" class="btn btn-primary navbar-btn">Login</a>`);
         console.log("invalid role")
     }
 })
