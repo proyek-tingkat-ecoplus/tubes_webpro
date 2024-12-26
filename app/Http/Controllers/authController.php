@@ -48,14 +48,14 @@ class authController extends Controller
 
         $credentials = $request->only(['email', 'password']);
         if (Auth::attempt($credentials)) {
-            $tokenResult = Auth::user()->createToken('PassportAuth');
+            $tokenResult = auth()->user()->createToken(Carbon::now()->toDateTimeString());
             $accessToken = $tokenResult->accessToken;
             $expiresAt = $tokenResult->token->expires_at;
             $expiresIn = Carbon::parse($expiresAt)->diff(now())->format('%d days, %h hours, %i minutes, %s seconds');
 
             return $this->respondWithToken([
                 'token' => $accessToken,
-                'user' => User::find(Auth()->id())->with("role")->first(),
+                'user' => User::where("id",Auth()->id())->with("role")->first(),
                 'expires_at' => $expiresAt,
                 'expires_in' => $expiresIn,
             ]);
@@ -98,7 +98,7 @@ class authController extends Controller
      */
     public function me()
     {
-        $user = auth()->user()->with("role")->first();
+        $user = User::where("id",Auth()->id())->with("role")->first();
         if ($user) {
             return response()->json($user);
         }

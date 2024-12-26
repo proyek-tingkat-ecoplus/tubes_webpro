@@ -14,10 +14,23 @@ class RolerSeeder extends Seeder
      */
     public function run(): void
     {
-        Role::create([
-            'name' => 'Petugas',
-            'description' => 'Petugas',
-            'permissions' => '*',
-        ]);
+        Role::insert([
+            [
+                'name' => 'Guest',
+                'description' => 'Guest',
+                'permissions' => '*',
+            ],
+            [
+                'name' => 'Petugas',
+                'description' => 'Petugas',
+                'permissions' => '*',
+            ],
+            [
+                'name' => 'Admin',
+                'description' => 'Admin',
+                'permissions' => '*',
+            ]
+        ]
+    );
     }
 }

@@ -24,6 +24,30 @@ class UserSeeder extends Seeder
             'username' => 'admin',
             'email' => 'admin@gmail.com',
             'password' => Hash::make('password'),
+            'role_id' => 2,
+            "photo" => 'image/profile/default.png',
+        ]);
+
+        $address = AddressDetails::create([
+            'city' => $faker->city,
+            'state' => $faker->state,
+            'zip' => $faker->postcode,
+            'country' => $faker->country,
+        ]);
+
+        UserDetails::create([
+            'user_id' => $user->id,
+            'phone' => $faker->phoneNumber,
+            'nik' => $faker->randomNumber(9),
+            'bio' => $faker->sentence,
+            'address_id' => $address->id,
+        ]);
+
+        // ini buat guest
+        $user = User::create([
+            'username' => 'guest',
+            'email' => 'guest@gmail.com',
+            'password' => Hash::make('password'),
             'role_id' => 1,
             "photo" => 'image/profile/default.png',
         ]);
