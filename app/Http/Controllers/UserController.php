@@ -27,6 +27,25 @@ class UserController extends Controller
         ->rawColumns(["avatar"])
         ->make(true);
     }
+
+        public function getProfile()
+    {
+        $user = auth()->user();
+
+        return response()->json([
+            'name' => $user->username,
+            'email' => $user->email,
+            'address' => $user->user_details->address->address ?? 'Alamat tidak tersedia',
+            'phone' => $user->user_details->phone ?? 'Telepon tidak tersedia',
+        ]);
+    }
+
+    public function getRole()
+    {
+        $user = auth()->user();
+        return response()->json(['role' => $user->role->name]);
+    }
+
     public function post(Request $request){
 
         $request->validate([

@@ -168,3 +168,15 @@ Route::get('/proposal/{path}', function($path){
         abort(404, 'File not found.');
     }
 })->where('path', '.*');
+
+Route::prefix('api/user')->group(function () {
+    Route::get('/profile', [UserController::class, 'getProfile']);
+    Route::get('/role', [UserController::class, 'getRole']);
+});
+
+Route::prefix('api/proposal')->group(function () {
+    Route::get('/', [ProposalController::class, 'index']);
+    Route::post('/add', [ProposalController::class, 'post']);
+    Route::put('/{id}/edit', [ProposalController::class, 'update']);
+    Route::delete('/{id}/delete', [ProposalController::class, 'deletes']);
+});

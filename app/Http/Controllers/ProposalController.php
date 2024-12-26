@@ -9,7 +9,19 @@ use Illuminate\Http\Request;
 class ProposalController extends Controller
 {
     public function index(){
-        return response()->json(["data"=> Proposal::with(['user','approved_by','rejected_by'])->get()]);
+        $user = auth()->user(); 
+
+        if ($user->role->name === 'kepala desa') {
+            $proposals = Proposal::where('user_id', $user->id)
+                ->with(['user', 'approved_by', 'rejected_by'])
+                ->get();
+        } elseif ($user->role->name === 'admin sdm') {
+            $proposals = Proposal::with(['user', 'approved_by', 'rejected_by'])->get();
+        } else {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+    
+        return response()->json(['data' => $proposals]);
     }
 
     public function post(Request $request){
