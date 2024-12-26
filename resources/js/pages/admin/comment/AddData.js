@@ -1,7 +1,8 @@
 import {
+    getTokens,
     isLogin
 } from "../../../Authentication";
-import { selectUser } from "../helper/handleSelectRequest"
+import { selectForum, selectUser } from "../helper/handleSelectRequest"
 import { userValidation } from "../../admin/validation/userValidation"
 
 
@@ -10,6 +11,7 @@ $(document).ready(function () {
         // ini buat select request
         try {
             selectUser()
+            selectForum()
         } catch (err) {
             console.log(err);
         }
@@ -21,11 +23,15 @@ $(document).ready(function () {
             }
 
             var form = new FormData(this);
-            //form.append('id', parseInt(lastId) + 1);
-            // var name = form.get('name');
+            form.append('user_id', $('select[name="user"]').val());
+            AddData(form);
+        });
+
+        const AddData = async (form) => {
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+                    'Authorization' : 'Bearer ' + getTokens()
                 },
                 url: "/api/comment/add",
                 type: 'POST',
@@ -45,6 +51,6 @@ $(document).ready(function () {
                     console.log("Request Failed: " + err);
                 }
             });
-        });
+        }
     }
 })

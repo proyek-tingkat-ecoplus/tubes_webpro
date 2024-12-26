@@ -7,6 +7,7 @@
 
         <div class="card">
             <div class=" text-nowrap p-3">
+                <div class=" alert-dismissible fade show" id="alert" role="alert"></div>
                 <table class="table" id="table-forum">
                     <thead>
                         <tr>
@@ -26,8 +27,18 @@
         </div>
     </div>
 </div>
-<input type="text" hidden value="{{asset('asset/admin/json/forum.json')}}" id="path">
 @vite(['resources/js/pages/admin/forum/index.js'])
 @endsection
 
 @push('styles')
+{{-- set color paginate --}}
+<style>
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current,
+    .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+        color: #fff !important;
+        background: #264417 !important;
+        border-color: #264417 !important;
+    }
+
+</style>
+@endpush

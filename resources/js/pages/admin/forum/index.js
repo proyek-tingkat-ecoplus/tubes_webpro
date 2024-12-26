@@ -36,7 +36,7 @@ $(document).ready(function () {
             responsive: true,
             autoWidth: false,
             ajax: {
-                url: "/api/forum",
+                url: "/api/forum/table",
                 method: 'GET',
                 dataSrc: 'data',
                 headers: {

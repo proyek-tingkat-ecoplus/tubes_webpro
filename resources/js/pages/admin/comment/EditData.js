@@ -1,5 +1,5 @@
-import { isLogin } from "../../../Authentication";
-import { selectRole, selectUser } from "../helper/handleSelectRequest";
+import { getTokens, isLogin } from "../../../Authentication";
+import { selectForum, selectRole, selectUser } from "../helper/handleSelectRequest";
 import { forumValidation } from "../../admin/validation/forumValidation";
 
 
@@ -12,12 +12,17 @@ $(document).ready(function(){
         url: "/api/comment/"+idx,
         type: 'GET',
         dataType: 'json',
+        headers: {
+            "Authorization": "Bearer " + getTokens()
+        },
         success: function (response) {
+            console.log(response.data);
+            console.log("here atas")
             if (response.data) {
                 var dataById = response.data;
-                $('input[name="name"]').val(dataById.name)
-                $('textarea[name="description"]').val(dataById.description)
-                selectUser(dataById.user.id)
+                selectUser(dataById.user_id);
+                selectForum(dataById.forum_id);
+                $("textarea[name='comment']").val(dataById.comment)
             }
         },
         error: function (jqxhr, textStatus, error) {
@@ -36,11 +41,13 @@ $('.forms').submit(function (e) {
     var form = new FormData(this);
     form.append('_method', 'PATCH'); // kalau patch harus make ini
     form.append('_token', $('meta[name="csrf_token"]').attr('content')); // CSRF token
+    form.append('user_id', $('select[name="user"]').val());
     //form.append('id', parseInt(lastId) + 1);
     // var name = form.get('name');
     $.ajax({
         headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+        "Authorization": "Bearer " + getTokens()
     },
         url: `/api/comment/${idx}/edit`,
         type: 'POST',

@@ -34,6 +34,10 @@ const jsFiles = getAllJsFiles(jsDir).map(filePath => path.relative(__dirname, fi
 console.log(jsFiles); // Verify the files
 
 export default defineConfig({
+    server: {
+        host: '127.0.0.1',
+        port: 3000, // Set an alternative port
+    },
     base: "/",
     build: {
         minify: false, // Disable minification for easier debugging

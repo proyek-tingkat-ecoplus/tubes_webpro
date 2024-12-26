@@ -22,6 +22,10 @@ $(document).ready(async function  ()  {
         $('#dash-email').val(user["email"]);
         $('#dash-id').val(user["id"]);
 
+        var photoPath = `${Laravel.asset_url}${user["photo"]}`;
+        console.log(photoPath);
+        $('.profile-img').append(`<img src="${photoPath}" class="w-px-30 h-auto rounded-pill" alt="User Avatar">`);
+
         // if dashboard route render char nya
         if (window.location.pathname == "/dashboard") {
             // render chart
