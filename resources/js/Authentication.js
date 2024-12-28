@@ -29,7 +29,15 @@ export const isLogin = async (role) =>  {
                         window.location.href = "/dashboard";
                     }
                 } else {
-                    window.history.back();
+                    if(document.referrer != ""){
+                        window.history.back();
+                    }else{
+                        if(authData && user.role.name != "Guest"){
+                            redirect('/dashboard')
+                        }else{
+                            redirect('/')
+                        }
+                    }
                 }
                 return false; // User is logged in but does not have the required role
             }
