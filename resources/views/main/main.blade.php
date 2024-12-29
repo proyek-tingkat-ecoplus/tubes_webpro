@@ -69,6 +69,11 @@
     <script type="text/javascript" src="{{ asset('asset/js/typeahead/typeahead.jquery.js') }}"></script>
     <script type="text/javascript" src="{{ asset('asset/js/typeahead/bloodhound.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('asset/js/client/landingPage.js') }}"></script>
+    <script>
+        window.Laravel = {!! json_encode([
+            'asset_url' => asset('')
+        ]) !!};
+    </script>
 
     @stack ('scripts')
     @vite(['resources/js/pages/user/dashboard.js'])
