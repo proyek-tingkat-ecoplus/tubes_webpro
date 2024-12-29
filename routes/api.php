@@ -3,6 +3,7 @@
 use App\Http\Controllers\authController;
 use App\Http\Controllers\ComentForumController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Excel\ExportController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\InventarisController;
 use App\Http\Controllers\PemetaanController;
@@ -88,6 +89,11 @@ Route::prefix('pemetaanalat')->middleware(["auth:api","role:Petugas"])->group(ca
     Route::get("/photo/{filename}", function($filename){
         return response()->file(public_path('image/pemetaan/'.$filename));
     });
+});
+
+
+Route::prefix('exports')->middleware(["auth:api","role:Petugas"])->group(function () {
+    Route::get('/users/excel', [ExportController::class, 'exportUsers']);
 });
 
 
