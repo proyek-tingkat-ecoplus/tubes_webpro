@@ -34,7 +34,7 @@ $(document).ready(async function  ()  {
 
         }
     }else{
-        $("#btn-area").html(`<a href="/login" class="btn btn-primary navbar-btn">Login</a>`);
+        $(".avatars").html(`<a href="/login" class="btn btn-primary navbar-btn">Login</a>`);
         console.log("invalid role")
     }
 })
