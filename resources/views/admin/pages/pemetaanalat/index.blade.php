@@ -5,15 +5,19 @@
     <div class="container">
         <div class="card mt-4">
             <div class="row mt-2 ms-2">
-                <div class="col-md-7">
+                <div class="col-md-5">
                     <h4>Pemetaan Alat</h4>
                 </div>
                 <div class="col-md-3">
                     <input type="text" id="location-input" class="form-control" placeholder="Search location...">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-1">
                     <button class="btn btn-primary" id="searchBtn">Search</button>
                 </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary btn-excel" id="searchBtn">Export Excel</button>
+                </div>
+
             </div>
             <div id="googleMap" class="mt-2" style="width:100%; height:380px;"></div>
         </div>

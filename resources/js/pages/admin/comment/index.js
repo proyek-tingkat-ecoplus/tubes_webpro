@@ -128,6 +128,30 @@ $(document).ready(function () {
         // ini buat nambah button
         $(".btn-table").append('<a href="/pages/comment/add" class="btn btn-primary">Tambah Comment</a>');
         $(".pdf-button").append('<button class="btn btn-danger mt-md-0 mt-3 me-2">Export PDF</button>' +
-            '<button class="btn btn-primary mt-md-0 mt-3 me-2">Export Excel</button>');
+            '<button class="btn btn-primary mt-md-0 mt-3 me-2 btn-excel">Export Excel</button>');
+            $(".btn-excel").click(function () {
+                $.ajax({
+                    url: "/api/exports/comment/excel",
+                    headers: {
+                        'Authorization': 'Bearer ' + getTokens()
+                    },
+                    xhrFields: {
+                        responseType: 'blob'
+                    },
+                    success: function (data, status, xhr) {
+                        const link = document.createElement('a');
+                        const url = window.URL.createObjectURL(data);
+                        link.href = url;
+                        link.setAttribute('download', 'comment.xlsx');
+                        document.body.appendChild(link);
+                        link.click();
+                        link.remove();
+                        window.URL.revokeObjectURL(url);
+                    },
+                    error: function (jqxhr, textStatus, error) {
+                        console.log("Request Failed: " + textStatus + ", " + error);
+                    }
+                });
+            });
     }
 })

@@ -187,5 +187,3 @@ Route::prefix('api/user')->group(function () {
 //     Route::put('/{id}/edit', [ProposalController::class, 'update']);
 //     Route::delete('/{id}/delete', [ProposalController::class, 'deletes']);
 // });
-
-

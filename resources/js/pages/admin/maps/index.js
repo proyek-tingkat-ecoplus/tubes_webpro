@@ -288,3 +288,29 @@ const funcDelButton = (location) => {
         });
     }
 };
+
+
+$(".btn-excel").click(function () {
+    $.ajax({
+        url: "/api/exports/pemetaanalat/excel",
+        headers: {
+            'Authorization': 'Bearer ' + getTokens()
+        },
+        xhrFields: {
+            responseType: 'blob' // Set response type to blob
+        },
+        success: function (data, status, xhr) {
+            const link = document.createElement('a'); // buat link
+            const url = window.URL.createObjectURL(data); // buat object url dari data blob atau yg berantakan
+            link.href = url; // set href link jadi nanti a link di click manual di browser di link.click()
+            link.setAttribute('download', 'pemetaanalat.xlsx'); // ubah attribute name
+            document.body.appendChild(link); // harus di append
+            link.click();  // click link
+            link.remove(); // hapus link
+            window.URL.revokeObjectURL(url); // revoke object url
+        },
+        error: function (jqxhr, textStatus, error) {
+            console.log("Request Failed: " + textStatus + ", " + error);
+        }
+    });
+});

@@ -3,6 +3,7 @@
 use App\Http\Controllers\authController;
 use App\Http\Controllers\ComentForumController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Excel\ExportController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\InventarisController;
@@ -23,6 +24,7 @@ Route::prefix("auth")->middleware("auth:api")->group(function(){
     Route::post('/refresh', [authController::class, 'refresh']);
 });
 
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(["auth:api","role:Petugas"]);
 
 Route::prefix("user")->middleware(["auth:api","role:Petugas"])->group(function(){
     Route::get("/",[UserController::class, 'index']);
@@ -94,6 +96,13 @@ Route::prefix('pemetaanalat')->middleware(["auth:api","role:Petugas"])->group(ca
 
 Route::prefix('exports')->middleware(["auth:api","role:Petugas"])->group(function () {
     Route::get('/users/excel', [ExportController::class, 'exportUsers']);
+    Route::get('/forum/excel', [ExportController::class, 'exportForum']);
+    Route::get('/comment/excel', [ExportController::class, 'exportComment']);
+    Route::get('/users/excel', [ExportController::class, 'exportUsers']);
+    Route::get('/proposal/excel', [ExportController::class, 'exportProposal']);
+    Route::get('/inventaris/excel', [ExportController::class, 'exportInventaris']);
+    Route::get('/pemetaanalat/excel', [ExportController::class, 'exportPemetaan']);
+    Route::get('/role/excel', [ExportController::class, 'exportRole']);
 });
 
 

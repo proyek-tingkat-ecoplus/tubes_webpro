@@ -1,4 +1,5 @@
 import {
+    getTokens,
     isLogin,
     Logout,
     me
@@ -10,6 +11,27 @@ import {
     initializeCalendar
 } from "../../lib/calendarDashboard";
 $(document).ready(async function  ()  {
+    const fetchDashboard = async () => {
+        $.ajax({
+            url: "/api/dashboard",
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + getTokens()
+            },
+            success: function (data) {
+                console.log(data)
+                $("#total-user").html(data["total_user"]);
+                $("#total-forum").html(data["total_forum"]);
+                $("#total-proposal").html(data["total_proposal"]);
+                //$("#total-pengembalian").html(data["total_comment"]);
+                $("#total-pemetaan").html(data["total_pemetaan"]);
+            },
+            error: function (err) {
+                console.log(err)
+            }
+        });
+    }
+
     if (isLogin("Petugas"))  {
         var user = await me();
         console.log(user);
@@ -21,6 +43,8 @@ $(document).ready(async function  ()  {
         $('#dash-name').val(user["username"]);
         $('#dash-email').val(user["email"]);
         $('#dash-id').val(user["id"]);
+
+        await fetchDashboard();
 
         var photoPath = `${Laravel.asset_url}${user["photo"]}`;
         console.log(photoPath);
@@ -39,4 +63,6 @@ $(document).ready(async function  ()  {
             Logout()
         })
     }
+
+
 })
