@@ -83,10 +83,16 @@
                 <div data-i18n="Inventory Data">Inventaris Alat</div>
             </a>
         </li>
-        <li class="menu-item  @if (Request::is('pages/pemetaanalat', 'pages/pemetaanalat/*')) active @endif"">
-            <a href="/pages/pemetaanalat" class="menu-link">
+        <li class="menu-item  @if (Request::is('pages/pemetaanalat/marker', 'pages/pemetaanalat/marker/*')) active @endif"">
+            <a href="/pages/pemetaanalat/marker" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-map"></i>
                 <div data-i18n="Mapping Data">Pemetaan Alat</div>
+            </a>
+        </li>
+        <li class="menu-item  @if (Request::is('pages/pemetaanalat', 'pages/pemetaanalat')) active @endif"">
+            <a href="/pages/pemetaanalat" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-map"></i>
+                <div data-i18n="Mapping Data">Maps</div>
             </a>
         </li>
 

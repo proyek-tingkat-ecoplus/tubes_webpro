@@ -7,11 +7,37 @@ use App\Models\ReportAlat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Yajra\DataTables\Facades\DataTables;
 
 class PemetaanController extends Controller
 {
     public function index(){
-        return response()->json(["data" => ReportAlat::with(['alat','user'])->get()]);
+        return response()->json(["data" => ReportAlat::with(['alat','user','approved_by','rejected_by'])->get()]);
+    }
+    public function table(){
+        return DataTables::of(ReportAlat::with(['alat','user','approved_by','rejected_by']))
+            ->addColumn('nama_alat', function($data){
+                return $data->alat->nama_alat;
+            })
+            ->addColumn('kode_alat', function($data){
+                return $data->alat->kode_alat;
+            })
+            ->addColumn('status', function($data){
+                if($data->status == "pending"){
+                    return "<span class='badge badge-warning'>Pending</span>";
+                }
+                if($data->status == "approved"){
+                    return "<span class='badge badge-success'>Approved</span>";
+                }
+                if($data->status == "rejected"){
+                    return "<span class='badge badge-danger'>Rejected</span>";
+                }
+            })
+            ->rawColumns(['status'])
+            ->make(true);
+    }
+    public function find($id){
+        return response()->json(["data" => ReportAlat::with(['alat','user','approved_by','rejected_by'])->where('id', $id)->first()]);
     }
     public function post(Request $request){
         $request->validate([
@@ -47,6 +73,34 @@ class PemetaanController extends Controller
                 "status" => "pending",
                 "tanggal" => Carbon::now()
             ]);
+
+            if($request->status != "pending"){
+                // set default
+                $alat->report_alat()->updateExistingPivot($request->user_id, [
+                    "status" => "approved",
+                    "approved_at" => null,
+                    "approved_by" => null,
+                    "rejected_at" => null,
+                    "rejected_by" => null
+                ]);
+                // add status
+                if($request->status == "approved"){
+                    $alat->report_alat()->updateExistingPivot($request->user_id, [
+                        "status" => "approved",
+                        "approved_at" => Carbon::now(),
+                        "approved_by" => $request->user_id
+                    ]);
+                }
+                if($request->status == "rejected"){
+                    $alat->report_alat()->updateExistingPivot($request->user_id, [
+                        "status" => "rejected",
+                        "rejected_at" => Carbon::now(),
+                        "rejected_by" => $request->user_id
+                    ]);
+                }
+            }
+
+
         }
         return response()->json(["message" => "Data berhasil ditambahkan"]);
     }
@@ -80,6 +134,31 @@ class PemetaanController extends Controller
                 "status" => "pending",
                 "tanggal" => Carbon::now()
             ]);
+
+            if($request->status != "pending"){
+                // set default
+                $reportAlaat->update([
+                    "status" => "approved",
+                    "approved_at" => null,
+                    "approved_by" => null,
+                    "rejected_at" => null,
+                    "rejected_by" => null
+                ]);
+                if($request->status == "approved"){
+                    $reportAlaat->update([
+                        "status" => "approved",
+                        "approved_at" => Carbon::now(),
+                        "approved_by" => $request->user_id
+                    ]);
+                }
+                if($request->status == "rejected"){
+                    $reportAlaat->update([
+                        "status" => "rejected",
+                        "rejected_at" => Carbon::now(),
+                        "rejected_by" => $request->user_id
+                    ]);
+                }
+            }
             return response()->json(["message" => "Data berhasil diubah"]);
         }
         return response()->json(["message" => "Data tidak ditemukan"]);

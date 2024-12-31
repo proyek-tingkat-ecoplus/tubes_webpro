@@ -1,38 +1,39 @@
+export const pemetaanValidation = () => {
+    let isValid = true;
 
-export const pemetaanValidation = () =>{
-    var isValid = true;
+    // Clear previous validation states
+    $("#addLocationForm input, #addLocationForm select, #addLocationForm textarea").removeClass("is-invalid");
+    $("#addLocationForm .invalid-feedback").text("");
+
+    // Validate inputs
     $("#addLocationForm input").each(function () {
         const input = $(this);
         const inputName = input.attr("name");
-        console.log(input);
 
         if (!input.val()) {
             input.addClass("is-invalid");
             input.next().text(`${inputName} is required`);
-            isValid = false
-        } else {
-            input.removeClass("is-invalid");
-            input.next().text("");
-            isValid = true
+            isValid = false;
         }
     });
 
-    // validation
+    // Validate selects
     $("#addLocationForm select").each(function () {
         if (!$(this).val()) {
             $(this).addClass("is-invalid");
-            $(this).next().html(`${$(this).attr("name")} is required`);
+            $(this).next().text(`${$(this).attr("name")} is required`);
             isValid = false;
         }
-    })
+    });
 
+    // Validate textareas
     $("#addLocationForm textarea").each(function () {
         if (!$(this).val()) {
             $(this).addClass("is-invalid");
-            $(this).next().html(`${$(this).attr("name")} is required`);
+            $(this).next().text(`${$(this).attr("name")} is required`);
             isValid = false;
         }
-    })
+    });
 
     return isValid;
-}
+};

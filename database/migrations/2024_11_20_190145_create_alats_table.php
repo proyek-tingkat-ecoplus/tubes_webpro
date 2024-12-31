@@ -43,8 +43,8 @@ return new class extends Migration
             $table->timestamp("approved_at")->nullable();
             $table->foreignId("approved_by")->nullable()->constrained("users")->onDelete("set null");
             $table->foreignId("rejected_by")->nullable()->constrained("users")->onDelete("set null");
-            $table->string("approved_reason")->nullable();
-            $table->string("rejected_reason")->nullable();
+            // $table->string("approved_reason")->nullable();
+            // $table->string("rejected_reason")->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
