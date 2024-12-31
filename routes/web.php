@@ -156,12 +156,16 @@ Route::prefix('pages')->group(function(){
         return view('admin.pages.pemetaanalat.index');
     });
 
-    Route::get('pemetaanalat/add', function(){
-        return view('admin.pages.pemetaanalat.add');
+    Route::get('pemetaanalat/marker', function(){
+        return view('admin.pages.pemetaanalat.table.index');
+    });
+
+    Route::get('pemetaanalat/marker/add', function(){
+        return view('admin.pages.pemetaanalat.table.add');
     });
 
     Route::get('pemetaanalat/{id}/edit', function($id){
-        return view('admin.pages.pemetaanalat.edit', ["id" => $id]);
+        return view('admin.pages.pemetaanalat.table.edit', ["id" => $id]);
     });
 });
 

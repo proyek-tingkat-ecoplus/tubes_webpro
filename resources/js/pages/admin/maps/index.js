@@ -5,6 +5,8 @@ import { pemetaanValidation } from "../validation/pemetaanValidation";
 var map;
 var marks = [];
 var currentMarker = null;
+// remove modal backdrop
+$('.modal-backdrop').remove();
 
 function loadGoogleMapsScript() {
     return new Promise((resolve, reject) => {
@@ -126,14 +128,39 @@ function openAddLocationModal(lat, lng)  {
 
 // Show location details in the modal
 function showMarkerDetails(location, marker, index) {
+    console.log(location);
+    $("#modal-kode-alat").text(location.alat.kode_alat);
+    $("#modal-nama-alat").text(location.alat.nama_alat);
+    $("#modal-jenis-alat").text(location.alat.jenis);
+    $("#modal-binwas").text(location.binwas);
+    $("#modal-tanggal").text(location.tanggal);
+    $("#modal-status").text(location.status);
+    $("#modal-tahun_operasi").text(location.tahun);
     $('#modal-judul-report').text(location.judul_report);
     $('#modal-location-description').text(location.deskripsi);
     $('#modal-location-lat').text(location.latitude);
     $('#modal-location-lng').text(location.longitude);
     $('#modal-location-address').text(location.address);
     $("#image").html(`
-        <img src="/api/pemetaanalat/photo/${location.photo}" alt="" id="modal-location-photo" style="width: 150px; height: 250px;object-fit: cover;">
+        <img src="/api/pemetaanalat/photo/${location.photo}" class="img-fluid rounded" alt="" id="modal-location-photo" style="width: 150px; height: 250px;object-fit: cover;">
     `);
+
+    $('#approval-info').addClass('d-none');
+    $('#rejection-info').addClass('d-none');
+
+    if(location.approved_by != null){
+        $('#approval-info').removeClass('d-none');
+        $('#modal-approved-by').text(location.approved_by.username);
+        $('#modal-approved-at').text(location.approved_at);
+    }
+
+    if(location.rejected_by != null){
+        $('#rejection-info').removeClass('d-none');
+        $('#modal-rejected-by').text(location.rejected_by.username);
+        $('#modal-rejected-at').text(location.rejected_at);
+    }
+
+
     currentMarker = marker; // Store the current marker
 
     var modal = new bootstrap.Modal(document.getElementById('markerModal'));
@@ -229,7 +256,7 @@ document.getElementById('addLocationForm').addEventListener('submit', function (
                 $("#addLocationModal").modal('hide');
                 document.getElementById('location-photo').value = "";
                 fetchGetData();
-                $("#modal-backdrop").removeClass("modal-backdrop");
+
             },
             error: function (err) {
                 console.log('Error saving location:', err);

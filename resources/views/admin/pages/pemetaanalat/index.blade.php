@@ -114,23 +114,61 @@
     </div>
 </div>
 
-<!-- Modal for displaying location details -->
 <div class="modal fade" id="markerModal" tabindex="-1" aria-labelledby="markerModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="markerModalLabel">Location Details</h5>
+                <h5 class="modal-title" id="markerModalLabel">Detail Laporan Alat</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <h3 id="modal-judul-report"></h3>
-                <div id="image">
-
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3 " id="image">
+                            {{-- <img id="" src="" alt="Report Photo" class="img-fluid rounded"> --}}
+                        </div>
+                        <div class="mb-3">
+                            <h5 id="modal-judul-report" class="text-primary"></h5>
+                        </div>
+                        <div class="mb-3">
+                            <strong>Deskripsi:</strong>
+                            <p id="modal-deskripsi"></p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-2">
+                            <strong>Detail Alat:</strong>
+                            <p class="mb-1">Kode: <span id="modal-kode-alat"></span></p>
+                            <p class="mb-1">Nama: <span id="modal-nama-alat"></span></p>
+                            <p class="mb-1">Jenis: <span id="modal-jenis-alat"></span></p>
+                        </div>
+                        <div class="mb-2">
+                            <strong>Informasi Laporan:</strong>
+                            <p class="mb-1">Binwas: <span id="modal-binwas"></span></p>
+                            <p class="mb-1">Tahun Operasi: <span id="modal-tahun-operasi"></span></p>
+                            <p class="mb-1">Tanggal: <span id="modal-tanggal"></span></p>
+                            <p class="mb-1">Status: <span id="modal-status" class="badge bg-primary"></span></p>
+                        </div>
+                        <div class="mb-2">
+                            <strong>Lokasi:</strong>
+                            <p class="mb-1">Latitude: <span id="modal-location-lat"></span></p>
+                            <p class="mb-1">Longitude: <span id="modal-location-lng"></span></p>
+                            <p class="mb-1">Alamat: <span id="modal-location-address"></span></p>
+                        </div>
+                        <div id="approval-info" class="mb-2 d-none">
+                            <strong>Informasi Persetujuan:</strong>
+                            <p class="mb-1">Disetujui oleh: <span id="modal-approved-by"></span></p>
+                            <p class="mb-1">Tanggal persetujuan: <span id="modal-approved-at"></span></p>
+                            {{-- <p class="mb-1">Alasan: <span id="modal-approved-reason"></span></p> --}}
+                        </div>
+                        <div id="rejection-info" class="mb-2 d-none">
+                            <strong>Informasi Penolakan:</strong>
+                            <p class="mb-1">Ditolak oleh: <span id="modal-rejected-by"></span></p>
+                            <p class="mb-1">Tanggal penolakan: <span id="modal-rejected-at"></span></p>
+                            {{-- <p class="mb-1">Alasan: <span id="modal-rejected-reason"></span></p> --}}
+                        </div>
+                    </div>
                 </div>
-                <p id="modal-location-description"></p>
-                <p><strong>Latitude:</strong> <span id="modal-location-lat"></span></p>
-                <p><strong>Longitude:</strong> <span id="modal-location-lng"></span></p>
-                <p><strong>Address:</strong> <span id="modal-location-address"></span></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-warning" id="editMarkerBtn">Edit</button>

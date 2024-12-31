@@ -17,7 +17,7 @@ class InventarisController extends Controller
     public function table(){
     return DataTables::of(Alat::all())
         ->addColumn("images", function ($data) {
-          return "<img src=".asset("image/$data->foto")." width='100' height='100' />";
+          return "<img src=".asset("image/inventaris/$data->foto")." width='100' height='100' />";
         })
         ->rawColumns(["images"])
         ->make(true);
@@ -37,7 +37,7 @@ class InventarisController extends Controller
         ]);
         $foto = $request->file('foto');
         $nama = $request->nama_alat.'-'.Carbon::now()->format("Y-m-d-H-i-s").".".$foto->getClientOriginalExtension();
-        $foto->move(public_path("\image"),$nama );
+        $foto->move(public_path("\image\inventaris"),$nama );
 
         Alat::create([
             "user_id" => $request->user,
@@ -68,12 +68,12 @@ class InventarisController extends Controller
                 'deskripsi_barang' => "required"
         ]);
         $alat = Alat::find($id);
-        if (File::exists(public_path('image/' . $alat->foto))) {
-            File::delete(public_path('image/' . $alat->foto));  // Delete the file if it exists
+        if (File::exists(public_path('image/inventaris/' . $alat->foto))) {
+            File::delete(public_path('image/inventaris/' . $alat->foto));  // Delete the file if it exists
         }
         $foto = $request->file('foto');
         $nama = $request->nama_alat.'-'.Carbon::now()->format("Y-m-d-H-i-s").".".$foto->getClientOriginalExtension();
-        $foto->move(public_path("\image"), $nama);
+        $foto->move(public_path("\image\inventaris"), $nama);
 
         $alat->update([
             "user_id" => $request->user,
@@ -92,8 +92,8 @@ class InventarisController extends Controller
             return response()->json(['error' => 'Invalid id'], 402);
         }
         $alat = Alat::find($id);
-        if(File::exists(public_path('image/' . $alat->foto))) {
-            File::delete(public_path('image/' . $alat->foto));  // Delete the file if it exists
+        if(File::exists(public_path('image/inventaris/' . $alat->foto))) {
+            File::delete(public_path('image/inventaris/' . $alat->foto));  // Delete the file if it exists
         }
         $alat->delete();
         return response()->json(["success" => "data berhasil di hapus"], 202);

@@ -85,14 +85,17 @@ Route::prefix('inventaris')->middleware(["auth:api","role:Petugas"])->group(call
 
 Route::prefix('pemetaanalat')->middleware(["auth:api","role:Petugas"])->group(callback: function(){
     Route::get('/', [PemetaanController::class, 'index']);
+    Route::get("/find/{id}",[PemetaanController::class, 'find']);
+    Route::get("/table", [PemetaanController::class, 'table']);
     Route::post('/add', [PemetaanController::class, 'post']);
     Route::patch('/{id}/edit', [PemetaanController::class, 'update']);
     Route::delete('/{id}/delete', [PemetaanController::class, 'deletes']);
-    Route::get("/photo/{filename}", function($filename){
-        return response()->file(public_path('image/pemetaan/'.$filename));
-    });
 });
 
+// ini sengaja public soalnya idah terlanjut buat di public
+Route::get("/pemetaanalat/photo/{filename}", function($filename){
+    return response()->file(public_path('image/pemetaan/'.$filename));
+});
 
 Route::prefix('exports')->middleware(["auth:api","role:Petugas"])->group(function () {
     Route::get('/users/excel', [ExportController::class, 'exportUsers']);
