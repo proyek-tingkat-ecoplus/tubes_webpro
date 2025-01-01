@@ -167,6 +167,18 @@ Route::prefix('pages')->group(function(){
     Route::get('pemetaanalat/{id}/edit', function($id){
         return view('admin.pages.pemetaanalat.table.edit', ["id" => $id]);
     });
+
+    Route::get('helper', function(){
+        return view('admin.pages.helperpage.index');
+    });
+
+    Route::get('helper/add', function(){
+        return view('admin.pages.helperpage.add');
+    });
+
+    Route::get('helper/{id}/edit', function($id){
+        return view('admin.pages.helperpage.edit', ["id" => $id]);
+    });
 });
 
 Route::post('/user/edit', [UserController::class,'editProfile']);
