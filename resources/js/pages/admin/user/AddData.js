@@ -8,7 +8,7 @@ import { selectRole } from "../helper/handleSelectRequest";
 
 
 $(document).ready(function () {
-    if (isLogin("Petugas")) {
+    if (isLogin("Admin")) {
 
         try {
             selectRole()

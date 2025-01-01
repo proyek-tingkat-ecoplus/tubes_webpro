@@ -19,71 +19,35 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         $faker = \Faker\Factory::create();
-
-        $user = User::create([
-            'username' => 'admin',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('password'),
-            'role_id' => 2,
-            "photo" => 'image/profile/default.png',
-        ]);
-
-        $address = AddressDetails::create([
-            'city' => $faker->city,
-            'state' => $faker->state,
-            'zip' => $faker->postcode,
-            'country' => $faker->country,
-        ]);
-
-        UserDetails::create([
-            'user_id' => $user->id,
-            'phone' => $faker->phoneNumber,
-            'nik' => $faker->randomNumber(9),
-            'bio' => $faker->sentence,
-            'address_id' => $address->id,
-        ]);
-
-        // ini buat guest
-        $user = User::create([
-            'username' => 'guest',
-            'email' => 'guest@gmail.com',
-            'password' => Hash::make('password'),
-            'role_id' => 1,
-            "photo" => 'image/profile/default.png',
-        ]);
-
-        $address = AddressDetails::create([
-            'city' => $faker->city,
-            'state' => $faker->state,
-            'zip' => $faker->postcode,
-            'country' => $faker->country,
-        ]);
-
-        UserDetails::create([
-            'user_id' => $user->id,
-            'phone' => $faker->phoneNumber,
-            'nik' => $faker->randomNumber(9),
-            'bio' => $faker->sentence,
-            'address_id' => $address->id,
-        ]);
-
         for ($i = 0; $i < 10; $i++) {
+            $defult = [["role_id" => 1, "name" => "Guest", "email" => "guest@gmail.com"],
+            ["role_id" => 2, "name" => "Kepala Desa", "email" => "kapdes@gmail.com"],
+            ["role_id" => 3, "name" => "Petugas", "email" => "petugas@gmail.com"],
+            ["role_id" => 4, "name" => "Admin", "email" => "admin@gmail.com"]];
+
+            if($i < 4){
+                $role_id = $defult[$i]["role_id"];
+                $name = $defult[$i]["name"];
+                $email = $defult[$i]["email"];
+            }else{
+                $role_id = 1;
+                $name = $faker->name;
+                $email = $faker->email;
+            }
+
             $user = User::create([
-                'username' => $faker->name,
-                'email' => $faker->email,
+                'username' => $name,
+                'email' => $email,
                 'password' => Hash::make('password'),
-                'role_id' => 1,
+                'role_id' => $role_id,
                 "photo" => 'image/profile/default.png',
             ]);
-
             $address = AddressDetails::create([
                 'city' => $faker->city,
                 'state' => $faker->state,
                 'zip' => $faker->postcode,
                 'country' => $faker->country,
             ]);
-
-
             UserDetails::create([
                 'user_id' => $user->id,
                 'phone' => $faker->phoneNumber,

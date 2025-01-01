@@ -24,9 +24,9 @@ Route::prefix("auth")->middleware("auth:api")->group(function(){
     Route::post('/refresh', [authController::class, 'refresh']);
 });
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(["auth:api","role:Petugas"]);
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware(["auth:api","role:Admin,Petugas,Kepala Desa"]);
 
-Route::prefix("user")->middleware(["auth:api","role:Petugas"])->group(function(){
+Route::prefix("user")->middleware(["auth:api","role:Admin"])->group(function(){
     Route::get("/",[UserController::class, 'index']);
     Route::get("/table",[UserController::class, 'table']);
     Route::get("/{id}",[UserController::class, 'find']);
@@ -37,7 +37,7 @@ Route::prefix("user")->middleware(["auth:api","role:Petugas"])->group(function()
     Route::delete('/{id}/delete', [UserController::class, 'deletes']);
 });
 
-Route::prefix("role")->middleware(["auth:api","role:Petugas"])->group(function(){
+Route::prefix("role")->middleware(["auth:api","role:Admin"])->group(function(){
     Route::get("/",[RoleController::class, 'index']);
     Route::get("/table",[RoleController::class, 'table']);
     Route::get("/{id}",[RoleController::class, 'find']);
@@ -46,7 +46,7 @@ Route::prefix("role")->middleware(["auth:api","role:Petugas"])->group(function()
     Route::delete('/{id}/delete', [RoleController::class, 'deletes']);
 });
 
-Route::prefix("forum")->middleware(["auth:api","role:Petugas"])->group(function(){
+Route::prefix("forum")->middleware(["auth:api","role:Petugas,Admin"])->group(function(){
     Route::get("/", [ForumController::class, 'index']);
     Route::get("/table", [ForumController::class, 'table']);
     Route::get("/{id}", [ForumController::class, 'find']);
@@ -55,7 +55,7 @@ Route::prefix("forum")->middleware(["auth:api","role:Petugas"])->group(function(
     Route::delete('/{id}/delete', [ForumController::class, 'deletes']);
 });
 
-Route::prefix("comment")->middleware(["auth:api","role:Petugas"])->group(function(){
+Route::prefix("comment")->middleware(["auth:api","role:Petugas,Admin"])->group(function(){
     Route::get("/", [CommentController::class, 'index']);
     Route::get("/table", [CommentController::class, 'table']);
     Route::get("/{id}", [CommentController::class, 'find']);
@@ -65,7 +65,7 @@ Route::prefix("comment")->middleware(["auth:api","role:Petugas"])->group(functio
     Route::get("/{id}/post", [CommentController::class, 'getCommentByPost']);
 });
 
-Route::prefix('proposal')->middleware(["auth:api","role:Petugas"])->group(callback: function(){
+Route::prefix('proposal')->middleware(["auth:api","role:Petugas,Kepala Desa,Admin"])->group(callback: function(){
     Route::get('/', [ProposalController::class, 'index']);
     Route::get("/table", [ProposalController::class, 'table']);
     Route::get("/{id}", [ProposalController::class, 'find']);
@@ -74,7 +74,7 @@ Route::prefix('proposal')->middleware(["auth:api","role:Petugas"])->group(callba
     Route::delete('/{id}/delete', [ProposalController::class, 'deletes']);
 });
 
-Route::prefix('inventaris')->middleware(["auth:api","role:Petugas"])->group(callback: function(){
+Route::prefix('inventaris')->middleware(["auth:api","role:Petugas,Admin"])->group(callback: function(){
     Route::get('/',[InventarisController::class, 'index']);
     Route::get('/table',[InventarisController::class, 'table']);
     Route::get("/{id}",[InventarisController::class, 'find']);
@@ -83,7 +83,7 @@ Route::prefix('inventaris')->middleware(["auth:api","role:Petugas"])->group(call
     Route::delete('/{id}/delete', [InventarisController::class, 'deletes']);
 });
 
-Route::prefix('pemetaanalat')->middleware(["auth:api","role:Petugas"])->group(callback: function(){
+Route::prefix('pemetaanalat')->middleware(["auth:api","role:Petugas,Admin,Kepala Desa"])->group(callback: function(){
     Route::get('/', [PemetaanController::class, 'index']);
     Route::get("/find/{id}",[PemetaanController::class, 'find']);
     Route::get("/table", [PemetaanController::class, 'table']);
@@ -97,7 +97,7 @@ Route::get("/pemetaanalat/photo/{filename}", function($filename){
     return response()->file(public_path('image/pemetaan/'.$filename));
 });
 
-Route::prefix('exports')->middleware(["auth:api","role:Petugas"])->group(function () {
+Route::prefix('exports')->middleware(["auth:api","role:Petugas,Admin,Kepala Desa"])->group(function () {
     Route::get('/users/excel', [ExportController::class, 'exportUsers']);
     Route::get('/forum/excel', [ExportController::class, 'exportForum']);
     Route::get('/comment/excel', [ExportController::class, 'exportComment']);

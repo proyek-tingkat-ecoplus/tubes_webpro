@@ -1,54 +1,70 @@
-export const redirect = (redirect) => {
+export const redirect = (url) => {
     try {
-        var token = JSON.parse(localStorage.getItem("authenticate"))["access_token"];
-        console.log(token);
+        const token = JSON.parse(localStorage.getItem("authenticate"))?.access_token;
         if (token) {
-            window.location.href = redirect;
+            window.location.href = url;
+        } else {
+            window.location.href = url;
         }
     } catch (e) {
         console.error('Error parsing authentication data:', e);
-        window.location.href = redirect;
+        window.location.href = url;
     }
 }
 
-export const isLogin = async (role) =>  {
+export const isLogin = async (requiredRole) => {
+    const refreshCount = parseInt(localStorage.getItem("refresh") || "0");
+    if (refreshCount >= 5) {
+        localStorage.removeItem("refresh");
+        localStorage.removeItem("authenticate");
+        Logout();
+        redirect('/login');
+        return false;
+    }
+
     try {
         const authData = JSON.parse(localStorage.getItem("authenticate"));
         if (!authData || !authData.access_token) {
-
-
+            return false;
         }
-        if (authData) {
-            const user = await me();
-            if (user && user.role && user.role.name === role) {
+
+        const user = await me();
+        if (!user || !user.role) {
+            return false;
+        }
+
+        if (Array.isArray(requiredRole)) {
+            if (requiredRole.includes(user.role.name)) {
                 return true;
-            } else {
-
-                if (document.referrer === window.location.href) {
-                    if(role != "guest"){
-                        window.location.href = "/dashboard";
-                    }
-                } else {
-                    if(document.referrer != ""){
-                        window.history.back();
-                    }else{
-                        if(authData && user.role.name != "Guest"){
-                            redirect('/dashboard')
-                        }else{
-                            redirect('/')
-                        }
-                    }
-                }
-                return false; // User is logged in but does not have the required role
+            }else{
+                LogoutWithoutAlert()
             }
+        } else if (user.role.name === requiredRole) {
+            return true;
         }
+
+        if (document.referrer === window.location.href) {
+            if (requiredRole !== "guest") {
+                redirect('/dashboard');
+            }
+        } else if (document.referrer !== '') {
+            window.history.back();
+            localStorage.setItem("refresh", refreshCount + 1);
+        } else if (authData && user.role.name !== 'Guest') {
+            localStorage.setItem("refresh", refreshCount + 1);
+            redirect('/dashboard');
+        } else {
+            redirect('/');
+        }
+
+        return false; // User is logged in but does not have the required role
     } catch (e) {
         console.error('Error parsing authentication data:', e);
-        if(window.location.pathname != "/login"){
-            if(role == "guest"){
-                redirect('/')
-            }else{
-                redirect('/login')
+        if (window.location.pathname !== "/login") {
+            if (requiredRole === "guest") {
+                redirect('/');
+            } else {
+                redirect('/login');
             }
         }
         return false;
@@ -61,27 +77,22 @@ export const getTokens = () => {
         console.error('No authentication data found in localStorage.');
         return null;
     }
-    return authData['access_token'];
+    return authData.access_token;
 }
-
 
 export const me = async () => {
     const authData = localStorage.getItem("authenticate");
     if (!authData) {
         console.error('No authentication data found in localStorage.');
-        if(window.location.pathname != "/login"){
-            redirect('/login')
+        if (window.location.pathname !== "/login") {
+            redirect('/login');
         }
-
         return null;
     }
-    const parsedData = JSON.parse(authData);
 
-    let data = null;
-    let response = null;
     try {
         const parsedData = JSON.parse(authData);
-        response = await $.ajax({
+        const response = await $.ajax({
             url: "/api/auth/me",
             method: "GET",
             headers: {
@@ -89,27 +100,21 @@ export const me = async () => {
                 "Accept": "Application/json"
             }
         });
-        console.log("here")
-        console.log(response)
-        if(response.status == 401){
-            localStorage.removeItem("authenticate")
-            redirect('/login')
+
+        if (response.status === 401) {
+            localStorage.removeItem("authenticate");
+            redirect('/login');
+            return null;
         }
-        if (!response) {
-                console.error('Error fetching user data:');
-                return parsedData.user || null;
-            }
-        data = response || parsedData.user || null;
+
+        return response || parsedData.user || null;
     } catch (e) {
         console.error('Error parsing authentication data:', e);
-        localStorage.removeItem("authenticate")
-            redirect('/login')
-        data = null;
+        localStorage.removeItem("authenticate");
+        redirect('/login');
+        return null;
     }
-    return data;
 };
-
-
 
 export const Logout = () => {
     Swal.fire({
@@ -122,23 +127,47 @@ export const Logout = () => {
     }).then((result) => {
         if (result.isConfirmed) {
             const authData = JSON.parse(localStorage.getItem("authenticate"));
-            console.log(authData.access_token)
             $.ajax({
                 url: '/api/auth/logout',
                 type: "POST",
-                headers: { 'Authorization': 'Bearer ' + authData.access_token },
-                success: function () {
+                headers: {
+                    'Authorization': 'Bearer ' + authData.access_token
+                },
+                success: () => {
                     Swal.fire({
                         title: "Success",
-                        text: "anda bershasil logout.",
+                        text: "You have successfully logged out.",
                         icon: "success"
                     });
-                    localStorage.removeItem("authenticate")
-                    window.location.href = "/login"
+                    localStorage.removeItem("authenticate");
+                    window.location.href = "/login";
                 },
-                error: function(xhr, status, error) { Swal.fire({ title: "Fail", text: "Anda gagal logout. Error: " + xhr.responseText, icon: "error" }); }
+                error: (xhr, status, error) => {
+                    Swal.fire({
+                        title: "Fail",
+                        text: "Failed to log out. Error: " + xhr.responseText,
+                        icon: "error"
+                    });
+                }
             });
         }
     });
+}
 
+const LogoutWithoutAlert = () => {
+    const authData = JSON.parse(localStorage.getItem("authenticate"));
+    $.ajax({
+        url: '/api/auth/logout',
+        type: "POST",
+        headers: {
+            "Authorization": "Bearer " + authData.access_token
+        },
+        success: () => {
+            localStorage.removeItem("authenticate");
+            window.location.href = "/login";
+        },
+        error: (xhr, status, error) => {
+            console.error('Failed to log out. Error:', xhr.responseText);
+        }
+    });
 }

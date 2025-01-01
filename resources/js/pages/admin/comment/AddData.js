@@ -7,7 +7,7 @@ import { userValidation } from "../../admin/validation/userValidation"
 
 
 $(document).ready(function () {
-    if (isLogin("Petugas")) {
+    if (isLogin(["Petugas", "Admin"])) {
         // ini buat select request
         try {
             selectUser()

@@ -34,7 +34,7 @@ $(document).ready(function () {
                     localStorage.setItem("authenticate", JSON.stringify(response));
 
                     me().then(user => {
-                        if (user && user.role.name === "Petugas") {
+                        if (user && user.role.name === "Admin" || user.role.name === "Petugas" || user.role.name === "Kepala Desa") {
                             redirect("/dashboard");
                         }
 

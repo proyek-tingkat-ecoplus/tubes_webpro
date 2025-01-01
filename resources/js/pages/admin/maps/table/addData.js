@@ -33,7 +33,7 @@ function initialize() {
 }
 
 $(document).ready(function () {
-    if(isLogin('Petugas')){
+    if(isLogin(["Admin", "Petugas", "Kepala Desa"])){
         selectUser();
         selectAlat();
         $('.form-pemetaan').submit(function (e) {

@@ -23,16 +23,16 @@
         </li>
 
         <!-- Master Data -->
-        <li class="menu-header small text-uppercase">
+        <li class="menu-header small text-uppercase menu-master d-none">
             <span class="menu-header-text">Master Data</span>
         </li>
-        <li class="menu-item @if (Request::is('pages/user', 'pages/user/*')) active @endif">
-            <a href="/pages/user"  class="menu-link ">
+        <li class="menu-item menu-user d-none @if (Request::is('pages/user', 'pages/user/*')) active @endif">
+            <a href="/pages/user"  class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="User Management">Data Pengguna</div>
             </a>
         </li>
-        <li class="menu-item @if (Request::is('pages/role', 'pages/role/*')) active @endif">
+        <li class="menu-item menu-role d-none @if (Request::is('pages/role', 'pages/role/*')) active @endif">
             <a href="/pages/role" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-lock"></i>
                 <div data-i18n="Role Management">Data Peran</div>
@@ -40,20 +40,20 @@
         </li>
 
         <!-- Form Section -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Formulir</span></li>
+        <li class="menu-header small text-uppercase menu-master-forum d-none"><span class="menu-header-text">Formulir</span></li>
         {{-- <li class="menu-item @if (Request::is('pages/tag', 'pages/tag/*')) active @endif">
             <a href="/pages/tag" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
                 <div data-i18n="Tags">Data Tag</div>
             </a>
         </li> --}}
-        <li class="menu-item @if (Request::is('pages/forum', 'pages/forum/*')) active @endif">
+        <li class="menu-item menu-forum d-none @if (Request::is('pages/forum', 'pages/forum/*')) active @endif">
             <a href="/pages/forum" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-comment-dots"></i>
                 <div data-i18n="Forum Data">Data Forum</div>
             </a>
         </li>
-        <li class="menu-item @if (Request::is('pages/comment', 'pages/comment/*')) active @endif">
+        <li class="menu-item menu-comment d-none @if (Request::is('pages/comment', 'pages/comment/*')) active @endif">
             <a href="/pages/comment" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-chat"></i>
                 <div data-i18n="Comment Data">Data Komentar Forum</div>
@@ -61,8 +61,8 @@
         </li>
 
         <!-- Proposal Section -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Proposal</span></li>
-        <li class="menu-item  @if (Request::is('pages/proposal', 'pages/proposal/*')) active @endif">
+        <li class="menu-header small text-uppercase menu-master-proposal d-none"><span class="menu-header-text">Proposal</span></li>
+        <li class="menu-item menu-proposal d-none  @if (Request::is('pages/proposal', 'pages/proposal/*')) active @endif">
             <a href="/pages/proposal" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div data-i18n="Proposal Data">Data Proposal</div>
@@ -76,20 +76,20 @@
         </li> --}}
 
         <!-- Mapping Section -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Pemetaan</span></li>
-        <li class="menu-item @if (Request::is('pages/inventaris', 'pages/inventaris/*')) active @endif">
+        <li class="menu-header small text-uppercase menu-master-pemetaan d=none"><span class="menu-header-text">Pemetaan</span></li>
+        <li class="menu-item menu-inventaris d-none @if (Request::is('pages/inventaris', 'pages/inventaris/*')) active @endif">
             <a href="/pages/inventaris" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Inventory Data">Inventaris Alat</div>
             </a>
         </li>
-        <li class="menu-item  @if (Request::is('pages/pemetaanalat/marker', 'pages/pemetaanalat/marker/*')) active @endif"">
+        <li class="menu-item menu-pemetaan d-none  @if (Request::is('pages/pemetaanalat/marker', 'pages/pemetaanalat/marker/*')) active @endif"">
             <a href="/pages/pemetaanalat/marker" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-map"></i>
                 <div data-i18n="Mapping Data">Pemetaan Alat</div>
             </a>
         </li>
-        <li class="menu-item  @if (Request::is('pages/pemetaanalat', 'pages/pemetaanalat')) active @endif"">
+        <li class="menu-item menu-maps d-none  @if (Request::is('pages/pemetaanalat', 'pages/pemetaanalat')) active @endif"">
             <a href="/pages/pemetaanalat" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-map"></i>
                 <div data-i18n="Mapping Data">Maps</div>

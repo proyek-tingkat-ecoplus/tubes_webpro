@@ -8,7 +8,7 @@ import { forumValidation } from "../../admin/validation/forumValidation"
 
 
 $(document).ready(function () {
-    if (isLogin("Petugas")) {
+    if (isLogin(["Petugas", "Admin"])) {
         // ini buat select request
         try {
             selectUser()
