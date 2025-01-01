@@ -4,7 +4,7 @@ import { inventarisValidation } from "../validation/inventarisValidation";
 import { userValidation } from "../validation/userValidation";
 
 $(document).ready(function () {
-    if (isLogin("Petugas")) {
+    if (isLogin(["Admin", "Petugas"])) {
         var idx = $("#idx").val()
         selectUser();
         // set data by idx

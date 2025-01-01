@@ -4,7 +4,7 @@ import { selectRole } from "../helper/handleSelectRequest";
 
 
 $(document).ready(function(){
-    if(isLogin("Petugas")){
+    if(isLogin("Admin")){
         var idx = $("#idx").val()
 
     // set data by idx

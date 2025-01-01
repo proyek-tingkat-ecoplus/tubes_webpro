@@ -21,6 +21,11 @@ class RolerSeeder extends Seeder
                 'permissions' => '*',
             ],
             [
+                'name' => 'Kepala Desa',
+                'description' => 'Kepala Desa',
+                'permissions' => '*',
+            ],
+            [
                 'name' => 'Petugas',
                 'description' => 'Petugas',
                 'permissions' => '*',

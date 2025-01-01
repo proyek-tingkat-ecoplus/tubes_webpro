@@ -3,7 +3,7 @@ import {selectAlat, selectUser} from "../../helper/handleSelectRequest";
 import { pemetaanValidation } from "../../validation/pemetaanValidation";
 
 $(document).ready(function () {
-    if (isLogin("Petugas")) {
+    if (isLogin(["Admin", "Petugas", "Kepala Desa"])) {
         var idx = $("#idx").val()
         console.log(idx);
         selectUser();

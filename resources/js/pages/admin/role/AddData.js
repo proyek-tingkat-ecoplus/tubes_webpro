@@ -8,7 +8,7 @@ import { roleValidation } from "../validation/roleValidation";
 
 
 $(document).ready(function () {
-    if (isLogin("Petugas")) {
+    if (isLogin("Admin")) {
         $('.form').submit(function (e) {
             e.preventDefault();
 

@@ -4,7 +4,7 @@ import {
 } from "../../../Authentication";
 
 $(document).ready(function () {
-    if (isLogin("Petugas")) {
+    if (isLogin(["Admin", "Petugas"])) {
 
         // get alert flash message
         if (localStorage.getItem("alert")) {

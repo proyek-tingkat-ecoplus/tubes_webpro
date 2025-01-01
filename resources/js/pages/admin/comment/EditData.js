@@ -4,7 +4,7 @@ import { forumValidation } from "../../admin/validation/forumValidation";
 
 
 $(document).ready(function(){
-    if(isLogin("Petugas")){
+    if(isLogin(["Petugas", "Admin"])){
         var idx = $("#idx").val()
 
     // set data by idx

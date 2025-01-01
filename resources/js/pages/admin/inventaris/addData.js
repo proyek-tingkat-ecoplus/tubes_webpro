@@ -4,7 +4,7 @@ import { selectUser } from "../helper/handleSelectRequest";
 import { inventarisValidation } from "../validation/inventarisValidation";
 
 $(document).ready(function () {
-    if(isLogin('Petugas')){
+    if(isLogin(["Admin", "Petugas"])){
         selectUser();
         $('.form').submit(function (e) {
             e.preventDefault();

@@ -1,5 +1,6 @@
 import { getTokens } from "../../../Authentication";
 import { selectAlat } from "../helper/handleSelectRequest";
+import { cekrole } from "../sidebar/sidebar";
 import { pemetaanValidation } from "../validation/pemetaanValidation";
 
 var map;
@@ -11,7 +12,7 @@ $('.modal-backdrop').remove();
 function loadGoogleMapsScript() {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
-        script.src = "https://maps.gomaps.pro/maps/api/js?key=AlzaSyNmabnuTR_4Obw2W3bQYOogkNhLVF779_C&libraries=places,geometry";
+        script.src = "https://maps.gomaps.pro/maps/api/js?key=AlzaSyqMHX_unh5VXPkap9x8n01epZh34uisF_Q&libraries=places,geometry";
         script.async = true;
         script.defer = true;
         script.onload = resolve;
@@ -34,11 +35,12 @@ function initialize() {
     };
 
     map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
-
+    if(cekrole(["Admin", "Petugas"])){
     // Event listener for adding a new location by clicking on the map
     google.maps.event.addListener(map, 'click', function (event) {
         openAddLocationModal(event.latLng.lat(), event.latLng.lng());
     });
+    }
 
     fetchGetData();
 
@@ -158,6 +160,11 @@ function showMarkerDetails(location, marker, index) {
         $('#rejection-info').removeClass('d-none');
         $('#modal-rejected-by').text(location.rejected_by.username);
         $('#modal-rejected-at').text(location.rejected_at);
+    }
+
+    if(cekrole(["Kepala Desa"])){
+    $("#deleteMarkerBtn").addClass('d-none');
+    $("#editMarkerBtn").addClass('d-none');
     }
 
 

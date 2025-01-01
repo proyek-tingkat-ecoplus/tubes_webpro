@@ -15,10 +15,10 @@ class AccRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, $role): Response
+    public function handle(Request $request, Closure $next, ...$role): Response
     {
         $roles = Role::where('id', auth()->user()->role_id)->first();
-        if ($roles->name !== $role) {
+        if (!in_array($roles->name, $role)) { // cek arraynya ada ataua tidak
             return response()->json([
                 'message' => 'Unauthorized',
             ], 401);

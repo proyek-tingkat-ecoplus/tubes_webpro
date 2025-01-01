@@ -32,7 +32,7 @@ $(document).ready(async function  ()  {
         });
     }
 
-    if (isLogin("Petugas"))  {
+    if (isLogin(["Admin", "Petugas", "Kepala Desa"])) {
         var user = await me();
         console.log(user);
         console.log(user);
