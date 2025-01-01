@@ -8,6 +8,8 @@ $(Document).ready(async function (){
         $(".menu-master").removeClass("d-none");
         $(".menu-user").removeClass("d-none");
         $(".menu-role").removeClass("d-none");
+        $(".menu-master-other").removeClass("d-none");
+        $(".menu-helper").removeClass("d-none");
     }
 
     if(cekrole(["Petugas","Admin"])){
