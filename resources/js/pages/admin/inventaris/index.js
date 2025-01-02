@@ -73,6 +73,8 @@ $(document).ready(function () {
                             <i class="bx bx-dots-vertical-rounded"></i>
                         </button>
                         <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/pages/inventaris/${data.id}/detailalat"><i
+                                    class='bx bx-food-menu'></i> Detail Alat</a>
                             <a class="dropdown-item" href="/pages/inventaris/${data.id}/edit"><i
                                     class="bx bx-edit-alt me-1"></i> Edit</a>
                             <a class="dropdown-item delete-btn" data-id="${data.id}">

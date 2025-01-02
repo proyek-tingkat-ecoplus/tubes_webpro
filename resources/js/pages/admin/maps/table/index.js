@@ -76,6 +76,8 @@ $(document).ready(function () {
                             <i class="bx bx-dots-vertical-rounded"></i>
                         </button>
                         <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/pages/pemetaanalat/${data.id}/detailpemetaan"><i
+                                    class='bx bx-map-alt'></i> Detail Pemetaan</a>
                             <a class="dropdown-item" href="/pages/pemetaanalat/${data.id}/edit"><i
                                     class="bx bx-edit-alt me-1"></i> Edit</a>
                             <a class="dropdown-item delete-btn" data-id="${data.id}">
