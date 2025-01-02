@@ -5,19 +5,18 @@
   }
 
   .form {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1500px; /* Adjust this value as needed */
-    margin: 0 auto;
-    padding: 20px;
-  }
+    max-width: 800px; /* Membatasi lebar form */
+    margin: 0 auto; /* Memposisikan di tengah */
+}
 
-  .post-item {
-    margin: 20px 0 0 0;
-    padding: 10px;
-    background-color: #004d40;
-    padding: 15px;
-  }
+.post-item {
+  max-width: 720px; /* Membatasi lebar post item */
+  margin: 20px auto; /* Menambahkan margin atas dan bawah, serta posisikan di tengah */
+  background-color: #006D5B;
+  padding: 20px;
+  border-radius: 10px; /* Tambahkan sedikit radius untuk estetika */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Opsional: Tambahkan shadow untuk tampilan modern */
+}
 
   .pos h2 {
     color: #ffffff;
@@ -32,44 +31,51 @@
     color: #ffffff;
   }
 
-  .profile{
-    width: 50px;
-    height: 50px;
-    border-radius: 30px;
-    margin-right: 20px;
-  }
-  /* .post-item .profile {
+  .profile {
+    margin-right: 15px;
+    flex-shrink: 0;
+
+}
+
+  .post-item .profile {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     margin-right: 20px;
     background-image: url("assets/image/icon-data.png");
-  } */
+  }
 
   .content h3 {
     margin-bottom: 5px;
     color: #ffffff;
+    flex: 1;
   }
-  .isi{
-    margin-left: -60px;
-  }
+
+  .content {
+    padding-left: 10px; /* Memberikan jarak pada isi konten */
+}
+
   .nama{
     font-weight: bold;
     color: white;
   }
-  .jam-pengisian{
-    color: white;
-    font-weight: 200;
-  }
-  .isi{
-    margin-bottom: 5px;
-    color: #ffffff;
-    margin-top: 10px;
-  }
+
+  .jam-pengisian {
+    color: #ccc;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+
+.isi {
+  color: white;
+  margin-left: -60px;
+}
 
  .isi span{
     font-weight: bolder;
  }
+
   .actions button {
     background-color: #00c853;
     border: none;
@@ -79,12 +85,15 @@
     margin-right: 10px;
     cursor: pointer;
   }
-  .search-bar{
-   background-color: #004d40 ;
-   color: #ffffff;
-  }
+
+  .search-bar {
+    background-color: #006D5B;
+    color: white;
+}
+
   .btn{
-    margin-left: -60px;
+    padding-top: 20px;
+
   }
 
   .btn:hover{
@@ -103,4 +112,7 @@
     width: 50%;
   }
 
-
+  .input-group {
+    max-width: 800px; /* Membatasi lebar input */
+    margin: 20px auto; /* Memastikan form tambah pesan tetap di tengah */
+}

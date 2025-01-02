@@ -37,9 +37,6 @@
                             <button type="submit" class="telegram-btn" id="submitButton">
                                 <i class="fa-brands fa-telegram me-2 btn-icon"></i>
                             </button>
-                            <a class="btn search-bar" type="button" id="button-addon2" href="/fr">
-                                <i class="fa-solid fa-plus"></i>
-                            </a>
                         </div>
                     </div>
                 </form>

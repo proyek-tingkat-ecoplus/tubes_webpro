@@ -10,7 +10,7 @@
 <body>
     <div class="card">
         <div class="content-section">
-            <img src="https://e0.pxfuel.com/wallpapers/879/771/desktop-wallpaper-cloud-in-the-sky-random-tumblr-cloud-for-your-mobile-tablet-explore-aesthetic-iphone-aesthetic-iphone-aesthetic-aesthetic.jpg" alt="">
+            <img src="{{asset('asset/image/logo-admin.png')}}" alt="">
         </div>
         <div class="vertical-line"></div>
         <div class="input-section">
