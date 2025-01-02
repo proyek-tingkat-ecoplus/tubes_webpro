@@ -34,11 +34,11 @@ $(document).ready(function () {
                     localStorage.setItem("authenticate", JSON.stringify(response));
 
                     me().then(user => {
-                        if (user && user.role.name === "Admin" || user.role.name === "Petugas" || user.role.name === "Kepala Desa") {
+                        if (user && user.role.name === "Admin" || user.role.name === "Petugas") {
                             redirect("/dashboard");
                         }
 
-                        if (user && user.role.name === "Guest") {
+                        if (user && user.role.name === "Guest" || user.role.name === "Kepala Desa") {
                             redirect("/");
                         }
                     });

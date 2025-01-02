@@ -12,7 +12,7 @@ $('.modal-backdrop').remove();
 function loadGoogleMapsScript() {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
-        script.src = "https://maps.gomaps.pro/maps/api/js?key=AlzaSyqMHX_unh5VXPkap9x8n01epZh34uisF_Q&libraries=places,geometry";
+        script.src = "https://maps.gomaps.pro/maps/api/js?key=AlzaSysWWlcIU8BtZuQY7x5221uJKXJlxWadjMP&libraries=places,geometry";
         script.async = true;
         script.defer = true;
         script.onload = resolve;
