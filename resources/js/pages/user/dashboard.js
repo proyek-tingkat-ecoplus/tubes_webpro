@@ -9,6 +9,7 @@ $(document).ready(async function  ()  {
         console.log("valid role")
 
         var user = await me();
+        $('#dash-id').val(user["id"]);
         var photoPath = `${Laravel.asset_url}${user["photo"]}`;
         console.log(photoPath);
         if(user){
@@ -56,7 +57,7 @@ $(document).ready(async function  ()  {
 
         }
     }else{
-        $(".avatars").html(`<a href="/login" class="btn btn-primary navbar-btn">Login</a>`);
+        $(".avatars").html(`<a href="/login" class="btn btn-success navbar-btn mt-2">Login</a>`);
         console.log("invalid role")
     }
 })
