@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Excel\ExportController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\InventarisController;
+use App\Http\Controllers\pdf\PdfController;
 use App\Http\Controllers\PemetaanController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\RoleController;
@@ -99,13 +100,20 @@ Route::get("/pemetaanalat/photo/{filename}", function($filename){
 
 Route::prefix('exports')->middleware(["auth:api","role:Petugas,Admin,Kepala Desa"])->group(function () {
     Route::get('/users/excel', [ExportController::class, 'exportUsers']);
+    Route::get('/role/excel', [ExportController::class, 'exportRole']);
     Route::get('/forum/excel', [ExportController::class, 'exportForum']);
     Route::get('/comment/excel', [ExportController::class, 'exportComment']);
-    Route::get('/users/excel', [ExportController::class, 'exportUsers']);
     Route::get('/proposal/excel', [ExportController::class, 'exportProposal']);
     Route::get('/inventaris/excel', [ExportController::class, 'exportInventaris']);
     Route::get('/pemetaanalat/excel', [ExportController::class, 'exportPemetaan']);
-    Route::get('/role/excel', [ExportController::class, 'exportRole']);
+
+
+    Route::get('/users/pdf', [PdfController::class, 'exportPdfUser']);
+    Route::get('/role/pdf', [PdfController::class, 'exportPdfRole']);
+    Route::get('/forum/pdf', [PdfController::class, 'exportPdfForum']);
+    Route::get('/comment/pdf', [PdfController::class, 'exportPdfComment']);
+    Route::get('/inventaris/pdf', [PdfController::class, 'exportPdfInventaris']);
+    Route::get('/pemetaanalat/pdf', [PdfController::class, 'exportPdfPemetaan']);
 });
 
 

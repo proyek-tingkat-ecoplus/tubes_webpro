@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Excel\ExportController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\pdf\PdfController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -197,9 +198,11 @@ Route::prefix('api/user')->group(function () {
     Route::get('/role', [UserController::class, 'getRole']);
 });
 
-// Route::prefix('api/proposal')->group(function () {
-//     Route::get('/', [ProposalController::class, 'index']);
-//     Route::post('/add', [ProposalController::class, 'post']);
-//     Route::put('/{id}/edit', [ProposalController::class, 'update']);
-//     Route::delete('/{id}/delete', [ProposalController::class, 'deletes']);
-// });
+Route::prefix("/export/pdf")->group(function(){
+    Route::get('/users', [PdfController::class, 'exportPdfUser']);
+    Route::get('/role', [PdfController::class, 'exportPdfRole']);
+    Route::get('/forum', [PdfController::class, 'exportPdfForum']);
+    Route::get('/comment', [PdfController::class, 'exportPdfComment']);
+    Route::get('/inventaris', [PdfController::class, 'exportPdfInventaris']);
+    Route::get('/pemetaan', [PdfController::class, 'exportPdfPemetaan']);
+});

@@ -12,6 +12,9 @@ $(document).ready(function () {
             url: "/api/inventaris/" + idx,
             type: 'GET',
             dataType: 'json',
+            headers: {
+                'Authorization': 'Bearer ' + getTokens()
+            },
             success: function (response) {
                 if (response.data) {
                     console.log(response.data)
