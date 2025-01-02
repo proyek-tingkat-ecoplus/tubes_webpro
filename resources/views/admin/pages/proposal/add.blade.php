@@ -9,8 +9,8 @@
                     <form method="POST" class="form" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group mt-2">
-                            <label for="name">Name</label>
-                            <input type="text" name="name" class="form-control" value="{{ old('name') }}">
+                            <label for="title">Name</label>
+                            <input type="text" name="title" class="form-control" value="{{ old('title') }}">
                             <span class="invalid-feedback"></span>
                         </div>
                         <div class="form-group mt-2">
@@ -19,19 +19,20 @@
                             <span class="invalid-feedback"></span>
                         </div>
                         <div class="form-group mt-2">
-                            <label for="file">File</label>
-                            <input type="file" name="file" class="form-control">
+                            <label for="attachment">File</label>
+                            <input type="file" name="attachment" class="form-control">
                             <span class="invalid-feedback"></span>
                         </div>
                         <div class="form-group mt-2">
-                            <label for="status">Status</label>
-                            <select name="status" class="form-control">
-                                <option value="1">Aktif</option>
-                                <option value="0">Non Active</option>
-                            </select>
+                            <label for="start_date">Start Data</label>
+                            <input type="date" name="start_date" class="form-control" value="{{ old('start_date') }}">
                             <span class="invalid-feedback"></span>
                         </div>
-
+                        <div class="form-group mt-2">
+                            <label for="end_date">End Date</label>
+                            <input type="date" name="end_date" class="form-control" value="{{ old('end_date') }}">
+                            <span class="invalid-feedback"></span>
+                        </div>
                         <div class="text-start">
                             <a href="/pages/proposal" class="btn btn-danger mt-3">Kembali</a>
                             <button type="submit" class="btn btn-primary mt-3">Simpan</button>
@@ -41,86 +42,5 @@
             </div>
         </div>
     </div>
-    <input type="text" hidden value="{{ asset('asset/admin/json/proposal.json') }}" id="path">
+    @vite(['resources/js/pages/user/proposal_user.js'])
 @endsection
-
-@push('scripts')
-<script>
-$(document).ready(function() {
-    var path = document.getElementById('path').value;
-    var lastId = 0;
-
-    // AJAX Request to Get Last ID
-    $.ajax({
-        url: path,
-        type: 'GET',
-        dataType: 'json',
-        success: function(data) {
-            if (data.data && data.data.length > 0) {
-                lastId = data.data[data.data.length - 1].id;
-            }
-        },
-        error: function(jqxhr, textStatus, error) {
-            console.error("Initial Request Failed: " + textStatus + ", " + error);
-        }
-    });
-
-    var validation = () => {
-        let isValid = true;
-        $('input, select').removeClass('is-invalid');
-        const name = $('input[name="name"]');
-        if (!name.val()) {
-            name.addClass('is-invalid');
-            name.next().text('Name is required');
-            isValid = false;
-        }
-        const description = $('input[name="description"]');
-        if (!description.val()) {
-            description.addClass('is-invalid');
-            description.next().text('Description is required');
-            isValid = false;
-        }
-        const file = $('input[name="file"]');
-        if (!file.val()) {
-            file.addClass('is-invalid');
-            file.next().text('File is required');
-            isValid = false;
-        }
-        const status = $('select[name="status"]');
-        if (!status.val()) {
-            status.addClass('is-invalid');
-            status.next().text('Status is required');
-            isValid = false;
-        }
-
-        return isValid;
-    };
-
-    $('.form').submit(function(e) {
-        e.preventDefault();
-        if (!validation()) return;
-        var form = new FormData(this);
-        form.append('id', parseInt(lastId) + 1);
-
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
-            },
-            url: "/api/proposal/add",
-            type: 'POST',
-            processData: false,
-            contentType: false,
-            data: form,
-            success: function(data) {
-                console.log(data);
-                window.location = "{{ url('pages/proposal') }}";
-            },
-            error: function(jqxhr, textStatus, error) {
-                var err = textStatus + ", " + error;
-                console.error("Request Failed: " + err);
-            }
-        });
-    });
-});
-</script>
-@endpush
