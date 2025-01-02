@@ -127,7 +127,7 @@ $(document).ready(function () {
         })
         // ini buat nambah button
         $(".btn-table").append('<a href="/pages/forum/add" class="btn btn-primary">Tambah Pengguna</a>');
-        $(".pdf-button").append('<button class="btn btn-danger mt-md-0 mt-3 me-2">Export PDF</button>' +
+        $(".pdf-button").append('<button class="btn btn-danger mt-md-0 mt-3 me-2 btn-pdf">Export PDF</button>' +
             '<button class="btn btn-primary mt-md-0 mt-3 me-2 btn-excel">Export Excel</button>');
             $(".btn-excel").click(function () {
                 $.ajax({
@@ -147,6 +147,30 @@ $(document).ready(function () {
                         link.click();
                         link.remove();
                         window.URL.revokeObjectURL(url);
+                    },
+                    error: function (jqxhr, textStatus, error) {
+                        console.log("Request Failed: " + textStatus + ", " + error);
+                    }
+                });
+            });
+            $(".btn-pdf").click(function () {
+                $.ajax({
+                    url: "/api/exports/forum/pdf",
+                    headers: {
+                        'Authorization': 'Bearer ' + getTokens()
+                    },
+                    xhrFields: {
+                        responseType: 'blob' // Set response type to blob
+                    },
+                    success: function (data, status, xhr) {
+                        const link = document.createElement('a');
+                        const url = window.URL.createObjectURL(data);
+                        link.href = url;
+                        link.setAttribute('download', 'forum.pdf');
+                        document.body.appendChild(link);
+                        link.click();
+                        link.remove();
+                        window.URL.revokeObjectURL(url); // revoke object url
                     },
                     error: function (jqxhr, textStatus, error) {
                         console.log("Request Failed: " + textStatus + ", " + error);
