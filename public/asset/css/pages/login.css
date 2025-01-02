@@ -27,10 +27,12 @@ body {
 }
 
 .card > .content-section > img {
-    max-width: 250px;
-    padding: 40px;
+    max-width: 300px;
+    /* padding: 40px; */
     border-radius: 50px;
+    margin-top: 80px;
 }
+
 .vertical-line {
     border-left: 2px solid #000;
     height: 400px;

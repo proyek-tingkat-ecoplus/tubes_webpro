@@ -4,6 +4,7 @@ use App\Http\Controllers\Excel\ExportController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\pdf\PdfController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ForumViewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,6 +26,11 @@ Route::get('/kontak', function () {
 Route::get('/forum', function () {
     return view('form');
 });
+
+Route::get('/forum', [ForumViewController::class, 'index'])->name('forums.index');
+Route::post('/forum', [ForumViewController::class, 'create'])->name('forums.store');
+Route::get('/forums', [ForumViewController::class, 'index'])->name('forums.index');
+Route::post('/forums', [ForumViewController::class, 'store'])->name('forums.store');
 
 Route::get('/tambahpesan', function () {
     return view('tambahpesan');
