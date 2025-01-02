@@ -2,6 +2,33 @@ import {getTokens, isLogin} from "../../../../Authentication";
 import {selectAlat, selectUser} from "../../helper/handleSelectRequest";
 import { pemetaanValidation } from "../../validation/pemetaanValidation";
 
+function loadGoogleMapsScript() {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = "https://maps.gomaps.pro/maps/api/js?key=AlzaSysWWlcIU8BtZuQY7x5221uJKXJlxWadjMP&libraries=places,geometry";
+        script.async = true;
+        script.defer = true;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
+}
+
+loadGoogleMapsScript().then(() => {
+    initialize();  // You can call your initialize function here
+}).catch(err => console.error("Google Maps script load error:", err));
+
+function initialize() {
+    // Search functionality
+    const locationInput = document.getElementById('location-address');
+    const autocomplete = new google.maps.places.Autocomplete(locationInput);
+    autocomplete.addListener('place_changed', function () {
+        var place = autocomplete.getPlace();
+        $("#location-lat").val(place.geometry.location.lat());
+        $("#location-lng").val(place.geometry.location.lng());
+    });
+}
+
 $(document).ready(function () {
     if (isLogin(["Admin", "Petugas", "Kepala Desa"])) {
         var idx = $("#idx").val()

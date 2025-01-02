@@ -102,6 +102,15 @@
                 <div data-i18n="Inventory Data">Feature Helper Mobile</div>
             </a>
         </li>
+
+        <!-- Settings Section -->
+       <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span></li>
+       <li class="menu-item @if (Request::is('pages/settings', 'pages/settings/settings')) active @endif">
+           <a href="/settings" class="menu-link">
+               <i class="menu-icon tf-icons bx bx-cog"></i>
+               <div data-i18n="System Settings">Pengaturan</div>
+           </a>
+        </li>
         {{-- <!-- Reports Section -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Laporan</span></li>
         <li class="menu-item">
@@ -118,19 +127,13 @@
         </li>
 
         <!-- Settings Section -->
-        <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span></li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user-circle"></i>
-                <div data-i18n="Account Settings">Pengaturan Akun</div>
-            </a>
-        </li>
-        <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link">
+       <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span></li>
+        <li class="menu-item @if (Request::is('pages/settings', 'pages/settings/settings')) active @endif">
+            <a href="/settings" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
-                <div data-i18n="System Settings">Pengaturan Sistem</div>
+                <div data-i18n="System Settings">Pengaturan</div>
             </a>
-        </li>
+        </li>
 
         <!-- Help Section -->
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Bantuan</span></li>

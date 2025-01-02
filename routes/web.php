@@ -55,6 +55,9 @@ Route::post('/forgetPassword', [ForgotPasswordController::class, 'submitForgetPa
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
 Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
+Route::get('/settings', function () {
+    return view('admin.pages.settings');
+})->name('settings');
 
 Route::prefix('pages')->group(function(){
     Route::get('/user', function () {
