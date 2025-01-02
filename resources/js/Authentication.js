@@ -84,7 +84,8 @@ export const me = async () => {
     const authData = localStorage.getItem("authenticate");
     if (!authData) {
         console.error('No authentication data found in localStorage.');
-        if (window.location.pathname !== "/login") {
+        var listWithoutLogin = ["/","/forum","/tambahpesan","/kontak","/informasi","/pemetaan","/profil","/kontak"];
+        if (!listWithoutLogin.includes(window.location.pathname) && window.location.pathname !== "/login") {
             redirect('/login');
         }
         return null;
