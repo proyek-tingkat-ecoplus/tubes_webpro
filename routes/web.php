@@ -149,6 +149,10 @@ Route::prefix('pages')->group(function(){
         return view('admin.pages.inventaris.add');
     });
 
+    Route::get('inventaris/{id}/detailalat', function($id){
+        return view('admin.pages.inventaris.detailalat', ["id" => $id]);
+    });
+
     Route::get('inventaris/{id}/edit', function($id){
         return view('admin.pages.inventaris.edit', ["id" => $id]);
     });
@@ -163,6 +167,10 @@ Route::prefix('pages')->group(function(){
 
     Route::get('pemetaanalat/marker/add', function(){
         return view('admin.pages.pemetaanalat.table.add');
+    });
+
+    Route::get('pemetaanalat/{id}/detailpemetaan', function($id){
+        return view('admin.pages.pemetaanalat.table.detailpemetaan', ["id" => $id]);
     });
 
     Route::get('pemetaanalat/{id}/edit', function($id){
