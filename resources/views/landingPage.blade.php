@@ -35,16 +35,16 @@
 <section class="energi-info-section">
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
+            {{-- <div class="col-md-6">
                 <div id="map-container">
                     <iframe
                         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.5708895213024!2d107.65214697499673!3d-6.941775893058302!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e8172d074f1f%3A0xf309f9b68cb6a7f8!2sDinas%20Energi%20dan%20Sumber%20Daya%20Mineral%20Prov.%20Jawa%20Barat!5e0!3m2!1sen!2sid!4v1729610728616!5m2!1sen!2sid"
                         width="700" height="550" style="border:0;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-md-6">
-                <form id="energiForm">
+                {{-- <form id="energiForm">
                     @csrf
                     <h4>Informasi Energi Terbarukan</h4>
                     <div class="form-group">
@@ -124,7 +124,7 @@
                         <input type="text" id="latLong" name="latLong" class="form-control" required>
                     </div>
                     <button type="submit" class="ms-1 btn btn-primary">Kirim</button>
-                </form>
+                </form> --}}
             </div>
         </div>
     </div>
