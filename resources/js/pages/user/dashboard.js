@@ -33,7 +33,7 @@ $(document).ready(async function  ()  {
                     })
             if(cekrole(["Kepala Desa"])){
             $(".avatars").html(`<div class="dropdown">
-                <a class="btn dropdown-toggle mt-3 ms-2" href="" role="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="btn dropdown-toggle ms-2" href="" role="button" id="dropdownMenu" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="${photoPath}" alt="Profile" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
                 </a>
 
@@ -57,7 +57,7 @@ $(document).ready(async function  ()  {
 
         }
     }else{
-        $(".avatars").html(`<a href="/login" class="btn btn-success navbar-btn mt-2">Login</a>`);
+        $(".avatars").html(`<a href="/login" class="mt-3 btn btn-success" style="padding:5px">Login</a>`);
         console.log("invalid role")
     }
 })
