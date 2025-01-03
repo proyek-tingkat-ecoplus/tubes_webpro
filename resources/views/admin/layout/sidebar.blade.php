@@ -95,7 +95,7 @@
                 <div data-i18n="Mapping Data">Maps</div>
             </a>
         </li>
-        <li class="menu-header small text-uppercase menu-master-orher d=none"><span class="menu-header-text">Other</span></li>
+        <li class="menu-header small text-uppercase menu-master-other d-none"><span class="menu-header-text">Other</span></li>
         <li class="menu-item menu-helper d-none @if (Request::is('pages/helper', 'pages/helper/*')) active @endif">
             <a href="/pages/helper" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
