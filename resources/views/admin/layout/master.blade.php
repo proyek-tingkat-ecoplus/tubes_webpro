@@ -9,14 +9,10 @@
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>@yield('title') - EchoPulse</title>
+    <link rel="icon" type="image" href="https://ibb.co.com/LNw4CJV">
 
     <meta name="description" content="" />
     <meta name="csrf_token" content="{{csrf_token()}}" />
-
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="{{asset('asset/admin/img/favicon/favicon.ico')}}" />
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
