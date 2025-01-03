@@ -16,7 +16,7 @@ class ForumController extends Controller
     public function table(){
       return DataTables::of(Forum::with(['user'])->get())
         ->addColumn('author', function($forum){
-            return $forum->user->username;
+            return $forum->user->username ?? $forum->name;
         })->make(true);
     }
 

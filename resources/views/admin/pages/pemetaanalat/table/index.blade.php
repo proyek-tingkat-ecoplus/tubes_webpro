@@ -16,8 +16,8 @@
                             <th>judul report</th>
                             <th>kode alat</th>
                             <th>Nama alat</th>
-                            <th>Status</th>
                             <th>tahun operasi</th>
+                            <th>Status</th>
                             <th>alamat</th>
                         </tr>
                     </thead>

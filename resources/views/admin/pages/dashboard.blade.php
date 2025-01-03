@@ -2,14 +2,14 @@
 @section('title', 'Dashboard')
 @section('content')
 <div class="row">
-    <div class="col-lg-3 col-md-3 col-6 mb-4">
+    <div class="col-lg-3 col-md-3 col-6 mb-4 d-none dash-total-user">
         <div class="card">
             <div class="card-body mt-2">
                 <div class="row">
                     <div class="col-md-4">
                         <i class="menu-icon tf-icons bx bx-home-circle  pt-sm-0" style="font-size:60px"></i>
                     </div>
-                    <div class="col-md-7">
+                    <div class="col-md-7 ">
                         <div class="card-title d-flex align-items-start justify-content-between">
                             <div class="row">
                                 <span class="fw-semibold d-block mb-1 mt-2">Total User</span>
@@ -33,7 +33,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-md-3 col-6 mb-4">
+    <div class="col-lg-3 col-md-3 col-6 mb-4 d-none dash-total-forum">
         <div class="card">
             <div class="card-body mt-2">
                 <div class="row">
@@ -64,7 +64,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-md-3 col-6 mb-4">
+    <div class="col-lg-3 col-md-3 col-6 mb-4 d-none dash-total-proposal">
         <div class="card">
             <div class="card-body mt-2">
                 <div class="row">
@@ -95,7 +95,7 @@
             </div>
         </div>
     </div>
-    <div class="col-lg-3 col-md-3 col-6 mb-4">
+    <div class="col-lg-3 col-md-3 col-6 mb-4 d-none dash-total-pemetaan">
         <div class="card">
             <div class="card-body mt-2">
                 <div class="row">

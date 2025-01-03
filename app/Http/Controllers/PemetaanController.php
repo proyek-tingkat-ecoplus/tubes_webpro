@@ -24,13 +24,13 @@ class PemetaanController extends Controller
             })
             ->addColumn('status', function($data){
                 if($data->status == "pending"){
-                    return "<span class='badge badge-warning'>Pending</span>";
+                    return "<span class='badge bg-warning'>Pending</span>";
                 }
                 if($data->status == "approved"){
-                    return "<span class='badge badge-success'>Approved</span>";
+                    return "<span class='badge bg-success'>Approved</span>";
                 }
                 if($data->status == "rejected"){
-                    return "<span class='badge badge-danger'>Rejected</span>";
+                    return "<span class='badge bg-danger'>Rejected</span>";
                 }
             })
             ->rawColumns(['status'])

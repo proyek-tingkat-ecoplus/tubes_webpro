@@ -5,7 +5,7 @@ import {
 
 $(document).ready(function () {
     if (isLogin("Admin")) {
-        var url = "https://3fe8-103-194-175-22.ngrok-free.app";
+        var url = "https://ddf8-103-194-175-22.ngrok-free.app";
         // get alert flash message
         if (localStorage.getItem("alert")) {
             alert = JSON.parse(localStorage.getItem("alert"))[0]
