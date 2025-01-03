@@ -66,7 +66,7 @@ Route::prefix("comment")->middleware(["auth:api","role:Petugas,Admin"])->group(f
     Route::get("/{id}/post", [CommentController::class, 'getCommentByPost']);
 });
 
-Route::prefix('proposal')->middleware(["auth:api","role:Kepala Desa, Petugas, Admin"])->group(callback: function(){
+Route::prefix('proposal')->middleware(["auth:api","role:Kepala Desa,Petugas,Admin"])->group(callback: function(){
     Route::get('/', [ProposalController::class, 'index']);
     Route::get("/table", [ProposalController::class, 'table']);
     Route::post('/add', [ProposalController::class, 'post']);
