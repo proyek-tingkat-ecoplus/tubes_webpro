@@ -6,7 +6,7 @@ import { selectRole } from "../helper/handleSelectRequest";
 $(document).ready(function(){
     if(isLogin("Admin")){
         var idx = $("#idx").val()
-    var url = "https://3fe8-103-194-175-22.ngrok-free.app";
+    var url = "https://3e1c-103-194-175-22.ngrok-free.app";
 
     // set data by idx
     $.ajax({

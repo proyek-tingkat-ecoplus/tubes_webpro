@@ -28,6 +28,6 @@ class Alat extends Model
         return $this->belongsTo(User::class,'user_id','id');
     }
     public function report_alat(){
-        return $this->belongsToMany(User::class,'report_alats','alat_id','user_id')->withPivot('judul_report', 'deskripsi', 'latidude','longitude','address','status', 'tanggal', 'rejected_at', 'approved_at', 'approved_by', 'rejected_by', 'approved_reason', 'rejected_reason');;
+        return $this->belongsToMany(User::class,'report_alats','alat_id','user_id')->withPivot('judul_report', 'deskripsi', 'latitude','longitude','address','status', 'tanggal', 'rejected_at', 'approved_at', 'approved_by', 'rejected_by');;
     }
 }
