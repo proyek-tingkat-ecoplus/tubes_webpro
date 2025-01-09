@@ -24,11 +24,12 @@ class InventarisController extends Controller
     }
 
     public function find($id){
-        return response()->json(['data' => Alat::find($id)]);
+        return response()->json(['data' => Alat::where("id", $id)->with(["user","report_alat"])->first()]);
     }
     public function post(Request $request){
         $request->validate([
             "user" => "required",
+            "nama_alat" => "required",
             "foto" => "required|image",
             "jenis" => "required",
             "jumlah" => "required",
@@ -48,7 +49,9 @@ class InventarisController extends Controller
             "jumlah" => $request->jumlah,
             "deskripsi_barang" => $request->deskripsi_barang,
         ]);
-        return response()->json($request->all());
+        return response()->json([
+            "message" => "data berhasil di tambahkan"
+        ]);
     }
 
     public function edit($id){
@@ -84,7 +87,9 @@ class InventarisController extends Controller
             "jumlah" => $request->jumlah,
             "deskripsi_barang" => $request->deskripsi_barang,
         ]);
-        return response()->json($request->all());
+        return response()->json([
+            "message" => "data berhasil di update"
+        ]);
     }
 
     public function deletes($id){

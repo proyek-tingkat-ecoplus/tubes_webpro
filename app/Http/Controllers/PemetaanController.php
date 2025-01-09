@@ -101,6 +101,8 @@ class PemetaanController extends Controller
             }
 
 
+        }else{
+            return response()->json(["message" => "Data tidak ditemukan"]);
         }
         return response()->json(["message" => "Data berhasil ditambahkan"]);
     }
@@ -159,9 +161,10 @@ class PemetaanController extends Controller
                     ]);
                 }
             }
-            return response()->json(["message" => "Data berhasil diubah"]);
+        }else{
+            return response()->json(["message" => "Data tidak ditemukan"]);
         }
-        return response()->json(["message" => "Data tidak ditemukan"]);
+        return response()->json(["message" => "Data berhasil diubah"]);
     }
 
     public function deletes($id)

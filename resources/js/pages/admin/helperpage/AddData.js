@@ -19,7 +19,7 @@ $(document).ready(function () {
             var form = new FormData();
             form.append("name", $("input[name='name']").val());
             form.append("detail", $("input[name='detail']").val());
-            var url = "https://ddf8-103-194-175-22.ngrok-free.app";
+            var url = "https://3e1c-103-194-175-22.ngrok-free.app";
             const urlEncodedData = new URLSearchParams(form).toString();
             $.ajax({
                 headers: {

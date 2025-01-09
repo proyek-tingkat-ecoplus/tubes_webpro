@@ -66,7 +66,7 @@ Route::prefix("comment")->middleware(["auth:api","role:Petugas,Admin"])->group(f
     Route::get("/{id}/post", [CommentController::class, 'getCommentByPost']);
 });
 
-Route::prefix('proposal')->middleware(["auth:api","role:Kepala Desa,Petugas,Admin"])->group(callback: function(){
+Route::prefix('proposal')->middleware(["auth:api","role:Petugas,Admin,Kepala Desa"])->group( function(){
     Route::get('/', [ProposalController::class, 'index']);
     Route::get("/table", [ProposalController::class, 'table']);
     Route::post('/add', [ProposalController::class, 'post']);
@@ -75,7 +75,7 @@ Route::prefix('proposal')->middleware(["auth:api","role:Kepala Desa,Petugas,Admi
     Route::delete('/{id}/delete', [ProposalController::class, 'deletes']);
 });
 
-Route::prefix('inventaris')->middleware(["auth:api","role:Petugas,Admin"])->group(callback: function(){
+Route::prefix('inventaris')->middleware(["auth:api","role:Petugas,Admin"])->group( function(){
     Route::get('/',[InventarisController::class, 'index']);
     Route::get('/table',[InventarisController::class, 'table']);
     Route::get("/{id}",[InventarisController::class, 'find']);
@@ -84,7 +84,7 @@ Route::prefix('inventaris')->middleware(["auth:api","role:Petugas,Admin"])->grou
     Route::delete('/{id}/delete', [InventarisController::class, 'deletes']);
 });
 
-Route::prefix('pemetaanalat')->middleware(["auth:api","role:Petugas,Admin,Kepala Desa"])->group(callback: function(){
+Route::prefix('pemetaanalat')->middleware(["auth:api","role:Petugas,Admin,Kepala Desa"])->group( function(){
     Route::get('/', [PemetaanController::class, 'index']);
     Route::get("/find/{id}",[PemetaanController::class, 'find']);
     Route::get("/table", [PemetaanController::class, 'table']);

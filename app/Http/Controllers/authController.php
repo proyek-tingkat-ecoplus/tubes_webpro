@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\AddressDetails;
+use App\Models\Role;
 use App\Models\User;
+use App\Models\UserDetails;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -67,19 +70,44 @@ class authController extends Controller
     public function register(Request $request){
 
         $request->validate([
-            "username" => "required",
+            "username" => "required|min:8",
             "email" => "required|email|unique:users,email",
-            "role" => "required",
-            "password" => "required"
+            // "role" => "required",
+            "password" => "required",
+            "first_name" => "required",
+            "last_name" => "required",
+            "nik" => "required|min:16",
+            "phone" => "required|min:10",
+            "password_confirmation" => "required|same:password",
         ]);
+        $role = $request->role;
+        if(empty($request->role)){
+            $role = Role::where("name","Guest")->first()->id;
+        }
 
         $data = User::create([
             "username" => $request->username,
             "password" => Hash::make($request->password),
             "email" => $request->email,
-            "role_id" => $request->role,
+            "role_id" => $role,
         ]);
-        return response()->json($data);
+
+        $address = AddressDetails::create([
+            "address" => "TBA",
+            "city" => "TBA",
+            "state" => "TBA",
+            "country" => "TBA",
+        ]);
+
+        UserDetails::create([
+            "first_name" => $request->first_name,
+            "last_name" => $request->last_name,
+            "nik" => $request->nik,
+            "user_id" => $data->id,
+            "phone" => $request->phone,
+            "address_id" => $address->id,
+        ]);
+        return response()->json(User::where("id",$data->id)->with(['role','user_details'=>fn($query) => $query->with('address')])->first());
     }
 
     /**
@@ -98,7 +126,7 @@ class authController extends Controller
      */
     public function me()
     {
-        $user = User::where("id",Auth()->id())->with("role")->first();
+        $user = User::where("id",Auth()->id())->with(["role","user_details"=>fn($query) => $query->with('address')])->first();
         if ($user) {
             return response()->json($user);
         }

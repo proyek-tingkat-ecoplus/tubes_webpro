@@ -26,7 +26,10 @@ class RoleController extends Controller
             "name" => $request->name,
             "description" => $request->description,
         ]);
-        return response()->json($data);
+        return response()->json([
+            "message" => "Data berhasil di tambahkan",
+            "role" => $data
+        ]);
     }
 
     public function find($id){
@@ -46,7 +49,10 @@ class RoleController extends Controller
             "name" => $request->name,
             "description" => $request->description,
         ]);
-        return response()->json($data);
+        return response()->json([
+            "message" => "Data berhasil di edit",
+            "role" => Role::find($id)
+        ]);
     }
 
     public function deletes($id){
@@ -54,7 +60,7 @@ class RoleController extends Controller
             return response()->json(['error' => 'Invalid id'], 402);
         }
         Role::where("id", $id)->delete();
-        return response()->json(["success" => "dat"]);
+        return response()->json(["success" => "data bershasil di hapus"], 202);
     }
 
 }
