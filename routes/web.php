@@ -31,6 +31,7 @@ Route::get('/forum', [ForumViewController::class, 'index'])->name('forums.index'
 Route::post('/forum', [ForumViewController::class, 'create'])->name('forums.store');
 Route::get('/forums', [ForumViewController::class, 'index'])->name('forums.index');
 Route::post('/forums', [ForumViewController::class, 'store'])->name('forums.store');
+Route::delete('forums/{id}',[ForumViewController::class, 'destroy'])->name('forums.destroy');
 
 Route::get('/tambahpesan', function () {
     return view('tambahpesan');

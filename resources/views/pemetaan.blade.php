@@ -11,7 +11,7 @@
 <!-- Form Informasi Energi Bersih -->
 <section class="energi-info-section">
     <div class="container">
-        <div class="text-center fs-1 fw-bold text-success-emphasis pb-5">Hello World</div>
+        <div class="text-center fs-1 fw-bold text-success-emphasis pb-5">Pemetaan</div>
         <div class="row">
             <div class="col-md-6">
                 <div id="map-container">

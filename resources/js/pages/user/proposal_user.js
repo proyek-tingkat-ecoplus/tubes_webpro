@@ -1,7 +1,7 @@
 import { getTokens, isLogin } from "../../Authentication";
 
 $(document).ready(function () {
-if (isLogin("Kepala Desa")) {
+if (isLogin(["Admin", "Kepala Desa"])) {
     if (localStorage.getItem("alert")) {
         const alert = JSON.parse(localStorage.getItem("alert"))[0];
         const color = (alert.status == "success") ? "success" : "danger";
@@ -29,7 +29,7 @@ if (isLogin("Kepala Desa")) {
         responsive: true,
         autoWidth: false,
         ajax: {
-            url: "/api/proposal/table", 
+            url: "/api/proposal/table",
             method: 'GET',
             dataSrc: 'data',
             headers: {
@@ -39,7 +39,7 @@ if (isLogin("Kepala Desa")) {
         columns: [
             {data: 'id'},
             {data: 'title'},
-            {data: 'description'}, 
+            {data: 'description'},
             {data: 'attachment',
                 render: function(data) {
                     return `<a href="/attachment/${data}">Download</a>`;
@@ -142,7 +142,7 @@ if (isLogin("Kepala Desa")) {
 
     $(".btn-pdf").click(function() {
         $.ajax({
-            url: "/api/exports/proposal/pdf", 
+            url: "/api/exports/proposal/pdf",
             headers: {'Authorization': 'Bearer ' + getTokens()},
             xhrFields: {responseType: 'blob'},
             success: function(data) {
@@ -208,14 +208,14 @@ var proposalId = $("#idx").val();
 
 if (proposalId) {
     $.ajax({
-        url: `/api/proposal/${proposalId}`, 
+        url: `/api/proposal/${proposalId}`,
         headers: {
             "Authorization": "Bearer " + getTokens(),
         },
         type: "GET",
         success: function (data) {
             console.log(data.data.id);
-             
+
              $("input[name='title']").val(data.data.title);
              $("input[name='description']").val(data.data.description);
              $("input[name='start_date']").val(data.data.start_date);
