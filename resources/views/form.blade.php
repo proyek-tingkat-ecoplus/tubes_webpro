@@ -20,6 +20,11 @@
                     <p class="nama">{{ $forum->name }}</p>
                     <p class="jam-pengisian">{{ $forum->created_at->diffForHumans() }}</p>
                     <p class="isi"><span> Infrastruktur terbaru </span> <br>  {{ $forum->description }}</p>
+                    <form action="{{route('forums.destroy', $forum['id'])}}" method="POST">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" class="btn btn-danger mt-4 me-5">Hapus</button>
+                    </form>
                 </div>
             </div>
         </div>

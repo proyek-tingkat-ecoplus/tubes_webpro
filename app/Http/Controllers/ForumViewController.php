@@ -43,4 +43,13 @@ class ForumViewController extends Controller
     return redirect('/forum')->with('success', 'Forum berhasil ditambahkan!');
 }
 
+    public function destroy($id){
+        $forums = Forum::find($id);
+        if(!$forums){
+            return redirect('/forum')->with('error', 'Forum Tidak Ditemukan');
+        }
+        $forums->delete();
+        return redirect('/forum')->with('success', 'Forum Berhasil Dihapus');
+    }
+
 }

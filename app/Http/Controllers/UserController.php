@@ -87,14 +87,14 @@ class UserController extends Controller
             "country" => $request->country,
         ]);
 
-        $userdet = UserDetails::create([
-            "first_name" => $request->first_name,
-            "last_name" => $request->last_name,
-            "phone" => $request->phone,
-            "nik" => $request->nik,
-            "address_id" => $address->id,
-            "user_id" => $user->id
-        ]);
+            $userdet = UserDetails::create([
+                "first_name" => $request->first_name,
+                "last_name" => $request->last_name,
+                "phone" => $request->phone,
+                "nik" => $request->nik,
+                "address_id" => $address->id,
+                "user_id" => $user->id
+            ]);
 
         $userdet->address_id = $address->id;
         $userdet->save();

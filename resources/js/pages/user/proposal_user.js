@@ -1,7 +1,7 @@
 import { getTokens, isLogin } from "../../Authentication";
 
 $(document).ready(function () {
-if (isLogin([ "Admin","Kepala Desa"])) {
+if (isLogin(["Admin", "Kepala Desa"])) {
     if (localStorage.getItem("alert")) {
         const alert = JSON.parse(localStorage.getItem("alert"))[0];
         const color = (alert.status == "success") ? "success" : "danger";
@@ -151,15 +151,108 @@ if (isLogin([ "Admin","Kepala Desa"])) {
             error: handleExportError
         });
     });
+}
+});
 
 function submitProposal(form) {
+
+$.ajax({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+        'Authorization': 'Bearer ' + getTokens()
+    },
+    url: "/api/proposal/add",
+    type: 'POST',
+    processData: false,
+    contentType: false,
+    data: form,
+    success: function(data) {
+        localStorage.setItem("alert", JSON.stringify([{
+            "status": "success",
+            "message": "Proposal berhasil ditambahkan"
+        }]));
+        window.location.href = "/pages/proposal";
+    },
+    error: function(xhr) {
+        console.log(xhr.responseText);
+        Swal.fire({
+            title: "Error!",
+            text: "Failed to submit proposal",
+            icon: "error"
+        });
+    }
+});
+}
+
+function downloadFile(data, filename) {
+const link = document.createElement('a');
+const url = window.URL.createObjectURL(data);
+link.href = url;
+link.setAttribute('download', filename);
+document.body.appendChild(link);
+link.click();
+link.remove();
+window.URL.revokeObjectURL(url);
+}
+
+function handleExportError(xhr) {
+console.log(xhr.responseText);
+Swal.fire({
+    title: "Error!",
+    text: "Export failed",
+    icon: "error"
+});
+}
+
+var proposalId = $("#idx").val();
+
+if (proposalId) {
+    $.ajax({
+        url: `/api/proposal/${proposalId}`,
+        headers: {
+            "Authorization": "Bearer " + getTokens(),
+        },
+        type: "GET",
+        success: function (data) {
+            console.log(data.data.id);
+
+             $("input[name='title']").val(data.data.title);
+             $("input[name='description']").val(data.data.description);
+             $("input[name='start_date']").val(data.data.start_date);
+             $("input[name='end_date']").val(data.data.end_date);
+             $("input[name='status']").val(data.data.status);
+            // document.querySelector("input[name='description']").value = data.description;
+            // document.querySelector("input[name='start_date']").value = data.start_date;
+            // document.querySelector("input[name='end_date']").value = data.end_date;
+            // document.querySelector("select[name='status']").value = data.status;
+        },
+        error: function (xhr) {
+            console.error("Failed to load proposal data:", xhr.responseText);
+            Swal.fire({
+                title: "Error!",
+                text: "Failed to load proposal data.",
+                icon: "error",
+            });
+        },
+    });
+}
+
+$('.forms').submit(function(e) {
+    e.preventDefault();
+    const form = new FormData(this);
+    form.append('_method', 'PATCH'); // kalau patch harus make ini
+    form.append('_token', $('meta[name="csrf_token"]').attr('content')); // CSRF token
+    form.append('user_id', $('select[name="user"]').val());
+    form.append('attachment', $('input[name="attachment"]').val());
+    const url = proposalId ? '/api/proposal/${proposalId}' : "/api/proposal/add";
+    const method = proposalId ? "PATCH" : "POST";
 
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
             'Authorization': 'Bearer ' + getTokens()
         },
-        url: "/api/proposal/add",
+        url: `/api/proposal/${proposalId}/edit`,
         type: 'POST',
         processData: false,
         contentType: false,
@@ -167,7 +260,7 @@ function submitProposal(form) {
         success: function(data) {
             localStorage.setItem("alert", JSON.stringify([{
                 "status": "success",
-                "message": "Proposal berhasil ditambahkan"
+                "message": "Proposal berhasil diedit"
             }]));
             window.location.href = "/pages/proposal";
         },
@@ -180,97 +273,5 @@ function submitProposal(form) {
             });
         }
     });
-    }
-
-    function downloadFile(data, filename) {
-    const link = document.createElement('a');
-    const url = window.URL.createObjectURL(data);
-    link.href = url;
-    link.setAttribute('download', filename);
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    window.URL.revokeObjectURL(url);
-    }
-
-    function handleExportError(xhr) {
-    console.log(xhr.responseText);
-    Swal.fire({
-        title: "Error!",
-        text: "Export failed",
-        icon: "error"
-    });
-    }
-
-    var proposalId = $("#idx").val();
-
-    if (proposalId) {
-        $.ajax({
-            url: `/api/proposal/${proposalId}`,
-            headers: {
-                "Authorization": "Bearer " + getTokens(),
-            },
-            type: "GET",
-            success: function (data) {
-                console.log(data.data.id);
-
-                 $("input[name='title']").val(data.data.title);
-                 $("input[name='description']").val(data.data.description);
-                 $("input[name='start_date']").val(data.data.start_date);
-                 $("input[name='end_date']").val(data.data.end_date);
-                 $("input[name='status']").val(data.data.status);
-                // document.querySelector("input[name='description']").value = data.description;
-                // document.querySelector("input[name='start_date']").value = data.start_date;
-                // document.querySelector("input[name='end_date']").value = data.end_date;
-                // document.querySelector("select[name='status']").value = data.status;
-            },
-            error: function (xhr) {
-                console.error("Failed to load proposal data:", xhr.responseText);
-                Swal.fire({
-                    title: "Error!",
-                    text: "Failed to load proposal data.",
-                    icon: "error",
-                });
-            },
-        });
-    }
-
-    $('.forms').submit(function(e) {
-        e.preventDefault();
-        const form = new FormData(this);
-        form.append('_method', 'PATCH'); // kalau patch harus make ini
-        form.append('_token', $('meta[name="csrf_token"]').attr('content')); // CSRF token
-        form.append('user_id', $('select[name="user"]').val());
-        form.append('attachment', $('input[name="attachment"]').val());
-        const url = proposalId ? '/api/proposal/${proposalId}' : "/api/proposal/add";
-        const method = proposalId ? "PATCH" : "POST";
-
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
-                'Authorization': 'Bearer ' + getTokens()
-            },
-            url: `/api/proposal/${proposalId}/edit`,
-            type: 'POST',
-            processData: false,
-            contentType: false,
-            data: form,
-            success: function(data) {
-                localStorage.setItem("alert", JSON.stringify([{
-                    "status": "success",
-                    "message": "Proposal berhasil diedit"
-                }]));
-                window.location.href = "/pages/proposal";
-            },
-            error: function(xhr) {
-                console.log(xhr.responseText);
-                Swal.fire({
-                    title: "Error!",
-                    text: "Failed to submit proposal",
-                    icon: "error"
-                });
-            }
-        });
-    });
-}
 });
+

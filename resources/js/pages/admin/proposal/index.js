@@ -11,13 +11,6 @@ $(document).ready(function () {
         }
     });
 
-    axios.get('/api/user/profile').then(response => {
-        document.getElementById('profileName').textContent = response.data.name;
-        document.getElementById('profileEmail').textContent = response.data.email;
-        document.getElementById('profileAddress').textContent = response.data.address;
-        document.getElementById('profilePhone').textContent = response.data.phone;
-    });
-
     let table = new DataTable('#table-proposal', {
         ajax: {
             url: '/api/proposal',
