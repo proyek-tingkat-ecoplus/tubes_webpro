@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -30,6 +31,7 @@
     <link rel="stylesheet" href="{{asset('asset/css/pages/form.css')}}">
     <link rel="stylesheet" href="{{asset('asset/css/pages/kontakDetails.css')}}">
     <title>EcoPulse</title>
+    <link rel="icon" type="image" href="https://ibb.co.com/LNw4CJV">
     <style>
         span.twitter-typeahead {
             width: 80%;

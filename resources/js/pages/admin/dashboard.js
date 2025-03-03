@@ -10,6 +10,7 @@ import {
 import {
     initializeCalendar
 } from "../../lib/calendarDashboard";
+import { cekrole } from "./sidebar/sidebar";
 $(document).ready(async function  ()  {
     const fetchDashboard = async () => {
         $.ajax({
@@ -58,11 +59,16 @@ $(document).ready(async function  ()  {
             // rende calendar
             initializeCalendar();
         }
+        // ini buat dashboard
+        if(cekrole(["Admin"])){
+            $(".dash-total-user").removeClass("d-none");
+            $(".dash-total-forum").removeClass("d-none");
+            $(".dash-total-proposal").removeClass("d-none");
+            $(".dash-total-pemetaan").removeClass("d-none");
+        }
         // when logout submit
         $("#logout").click(function () {
             Logout()
         })
     }
-
-
 })

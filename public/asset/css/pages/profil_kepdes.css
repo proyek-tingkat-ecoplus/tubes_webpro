@@ -16,11 +16,11 @@
 }
 
 
-.profile-card:nth-child(odd) {
+.carousel-item:nth-child(odd) .profile-card {
     background-color: #2b592a;
     color: #ffffff;
 }
-.profile-card:nth-child(even) {
+.carousel-item:nth-child(even) .profile-card {
     background-color: #ffffff;
     color: #2b592a;
 }
