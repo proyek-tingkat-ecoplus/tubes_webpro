@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Forum;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Jorenvh\Share\Share;
 
 class ForumViewController extends Controller
 {
