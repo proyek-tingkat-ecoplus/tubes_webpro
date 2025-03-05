@@ -1,6 +1,7 @@
-import { isLogin, me } from "../../../Authentication";
+import { isLogin, me, SetTimeOut } from "../../../Authentication";
 
 $(Document).ready(async function (){
+    SetTimeOut();
     var user = await me();
     var role = user['role']['name'];
 

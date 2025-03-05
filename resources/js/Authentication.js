@@ -117,6 +117,40 @@ export const me = async () => {
     }
 };
 
+export const SetTimeOut = () => { // logout 30 detik
+    let timer;
+    function resetTimer() {
+        clearTimeout(window.timer);
+        countdown();
+        window.timer = setTimeout(() => {
+            console.log('Logging out due to inactivity.');
+            LogoutWithoutAlert();
+        }, 30000); // kalau udh 30 detik, bakal logout
+    }
+
+    function countdown() { // ini buat countdown waktu
+        let time = 30;
+        clearTimeout(timer);
+        timer = setInterval(() => {
+            if(time >= 0){
+                console.log('Logging out in ' + time + ' seconds.');
+                time--;
+            }
+        }, 1000);
+    }
+
+    window.addEventListener('mousemove', resetTimer, true);
+    window.addEventListener('mousedown', resetTimer, true);
+    window.addEventListener('keypress', resetTimer, true);
+    window.addEventListener('touchstart', resetTimer, true);
+    window.addEventListener('tounchmove', resetTimer, true);
+    window.addEventListener('scroll', resetTimer, true);
+    window.addEventListener('resize', resetTimer, true);
+    window.addEventListener('click', resetTimer, true);
+    window.addEventListener('keydown', resetTimer, true);
+    window.addEventListener('wheel', resetTimer, true);
+}
+
 export const Logout = () => {
     Swal.fire({
         title: "Logout?",

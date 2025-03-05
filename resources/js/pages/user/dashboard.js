@@ -1,10 +1,12 @@
 import {
     isLogin,
     Logout,
-    me
+    me,
+    SetTimeOut
 } from "../../Authentication";
 import { cekrole } from "../admin/sidebar/sidebar";
 $(document).ready(async function  ()  {
+    SetTimeOut()
     if (await isLogin(["Guest", "Kepala Desa"]) )  {
         console.log("valid role")
 

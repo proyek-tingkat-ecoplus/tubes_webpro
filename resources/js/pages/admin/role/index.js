@@ -5,7 +5,6 @@ import {
 
 $(document).ready(function () {
     if (isLogin("Admin")) {
-
         // get alert flash message
         if (localStorage.getItem("alert")) {
             alert = JSON.parse(localStorage.getItem("alert"))[0]

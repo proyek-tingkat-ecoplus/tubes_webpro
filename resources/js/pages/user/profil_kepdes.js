@@ -1,9 +1,12 @@
+import { SetTimeOut } from "../../Authentication";
+
 $(document).ready(function () {
+    SetTimeOut();
     $.ajax({
-        url: '/api/user/profiles',  
+        url: '/api/user/profiles',
         type: 'GET',
         headers: {
-            'Authorization': 'Bearer ' + getTokens()  
+            'Authorization': 'Bearer ' + getTokens()
         },
         success: function (data) {
             if (data && data.profiles) {

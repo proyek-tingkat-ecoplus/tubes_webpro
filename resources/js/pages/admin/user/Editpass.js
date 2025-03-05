@@ -1,12 +1,11 @@
-import { getTokens, isLogin } from "../../../Authentication";
+import { getTokens, isLogin, SetTimeOut } from "../../../Authentication";
 import { userValidation } from "../validation/userValidation";
 import { selectRole } from "../helper/handleSelectRequest";
 
 
 $(document).ready(function(){
     if(isLogin("Admin")){
-        var idx = $("#idx").val()
-
+    var idx = $("#idx").val()
     // set data by idx
     $.ajax({
         url: "/api/user/"+idx,
