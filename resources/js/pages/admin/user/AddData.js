@@ -9,7 +9,6 @@ import { selectRole } from "../helper/handleSelectRequest";
 
 $(document).ready(function () {
     if (isLogin("Admin")) {
-
         try {
             selectRole()
         } catch (err) {
