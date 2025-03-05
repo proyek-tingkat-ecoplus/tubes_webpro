@@ -20,9 +20,10 @@
     <!-- Swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-    <meta name="csrf-token" content="@csrf">
+    <meta name="csrf_token" content="{{csrf_token()}}" />
+    <!-- Fonts -->
 
-    <!-- Local CSS -->
+    <!-- Local CSSa -->
     <link rel="stylesheet" href="{{asset('asset/style.css')}}">
     <link rel="stylesheet" href="asset/js/script.css">
     <link rel="stylesheet" href="{{ asset('asset/css/typeahead.css') }}">
