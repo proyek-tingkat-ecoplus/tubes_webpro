@@ -2,11 +2,9 @@ import {
     isLogin,
     Logout,
     me,
-    SetTimeOut
 } from "../../Authentication";
 import { cekrole } from "../admin/sidebar/sidebar";
 $(document).ready(async function  ()  {
-    SetTimeOut()
     if (await isLogin(["Guest", "Kepala Desa"]) )  {
         console.log("valid role")
 
@@ -59,7 +57,11 @@ $(document).ready(async function  ()  {
 
         }
     }else{
-        $(".avatars").html(`<a href="/login" class="mt-3 btn btn-success" style="padding:5px">Login</a>`);
+        $(".avatars").html(`<a href="/login" class="btn btn-primary me-5">
+                <i class="fas fa-user"></i>
+                Login
+            </a>`);
+
         console.log("invalid role")
     }
 })

@@ -117,7 +117,6 @@ class UserController extends Controller
     }
 
     public function update(Request $request, $id){
-        return response()->json(["message" => "Data berhasil diedit"]);
         $request->validate([
             "name" => "required",
             "email" => "required|email",

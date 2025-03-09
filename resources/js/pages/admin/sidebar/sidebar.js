@@ -1,9 +1,7 @@
 import { isLogin, me, SetTimeOut } from "../../../Authentication";
 
-$(Document).ready(async function (){
+$(document).ready(async function (){
     SetTimeOut();
-    var user = await me();
-    var role = user['role']['name'];
 
     if(cekrole(["Admin"])){
         $(".menu-master").removeClass("d-none");
