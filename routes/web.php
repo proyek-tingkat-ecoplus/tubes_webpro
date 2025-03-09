@@ -1,15 +1,13 @@
 <?php
 
 use App\Http\Controllers\Excel\ExportController;
+use App\Models\User;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\pdf\PdfController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ForumViewController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('landingPage');
-});
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -19,40 +17,39 @@ Route::get('/register', function () {
     return view('auth.register');
 });
 
-Route::get('/kontak', function () {
-    return view('kontak');
-});
+// user view
+    Route::get('/', function () {
+        return view('user.landing');
+    });
+    Route::get('/informasi', function () {
+        return view('user.informasi');
+    });
 
-Route::get('/forum', function () {
-    return view('form');
-});
 
-Route::get('/forum', [ForumViewController::class, 'index'])->name('forums.index');
-Route::post('/forum', [ForumViewController::class, 'create'])->name('forums.store');
-Route::get('/forums', [ForumViewController::class, 'index'])->name('forums.index');
-Route::post('/forums', [ForumViewController::class, 'store'])->name('forums.store');
-Route::delete('forums/{id}',[ForumViewController::class, 'destroy'])->name('forums.destroy');
+    Route::get('/kontak', action: function () {
+        return view('user.kontak');
+    });
 
-Route::get('/tambahpesan', function () {
-    return view('tambahpesan');
-});
+    Route::get('/profile', action: function () {
+        $user = User::with(['role','user_details'=>fn($query) => $query->with('address')])->get()->whereNotIn('role.name',['Guest','Kepala Desa']);
+        return view('user.pofile_dinas', compact('user'));
+    });
 
-Route::get('/profil', function (){
-    return view('profilKepdes');
-});
 
-Route::get('/pemetaan', function () {
-    return view('pemetaan');
-});
-
-Route::get('/informasi', function () {
-    return view('informasi');
-});
-
+    Route::get('/forum', [ForumViewController::class, 'index'])->name('forums.index');
+    Route::get('/forum/add', [ForumViewController::class, 'create'])->name('forums.create');
+    Route::post('/forum', [ForumViewController::class, 'store'])->name('forum.store');
+    Route::put('/forum/{id}/comment', [ForumViewController::class, 'comment'])->name('forum.comment');
+    Route::get('/forums', [ForumViewController::class, 'index'])->name('forums.index');
+    Route::post('/forums', [ForumViewController::class, 'store'])->name('forums.store');
+    Route::delete('forums/{id}',[ForumViewController::class, 'destroy'])->name('forums.destroy');
+//enduser view
+// dashboard
 Route::get('/dashboard', function () {
     return view('admin.pages.dashboard');
 });
 
+// profile
 Route::get('/edit-profile', function () {
     return view('admin.pages.edit-profile');
 });
@@ -224,3 +221,4 @@ Route::prefix("/export/pdf")->group(function(){
     Route::get('/inventaris', [PdfController::class, 'exportPdfInventaris']);
     Route::get('/pemetaan', [PdfController::class, 'exportPdfPemetaan']);
 });
+

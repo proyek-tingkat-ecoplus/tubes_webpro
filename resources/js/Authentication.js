@@ -118,6 +118,10 @@ export const me = async () => {
 };
 
 export const SetTimeOut = () => { // logout 30 detik
+    const authData = localStorage.getItem("authenticate");
+    if (!authData) {
+        return;
+    }
     let timer;
     function resetTimer() {
         clearTimeout(window.timer);

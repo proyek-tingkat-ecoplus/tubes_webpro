@@ -1,4 +1,7 @@
-@extends('main.main')
+@extends('user.master.master')
+@push('styles')
+<link rel="stylesheet" href="{{ asset('asset/user/css/kontak.css') }}">
+@endpush
 @section('content')
 <!-- jQuery dan Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -7,9 +10,7 @@
 <!-- Profil Kepdes JS -->
 <script src="{{ asset('asset/js/profil_kepdes.js') }}"></script>
 
-<div class="container-fluid">
-    <img src="{{asset('asset/image/pabrik.jpeg')}}" class="img-fluid img-hero" alt="Responsive image">
-
+<div class="container-fluid hero-1 mb-3">
     <div class="card mx-auto card-style" style="z-index: 2">
         <div class="row">
             <!-- Form Section (Kiri) -->
@@ -190,9 +191,5 @@
                         }
                     });
                 </script>
-
+</div>
 @endsection
-
-@push('scripts')
-<script src="{{asset('asset/js/custom.js')}}"></script>
-@endpush

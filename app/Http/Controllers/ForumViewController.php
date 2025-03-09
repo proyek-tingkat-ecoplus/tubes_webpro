@@ -12,10 +12,10 @@ class ForumViewController extends Controller
     public function index()
     {
         // Load forums with user relationship
-        $forums = Forum::with(['user', 'comments'])->latest()->get();
-
+        $forums = Forum::with(['user', 'comments'])->latest()->paginate(2);
+        $mostCommented = Forum::withCount('comments')->orderBy('comments_count',"DESC")->limit(5)->get();
         // Pass forums to view
-        return view('form', compact('forums'));
+        return view('user.forum.index', compact('forums','mostCommented'));
     }
 
     public function create()
@@ -24,25 +24,39 @@ class ForumViewController extends Controller
         $forums = Forum::with(['user', 'comments'])->latest()->get();
 
         // Pass forums to view
-        return view('tambahpesan', compact('forums'));
+        return view('user.forum.add', compact('forums'));
     }
 
     public function store(Request $request)
 {
     $request->validate([
-        'name' => 'required|string|max:255',
-        'description' => 'required|string',
+        'title' => 'required|string|max:255',
+        'content' => 'required|string',
+        'author' => 'required|string',
     ]);
-
     Forum::create([
-        'name' => $request->name,
-        'description' => $request->description,
-        'slug' => Str::slug($request->name),
+        'guest_author' => $request->author,
+        'name' => $request->title,
+        'description' => $request->content,
+        'slug' => Str::slug($request->title),
         'user_id' => null, // Pastikan user_id diisi dengan NULL jika tidak ada login
     ]);
-
-    return redirect('/forum')->with('success', 'Forum berhasil ditambahkan!');
+    return redirect()->route('forums.index')->with('success', 'Forum berhasil ditambahkan!');
 }
+
+    public function comment(Request $request, $id)
+    {
+        $request->validate([
+            'comment' => 'required|string',
+            'user_id' => 'required|integer',
+        ]);
+        $forum = Forum::find($id);
+        $forum->comments()->create([
+            'user_id' => $request->user_id, // Pastikan user_id diisi dengan NULL jika tidak ada login
+            'content' => $request->comment,
+        ]);
+        return redirect()->route('forums.index')->with('success', 'Komentar berhasil ditambahkan!');
+    }
 
     public function destroy($id){
         $forums = Forum::find($id);

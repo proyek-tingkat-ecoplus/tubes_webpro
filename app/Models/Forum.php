@@ -11,6 +11,7 @@ class Forum extends Model
         "name",
         "description",
         "slug",
+        'guest_author'
     ];
 
     protected $hidden = [
@@ -21,7 +22,7 @@ class Forum extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, "user_id", "id");
+        return $this->belongsTo(User::class, "user_id");
     }
 
     public function comments()
