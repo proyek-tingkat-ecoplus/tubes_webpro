@@ -78,10 +78,20 @@ export const ToastLastNotification = () => {
         const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
+            iconHtml: '<i class="bx bx-envelope"></i>',
+            iconColor: '#264417',
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
+            customClass: {
+                popup: 'custom-toast'  // Class custom untuk styling
+            },
             didOpen: (toast) => {
+                // Tambahkan styling inline untuk positioning
+                toast.style.marginTop = '25%';  // Atur jarak dari atas
+                toast.style.zIndex = '99999';     // Pastikan di atas elemen lain
+
+
                 toast.addEventListener('mouseenter', Swal.stopTimer);
                 toast.addEventListener('mouseleave', Swal.resumeTimer);
             }
@@ -89,7 +99,7 @@ export const ToastLastNotification = () => {
 
         Toast.fire({
             icon: 'info',
-            title: lastNotification.message
+            title: "ada notifikasi baru"
         });
     }
 };
