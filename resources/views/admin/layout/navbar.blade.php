@@ -15,7 +15,31 @@
         <!-- /Search -->
 
         <ul class="navbar-nav flex-row align-items-center ms-auto">
-
+            <!-- Notifications -->
+             <li class="nav-item navbar-dropdown dropdown-user dropdown me-4">
+                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <div type="button" class=" position-relative">
+                        <i class="bx bx-bell me-2" style="font-size: 40px"></i>
+                        <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger Notifications-count" style="font-size: 10px;top:5px">
+                          2
+                          <span class="visually-hidden">unread messages</span>
+                        </span>
+                      </div>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end Notifications-dropwdown">
+                    <li>
+                        {{-- <a class="dropdown-item">
+                            <i class="bx bx-bell me-2" ></i>
+                            <span class="align-middle">Proposal anda sudah di submit</span>
+                        </a>
+                        <a class="dropdown-item">
+                            <i class="bx bx-bell me-2"></i>
+                            <span class="align-middle">Proposal anda sudah di terima</span>
+                        </a> --}}
+                    </li>
+                </ul>
+            </li>
             <!-- User -->
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"

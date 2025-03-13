@@ -1,4 +1,5 @@
-import { getTokens, isLogin } from "../../Authentication";
+import { getTokens, isLogin, me } from "../../Authentication";
+import { SetNotification } from "../notification";
 
 $(document).ready(function () {
 if (isLogin(["Admin", "Kepala Desa"])) {
@@ -95,6 +96,8 @@ if (isLogin(["Admin", "Kepala Desa"])) {
                             text: "Data successfully deleted",
                             icon: "success"
                         });
+                        SetNotification("Proposal successfully deleted");
+                        window.location.reload();
                     },
                     error: function (jqxhr, textStatus, error) {
                         console.log("Request Failed: " + textStatus + ", " + error);
@@ -110,10 +113,11 @@ if (isLogin(["Admin", "Kepala Desa"])) {
     });
 
 
-    $('.form').submit(function(e) {
+    $('.form').submit (async function (e) {
         e.preventDefault();
         const form = new FormData(this);
-        form.append('user_id', $('select[name="user"]').val());
+        const user = await me();
+        form.append('user_id', user.id);
         submitProposal(form);
     });
 
@@ -171,6 +175,7 @@ $.ajax({
             "status": "success",
             "message": "Proposal berhasil ditambahkan"
         }]));
+        SetNotification("Proposal berhasil ditambahkan");
         window.location.href = "/pages/proposal";
     },
     error: function(xhr) {

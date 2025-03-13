@@ -7,6 +7,8 @@
 
         <div class="card">
             <div class=" text-nowrap p-3">
+                <div class=" alert-dismissible fade show" id="alert" role="alert">
+                </div>
                 <table class="table" id="table-proposal">
                     <thead>
                         <tr>

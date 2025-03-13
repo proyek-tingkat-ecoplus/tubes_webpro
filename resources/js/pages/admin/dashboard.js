@@ -10,8 +10,11 @@ import {
 import {
     initializeCalendar
 } from "../../lib/calendarDashboard";
+import { getNotification } from "../notification";
 import { cekrole } from "./sidebar/sidebar";
 $(document).ready(async function  ()  {
+
+    getNotification();
     const fetchDashboard = async () => {
         $.ajax({
             url: "/api/dashboard",
