@@ -128,7 +128,7 @@ export const SetTimeOut = () => { // logout 30 detik
         countdown();
         window.timer = setTimeout(() => {
             console.log('Logging out due to inactivity.');
-            LogoutWithoutAlert();
+            //LogoutWithoutAlert();
         }, 30000); // kalau udh 30 detik, bakal logout
     }
 
