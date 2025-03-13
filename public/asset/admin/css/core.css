@@ -5014,7 +5014,7 @@ fieldset:disabled .btn {
     filter: invert(1) grayscale(100%) brightness(200%);
 }
 
-.toast {
+/* .toast {
     width: 350px;
     max-width: 100%;
     font-size: 0.9375rem;
@@ -5028,7 +5028,7 @@ fieldset:disabled .btn {
 
 .toast.showing {
     opacity: 0;
-}
+} */
 
 .toast:not(.show) {
     display: none;
@@ -18235,3 +18235,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
     border-color: rgba(105, 122, 141, 0.0783835294);
 }
 
+.toast {
+    position: fixed !important;
+    z-index: 99999 !important;
+}
