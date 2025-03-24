@@ -11,7 +11,7 @@
             <!-- Kolom Utama -->
             <div class="col-md-8">
                 <!-- Tombol Buat Post -->
-                <a href="{{ route('forums.create') }}" class="btn btn-primary mb-4 w-100">
+                <a href="{{ route('forums.create') }}" class="btn btn-primary mb-4 w-100 btn-post">
                     <i class="fas fa-plus me-2"></i>Buat Post Baru
                 </a>
 
@@ -27,16 +27,16 @@
                                 <h6 class="mb-0">{{ $forum->guest_author ?? $forum->user->user_details->first_name ?? $forum->user->username ?? "Guest"  }}</h6>
                                 <small class="text-muted">
                                     <i class="fas fa-clock me-1"></i>{{ $forum->created_at->diffForHumans() }}
-                                    <i class="fas fa-tag me-1"></i>{{ $forum->user->role->name ?? "Guest"   }}
+                                    <i class="fas fa-tag me-1"></i>{{ $forum->user->role->name ?? "Guest" }}
                                 </small>
                             </div>
-                            <div class="btn-group ms-auto">
+                            <div class="btn-group ms-auto btn-action" data-user="{{ $forum->user->id }}">
                                 <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle"
                                     data-bs-toggle="dropdown">
-                                    :
+
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">
+                                    <li><a class="dropdown-item" href="{{ route('forum.edit', $forum->id) }}">
                                             <i class="fa fa-pencil text-warning me-2"></i>Edit
                                         </a></li>
                                     <li>
@@ -105,8 +105,8 @@
                         <!-- Section Komentar -->
                         <div class="comment-section mt-4 d-none">
                             <!-- Form Komentar -->
-                        
-                            <div class="d-flex mb-3">
+
+                            <div class="d-flex mb-3 comment-form">
                                 <img src="{{ asset($forum->user->image ?? 'image/profile/default.png') }}" class="rounded-circle me-2" alt="User Avatar"
                                     style="width: 32px; height: 32px;">
                                 <div class="flex-grow-1">
@@ -114,8 +114,11 @@
                                         @method('PUT')
                                         @csrf
                                         <input type="text" name="user_id" id="user_id" hidden>
-                                        <textarea class="form-control" name="comment" rows="2"
+                                        <textarea class="form-control @error('comment') is-invalid @enderror" name="comment" rows="2"
                                         placeholder="Tulis komentar Anda..."></textarea>
+                                        @error('comment')
+                                        <div class="text-danger">{{ $message }}</div>
+                                        @enderror
                                     <button class="btn btn-sm btn-primary mt-2">
                                         <i class="fas fa-paper-plane me-1"></i>Kirim
                                     </button>
@@ -138,7 +141,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @endforeach 
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -199,24 +202,7 @@
 </div>
 <script>
     // Toggle Komentar
-    document.querySelectorAll('.toggle-comments').forEach(button => {
-        button.addEventListener('click', function () {
-            const authData = JSON.parse(localStorage.getItem("authenticate"));
-            if (!authData || !authData.access_token) {
-                alert('Silahkan login terlebih dahulu');
-                return false;
-            }
-            id = authData['user']['id'];
-            document.getElementById('user_id').value = id;
-            const commentSection = this.closest('.card-body').querySelector('.comment-section');
-            commentSection.classList.toggle('d-none');
 
-            // Update icon
-            const icon = this.querySelector('i');
-            icon.classList.toggle('fa-comment');
-            icon.classList.toggle('fa-comment-dots');
-        });
-    });
 
 </script>
 @vite('resources/js/pages/user/forum.js')

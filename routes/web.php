@@ -39,9 +39,9 @@ Route::get('/register', function () {
     Route::get('/forum', [ForumViewController::class, 'index'])->name('forums.index');
     Route::get('/forum/add', [ForumViewController::class, 'create'])->name('forums.create');
     Route::post('/forum', [ForumViewController::class, 'store'])->name('forum.store');
+    Route::get('/forum/{id}/edit', [ForumViewController::class,'edit'])->name('forum.edit');
+    Route::put('/forum/{id}/update', [ForumViewController::class,'update'])->name('forum.update');
     Route::put('/forum/{id}/comment', [ForumViewController::class, 'comment'])->name('forum.comment');
-    Route::get('/forums', [ForumViewController::class, 'index'])->name('forums.index');
-    Route::post('/forums', [ForumViewController::class, 'store'])->name('forums.store');
     Route::delete('forums/{id}',[ForumViewController::class, 'destroy'])->name('forums.destroy');
 //enduser view
 // dashboard

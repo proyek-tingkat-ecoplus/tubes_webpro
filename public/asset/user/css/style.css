@@ -85,11 +85,13 @@ body{
 .section-230-sm{
     height: 100vh;
 }
+
 /* end default */
 /* hero section */
 .hero{
     margin-top: 30vh;
 }
+
 .hero-1{
     margin-top: 20vh;
 }

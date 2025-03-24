@@ -1,7 +1,9 @@
 export const getNotification = () => {
     let storedNotifications = localStorage.getItem("Notification");
 
-    if (!storedNotifications) {
+
+    if (storedNotifications.length <= 0) {
+        console.log(storedNotifications);
         SetNotification("Welcome to Notification");
         storedNotifications = localStorage.getItem("Notification");
     }
@@ -12,9 +14,9 @@ export const getNotification = () => {
         localStorage.setItem("Notification", JSON.stringify(notifications));
         storedNotifications = JSON.stringify(notifications);
     }
+    ToastLastNotification()
 
 
-    ToastLastNotification();
 
     // Clear existing dropdown content
     const dropdown = $(".Notifications-dropwdown");
@@ -45,6 +47,8 @@ export const getNotification = () => {
         `);
     }
 
+
+
 };
 
 export const SetNotification = (message) => {
@@ -67,6 +71,7 @@ export const ToastLastNotification = () => {
 
     const notifications = JSON.parse(storedNotifications);
     const lastNotification = notifications[notifications.length - 1];
+    console.log(lastNotification)
 
     // Convert stored time string to Date object
     const lastTime = new Date(lastNotification.time);
