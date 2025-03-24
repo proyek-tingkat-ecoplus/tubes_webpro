@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Forum;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Jorenvh\Share\Share;
@@ -34,15 +35,33 @@ class ForumViewController extends Controller
         'content' => 'required|string',
         'author' => 'required|string',
     ]);
+    $user = null;
+    if($request->user){
+        $user = User::where('id', $request->user)->first();
+    }
     Forum::create([
         'guest_author' => $request->author,
         'name' => $request->title,
         'description' => $request->content,
         'slug' => Str::slug($request->title),
-        'user_id' => null, // Pastikan user_id diisi dengan NULL jika tidak ada login
+        'user_id' => $user->id ?? null, // Pastikan user_id diisi dengan NULL jika tidak ada login
     ]);
     return redirect()->route('forums.index')->with('success', 'Forum berhasil ditambahkan!');
-}
+    }
+
+    public function update(Request $request, $id){
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'author' => 'required|string',
+        ]);
+
+        $forum = Forum::find($id);
+        $forum->name = $request->title;
+        $forum->description = $request->content;
+        $forum->save();
+        return redirect()->route('forums.index')->with('success','Forum berhasil di update');
+    }
 
     public function comment(Request $request, $id)
     {
@@ -57,6 +76,13 @@ class ForumViewController extends Controller
         ]);
         return redirect()->route('forums.index')->with('success', 'Komentar berhasil ditambahkan!');
     }
+
+    public function edit(Request $request, $id){
+        $forum = Forum::find($id);
+        return view('user.forum.edit', compact('forum'));
+    }
+
+
 
     public function destroy($id){
         $forums = Forum::find($id);

@@ -14,13 +14,14 @@
                     </div>
 
                     <div class="card-body">
-                        <form id="createForumForm" action="{{ route('forum.store') }}" method="POST">
+                        <form id="createForumForm" action="{{ route('forum.update', $forum->id) }}" method="POST">
+                            @method('PUT')
                             @csrf
                             <div class="mb-4">
                                 <label for="postTitle" class="form-label fw-bold">Penulis</label>
                                 <input type="text" class="form-control @error('author') is-invalid @enderror" id="postAuthor"
                                 name="author"
-                                    placeholder="Masukkan Penulis postingan" required>
+                                    placeholder="Masukkan Penulis postingan" value="{{ $forum->guest_author }}" readonly>
                                 <input type="text" name="user" hidden>
                                 @error('author')
                                     <div class="text-danger">{{ $message }}</div>
@@ -30,7 +31,7 @@
                             <div class="mb-4">
                                 <label for="postTitle" class="form-label fw-bold">Judul Postingan</label>
                                 <input type="text" class="form-control @error('title') is-invalid @enderror" id="postTitle" name="title"
-                                    placeholder="Masukkan judul postingan" >
+                                    placeholder="Masukkan judul postingan" value="{{ $forum->name }}">
                                 @error('title')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -51,10 +52,15 @@
                             <!-- Konten Postingan -->
                             <div class="mb-4">
                                 <label for="postContent" class="form-label fw-bold">Isi Postingan</label>
-                                <textarea class="form-control" id="postContent" name="content @error('content')
+                                <textarea class="form-control is @error('content')
                                     is-invalid
-                                @enderror " rows="8"
-                                    placeholder="Tulis isi postingan Anda disini..."></textarea>
+                                @enderror" id="postContent" name="content" rows="8"
+                                    placeholder="Tulis isi postingan Anda disini...">{!! $forum->description !!}</textarea>
+                                @error('content')
+                                <div class="invalid-validate">
+                                    {{ $message }}
+                                </div>
+                                @enderror
                             </div>
 
                             <!-- Tombol Submit -->
@@ -97,36 +103,36 @@
 @vite('resources/js/pages/user/forum.js')
 <script>
     // Validasi form sederhana
-    tinymce.init({
-        selector: 'textarea',
-        plugins: [
-            // Core editing features
-            'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media',
-            'searchreplace', 'table', 'visualblocks', 'wordcount',
-            // Your account includes a free trial of TinyMCE premium features
+    // tinymce.init({
+    //     selector: 'textarea',
+    //     plugins: [
+    //         // Core editing features
+    //         'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media',
+    //         'searchreplace', 'table', 'visualblocks', 'wordcount',
+    //         // Your account includes a free trial of TinyMCE premium features
 
-            // Try the most popular premium features until Mar 23, 2025:
-            'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker',
-            'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage',
-            'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags',
-            'autocorrect', 'typography', 'inlinecss', 'markdown', 'importword', 'exportword', 'exportpdf'
-        ],
-        toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-        tinycomments_mode: 'embedded',
-        tinycomments_author: 'Author name',
+    //         // Try the most popular premium features until Mar 23, 2025:
+    //         'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker',
+    //         'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage',
+    //         'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags',
+    //         'autocorrect', 'typography', 'inlinecss', 'markdown', 'importword', 'exportword', 'exportpdf'
+    //     ],
+    //     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+    //     tinycomments_mode: 'embedded',
+    //     tinycomments_author: 'Author name',
 
-        mergetags_list: [{
-                value: 'First.Name',
-                title: 'First Name'
-            },
-            {
-                value: 'Email',
-                title: 'Email'
-            },
-        ],
-        ai_request: (request, respondWith) => respondWith.string(() => Promise.reject(
-            'See docs to implement AI Assistant')),
-    });
+    //     mergetags_list: [{
+    //             value: 'First.Name',
+    //             title: 'First Name'
+    //         },
+    //         {
+    //             value: 'Email',
+    //             title: 'Email'
+    //         },
+    //     ],
+    //     ai_request: (request, respondWith) => respondWith.string(() => Promise.reject(
+    //         'See docs to implement AI Assistant')),
+    // });
 
 </script>
 @endsection
