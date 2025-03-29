@@ -1,6 +1,6 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="index.html" class="app-brand-link">
+        <a href="/dashboard" class="app-brand-link">
             <span class="app-brand-logo demo">
                 <!-- Logo bisa ditambahkan di sini -->
             </span>
@@ -95,13 +95,13 @@
                 <div data-i18n="Mapping Data">Maps</div>
             </a>
         </li>
-        <li class="menu-header small text-uppercase menu-master-other d-none"><span class="menu-header-text">Other</span></li>
+        {{-- <li class="menu-header small text-uppercase menu-master-other d-none"><span class="menu-header-text">Other</span></li>
         <li class="menu-item menu-helper d-none @if (Request::is('pages/helper', 'pages/helper/*')) active @endif">
             <a href="/pages/helper" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Inventory Data">Feature Helper Mobile</div>
             </a>
-        </li>
+        </li> --}}
 
         <!-- Settings Section -->
        <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span></li>

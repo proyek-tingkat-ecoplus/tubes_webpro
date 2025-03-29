@@ -1,5 +1,5 @@
 
-export const userValidation = () =>{
+export const proposalValidation = () =>{
     var isValid = true;
     $(".form-group input").each(function () {
         const input = $(this);
@@ -16,16 +16,6 @@ export const userValidation = () =>{
             isValid = true
         }
 
-        // Validasi khusus untuk email
-        if (inputName === "email") {
-             //[^\s@] karakter spasi selain @ dan spasi + . + karakter selain @ dan spasi
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailPattern.test(input.val())) {
-                input.addClass("is-invalid");
-                input.next().text('Please enter a valid email address');
-                isValid = false
-            }
-        }
         if (inputName === "password_confirmation") {
             const password = $('input[name="password"]').val();
             if (input.val() !== password) {

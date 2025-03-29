@@ -1,4 +1,5 @@
 import { getTokens, isLogin, me } from "../../Authentication";
+import { proposalValidation } from "../admin/validation/poposalValidation";
 import { SetNotification } from "../notification";
 
 $(document).ready(function () {
@@ -43,11 +44,11 @@ if (isLogin(["Admin", "Kepala Desa"])) {
             {data: 'description'},
             {data: 'attachment',
                 render: function(data) {
-                    return `<a href="/attachment/${data}">Download</a>`;
+                    return `<a class="btn btn-primary" href="/attachment/${data}">Download</a>`;
                 }
             },
-            {data: 'start_date'},
-            {data: 'end_date'},
+            {data: 'tanggal'},
+            {data: 'tanggal_pengajuan'},
             {data: 'status'},
             {
                 data: null,
@@ -115,6 +116,9 @@ if (isLogin(["Admin", "Kepala Desa"])) {
 
     $('.form').submit (async function (e) {
         e.preventDefault();
+        if(!proposalValidation()) {
+            return;
+        }
         const form = new FormData(this);
         const user = await me();
         form.append('user_id', user.id);
@@ -180,10 +184,14 @@ $.ajax({
     },
     error: function(xhr) {
         console.log(xhr.responseText);
-        Swal.fire({
-            title: "Error!",
-            text: "Failed to submit proposal",
-            icon: "error"
+        var errors = xhr.responseJSON.errors;
+        Object.keys(errors).forEach((key,error) => {
+            console.log(key);
+            var input = $(`input[name="${key}"]`);
+            input.addClass("is-invalid");
+            var errorMessage = errors[key].join(', ');
+            console.log(key.slice(1));
+            input.next().text(`${key.charAt(0).toUpperCase() + key.slice(1)}: ${errorMessage}`);
         });
     }
 });
@@ -280,3 +288,41 @@ $('.forms').submit(function(e) {
     });
 });
 
+$(document).on('click', '.btn-up, .btn-status', function(e) { // Handles both classes
+    e.preventDefault(); // Prevent default form submission
+    console.log("masuk");
+    const status = $(this).data('status');
+    const proposalId = $(this).data('id');
+    const formData = new FormData();
+    formData.append('status', status);
+    formData.append('_method', 'PUT');
+    formData.append('_token', $('meta[name="csrf-token"]').attr('content')); // Fixed typo: csrf_token to csrf-token
+    formData.append('user_id', $('select[name="user"]').val());
+
+    $.ajax({
+        url: `/api/proposal/${proposalId}/status`,
+        type: 'POST',
+        headers: {
+            'Authorization': 'Bearer ' + getTokens()
+        },
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function(response) {
+            Swal.fire({
+                title: "Success!",
+                text: "Status updated successfully",
+                icon: "success"
+            });
+            window.location.reload();
+        },
+        error: function(xhr) {
+            console.error("Failed to update status:", xhr.responseText);
+            Swal.fire({
+                title: "Error!",
+                text: "Failed to update status.",
+                icon: "error",
+            });
+        }
+    });
+});

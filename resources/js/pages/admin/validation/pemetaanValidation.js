@@ -10,7 +10,7 @@ export const pemetaanValidation = () => {
         const input = $(this);
         const inputName = input.attr("name");
 
-        if (!input.val()) {
+        if (!input.val() | input.val().trim() === "") {
             input.addClass("is-invalid");
             input.next().text(`${inputName} is required`);
             isValid = false;

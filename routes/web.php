@@ -6,6 +6,7 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\pdf\PdfController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ForumViewController;
+use App\Http\Controllers\ProposalController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -143,6 +144,8 @@ Route::prefix('pages')->group(function(){
     Route::get('proposal/add', function(){
         return view('admin.pages.proposal.add');
     });
+
+
 
     Route::get('proposal/{id}/edit', function($id){
         return view('admin.pages.proposal.edit', ["id" => $id]);
