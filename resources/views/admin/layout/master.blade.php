@@ -9,7 +9,7 @@
         content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
     <title>@yield('title') - EchoPulse</title>
-    <link rel="icon" type="image" href="https://ibb.co.com/LNw4CJV">
+    <link rel="icon" type="image/png" href="https://png.pngtree.com/png-vector/20240506/ourmid/pngtree-fun-anime-leaf-symbol-png-image_12372412.png"/>
 
     <meta name="description" content="" />
     <meta name="csrf_token" content="{{csrf_token()}}" />
