@@ -2,7 +2,7 @@ export const getNotification = () => {
     let storedNotifications = localStorage.getItem("Notification");
 
 
-    if (storedNotifications.length <= 0) {
+    if (storedNotifications.length <= 2) {
         console.log(storedNotifications);
         SetNotification("Welcome to Notification");
         storedNotifications = localStorage.getItem("Notification");

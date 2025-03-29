@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use App\Models\Proposal;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Dummy\dummyProposal;
+
 
 class ProposalrSeeder extends Seeder
 {
@@ -14,16 +16,26 @@ class ProposalrSeeder extends Seeder
     public function run(): void
     {
         $faker = \Faker\Factory::create();
+        $data = DummyProposal::get(); // Menggunakan kelas yang benar
 
-        for($i=1; $i<10;$i++){
-            $proposal = Proposal::create([
-                'user_id' => $i,
+        // Generate proposals dengan status berbeda
+        $this->generateProposals('pending', 12, $data, $faker);
+        $this->generateProposals('approved', 10, $data, $faker);
+        $this->generateProposals('rejected', 12, $data, $faker);
+    }
+
+    private function generateProposals($status, $count, $data, $faker): void
+    {
+        for ($i = 0; $i < $count; $i++) { // Menggunakan indeks dari 0
+            Proposal::create([
+                'user_id' => $faker->numberBetween(1, 10),
                 'title' => $faker->sentence,
-                'description' => $faker->sentence,
-                'attachment' => $faker->imageUrl(),
-                'start_date' => $faker->date(),
-                'end_date' => $faker->date(),
-                'status' => 'pending',
+                'description' => $faker->paragraph,
+                'attachment' => $faker->imageUrl(640, 480, 'business', true),
+                'tanggal_pengajuan' => $data[$i]['tanggal_pengajuan'],
+                'start_date' => $data[$i]['start_date'],
+                'end_date' => $data[$i]['end_date'],
+                'status' => $status,
             ]);
         }
     }

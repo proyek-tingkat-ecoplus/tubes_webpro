@@ -16,8 +16,8 @@
                             <th>name</th>
                             <th>deskription</th>
                             <th>file</th>
-                            <th>start_date</th>
-                            <th>end_date</th>
+                            <th>tanggal</th>
+                            <th>pengajuan</th>
                             <th>status</th>
                             <th>Aksi</th>
                         </tr>

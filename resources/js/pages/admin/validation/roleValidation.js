@@ -5,7 +5,7 @@ export const roleValidation = () =>{
         const input = $(this);
         const inputName = input.attr("name");
 
-        if (!input.val()) {
+        if (!input.val() | input.val().trim() === "") {
             input.addClass("is-invalid");
             input.next().text(`${inputName.charAt(0).toUpperCase() + inputName.slice(1)} is required`);
             isValid = false

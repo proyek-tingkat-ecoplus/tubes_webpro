@@ -77,6 +77,7 @@
                     <div class="mb-3">
                         <label for="location-photo" class="form-label">Photo</label>
                         <input type="file" class="form-control" id="location-photo" accept="image/*" name="photo">
+                        <span class="invalid-feedback"></span>
                     </div>
 
                     <!-- Status -->

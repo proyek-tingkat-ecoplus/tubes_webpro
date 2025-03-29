@@ -35,6 +35,7 @@ class ForumViewController extends Controller
         'content' => 'required|string',
         'author' => 'required|string',
     ]);
+    dd($request->all());
     $user = null;
     if($request->user){
         $user = User::where('id', $request->user)->first();

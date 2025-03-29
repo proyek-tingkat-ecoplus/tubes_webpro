@@ -6,6 +6,7 @@ use App\Models\Proposal;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class ProposalController extends Controller
@@ -32,7 +33,38 @@ class ProposalController extends Controller
         })
         ->addColumn('description', function($data){
             return strlen($data->description) > 10 ? substr($data->description, 0, 15)."..." : $data->description;
+        })->addColumn('status', content: function($data){
+            if(Auth::user()->role->name === 'Kepala Desa'){
+                return $data->status == "approved" ? "<span class='badge bg-success'>".$data->status."</span>" : ($data->status == "rejected" ? "<span class='badge bg-danger'>".$data->status."</span>" : "<span class='badge bg-warning'>".$data->status."</span>");
+            }else{
+            $color = match($data->status) {
+                'approved' => 'btn-success',
+                'rejected' => 'btn-danger',
+                default => 'btn-warning'
+            };
+            $list = match($data->status) {
+                'approved' => "
+                <li>
+                <button type='submit' class='dropdown-item btn btn-danger btn-up' data-id='$data->id' data-status='rejected'  >Reject</button>
+                </li>",
+                'rejected' => "<li><button class='dropdown-item btn btn-success btn-status' data-id='$data->id' data-status='approved'>Approve</button></li>",
+                default => "
+                <li><button class='dropdown-item btn btn-success btn-status' href='#' data-id='$data->id' data-status='approved'>Approve</button></li>
+                <li><button class='dropdown-item btn btn-danger btn-status mt-2' data-id='$data->id' data-status='rejected'>Reject</button></li>"
+            };
+            return "<div class='dropdown'>
+            <button class='btn $color dropdown-toggle' type='button' id='dropdownMenuButton1' data-bs-toggle='dropdown' aria-expanded='false'>
+                $data->status
+                </button>
+                <ul class='dropdown-menu' aria-labelledby='dropdownMenuButton1'>
+                    $list
+                </ul>
+            </div>";
+        }
+        })->addColumn("tanggal", function($data){
+            return Carbon::parse($data->start_date)->isoFormat("DD-MM-YYYY")." s/d   ".Carbon::parse($data->end_date)->isoFormat("DD-MM-YYYY");
         })
+        ->rawColumns(['action', 'status'])
         ->make(true);
     }
     public function post(Request $request){
@@ -80,10 +112,6 @@ class ProposalController extends Controller
     }
 
     public function update(Request $request, $id){
-        return response()->json([
-            "message" => "Data berhasil di edit",
-            // "proposal" => Proposal::find($id)
-        ]);
         $request->validate([
             "user_id" => "required",
             "title" => "required",
@@ -110,6 +138,33 @@ class ProposalController extends Controller
         ]);
         return response()->json([
             "message" => "Data berhasil di edit",
+            // "proposal" => Proposal::find($id)
+        ]);
+    }
+
+    public function status(Request $request, $id){
+        $request->validate([
+            "status" => "required",
+            // "reason" => "required"
+        ]);
+        if(empty($id)){
+            return response()->json(['error' => 'Invalid id'], 402);
+        }
+        $proposal = Proposal::where("id", $id)->first();
+        if($request->status == "approved"){
+            $proposal->status = "approved";
+            $proposal->approved_by = auth()->user()->id;
+            $proposal->approved_at = Carbon::now();
+        }
+        if($request->status == "rejected"){
+            $proposal->status = "rejected";
+            $proposal->rejected_by = auth()->user()->id;
+            $proposal->rejected_at = Carbon::now();
+        }
+        $proposal->save();
+
+        return response()->json([
+            "message" => "Data berhasil di $request->status",
             // "proposal" => Proposal::find($id)
         ]);
     }

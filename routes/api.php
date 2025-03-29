@@ -73,6 +73,7 @@ Route::prefix('proposal')->middleware(["auth:api","role:Admin,Kepala Desa,Petuga
     Route::get("/{id}", [ProposalController::class, 'find']);
     Route::patch('/{id}/edit', [ProposalController::class, 'update']);
     Route::delete('/{id}/delete', [ProposalController::class, 'deletes']);
+    Route::put('/{id}/status', [ProposalController::class, 'status'])->name('proposal.reject');
 });
 
 Route::prefix('inventaris')->middleware(["auth:api","role:Petugas,Admin"])->group(callback: function(){
