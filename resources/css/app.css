@@ -1,3 +1,55 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.dark {
+    background-color: #121212;
+    color: white;
+}
+
+body.dark {
+    background-color: #121212;
+    color: #f8f9fa;
+}
+
+.dark .card {
+    background-color: #2d2d2d;
+    color: #f8f9fa;
+    border-color: #444;
+}
+
+.dark .navbar-dark {
+    background-color: #1a1a1a !important;
+}
+
+.dark .btn-dark {
+    background-color: #3a3a3a;
+    border-color: #444;
+}
+
+.dark .form-control {
+    background-color: #2d2d2d;
+    color: #f8f9fa;
+    border-color: #444;
+}
+
+.dark .bg-light {
+    background-color: #1a1a1a !important;
+}
+
+.dark .text-dark {
+    color: #f8f9fa !important;
+}
+
+.dark .border {
+    border-color: #444 !important;
+}
+
+.dark .table {
+    color: #f8f9fa;
+}
+
+.dark .footer {
+    background-color: #1a1a1a;
+    color: #f8f9fa;
+}

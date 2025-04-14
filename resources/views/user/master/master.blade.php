@@ -41,6 +41,9 @@
     </script>
     @stack('scripts')
     @vite(['resources/js/pages/user/dashboard.js'])
+    @vite(['resources/js/darkmode.js'])
+
+
 </body>
 
 </html>
