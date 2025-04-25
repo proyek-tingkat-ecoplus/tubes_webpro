@@ -9,6 +9,96 @@
             @csrf
             <!-- Info Personal -->
             <div class="form-group mt-4">
+                <h4>Info Aplikasi</h4>
+            </div>
+            <div class="form-group mt-2 @if($errors->has('nama_dinas')) has-error @endif">
+                <label for="nama_dinas">Nama Dinas</label>
+                <select name="nama_dinas" class="form-control">
+                    <option value="ESDM Provinsi Jawa Barat" {{ old('email') }}>ESDM
+                        Provinsi Jawa Barat</option>
+                </select>
+                @if($errors->has('nama_dinas'))
+                    <span class="help-block @if($errors->has('nama_dinas')) has-error @endif">
+                        {{ $errors->first('nama_dinas') }}
+                    </span>
+                @endif
+            </div>
+            <div class="form-group mt-2 @if($errors->has('jam_buka')) has-error @endif">
+                <label for="jam_buka">Tanggal & jam buka</label>
+                <input type="text" name="jam_buka" class="form-control" value="{{ old('jam_buka') }}">
+                @if($errors->has('jam_buka'))
+                    <span class="help-block @if($errors->has('jam_buka')) has-error @endif">
+                        {{ $errors->first('jam_buka') }}
+                    </span>
+                @endif
+            </div>
+            <div class="form-group mt-2 @if($errors->has('hari_buka')) has-error @endif">
+                <label for="hari_buka">Tanggal Lahir</label>
+                <input type="date" name="hari_buka" class="form-control" value="{{ old('hari_buka', ) }}">
+                @if($errors->has('hari_buka'))
+                    <span class="help-block @if($errors->has('hari_buka')) has-error @endif">
+                        {{ $errors->first('hari_buka') }}
+                    </span>
+                @endif
+            </div>
+            <div class="form-group mt-2 @if($errors->has('no_telp')) has-error @endif">
+                <label for="no_telp">Nomor Telepon</label>
+                <input type="text" name="no_telp" class="form-control" value="{{ old('no_telp', '+62 812 3456 7890') }}">
+                @if($errors->has('no_telp'))
+                    <span class="help-block @if($errors->has('no_telp')) has-error @endif">
+                        {{ $errors->first('no_telp') }}
+                    </span>
+                @endif
+            </div>
+            <div class="form-group mt-2 @if($errors->has('email')) has-error @endif">
+                <label for="email">Email</label>
+                <input type="email" name="email" class="form-control" value="{{ old('email', 'admin@gmail.com')}}">
+                @if($errors->has('email'))
+                    <span class="help-block @if($errors->has('branch')) has-error @endif">
+                        {{ $errors->first('branch') }}
+                    </span>
+                @endif
+            </div>
+
+
+            <!-- Alamat -->
+            <div class="form-group mt-4">
+                <h4>Alamat</h4>
+            </div>
+            <div class="form-group mt-2 @if($errors->has('alamat')) has-error @endif">
+                <label for="alamat">Alamat Lengkap</label>
+                <input type="text" name="alamat" class="form-control"
+                    value="{{ old('alamat', 'Jl. Merdeka No. 15, Kel. Dago, Kec. Coblong, Kota Bandung, Jawa Barat') }}">
+                @if($errors->has('alamat'))
+                    <span class="help-block @if($errors->has('alamat')) has-error @endif">
+                        {{ $errors->first('alamat') }}
+                    </span>
+                @endif
+            </div>
+
+            <div class="form-group mt-2 @if($errors->has('postal_code')) has-error @endif">
+                <label for="postal_code">Kode Pos</label>
+                <input type="text" name="postal_code" class="form-control" value="{{ old('postal_code', '40135') }}">
+                @if($errors->has('postal_code'))
+                    <span class="help-block @if($errors->has('postal_code')) has-error @endif">
+                        {{ $errors->first('postal_code') }}
+                    </span>
+                @endif
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-start">
+                <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="card mt-3">
+    <div class="container pe-3 ps-3 pb-3">
+        <form action="" method="POST" class="form">
+            @csrf
+            <!-- Info Personal -->
+            <div class="form-group mt-4">
                 <h4>Info Personal</h4>
             </div>
             <div class="form-group mt-2 @if($errors->has('name')) has-error @endif">

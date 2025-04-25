@@ -10,6 +10,7 @@ class Category extends Model
         "name",
         "description",
         "slug",
+        'user_id',
     ];
 
     protected $hidden = [
@@ -21,4 +22,9 @@ class Category extends Model
     public function forums(){
         return $this->belongsToMany(Forum::class,'category_forum','category_id','forum_id');
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
 }

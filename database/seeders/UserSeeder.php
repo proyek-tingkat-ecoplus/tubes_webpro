@@ -41,6 +41,8 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'role_id' => $role_id,
                 "photo" => 'image/profile/default.png',
+                'kantor_dinas_id' => $faker->numberBetween(1, 2),
+
             ]);
             $address = AddressDetails::create([
                 'city' => $faker->city,

@@ -5,8 +5,8 @@ import { authValidation } from "./pages/admin/validation/authValidation";
 $(document).ready(function () {
     isLogin()
     $("#loginForm").submit(async function (e) {
-        console.log("clicked");
         e.preventDefault();
+        console.log("clicked");
         let isValid = true;
 
         $(".error").text("");
