@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Excel\ExportController;
+use App\Models\Category;
 use App\Models\User;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\pdf\PdfController;
@@ -101,18 +102,6 @@ Route::prefix('pages')->group(function(){
         return view('admin.pages.role.edit', ["id" => $id]);
     });
 
-    Route::get('tag', function(){
-        return view('admin.pages.tag.index');
-    });
-
-    Route::get('tag/add', function(){
-        return view('admin.pages.tag.add');
-    });
-
-    Route::get('tag/{id}/edit', function($id){
-        return view('admin.pages.tag.edit', ["id" => $id]);
-    });
-
     Route::get('forum', function(){
         return view('admin.pages.forum.index');
     });
@@ -123,6 +112,18 @@ Route::prefix('pages')->group(function(){
 
     Route::get('forum/{id}/edit', function($id){
         return view('admin.pages.forum.edit', ["id" => $id]);
+    });
+
+    Route::get('kategori', function(){
+        return view('admin.pages.kategori.index');
+    });
+
+    Route::get('kategori/add', function(){
+        return view('admin.pages.kategori.add');
+    });
+
+    Route::get('kategori/{id}/edit', function($id){
+        return view('admin.pages.kategori.edit', ["id" => $id]);
     });
 
     Route::get('comment', function(){

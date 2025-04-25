@@ -41,12 +41,12 @@
 
         <!-- Form Section -->
         <li class="menu-header small text-uppercase menu-master-forum d-none"><span class="menu-header-text">Formulir</span></li>
-        {{-- <li class="menu-item @if (Request::is('pages/tag', 'pages/tag/*')) active @endif">
-            <a href="/pages/tag" class="menu-link">
+        <li class="menu-item @if (Request::is('pages/kategori', 'pages/kategori/*')) active @endif">
+            <a href="/pages/kategori" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-collection"></i>
-                <div data-i18n="Tags">Data Tag</div>
+                <div data-i18n="Tags">Data kategori</div>
             </a>
-        </li> --}}
+        </li>
         <li class="menu-item menu-forum d-none @if (Request::is('pages/forum', 'pages/forum/*')) active @endif">
             <a href="/pages/forum" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-comment-dots"></i>

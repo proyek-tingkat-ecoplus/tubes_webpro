@@ -20,6 +20,7 @@ class CategorySeeder extends Seeder
                 'name' => $faker->sentence,
                 'slug' => $faker->slug,
                 'description' => $faker->sentence,
+                'user_id' => $i,
             ]);
 
             for ($j = 1; $j < 5; $j++) {

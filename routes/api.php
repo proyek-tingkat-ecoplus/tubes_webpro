@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Excel\ExportController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\InventarisController;
+use App\Http\Controllers\KategoriForumController;
 use App\Http\Controllers\pdf\PdfController;
 use App\Http\Controllers\PemetaanController;
 use App\Http\Controllers\ProposalController;
@@ -54,6 +55,15 @@ Route::prefix("forum")->middleware(["auth:api","role:Petugas,Admin"])->group(fun
     Route::post('/add', [ForumController::class, 'post']);
     Route::patch('/{id}/edit', [ForumController::class, 'update']);
     Route::delete('/{id}/delete', [ForumController::class, 'deletes']);
+});
+
+Route::prefix("kategori")->middleware(["auth:api","role:Petugas,Admin"])->group(function(){
+    Route::get("/", [KategoriForumController::class, 'index']);
+    Route::get("/table", [KategoriForumController::class, 'table']);
+    Route::get("/{id}", [KategoriForumController::class, 'find']);
+    Route::post('/add', [KategoriForumController::class, 'post']);
+    Route::patch('/{id}/edit', [KategoriForumController::class, 'update']);
+    Route::delete('/{id}/delete', [KategoriForumController::class, 'deletes']);
 });
 
 Route::prefix("comment")->middleware(["auth:api","role:Petugas,Admin"])->group(function(){

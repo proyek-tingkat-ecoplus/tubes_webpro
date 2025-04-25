@@ -27,14 +27,34 @@ class RolerSeeder extends Seeder
             ],
             [
                 'name' => 'Petugas',
-                'description' => 'Petugas',
+                'description' => 'Ketua Petugas',
                 'permissions' => '*',
             ],
             [
                 'name' => 'Admin',
                 'description' => 'Admin',
                 'permissions' => '*',
-            ]
+            ],
+            [
+                'name' => 'Petugas',
+                'description' => 'Wakil Petugas',
+                'permissions' => '*',
+            ],
+            [
+                'name' => 'Petugas',
+                'description' => 'Sekretaris Petugas',
+                'permissions' => '*',
+            ],
+            [
+                'name' => 'Petugas',
+                'description' => 'Bendahara Petugas',
+                'permissions' => '*',
+            ],
+            [
+                'name' => 'Petugas',
+                'description' => 'Anggota Petugas',
+                'permissions' => '*',
+            ],
         ]
     );
     }

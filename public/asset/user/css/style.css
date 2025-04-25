@@ -7,6 +7,16 @@
     --white: #fff;
     --black: #000;
 }
+/* dark mode */
+html.dark {
+    --dark-green: #003030;
+    --light-green: #003030;
+    --dark-blue: #1b262c;
+    --grey: #000;
+    --light-grey: #000;
+    --white: #fff;
+    --black: #000;
+}
 
 body{
     font-family: 'Poppins', sans-serif;
