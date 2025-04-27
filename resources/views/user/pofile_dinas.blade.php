@@ -4,8 +4,7 @@
     <!-- Header Profil -->
     <div class="text-center default-title mb-5 hero-1" style="background-color: var(--dark-green);">
         <div class="container py-5">
-            <h1 class="text-white mb-3">Dinas XYZ Kabupaten ABC</h1>
-            <p class="lead text-white">Melayani dengan hati untuk kemajuan bersama</p>
+            <h1 class="text-white mb-3">Dinas Energi dan Sumber Daya Mineral Prov. Jawa Barat</h1>
         </div>
     </div>
 
@@ -18,7 +17,7 @@
                         <h4><i class="fas fa-bullseye me-2"></i>Visi</h4>
                     </div>
                     <div class="card-body">
-                        <p class="lead">"Menjadi dinas terdepan dalam pelayanan publik yang profesional dan berintegritas"</p>
+                        <p class="lead">"Terwujudnya Indonesia yang Berdaulat, Mandiri, dan Berkepribadian Berlandaskan Gotong Royong"</p>
                     </div>
                 </div>
             </div>
@@ -30,9 +29,14 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Meningkatkan kualitas pelayanan publik</li>
-                            <li class="list-group-item">Mengembangkan SDM yang kompeten</li>
-                            <li class="list-group-item">Mewujudkan tata kelola yang transparan</li>
+                            <li class="list-group-item">Mewujudkan keamanan nasional yang mampu menjaga kedaulatan wilayah, 
+                                menopang kemandirian ekonomi dengan mengamankan sumber daya maritim, dan mencerminkan kepribadian Indonesia sebagai negara kepulauan</li>
+                            <li class="list-group-item">Mewujudkan masyarakat maju, berkesinambungan, dan demokratis berlandaskan negara hukum</li>
+                            <li class="list-group-item">Mewujudkan politik luar negeri bebas-aktif dan memperkuat jati diri sebagai negara maritim</li>
+                            <li class="list-group-item">Mewujudkan kualitas hidup manusia Indonesia yang tinggi, maju, dan sejahtera</li>
+                            <li class="list-group-item">Mewujudkan bangsa yang berdaya saing</li>
+                            <li class="list-group-item">Mewujudkan Indonesia menjadi negara maritim yang mandiri, maju, kuat, dan berbasiskan kepentingan nasional</li>
+                            <li class="list-group-item">Mewujudkan masyarakat yang berkepribadian dalam kebudayaan</li>
                         </ul>
                     </div>
                 </div>
@@ -82,10 +86,10 @@
                     </div>
                     <div class="col-md-6">
                         <div class="contact-info">
-                            <h5 class="mb-4">Kantor Dinas XYZ</h5>
+                            <h5 class="mb-4">Dinas Energi dan Sumber Daya Mineral Prov. Jawa Barat</h5>
                             <p class="mb-3">
                                 <i class="fas fa-building me-2"></i>
-                                Jl. Pelayanan Publik No. 123, Jakarta
+                                Jl. Soekarno-Hatta No.576, Sekejati, Kec. Buahbatu, Kota Bandung, Jawa Barat 40286
                             </p>
                             <p class="mb-3">
                                 <i class="fas fa-clock me-2"></i>
@@ -93,11 +97,11 @@
                             </p>
                             <p class="mb-3">
                                 <i class="fas fa-phone me-2"></i>
-                                (021) 1234-5678
+                                (022) 7562-049
                             </p>
                             <p class="mb-0">
                                 <i class="fas fa-envelope me-2"></i>
-                                info@dinasxyz.id
+                                esdm.jabarprov.go.id
                             </p>
                         </div>
                     </div>
