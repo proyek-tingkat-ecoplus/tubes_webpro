@@ -24,7 +24,7 @@ $(document).ready(function () {
 
 
         let table = new DataTable('#table-categori', {
-            dom: "<'row'<'col-sm-12 col-md-5 btn-table'><'col-sm-12 col-md-3'<'ms-4'f>><'col-sm-12 col-md-4 pdf-button'>>" +
+            dom: "<'row'<'col-sm-12 col-md-5 btn-table'><'col-sm-12 col-md-7'f> >" +
                 "<'row mt-3'<'col-sm-12'tr>>" +
                 "<'row mt-2'<'col-md-8 col-12'i><'col-md-4 col-12'p>>",
             ordering: false,

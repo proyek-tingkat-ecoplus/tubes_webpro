@@ -16,6 +16,13 @@
                         </div>
 
                         <div class="form-group mt-2">
+                            <label for="category">Category</label>
+                            <select name="category" class="form-control" >
+                            </select>
+                            <span class="invalid-feedback"></span>
+                        </div>
+
+                        <div class="form-group mt-2">
                             <label for="name">name</label>
                             <input type="text" name="name" class="form-control" value="{{ old('name') }}">
                             <span class="invalid-feedback"></span>

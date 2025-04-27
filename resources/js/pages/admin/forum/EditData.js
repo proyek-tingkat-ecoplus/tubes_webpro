@@ -3,6 +3,7 @@ import {
     isLogin
 } from "../../../Authentication";
 import {
+    selectKategori,
     selectRole,
     selectUser
 } from "../helper/handleSelectRequest";
@@ -29,6 +30,7 @@ $(document).ready(function () {
                     $('input[name="name"]').val(dataById.name)
                     $('textarea[name="description"]').val(dataById.description)
                     selectUser(dataById.user.id)
+                    selectKategori(dataById.categories[0].id)
                 }
             },
             error: function (jqxhr, textStatus, error) {

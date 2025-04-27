@@ -119,3 +119,32 @@ import { getTokens } from "../../../Authentication";
             }
         });
     }
+
+    export const selectKategori = (id) => {
+        $.ajax({
+            url: "/api/kategori",
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + getTokens()
+            },
+            success: function (response) {
+                console.log(response)
+                if (response && response.data) {
+                    const data = response.data;
+                    const selectElement = $('select[name="category"]');
+                    selectElement.empty();
+                    selectElement.append('<option value="">Select a kategori</option>');
+                    data.forEach(function (data) {
+                        if(data.id !== id){
+                            selectElement.append('<option value="' + data.id + '">' + data.name + '</option>');
+                        }else{
+                            selectElement.append('<option value="' + data.id + '" selected>' + data.name + '</option>');
+                        }
+                    });
+                }
+            },
+            error: function (error) {
+                console.error("Error fetching kategori:", error);
+            }
+        });
+    }

@@ -26,6 +26,7 @@ class ForumController extends Controller
             "user" => "required",
             "name" => "required",
             "description" => "required",
+            "category" => "required",
         ]);
 
         $user = User::where("id", $request->user)->first();
@@ -40,7 +41,9 @@ class ForumController extends Controller
             "slug" => Str::slug($request->name),
             "created_at" => Carbon::now()
         ]);
-        //$forum->categories()->attach($request->categories);
+        if($request->category){
+            $forum->categories()->attach($request->category);
+        }
         return response()->json([
             "message" => "Data berhasil di tambahkan",
             "forum" => $forum
@@ -62,6 +65,7 @@ class ForumController extends Controller
             "user" => "required",
             "name" => "required",
             "description" => "required",
+            "category" => "required",
         ]);
         if(empty($id)){
             return response()->json(['error' => 'Invalid id'], 402);
@@ -78,8 +82,10 @@ class ForumController extends Controller
             "slug" => Str::slug($request->name),
             "updated_at" => Carbon::now()
         ]);
+        if($request->category){
+            $forum->categories()->sync($request->category);
+        }
 
-        // $forum->categories()->sync($request->categories);
         return response()->json([
             "message" => "Data berhasil di edit",
             "forum" => Forum::where("id", $id)->with(['user','comments','categories'])->first()

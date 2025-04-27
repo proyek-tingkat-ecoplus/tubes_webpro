@@ -7,6 +7,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Excel\ExportController;
 use App\Http\Controllers\ForumController;
 use App\Http\Controllers\InventarisController;
+use App\Http\Controllers\KantorDinasController;
 use App\Http\Controllers\KategoriForumController;
 use App\Http\Controllers\pdf\PdfController;
 use App\Http\Controllers\PemetaanController;
@@ -102,6 +103,15 @@ Route::prefix('pemetaanalat')->middleware(["auth:api","role:Petugas,Admin,Kepala
     Route::post('/add', [PemetaanController::class, 'post']);
     Route::patch('/{id}/edit', [PemetaanController::class, 'update']);
     Route::delete('/{id}/delete', [PemetaanController::class, 'deletes']);
+});
+
+Route::prefix("kantor_dinas")->middleware(["auth:api","role:Petugas,Admin"])->group(function(){
+    Route::get("/", [KantorDinasController::class, 'index']);
+    Route::get("/table", [KantorDinasController::class, 'table']);
+    Route::get("/{id}", [KantorDinasController::class, 'find']);
+    Route::post('/add', [KantorDinasController::class, 'post']);
+    Route::patch('/{id}/edit', [KantorDinasController::class, 'update']);
+    Route::delete('/{id}/delete', [KantorDinasController::class, 'deletes']);
 });
 
 // ini sengaja public soalnya idah terlanjut buat di public
