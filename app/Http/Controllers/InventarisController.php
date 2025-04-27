@@ -17,7 +17,7 @@ class InventarisController extends Controller
     public function table(){
     return DataTables::of(Alat::all())
         ->addColumn("images", function ($data) {
-          return "<img src=".asset("image/inventaris/$data->foto")." width='100' height='100' />";
+            return "<img src=".asset("image/inventaris/$data->foto")." width='100' height='100' />";
         })
         ->rawColumns(["images"])
         ->make(true);

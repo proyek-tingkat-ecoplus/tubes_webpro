@@ -10,6 +10,7 @@ use App\Http\Controllers\ForumViewController;
 use App\Http\Controllers\ProposalController;
 use Illuminate\Support\Facades\Route;
 
+include_once __DIR__.'/pages.php';
 
 Route::get('/login', function () {
     return view('auth.login');
@@ -37,7 +38,6 @@ Route::get('/register', function () {
         return view('user.pofile_dinas', compact('user'));
     });
 
-
     Route::get('/forum', [ForumViewController::class, 'index'])->name('forums.index');
     Route::get('/forum/add', [ForumViewController::class, 'create'])->name('forums.create');
     Route::post('/forum', [ForumViewController::class, 'store'])->name('forum.store');
@@ -45,184 +45,47 @@ Route::get('/register', function () {
     Route::put('/forum/{id}/update', [ForumViewController::class,'update'])->name('forum.update');
     Route::put('/forum/{id}/comment', [ForumViewController::class, 'comment'])->name('forum.comment');
     Route::delete('forums/{id}',[ForumViewController::class, 'destroy'])->name('forums.destroy');
-//enduser view
-// dashboard
-Route::get('/dashboard', function () {
-    return view('admin.pages.dashboard');
-});
-
-// profile
-Route::get('/edit-profile', function () {
-    return view('admin.pages.edit-profile');
-});
-
-Route::get('/forgetPassword', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
-Route::post('/forgetPassword', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
-Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
-Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
-
-Route::get('/settings', function () {
-    return view('admin.pages.settings');
-})->name('settings');
-
-Route::prefix('pages')->group(function(){
-    Route::get('/user', function () {
-        return view('admin.pages.user.index');
+    //enduser view
+    // dashboard
+    Route::get('/dashboard', function () {
+        return view('admin.pages.dashboard');
     });
 
-    Route::get('/user/add', function () {
-        return view('admin.pages.user.add');
+    // profile
+    Route::get('/edit-profile', function () {
+        return view('admin.pages.edit-profile');
     });
 
-    Route::post('/user/add', function () {
-        return view('admin.pages.user.add');
+    Route::get('/forgetPassword', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');
+    Route::post('/forgetPassword', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('forget.password.post');
+    Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+    Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
+    Route::get('/settings', function () {
+        return view('admin.pages.settings');
+    })->name('settings');
+
+    Route::post('/user/edit', [UserController::class,'editProfile']);
+
+    Route::get('/proposal/{path}', function($path){
+        $fullPath = public_path($path);
+        if (file_exists($fullPath)) {
+            return response()->file($fullPath);
+        } else {
+            abort(404, 'File not found.');
+        }
+    })->where('path', '.*');
+
+    Route::prefix('api/user')->group(function () {
+        Route::get('/profile', [UserController::class, 'getProfile']);
+        Route::get('/role', [UserController::class, 'getRole']);
     });
 
-    Route::get('/user/{id}/editpass', function($id){
-        return view('admin.pages.user.editpass', ["id" => $id]);
+    Route::prefix("/export/pdf")->group(function(){
+        Route::get('/users', [PdfController::class, 'exportPdfUser']);
+        Route::get('/role', [PdfController::class, 'exportPdfRole']);
+        Route::get('/forum', [PdfController::class, 'exportPdfForum']);
+        Route::get('/comment', [PdfController::class, 'exportPdfComment']);
+        Route::get('/inventaris', [PdfController::class, 'exportPdfInventaris']);
+        Route::get('/pemetaan', [PdfController::class, 'exportPdfPemetaan']);
     });
-
-    Route::get('/user/{id}/detail', function($id){
-        return view('admin.pages.user.detail' ,["id" => $id]);
-    });
-
-    Route::get('/user/{id}/edit', function($id){
-        return view('admin.pages.user.edit' ,["id" => $id]);
-    });
-
-    Route::get('role', function(){
-        return view('admin.pages.role.index');
-    });
-
-    Route::get('role/add', function(){
-        return view('admin.pages.role.add');
-    });
-
-    Route::get('role/{id}/edit', function($id){
-        return view('admin.pages.role.edit', ["id" => $id]);
-    });
-
-    Route::get('forum', function(){
-        return view('admin.pages.forum.index');
-    });
-
-    Route::get('forum/add', function(){
-        return view('admin.pages.forum.add');
-    });
-
-    Route::get('forum/{id}/edit', function($id){
-        return view('admin.pages.forum.edit', ["id" => $id]);
-    });
-
-    Route::get('kategori', function(){
-        return view('admin.pages.kategori.index');
-    });
-
-    Route::get('kategori/add', function(){
-        return view('admin.pages.kategori.add');
-    });
-
-    Route::get('kategori/{id}/edit', function($id){
-        return view('admin.pages.kategori.edit', ["id" => $id]);
-    });
-
-    Route::get('comment', function(){
-        return view('admin.pages.comment.index');
-    });
-
-    Route::get('comment/add', function(){
-        return view('admin.pages.comment.add');
-    });
-
-    Route::get('comment/{id}/edit', function($id){
-        return view('admin.pages.comment.edit', ["id" => $id]);
-    });
-
-    Route::get('proposal', function(){
-        return view('admin.pages.proposal.index');
-    });
-
-    Route::get('proposal/add', function(){
-        return view('admin.pages.proposal.add');
-    });
-
-
-
-    Route::get('proposal/{id}/edit', function($id){
-        return view('admin.pages.proposal.edit', ["id" => $id]);
-    });
-
-    Route::get('inventaris', function(){
-        return view('admin.pages.inventaris.index');
-    });
-
-    Route::get('inventaris/add', function(){
-        return view('admin.pages.inventaris.add');
-    });
-
-    Route::get('inventaris/{id}/detailalat', function($id){
-        return view('admin.pages.inventaris.detailalat', ["id" => $id]);
-    });
-
-    Route::get('inventaris/{id}/edit', function($id){
-        return view('admin.pages.inventaris.edit', ["id" => $id]);
-    });
-
-    Route::get('pemetaanalat', function(){
-        return view('admin.pages.pemetaanalat.index');
-    });
-
-    Route::get('pemetaanalat/marker', function(){
-        return view('admin.pages.pemetaanalat.table.index');
-    });
-
-    Route::get('pemetaanalat/marker/add', function(){
-        return view('admin.pages.pemetaanalat.table.add');
-    });
-
-    Route::get('pemetaanalat/{id}/detailpemetaan', function($id){
-        return view('admin.pages.pemetaanalat.table.detailpemetaan', ["id" => $id]);
-    });
-
-    Route::get('pemetaanalat/{id}/edit', function($id){
-        return view('admin.pages.pemetaanalat.table.edit', ["id" => $id]);
-    });
-
-    Route::get('helper', function(){
-        return view('admin.pages.helperpage.index');
-    });
-
-    Route::get('helper/add', function(){
-        return view('admin.pages.helperpage.add');
-    });
-
-    Route::get('helper/{id}/edit', function($id){
-        return view('admin.pages.helperpage.edit', ["id" => $id]);
-    });
-});
-
-Route::post('/user/edit', [UserController::class,'editProfile']);
-
-Route::get('/proposal/{path}', function($path){
-    $fullPath = public_path($path);
-    if (file_exists($fullPath)) {
-        return response()->file($fullPath);
-    } else {
-        abort(404, 'File not found.');
-    }
-})->where('path', '.*');
-
-Route::prefix('api/user')->group(function () {
-    Route::get('/profile', [UserController::class, 'getProfile']);
-    Route::get('/role', [UserController::class, 'getRole']);
-});
-
-Route::prefix("/export/pdf")->group(function(){
-    Route::get('/users', [PdfController::class, 'exportPdfUser']);
-    Route::get('/role', [PdfController::class, 'exportPdfRole']);
-    Route::get('/forum', [PdfController::class, 'exportPdfForum']);
-    Route::get('/comment', [PdfController::class, 'exportPdfComment']);
-    Route::get('/inventaris', [PdfController::class, 'exportPdfInventaris']);
-    Route::get('/pemetaan', [PdfController::class, 'exportPdfPemetaan']);
-});
-

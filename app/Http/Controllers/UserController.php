@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\File;
 use App\Models\AddressDetails;
+use App\Models\KantorDinas;
 use App\Models\UserDetails;
 
 class UserController extends Controller
@@ -65,6 +66,7 @@ class UserController extends Controller
             "state" => "required",
             "country" => "required",
             "avatar" => "required|image",
+            'kantor_dinas_id' => 'required|exists:kantor_dinas,id',
         ]);
 
         $foto = $request->file('avatar');
@@ -77,7 +79,8 @@ class UserController extends Controller
             "password" => Hash::make($request->password),
             "email" => $request->email,
             "role_id" => $request->role,
-            "photo" => $path
+            "photo" => $path,
+            "kantor_dinas_id" => $request->kantor_dinas_id,
         ]);
 
         $address = AddressDetails::create([
@@ -98,6 +101,8 @@ class UserController extends Controller
 
         $userdet->address_id = $address->id;
         $userdet->save();
+
+
 
         return response()->json(["message" => "Data berhasil ditambahkan"]);
     }
@@ -130,6 +135,7 @@ class UserController extends Controller
             "state" => "required",
             "country" => "required",
             "avatar" => "required|image",
+            'kantor_dinas_id' => 'required',
         ]);
 
         $user = User::where('id', $id)->first();
@@ -147,11 +153,17 @@ class UserController extends Controller
         $foto->move(public_path("\image\profile"),$photo );
         $userdetail = UserDetails::where("id", $id)->first();
 
+        $kantor_dinas = KantorDinas::where("id", $id)->first();
+        if(empty($kantor_dinas)){
+            return response()->json(['error' => 'Invalid kantor_dinas id'], 402);
+        }
+
         $user = User::where("id", $id)->update([
             "username" => $request->name,
             "email" => $request->email,
             "role_id" => $request->role,
-            "photo" => $path
+            "photo" => $path,
+            "kantor_dinas_id" => $request->kantor_dinas_id,
         ]);
 
         AddressDetails::where("id", $userdetail->address_id)->update([

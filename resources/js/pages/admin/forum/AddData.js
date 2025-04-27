@@ -3,7 +3,7 @@ import {
     isLogin,
     me
 } from "../../../Authentication";
-import { selectUser } from "../helper/handleSelectRequest"
+import { selectKategori, selectUser } from "../helper/handleSelectRequest"
 import { forumValidation } from "../../admin/validation/forumValidation"
 
 
@@ -12,6 +12,7 @@ $(document).ready(function () {
         // ini buat select request
         try {
             selectUser()
+            selectKategori()
         } catch (err) {
             console.log(err);
         }

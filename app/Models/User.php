@@ -79,6 +79,10 @@ class User extends Authenticatable
         ->withPivot('judul_report', 'deskripsi', 'latidude','longitude','address','status', 'tanggal', 'rejected_at', 'approved_at', 'approved_by', 'rejected_by', 'approved_reason', 'rejected_reason');
     }
 
+    public function kantor_dinas(){
+        return $this->belongsTo(KantorDinas::class, 'kantor_dinas_id', 'id');
+    }
+
 
 
 

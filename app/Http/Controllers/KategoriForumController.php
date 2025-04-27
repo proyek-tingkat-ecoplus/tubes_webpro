@@ -11,7 +11,7 @@ use Yajra\DataTables\Facades\DataTables;
 class KategoriForumController extends Controller
 {
     public function index(){
-        return response()->json(["data" => Category::with(['forum'])->get()]);
+        return response()->json(["data" => Category::with(['forums'])->get()]);
     }
     public function table(){
       return DataTables::of(Category::with('forums')->get())
@@ -21,7 +21,6 @@ class KategoriForumController extends Controller
         ->rawColumns(['c'])
         ->make(true);
     }
-
     public function post(Request $request){
         $request->validate([
             "name" => "required",
