@@ -16,6 +16,26 @@ html.dark {
     --light-grey: #000;
     --white: #fff;
     --black: #000;
+
+    --text-color: #fff;
+}
+
+body.darkmode{
+    background-color: #121212;
+    color: white;
+}
+
+.darkmode p,
+.darkmode h1,
+.darkmode h2,
+.darkmode h3,
+.darkmode h4,
+.darkmode h5,
+.darkmode h6,
+.darkmode a,
+.darkmode span,
+.darkmode div {
+  color: white !important;
 }
 
 body{
