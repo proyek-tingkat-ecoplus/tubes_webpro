@@ -30,7 +30,7 @@
                                     <i class="fas fa-tag me-1"></i>{{ $forum->user->role->name ?? "Guest" }}
                                 </small>
                             </div>
-                            <div class="btn-group ms-auto btn-action" data-user="{{ $forum->user->id }}">
+                            <div class="btn-group ms-auto btn-action" data-user="{{ $forum->user->id ?? 0}}">
                                 <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle"
                                     data-bs-toggle="dropdown">
 
