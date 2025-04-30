@@ -1,104 +1,50 @@
 <!-- Remove the container if you want to extend the Footer to full width. -->
 <div>
     <!-- Footer -->
-    <footer class="text-center text-white footer">
-        <!-- Grid container -->
-        <div class="container">
-            <!-- Section: Links -->
-            <section class="mt-5">
-                <!-- Grid row-->
-                <div class="row text-center d-flex justify-content-center pt-5">
-                    <!-- Grid column -->
-                    <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="#!" class="text-white">Informasi</a>
-                        </h6>
+<img src="{{asset('asset/image/kincir.jpeg')}}" alt="Kota" class="img-kota" style=" height: 600px">
+<section class="footer-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6 mb-3">
+                <div class="footer-card">
+                    <div class="card footer-card">
+                        <img src="{{asset('asset/image/logo.png')}}" alt="Logo" class="link-image">
                     </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="#!" class="text-white">Forum</a>
-                        </h6>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="#!" class="text-white">Profile Dinas</a>
-                        </h6>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="#!" class="text-white">Hubungi Kami</a>
-                        </h6>
-                    </div>
-                    <!-- Grid column -->
-
-                    <!-- Grid column -->
-                    <div class="col-md-2">
-                        <h6 class="text-uppercase font-weight-bold">
-                            <a href="#!" class="text-white">Contact</a>
-                        </h6>
-                    </div>
-                    <!-- Grid column -->
+                    <p class="footer-text">Ecopulse merupakan suatu lembaga yang bergerak di bidang energi bersih terbaharukan, fokus ecopulse disini itu sediri menjadikan desa desa di lingkup bandung raya menjadi mempunyai energi yang bisa di pakai untung generasi generasi kedepannya.</p>
                 </div>
-                <!-- Grid row-->
-            </section>
-            <!-- Section: Links -->
-
-            <hr class="my-5" />
-
-            <!-- Section: Text -->
-            <section class="mb-5">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-lg-8">
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-                            distinctio earum repellat quaerat voluptatibus placeat nam,
-                            commodi optio pariatur est quia magnam eum harum corrupti
-                            dicta, aliquam sequi voluptate quas.
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <!-- Section: Text -->
-
-            <!-- Section: Social -->
-            <section class="text-center mb-5">
-                <a href="" class="text-white me-4">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="" class="text-white me-4">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="" class="text-white me-4">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a href="" class="text-white me-4">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="" class="text-white me-4">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="" class="text-white me-4">
-                    <i class="fab fa-github"></i>
-                </a>
-            </section>
-            <!-- Section: Social -->
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <p class="footer-title">EcoPulse</p>
+                <br>
+                <ul>
+                    <p class="footer-judul">Kompleks Tahura, Jl. Ir. H. Juanda No.99, Ciburial, Kec. Cimenyan, Kabupaten Bandung, Jawa Barat 40198</p>
+                </ul>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <p class="footer-title">Telephone</p>
+                <br>
+                <ul>
+                    <p class="footer-judul">+22-3214458</p>
+                </ul>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-3">
+                <p class="footer-title">Surel</p>
+                <br>
+                    <p class="footer-judul">admin.Ecopulse@gmail.com</p>
+            </div>
         </div>
-        <!-- Grid container -->
-
-        <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-            © 2020 Copyright:
-            <a class="text-white" href="https://mdbootstrap.com/">EcoPulse.com</a>
+        <div class="row my-3">
+            <div class="col-lg-12 col-md-12">
+                <br>
+                <p class="footer-main-title">© <?php echo date("Y"); ?> Ecopulse</p>
+            </div>
         </div>
-        <!-- Copyright -->
-    </footer>
-</div>
+    </div>
+</section>
+
+<!-- Scroll Back To Top -->
+<button onclick="topFunction()" id="totop" title="Go to top"><svg xmlns="http://www.w3.org/2000/svg" width="28"
+        height="20" fill="currentColor" class="bi bi-arrow-up" viewBox="0 0 16 16">
+        <path fill-rule="evenodd"
+            d="M8 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L7.5 2.707V14.5a.5.5 0 0 0 .5.5z" />
+</svg></i></button>
