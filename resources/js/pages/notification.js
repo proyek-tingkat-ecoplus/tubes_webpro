@@ -1,8 +1,7 @@
 export const getNotification = () => {
     let storedNotifications = localStorage.getItem("Notification");
 
-
-    if (storedNotifications.length <= 2) {
+    if (!storedNotifications || storedNotifications === "[]") {
         console.log(storedNotifications);
         SetNotification("Welcome to Notification");
         storedNotifications = localStorage.getItem("Notification");
@@ -46,9 +45,6 @@ export const getNotification = () => {
             </li>
         `);
     }
-
-
-
 };
 
 export const SetNotification = (message) => {
@@ -64,6 +60,15 @@ export const SetNotification = (message) => {
         localStorage.setItem("Notification", JSON.stringify([{ message, time }]));
     }
 };
+
+export const ClearNotification = () => {
+    const storedNotifications = localStorage.getItem("Notification");
+    if (storedNotifications) {
+        const notifications = JSON.parse(storedNotifications);
+        notifications.length = 0; // Clear the array
+        localStorage.setItem("Notification", JSON.stringify(notifications));
+    }
+}
 
 export const ToastLastNotification = () => {
     const storedNotifications = localStorage.getItem("Notification");

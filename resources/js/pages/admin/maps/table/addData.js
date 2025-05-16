@@ -3,12 +3,13 @@ import { getTokens, isLogin } from "../../../../Authentication"
 import { selectAlat, selectUser } from "../../helper/handleSelectRequest";
 import { inventarisValidation } from "../../validation/inventarisValidation";
 import { pemetaanValidation } from "../../validation/pemetaanValidation";
+import { apiKey } from "..";
 
 
 function loadGoogleMapsScript() {
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
-        script.src = "https://maps.gomaps.pro/maps/api/js?key=AlzaSyQEyf5CPLnTe2dbPqAUaYujQkKdzVFl74p&libraries=places,geometry";
+        script.src = `https://maps.gomaps.pro/maps/api/js?key=${apiKey}&libraries=places,geometry`;
         script.async = true;
         script.defer = true;
         script.onload = resolve;

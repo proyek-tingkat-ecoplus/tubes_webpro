@@ -129,7 +129,7 @@ export const SetTimeOut = () => { // logout 30 detik
         window.timer = setTimeout(() => {
             console.log('Logging out due to inactivity.');
             //LogoutWithoutAlert();
-        }, 30000); // kalau udh 30 detik, bakal logout
+        }, 300000000); // kalau udh 30 detik, bakal logout
     }
 
     function countdown() { // ini buat countdown waktu
