@@ -33,11 +33,6 @@
             <div class="line">
                 <span>OR</span>
             </div>
-            <button><i class="fa-brands fa-google icon-button"></i>Masuk dengan Google</button>
-            <button><i class="fa-brands fa-facebook icon-button"></i>Masuk dengan Facebook</button>
-            <div class="line">
-                <span>OR</span>
-            </div>
             <div class="bottom-section">
                 <div><a href="/forgetPassword">Forgot Password?</a></div>
                 <div>Belum punya akun? <a href="/register">Daftar</a></div>
