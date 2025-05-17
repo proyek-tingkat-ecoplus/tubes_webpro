@@ -1,25 +1,64 @@
 @extends('admin.layout.master')
 @section('title', 'Pemetaan Alat')
+@push('styles')
+    <style>
+        .select2-container--bootstrap-5 .select2-selection--single {
+            border: 1px solid #ced4da !important; /* Bootstrap's default border color */
+            border-radius: 0.375rem; /* Match Bootstrap's border-radius */
+            height: calc(2.25rem + 2px); /* Match Bootstrap's input height */
+            padding-top:8px;
+            padding: 8px 0px 2rem 15px;
+        }
+        .select2-container--bootstrap-5 .select2-selection--single .select2-selection__rendered {
+            line-height: 1.5; /* Align text vertically */
+        }
+        .select2-container--bootstrap-5 .select2-selection--single .select2-selection__arrow {
+            height: calc(2.25rem + 2px); /* Align arrow with input height */
+        }
+        .select2-container--bootstrap-5 .select2-results__option {
+            padding: 8px 15px; /* Add padding to options */
+            background-color: #f0f0f0 !important; /* Light gray background */
+        }
+        /* Highlighted/selected option */
+        .select2-container--bootstrap-5 .select2-results__option--highlighted {
+            background-color: #004d40 !important; /* Bootstrap primary color for highlight */
+            color: #fff !important; /* White text for contrast */
+        }
+    </style>
+@endpush
 @section('content')
 <div class="content-wrapper">
-    <div class="container">
-        <div class="card mt-4">
-            <div class="row mt-2 ms-2">
-                <div class="col-md-5">
-                    <h4>Pemetaan Alat</h4>
-                </div>
-                <div class="col-md-3">
-                    <input type="text" id="location-input" class="form-control" placeholder="Search location...">
-                </div>
-                <div class="col-md-1">
-                    <button class="btn btn-primary" id="searchBtn">Search</button>
-                </div>
-                <div class="col-md-2">
-                    <button class="btn btn-primary btn-excel" id="searchBtn">Export Excel</button>
-                </div>
 
+    <div class="container">
+    <div class="card">
+            <div class="row m-2">
+            <div class="col-md-3">
+                <label for="" class="form-label">Pencarian lokasi :</label>
+                <input type="text" id="location-input" class="form-control" placeholder="Search location...">
             </div>
-            <div id="googleMap" class="mt-2" style="width:100%; height:380px;"></div>
+            <div class="col-md-3">
+                <label for="" class="form-label">Kode alat :</label>
+                <select name="nama_alat" class="form-control select2  select_kode_alat" id="" >
+
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="" class="form-label">tahun :</label>
+
+                <select name="tahun_alat" class="form-control select2 select_tahun_operasi" id="">
+                    <option value="2024">2024</option>
+                    <option value="2025">2025</option>
+                    <option value="2026">2026</option>
+                </select>
+            </div>
+            <div class="col-md-3 mt-md-0">
+                <button class="btn btn-primary mt-md-4 mt-2" id="search">Search</button>
+                <button class="btn btn-primary mt-md-4 mt-2" id="clear">Reset</button>
+            </div>
+        </div>
+    </div>
+        <div class="card mt-2">
+            <div id="googleMap" class="m-2" style="width:98%; height:380px;posision:relative;"></div>
         </div>
     </div>
 </div>
