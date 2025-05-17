@@ -8,6 +8,28 @@ var marks = [];
 var currentMarker = null;
 // remove modal backdrop
 $('.modal-backdrop').remove();
+$('.select2').select2({ theme: 'bootstrap-5', width: '100%' });
+
+const setFormCodeAlat = () => {
+    $.ajax({
+        url: '/api/pemetaanalat',
+        type: 'GET',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            'Authorization': 'Bearer ' + getTokens()
+        },
+        success: function (data) {
+            data.data.forEach(function (data, index) {
+                console.log(data);
+                $('.select_kode_alat').append(`<option value=" ${data.id}">${data.alat.kode_alat}</option>`);
+            });
+        },
+        error: function (err) {
+            console.log(err);
+        }
+    });
+}
+
 
 export const apiKey = "AlzaSyQEyf5CPLnTe2dbPqAUaYujQkKdzVFl74p";
 
@@ -29,11 +51,25 @@ loadGoogleMapsScript().then(() => {
 
 // Initialize map
 function initialize() {
+    setFormCodeAlat();
+    var bandungBounds = new google.maps.LatLngBounds( // lat lang hanya 2 parameter
+        new google.maps.LatLng(-7.05, 107.45), // Barat daya (southwest)
+        new google.maps.LatLng(-6.75, 107.75)  // Timur laut (northeast)
+    )
+    // console.log(bandungBounds.toString());
     var defaultLocation = new google.maps.LatLng(-6.921229357282421, 107.60953903198242);
     var mapOptions = {
         center: defaultLocation,
         zoom: 12,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
+        minZoom:10,
+        maxZoom:15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        restriction: {
+            latLngBounds: bandungBounds,
+            strictBounds: true // Mencegah pengguna keluar dari batas
+        },
+        streetViewControl: false,
+        disableDefaultUI: true
     };
 
     map = new google.maps.Map(document.getElementById("googleMap"), mapOptions);
@@ -43,19 +79,34 @@ function initialize() {
         openAddLocationModal(event.latLng.lat(), event.latLng.lng());
     });
     }
-
+    // fetch semua data
     fetchGetData();
 
     // Search functionality
-    const locationInput = document.getElementById('location-input');
-    const autocomplete = new google.maps.places.Autocomplete(locationInput);
-    autocomplete.addListener('place_changed', function () {
-        var place = autocomplete.getPlace();
-        if (place.geometry) {
-            map.setCenter(place.geometry.location);
-            map.setZoom(14);
-        }
-    });
+        const locationInput = document.getElementById('location-input');
+
+            const autocomplete = new google.maps.places.Autocomplete(locationInput, {
+                bounds: bandungBounds, // ini kasih restriction biar ga bisa keluar dari bandung
+                strictBounds: true, // ini buat rule nya
+                types: ['geocode'], // ini type nya make yg geocode
+                componentRestrictions: { country: 'id' } // harus indonesia
+            });
+            console.log('autocomplete:', autocomplete);
+
+            // Handle place selection
+            autocomplete.addListener('place_changed', function () {
+                const place = autocomplete.getPlace(); // get place
+                console.log('Selected place:', place);
+                if (place.geometry && bandungBounds.contains(place.geometry.location)) { // jika ga sesuai dengan bouns nya maka akan error
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(14);
+                } else {
+                    alert('Lokasi di luar wilayah Bandung. Silakan pilih lokasi di Bandung.');
+                    locationInput.value = '';
+                }
+            });
+
+
 }
 
 function findAdress(lat, lng) {
@@ -97,21 +148,67 @@ function addMarker(location, index) {
         showMarkerDetails(location, marker, index);
     });
 
-    marks.push(marker);
+    marks.push(marker); // simpan ke dalam array marker
+}
+
+$('#search').on('click', function () {
+    clearAllMarkers();
+    // Get selected values from select2 dropdowns
+    const kodeAlat = $('.select_kode_alat').select2('data')[0]?.text || '';
+    const tahunOperasi = $('.select_tahun_operasi').select2('data')[0]?.text || '';
+
+    // Build query parameters
+    const queryParams = [
+        `kode_alat=${encodeURIComponent(kodeAlat)}`,
+        `tahun_operasi=${encodeURIComponent(tahunOperasi)}`
+    ].filter(param => param.split('=')[1] !== ''); // Remove empty params di split [key][=][value] kalau value nya kosong ga di tampilin
+
+    // Create query string
+    const queryString = queryParams.length > 0 ? `${queryParams.join('&')}` : ''; // gabungin semua array nya
+    // console.log(queryString);
+
+    // Fetch data
+    fetchGetData(queryString);
+});
+
+$('#clear').on('click', function () {
+    clearAllMarkers();
+    fetchGetData();
+});
+
+
+function clearAllMarkers() {
+    // Remove all markers from the map
+    marks.forEach(function (marker) {
+        marker.setMap(null);
+    });
+    // Clear the marks array
+    marks = [];
 }
 
 // Fetch data from the API and populate the map with markers
-function fetchGetData() {
+function fetchGetData(queryString = '') {
+    let url = queryString ? `/api/pemetaanalat?${queryString}` : '/api/pemetaanalat';
     $.ajax({
-        url: '/api/pemetaanalat',
+        url: url,
         type: 'GET',
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
             'Authorization': 'Bearer ' + getTokens()
         },
         success: function (data) {
+            if(data.data.length == 0){
+                alert("Data tidak ditemukan");
+                fetchGetData();
+                return;
+            }
             data.data.forEach(function (location, index) {
                 addMarker(location, index);
+                if(data.data.length < 2){
+                    console.log("No data found");
+                    map.setCenter(new google.maps.LatLng(location.latitude, location.longitude));
+                    map.setZoom(10);
+                }
             });
         },
         error: function (err) {
@@ -119,6 +216,7 @@ function fetchGetData() {
         }
     });
 }
+
 
 // Open modal for adding a new location
 function openAddLocationModal(lat, lng)  {

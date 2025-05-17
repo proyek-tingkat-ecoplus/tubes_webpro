@@ -12,6 +12,18 @@ use Yajra\DataTables\Facades\DataTables;
 class PemetaanController extends Controller
 {
     public function index(){
+        if(request()->query('kode_alat') != null){
+            $alat = Alat::where('kode_alat', request()->query('kode_alat'))->first();
+            $reportAlaat = ReportAlat::where('alat_id', $alat->id)->with(['alat','user','approved_by','rejected_by'])->get();
+            if(request()->query('tahun_operasi') != null && $reportAlaat != null){
+                    $reportAlaat = $reportAlaat->where('tahun_operasi', request()->query('tahun_operasi'));
+            }
+            if(!empty($reportAlaat)){
+                return response()->json(["data" => $reportAlaat]);
+            }else{
+                return response()->json(["message" => "Data tidak ditemukan"]);
+            }
+        }
         return response()->json(["data" => ReportAlat::with(['alat','user','approved_by','rejected_by'])->get()]);
     }
     public function table(){
