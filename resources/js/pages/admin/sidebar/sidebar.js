@@ -14,9 +14,11 @@ $(document).ready(async function (){
     if(cekrole(["Petugas","Admin"])){
         $(".menu-master-forum").removeClass("d-none");
         $(".menu-forum").removeClass("d-none");
+        $(".menu-kategori").removeClass("d-none");
         $(".menu-comment").removeClass("d-none");
         $(".menu-inventaris").removeClass("d-none");
         $('.menu-pemetaan').removeClass("d-none");
+
     }
 
     if(cekrole(["Petugas","Admin","Kepala Desa"])){

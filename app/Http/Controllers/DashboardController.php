@@ -12,6 +12,12 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
 
+    public function view(){
+        $mostCommented = Forum::withCount('comments')->orderBy('comments_count',"DESC")->limit(5)->get();
+        return view('admin.pages.dashboard',[
+            'mostCommented' => $mostCommented,
+        ]);
+    }
     public function map_ARRAY($data) {
         $filtered = [];
         $bulanMap = [];

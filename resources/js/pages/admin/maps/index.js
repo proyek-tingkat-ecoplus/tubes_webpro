@@ -31,7 +31,7 @@ const setFormCodeAlat = () => {
 }
 
 
-export const apiKey = "AlzaSyQEyf5CPLnTe2dbPqAUaYujQkKdzVFl74p";
+export const apiKey = "AlzaSyXhjziIbF05AHp51D6Ej-FoNMQvYolZRXS";
 
 function loadGoogleMapsScript() {
     return new Promise((resolve, reject) => {
@@ -230,8 +230,10 @@ function openAddLocationModal(lat, lng)  {
 
 // Show location details in the modal
 function showMarkerDetails(location, marker, index) {
-    console.log(location);
+    // console.log(location);
+    console.log(location.deskripsi);
     $("#modal-kode-alat").text(location.alat.kode_alat);
+    $('#modal-deskripsi').text(location.deskripsi);
     $("#modal-nama-alat").text(location.alat.nama_alat);
     $("#modal-jenis-alat").text(location.alat.jenis);
     $("#modal-binwas").text(location.binwas);
@@ -361,6 +363,7 @@ document.getElementById('addLocationForm').addEventListener('submit', function (
                     text: 'Location saved successfully'
                 });
                 $("#addLocationModal").modal('hide');
+                $('.modal-backdrop').remove();
                 document.getElementById('location-photo').value = "";
                 fetchGetData();
 
@@ -373,7 +376,7 @@ document.getElementById('addLocationForm').addEventListener('submit', function (
                         var input = $(input[name="${key}"]);
                         input.addClass("is-invalid");
                         var errorMessage = errors[key].join(', ');
-                        input.next().text(${key.charAt(0).toUpperCase() + key.slice(1)}: ${errorMessage});
+                        input.next().text(`${key.charAt(0).toUpperCase() + key.slice(1)}: ${errorMessage} `);
                     });
                 }
                 Swal.fire({
@@ -384,6 +387,10 @@ document.getElementById('addLocationForm').addEventListener('submit', function (
             }
         });
     }
+});
+
+$('.btn-close').click(function(){
+    $('.modal-backdrop').remove();
 });
 
 // Handle location deletion
