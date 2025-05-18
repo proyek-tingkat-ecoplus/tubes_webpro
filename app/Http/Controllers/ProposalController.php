@@ -27,7 +27,7 @@ class ProposalController extends Controller
         return response()->json(['data' => $proposals]);
     }
     public function table(){
-        return DataTables::of(Proposal::with(['user', 'approved_by', 'rejected_by'])->get())
+        return DataTables::of(Proposal::with(['user', 'approved_by', 'rejected_by'])->orderBy('id','desc')->get())
         ->addColumn('title', function($data){
             return strlen($data->title) > 10 ? substr($data->title, 0, 15)."..." : $data->title;
         })

@@ -3,7 +3,7 @@ import { proposalValidation } from "../admin/validation/poposalValidation";
 import { SetNotification } from "../notification";
 
 $(document).ready(function () {
-if (isLogin(["Admin", "Kepala Desa"])) {
+if (isLogin(["Admin", "Kepala Desa", "Petugas"])) {
     if (localStorage.getItem("alert")) {
         const alert = JSON.parse(localStorage.getItem("alert"))[0];
         const color = (alert.status == "success") ? "success" : "danger";

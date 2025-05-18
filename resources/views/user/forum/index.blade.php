@@ -24,6 +24,16 @@
                     </a>
                 </div>
 
+        <div class="row g-5">
+            <!-- Kolom Utama -->
+            <div class="col-lg-8">
+
+                <!-- Tombol Buat Post -->
+                <div class="mb-4">
+                    <a href="{{ route('forums.create') }}" class="btn w-100 shadow-sm">
+                        <i class="fas fa-pen me-2"></i> Buat Post Baru
+                    </a>
+                </div>
 
                 @foreach ($forums as $forum)
                 <div class="card mb-4 shadow-sm rounded-4 border-0">
@@ -88,43 +98,29 @@
                             </div>
                         </div>
 
-                        <!-- Section Komentar -->
-                        <div class="comment-section mt-4 d-none">
-                            <!-- Form Komentar -->
-
-                            <div class="d-flex mb-3 comment-form">
-                                <img src="{{ asset($forum->user->image ?? 'image/profile/default.png') }}" class="rounded-circle me-2" alt="User Avatar"
-                                    style="width: 32px; height: 32px;">
-                                <div class="flex-grow-1">
+                        <!-- Komentar -->
+                        <div class="comment-section d-none mt-4">
+                            <div class="d-flex align-items-start mb-3">
+                                <img src="{{ asset($forum->user->photo ?? 'image/profile/default.png') }}" class="rounded-circle" alt="User Avatar" style="width: 32px; height: 32px;">
+                                <div class="ms-3 w-100">
                                     <form action="{{ route('forum.comment', $forum->id) }}" method="POST">
-                                        @method('PUT')
                                         @csrf
-                                        <input type="text" name="user_id" id="user_id" hidden>
-                                        <textarea class="form-control @error('comment') is-invalid @enderror" name="comment" rows="2"
-                                        placeholder="Tulis komentar Anda..."></textarea>
-                                        @error('comment')
-                                        <div class="text-danger">{{ $message }}</div>
-                                        @enderror
-                                    <button class="btn btn-sm btn-primary mt-2">
-                                        <i class="fas fa-paper-plane me-1"></i>Kirim
-                                    </button>
+                                        @method('PUT')
+                                        <textarea class="form-control" name="comment" rows="2" placeholder="Tulis komentar..."></textarea>
+                                        <button class="btn btn-primary btn-sm mt-2"><i class="fas fa-paper-plane me-1"></i>Kirim</button>
                                     </form>
                                 </div>
                             </div>
+
                             @foreach ($forum->comments as $comment)
-                            <!-- Daftar Komentar -->
-                            <div class="comments-list">
-                                <!-- Komentar 1 -->
-                                <div class="d-flex mt-3">
-                                    <img src="{{ asset($comment->user->photo) }}" class="rounded-circle me-2"
-                                        alt="User Avatar" style="width: 32px; height: 32px;">
-                                    <div class="flex-grow-1 bg-light rounded p-3">
-                                        <div class="d-flex justify-content-between align-items-center mb-2">
-                                            <h6 class="mb-0">Budi Santoso</h6>
-                                            <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
-                                        </div>
-                                        <p class="mb-0">{{ $comment->content }}</p>
+                            <div class="d-flex align-items-start mb-3">
+                                <img src="{{ asset($comment->user->photo ?? 'image/profile/default.png') }}" class="rounded-circle" alt="User Avatar" style="width: 32px; height: 32px;">
+                                <div class="ms-3 bg-light rounded p-3 w-100">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <strong>{{ $comment->user->user_details->first_name ?? 'Anonim' }}</strong>
+                                        <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
                                     </div>
+                                    <p class="mb-0">{{ $comment->content }}</p>
                                 </div>
                             </div>
                             @endforeach
