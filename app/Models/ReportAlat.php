@@ -12,7 +12,7 @@ class ReportAlat extends Model
         'alat_id',
         'user_id',
         'judul_report',
-        'desripsi',
+        'deskripsi',
         'binwas',
         'tahun_operasi',
         'latitude',

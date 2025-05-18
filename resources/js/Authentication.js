@@ -61,7 +61,7 @@ export const isLogin = async (requiredRole) => {
     } catch (e) {
         console.error('Error parsing authentication data:', e);
         if (window.location.pathname !== "/login") {
-            if (requiredRole === "guest") {
+            if (requiredRole === "Guest") {
                 redirect('/');
             } else {
                 redirect('/login');
@@ -129,7 +129,7 @@ export const SetTimeOut = () => { // logout 30 detik
         window.timer = setTimeout(() => {
             console.log('Logging out due to inactivity.');
             //LogoutWithoutAlert();
-        }, 300000000); // kalau udh 30 detik, bakal logout
+        }, 30000); // kalau udh 30 detik, bakal logout
     }
 
     function countdown() { // ini buat countdown waktu

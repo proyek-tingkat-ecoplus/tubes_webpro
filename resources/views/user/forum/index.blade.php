@@ -12,17 +12,17 @@
 </div>
 
 <div class="py-5" style="background-color: #f7f9fb;">
-    <div class="container">
+    <div class="container mb-5">
         <div class="row g-5">
             <!-- Kolom Utama -->
-            <div class="col-lg-8">
-
+            <div class="col-lg-12">
+{{--
                 <!-- Tombol Buat Post -->
                 <div class="mb-4">
                     <a href="{{ route('forums.create') }}" class="btn shadow-sm" style="background-color: #003030; color: white;">
                         <i class="fas fa-pen me-2" style="color:white"></i> Buat Post Baru
                     </a>
-                </div>
+                </div> --}}
 
         <div class="row g-5">
             <!-- Kolom Utama -->
@@ -30,7 +30,7 @@
 
                 <!-- Tombol Buat Post -->
                 <div class="mb-4">
-                    <a href="{{ route('forums.create') }}" class="btn w-100 shadow-sm">
+                    <a href="{{ route('forums.create') }}" class="btn w-100 shadow-sm btn-post">
                         <i class="fas fa-pen me-2"></i> Buat Post Baru
                     </a>
                 </div>
@@ -47,7 +47,7 @@
                                 <small class="text-muted">{{ $forum->created_at->diffForHumans() }} &middot; {{ $forum->user->role->name ?? "Guest" }}</small>
                             </div>
 
-                            <div class="ms-auto dropdown">
+                            <div class="ms-auto dropdown btn-action" data-user="{{ $forum->user->id }}">
                                 <button class="btn btn-sm btn-light rounded-circle" type="button" data-bs-toggle="dropdown">
                                     <i class="fas fa-ellipsis-h"></i>
                                 </button>
@@ -74,7 +74,7 @@
 
                         <!-- Footer -->
                         <div class="d-flex align-items-center mt-3">
-                            <button class="btn btn-outline-secondary btn-sm me-2 toggle-comments">
+                            <button class="btn btn-outline-secondary btn-sm me-2 toggle-comments comment-form">
                                 <i class="fas fa-comments me-1"></i> {{ $forum->comments->count() }} Komentar
                             </button>
 
@@ -106,6 +106,7 @@
                                     <form action="{{ route('forum.comment', $forum->id) }}" method="POST">
                                         @csrf
                                         @method('PUT')
+                                        <input type="text" name="user_id" id="user_id" hidden>
                                         <textarea class="form-control" name="comment" rows="2" placeholder="Tulis komentar..."></textarea>
                                         <button class="btn btn-primary btn-sm mt-2"><i class="fas fa-paper-plane me-1"></i>Kirim</button>
                                     </form>
@@ -117,7 +118,7 @@
                                 <img src="{{ asset($comment->user->photo ?? 'image/profile/default.png') }}" class="rounded-circle" alt="User Avatar" style="width: 32px; height: 32px;">
                                 <div class="ms-3 bg-light rounded p-3 w-100">
                                     <div class="d-flex justify-content-between mb-1">
-                                        <strong>{{ $comment->user->user_details->first_name ?? 'Anonim' }}</strong>
+                                        <strong>{{ $comment->user->user_details->first_name ?? $comment->user->role->name ?? 'Anonim' }}</strong>
                                         <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
                                     </div>
                                     <p class="mb-0">{{ $comment->content }}</p>
@@ -173,6 +174,7 @@
                     </div>
                 </div>
             </div>
+        </div>
 
         </div>
     </div>
