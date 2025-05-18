@@ -95,7 +95,7 @@
 
 </style>
 @vite('resources/js/pages/user/forum.js')
-<script>
+{{-- <script>
     // Validasi form sederhana
     tinymce.init({
         selector: 'textarea',
@@ -128,7 +128,7 @@
             'See docs to implement AI Assistant')),
     });
 
-</script>
+</script> --}}
 @endsection
 
 

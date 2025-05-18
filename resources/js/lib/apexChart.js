@@ -30,6 +30,20 @@ const getData = async () => {
                 "name": "Direject",
                 "data": response['proposal_count_rejected']
             }
+        ],
+        "chart_daerah":[
+            {
+                "name": "bandung_barat",
+                "data": response['proposal_daerah_bandungbarat']
+            },
+            {
+                "name": "bandung_timur",
+                "data": response['proposal_daerah_bandungtimur']
+            },
+            {
+                "name": "bandung_selatan",
+                "data": response['proposal_daerah_bandungselatan']
+            }
         ]
     }
 }
@@ -123,7 +137,68 @@ var options = {
 chart = new ApexCharts(document.querySelector('.bar_chart'), options)
 }
 
-init();
+var chart_daerah;
+const init_daerah = async () => {
+const data = await getData();
+var json = {
+    "chart_daerah": data["chart_daerah"],
+};
 
-export {chart} ;
+var color1 = '#264417';
+var color2 = '#437c4f';
+var color3 = '#437c4f';
+var options = {
+    chart: {
+        height: 350,
+        type: 'bar',
+        background: '#ffff',
+        foreColor: '#333',
+    },
+    series: json.chart_daerah, // Use data from JSON
+    xaxis: {
+        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        labels: {
+            style: {
+                colors: '#a1acb8',
+            },
+        },
+    },
+    fill: {
+        opacity: 1,
+        colors: [color1, color2,  color3],
+    },
+    legend: {
+        show: true,
+        labels: {
+            colors: '#a1acb8',
+            useSeriesColors: false,
+        },
+    },
+    colors: [color1, color2, color3],
+        // plotOptions: {
+        //     bar: {
+        //         horizontal: false,
+        //         columnWidth: '55%',
+        //         endingShape: 'rounded',
+        //     },
+        // },
+    dataLabels: {
+        enabled: true,
+    },
+    stroke: {
+        show: true,
+        width: 2,
+        colors: ['#fff'],
+    },
+    grid: {
+        borderColor: '#e0e6ed',
+        strokeDashArray: 4,
+    },
+};
+chart_daerah = new ApexCharts(document.querySelector('.bar_chart_daerah'), options)
+}
+init();
+init_daerah();
+export {chart,chart_daerah} ;
+
 

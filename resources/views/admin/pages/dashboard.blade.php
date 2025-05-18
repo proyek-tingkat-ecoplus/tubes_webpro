@@ -144,6 +144,23 @@
     </div>
 
 </div>
+<div class="row">
+    <!-- Total Revenue -->
+    <div class="col-12 col-lg-9 order-2 order-md-3 order-lg-2 mb-4">
+        <div class="card">
+            <div class="row row-bordered g-0">
+                <div class="col-md-12">
+                    <h5 class="card-header m-0 me-2 pb-3">Rekap proposal daerah</h5>
+                    <div class="bar_chart_daerah p-3 pe-5"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div id="calendar"></div>
+    </div>
+
+</div>
 </div>
 
 @endsection

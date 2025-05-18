@@ -5,7 +5,8 @@ import {
     me
 } from "../../Authentication";
 import {
-    chart
+    chart,
+    chart_daerah
 } from "../../lib/apexChart";
 import {
     initializeCalendar
@@ -58,7 +59,7 @@ $(document).ready(async function  ()  {
         if (window.location.pathname == "/dashboard") {
             // render chart
             chart.render();
-
+            chart_daerah.render();
             // rende calendar
             initializeCalendar();
         }

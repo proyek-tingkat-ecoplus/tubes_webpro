@@ -37,6 +37,9 @@ class DashboardController extends Controller
         $proposal_approved = $this->map_ARRAY(Proposal::where('status','approved')->selectRaw('MONTH(tanggal_pengajuan) as bulan,COUNT(*) as total')->groupByRaw('bulan')->orderBy('bulan','asc')->get()->toArray());
         $proposal_rejected = $this->map_ARRAY(Proposal::where('status','rejected')->selectRaw('MONTH(tanggal_pengajuan) as bulan,COUNT(*) as total')->groupByRaw('bulan')->orderBy( 'bulan','asc')->get()->toArray());
 
+        $proposal_daerah_bandungbarat = $this->map_ARRAY(Proposal::where('daerah','bandung_barat')->selectRaw('MONTH(tanggal_pengajuan) as bulan,COUNT(*) as total')->groupByRaw('bulan')->orderBy('bulan','asc')->get()->toArray());
+        $proposal_daerah_bandungtimur = $this->map_ARRAY(Proposal::where('daerah','bandung_timur')->selectRaw('MONTH(tanggal_pengajuan) as bulan,COUNT(*) as total')->groupByRaw('bulan')->orderBy('bulan','asc')->get()->toArray());
+        $proposal_daerah_bandungselatan = $this->map_ARRAY(Proposal::where('daerah','bandung_selatan')->selectRaw('MONTH(tanggal_pengajuan) as bulan,COUNT(*) as total')->groupByRaw('bulan')->orderBy('bulan','asc')->get()->toArray());
 
         return response()->json([
             'total_forum' => $forum,
@@ -46,7 +49,10 @@ class DashboardController extends Controller
             'total_pemetaan' => $pemetaan,
             'proposal_count_pending'=> $proposal_pending,
             'proposal_count_approved'=> $proposal_approved,
-            'proposal_count_rejected'=> $proposal_rejected
+            'proposal_count_rejected'=> $proposal_rejected,
+            'proposal_daerah_bandungbarat' => $proposal_daerah_bandungbarat,
+            'proposal_daerah_bandungtimur' => $proposal_daerah_bandungtimur,
+            'proposal_daerah_bandungselatan' => $proposal_daerah_bandungselatan
         ]);
     }
 }

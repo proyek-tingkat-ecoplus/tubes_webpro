@@ -6,11 +6,12 @@
 <!-- jQuery dan Bootstrap -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+<!-- HERO SECTION -->
+<div class="d-flex align-items-center" style="background: url('asset/image/pabrik.jpeg') center center/cover no-repeat; height: 600px; background-color: rgba(0,0,0,0.6); background-blend-mode: darken;"></div>
 <!-- Profil Kepdes JS -->
 <script src="{{ asset('asset/js/profil_kepdes.js') }}"></script>
 
-<div class="container-fluid hero-1 mb-3">
+<div class="container-fluid hero-1 mb-3" style="margin-top: -100px; border-radius: 15px;">
     <div class="card mx-auto card-style" style="z-index: 2">
         <div class="row">
             <!-- Form Section (Kiri) -->
@@ -33,7 +34,7 @@
                 @endif
 
                 <!-- Form Section -->
-                <form action="mailto:admin.Ecopulse@gmail.com" method="post" enctype="text/plain" class="p-5" id="contactForm">
+                <form action="mailto:admin.Ecopulse@gmail.com" method="post" enctype="text/plain" class="p-5" id="contactForm" >
                     <div class="fs-3 fw-bold mb-3">Form Hubungi Kami</div>
 
                     <div class="row">
@@ -73,12 +74,9 @@
                     </div>
 
                     <div class="row mt-2">
-                        <div class="col-md-11">
-                            <hr>
-                        </div>
                         <div class="col-md-1">
-                            <button type="submit" class="telegram-btn" id="submitButton">
-                                <i class="fa-brands fa-telegram me-2 btn-icon"></i>
+                            <button type="submit" class="btn btn-sm text-white" id="submitButton" style="background-color: #003030">
+                                Kirim
                             </button>
                         </div>
                     </div>
@@ -116,7 +114,7 @@
 
                 <!-- Google Maps -->
                 <div class="ratio ratio-21x9 ratio-style">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2883.4031134895417!2d10.396597!3d43.722952!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12d591a6c44e88cd%3A0x32eca9b1d554fc03!2sTower%20of%20Pisa!5e0!3m2!1sen!2sid!4v1729254277951!5m2!1sen!2sid"
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13624.303093780829!2d107.64967217886876!3d-6.94350527415583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e8172d074f1f%3A0xf309f9b68cb6a7f8!2sDinas%20Energi%20dan%20Sumber%20Daya%20Mineral%20Prov.%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1746086333996!5m2!1sid!2sid"
                         allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>

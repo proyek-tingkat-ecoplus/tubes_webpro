@@ -270,10 +270,10 @@ document.getElementById('addLocationForm').addEventListener('submit', function (
                 if(err.status == 422){
                     var errors = err.responseJSON.errors;
                     Object.keys(errors).forEach((key) => {
-                        var input = $(`input[name="${key}"]`);
+                        var input = $(input[name="${key}"]);
                         input.addClass("is-invalid");
                         var errorMessage = errors[key].join(', ');
-                        input.next().text(`${key.charAt(0).toUpperCase() + key.slice(1)}: ${errorMessage}`);
+                        input.next().text(${key.charAt(0).toUpperCase() + key.slice(1)}: ${errorMessage});
                     });
                 }
                 Swal.fire({

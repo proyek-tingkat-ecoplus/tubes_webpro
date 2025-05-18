@@ -13,9 +13,9 @@
                 <li class="nav-item ">
                     <a class="nav-link @if(Request::is('/')) active @endif" href="/">Beranda</a>
                 </li>
-                <li class="nav-item">
+                {{-- <li class="nav-item">
                     <a class="nav-link @if (Request::is('informasi')) active @endif" href="/informasi">Informasi</a>
-                </li>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link @if (Request::is('forum')) active @endif" href="/forum">Forum</a>
                 </li>
