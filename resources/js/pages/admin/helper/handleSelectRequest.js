@@ -148,3 +148,32 @@ import { getTokens } from "../../../Authentication";
             }
         });
     }
+    //  export const selectDaerah = (id) => {
+    //     $.ajax({
+    //         url: "/api/proposal",
+    //         method: "GET",
+    //         headers: {
+    //             "Authorization": "Bearer " + getTokens()
+    //         },
+    //         success: function (response) {
+    //             console.log(response)
+    //             if (response && response.data) {
+    //                 const data = response.data;
+    //                 const selectElement = $('select[name="daerah"]');
+    //                 selectElement.empty();
+    //                 selectElement.append('<option value="">Select a kategori</option>');
+    //                 console.log(id)
+    //                 data.forEach(function (data) {
+    //                     if(data.id !== id){
+    //                         selectElement.append('<option value="' + data.id + '">' + data.daerah + '</option>');
+    //                     }else{
+    //                         selectElement.append('<option value="' + data.id + '" selected>' + data.daerah + '</option>');
+    //                     }
+    //                 });
+    //             }
+    //         },
+    //         error: function (error) {
+    //             console.error("Error fetching kategori:", error);
+    //         }
+    //     });
+    // }

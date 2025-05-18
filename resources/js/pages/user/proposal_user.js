@@ -17,7 +17,6 @@ if (isLogin(["Admin", "Kepala Desa", "Petugas"])) {
             localStorage.removeItem("alert");
         }, 3000);
     }
-
     let table = new DataTable('#table-proposal', {
         dom: "<'row'<'col-sm-12 col-md-5 btn-table'><'col-sm-12 col-md-3'<'ms-4'f>><'col-sm-12 col-md-4 pdf-button'>>" +
             "<'row mt-3'<'col-sm-12'tr>>" +
@@ -41,7 +40,7 @@ if (isLogin(["Admin", "Kepala Desa", "Petugas"])) {
         columns: [
             {data: 'id'},
             {data: 'title'},
-            {data: 'description'},
+            {data: 'daerah'},
             {data: 'attachment',
                 render: function(data) {
                     return `<a class="btn btn-primary" href="/attachment/${data}">Download</a>`;

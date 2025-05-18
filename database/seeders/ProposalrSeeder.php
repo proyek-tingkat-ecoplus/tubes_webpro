@@ -31,6 +31,7 @@ class ProposalrSeeder extends Seeder
                 'user_id' => $faker->numberBetween(1, 10),
                 'title' => $faker->sentence,
                 'description' => $faker->paragraph,
+                'daerah' => $faker->randomElement(['bandung_barat', 'bandung_timur', 'bandung_selatan']),
                 'attachment' => $faker->imageUrl(640, 480, 'business', true),
                 'tanggal_pengajuan' => $data[$i]['tanggal_pengajuan'],
                 'start_date' => $data[$i]['start_date'],

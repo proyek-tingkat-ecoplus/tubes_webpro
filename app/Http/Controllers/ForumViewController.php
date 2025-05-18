@@ -32,20 +32,22 @@ class ForumViewController extends Controller
 {
     $request->validate([
         'title' => 'required|string|max:255',
-        'content' => 'required|string',
+        'content__' => 'required|string',
         'author' => 'required|string',
     ]);
-    dd($request->all());
+
     $user = null;
     if($request->user){
         $user = User::where('id', $request->user)->first();
     }
+
     Forum::create([
         'guest_author' => $request->author,
         'name' => $request->title,
-        'description' => $request->content,
+        'description' => $request->content__,
         'slug' => Str::slug($request->title),
         'user_id' => $user->id ?? null, // Pastikan user_id diisi dengan NULL jika tidak ada login
+
     ]);
     return redirect()->route('forums.index')->with('success', 'Forum berhasil ditambahkan!');
     }
@@ -53,7 +55,7 @@ class ForumViewController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'content__' => 'required|string',
             'author' => 'required|string',
         ]);
 
@@ -73,7 +75,7 @@ class ForumViewController extends Controller
         $forum = Forum::find($id);
         $forum->comments()->create([
             'user_id' => $request->user_id, // Pastikan user_id diisi dengan NULL jika tidak ada login
-            'content' => $request->comment,
+            'content__' => $request->comment,
         ]);
         return redirect()->route('forums.index')->with('success', 'Komentar berhasil ditambahkan!');
     }

@@ -35,7 +35,6 @@
             </div>
             <div class="bottom-section">
                 <div><a href="/forgetPassword">Forgot Password?</a></div>
-                <div>Belum punya akun? <a href="/register">Daftar</a></div>
             </div>
         </div>
     </div>

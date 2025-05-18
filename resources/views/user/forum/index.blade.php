@@ -3,12 +3,26 @@
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+<!-- HERO SECTION -->
+<div class="d-flex align-items-center" style="background: url('asset/image/pabrik.jpeg') center center/cover no-repeat; height: 600px; background-color: rgba(0,0,0,0.6); background-blend-mode: darken;">
+    <div class="container" style="padding-top: 200px;">
+        <h1 class="text-white fw-bold" style="font-size: 3rem;">Forum Kepala Desa</h1>
+        <p class="text-white" style="font-size: 1.25rem;">Diskusi, informasi, dan kolaborasi antar Kepala Desa</p>
+    </div>
+</div>
+
 <div class="py-5" style="background-color: #f7f9fb;">
     <div class="container">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold">Forum Kepala Desa</h2>
-            <p class="text-muted">Diskusi, informasi, dan kolaborasi antar Kepala Desa se-Indonesia</p>
-        </div>
+        <div class="row g-5">
+            <!-- Kolom Utama -->
+            <div class="col-lg-8">
+
+                <!-- Tombol Buat Post -->
+                <div class="mb-4">
+                    <a href="{{ route('forums.create') }}" class="btn shadow-sm" style="background-color: #003030; color: white;">
+                        <i class="fas fa-pen me-2" style="color:white"></i> Buat Post Baru
+                    </a>
+                </div>
 
         <div class="row g-5">
             <!-- Kolom Utama -->
@@ -125,16 +139,16 @@
                 <div class="sticky-top" style="top: 80px;">
                     <!-- Kategori -->
                     <div class="card shadow-sm mb-4 border-0 rounded-4">
-                        <div class="card-header bg-success text-white rounded-top-4">
+                        <div class="card-header text-white rounded-top-4" style="background-color: #003030">
                             <h5 class="mb-0"><i class="fas fa-folder-open me-2"></i> Kategori Diskusi</h5>
                         </div>
                         <div class="card-body p-0">
                             <div class="list-group list-group-flush">
                                 <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between">
-                                    Administrasi Desa <span class="badge bg-success">14</span>
+                                    Administrasi Desa <span class="badge" style="background-color: #003030" >14</span>
                                 </a>
                                 <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between">
-                                    Pembangunan Desa <span class="badge bg-success">23</span>
+                                    Pembangunan Desa <span class="badge" style="background-color: #003030" >23</span>
                                 </a>
                             </div>
                         </div>
@@ -142,7 +156,7 @@
 
                     <!-- Post Populer -->
                     <div class="card shadow-sm border-0 rounded-4">
-                        <div class="card-header bg-success text-white rounded-top-4">
+                        <div class="card-header text-white rounded-top-4" style="background-color: #003030">
                             <h5 class="mb-0"><i class="fas fa-fire me-2"></i> Post Terpopuler</h5>
                         </div>
                         <div class="card-body">

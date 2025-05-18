@@ -37,6 +37,18 @@ Route::prefix('pages')->group(function(){
         return view('admin.pages.role.edit', ["id" => $id]);
     });
 
+    Route::get('kantor_dinas', function(){
+        return view('admin.pages.kantor_dinas.index');
+    });
+
+    Route::get('kantor_dinas/add', function(){
+        return view('admin.pages.kantor_dinas.add');
+    });
+
+    Route::get('role/{id}/edit', function($id){
+        return view('admin.pages.kantor_dinas.edit', ["id" => $id]);
+    });
+
     Route::get('forum', function(){
         return view('admin.pages.forum.index');
     });

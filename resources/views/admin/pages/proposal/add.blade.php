@@ -19,6 +19,15 @@
                             <span class="invalid-feedback"></span>
                         </div>
                         <div class="form-group mt-2">
+                            <label for="daerah">Daerah</label>
+                            <select name="daerah" class="form-control" value="{{ old('daerah') }}">
+                                <option value="bandung_barat">Bandung Barat</option>
+                                <option value="bandung_timur">Bandung Timur</option>
+                                <option value="bandung_selatan">Bandung Selatan</option>
+                            </select>
+                            <span class="invalid-feedback"></span>
+                        </div>
+                        <div class="form-group mt-2">
                             <label for="attachment">File</label>
                             <input type="file" name="attachment" class="form-control">
                             <span class="invalid-feedback"></span>

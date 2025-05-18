@@ -62,8 +62,19 @@
                 <li>Dan regulasi terkait lainnya.</li>
             </ul>
 
-            <!-- (Lanjutkan bagian Fungsi, Dasar Hukum, Visi Misi seperti biasa...) -->
-
+            <!-- Visi -->
+            <h5 class="fw-bold mb-3">VISI</h5>
+            <ul class="mb-5">
+                <li>"JABAR ISTIMEWA"<p>(LEMBUR DIURUS, KOTA DITATA)</p></li>
+            </ul>
+            <!-- Misi -->
+            <h5 class="fw-bold mb-3">MISI</h5>
+            <ul class="mb-5">
+                <li>Mengembangkan kualitas Sumber Daya Manusia yang berkarakter, Cerdas , berpengatahuan, bertaqwa dan profesional pada bidang tugasnya masing - masing.</li>
+                <li>Mengembangkan ekonomi kerakyatan berbasis sumber daya lokal, berdaulat, berkelanjutan, berdaya saing tinggi dengan memanfaatkan ragam teknologi masa kini.</li>
+                <li>Mengurangi disparitas pembangunan utara - selatan dengan mendorong masuknya investasi dan pemerataan penyediaan sarana dan prasarana pendidikan, kesehatan, perekonomian dan lingkungan hidup yang proposional.</li>
+                <li>Memperkuat Transformasi birokrasi berdampak.</li>
+            </ul>
         </div>
     </div>
 

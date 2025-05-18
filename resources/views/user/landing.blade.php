@@ -42,99 +42,138 @@
 
 <!-- SPACER SECTION BAWAH -->
 <section style="height: 120px;"></section>
+<!-- Kontainer utama terpusat -->
+<div class="container my-5">
+    <div class="d-flex justify-content-center align-items-start">
 
+      <!-- Gambar -->
+      <div style="flex-shrink: 0;">
+        <img src="asset/image/logo-admin.png" class="img-fluid rounded" alt="Informasi" style="max-width: 250px; height: auto;">
+      </div>
 
-{{-- <!-- Feature Section -->
-<div id="feature" class="bg-light py-5">
-    <div class="container">
-        <h2 class="text-center fw-bold mb-5">Fitur Kami</h2>
-        <div class="row g-4 justify-content-center">
-            <div class="col-md-4">
-                <div class="card border-0 shadow h-100 text-center">
-                    <img src="{{ asset('image/inventaris/default.png') }}" class="card-img-top p-4" alt="Pengiriman Proposal">
-                    <div class="card-body">
-                        <h5 class="card-title fw-semibold">Pengiriman Proposal</h5>
-                        <p class="card-text text-muted">Kepala desa dapat mengajukan proposal permohonan pembangunan.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card border-0 shadow h-100 text-center">
-                    <img src="{{ asset('image/inventaris/default.png') }}" class="card-img-top p-4" alt="Forum">
-                    <div class="card-body">
-                        <h5 class="card-title fw-semibold">Forum</h5>
-                        <p class="card-text text-muted">Bergabunglah dalam forum kami dan diskusikan seputar lingkungan hidup.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card border-0 shadow h-100 text-center">
-                    <img src="{{ asset('image/inventaris/default.png') }}" class="card-img-top p-4" alt="Pemetaan Infrastruktur">
-                    <div class="card-body">
-                        <h5 class="card-title fw-semibold">Pemetaan Infrastruktur</h5>
-                        <p class="card-text text-muted">Pemetaan infrastruktur untuk energi terbarukan dan peninjauan alat.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <!-- Teks Informasi -->
+      <div class="ms-4" style="max-width: 700px;">
+        <h1 class="fw-bold">Tentang Kami</h1>
+        <p class="text-justify mb-2">
+          Dinas Energi dan Sumber Daya Mineral Provinsi Jawa Barat yang berlokasi di <br>
+          Jalan Soekarno-Hatta Nomor 576 Bandung, pertama kali dibentuk pada tahun 1978<br>
+          berdasarkan Peraturan Daerah Provinsi Jawa Barat Nomor 4/DP/040/DP/1978<br>
+          dengan nama Dinas Pertambangan Daerah Provinsi Jawa Barat. Berdasarkan Peraturan<br>
+          Gubernur Nomor 65 Tahun 2017, Dinas ESDM Provinsi Jawa Barat mempunyai tugas pokok<br>
+          melaksanakan urusan pemerintahan bidang energi dan sumber daya mineral, meliputi <b>energi,<br>
+          ketenagalistrikan, pertambangan serta air tanah</b> yang menjadi kewenangan Provinsi.
+        </p>
+        <a href="http://127.0.0.1:8000/profile" class="text-primary fw-semibold text-decoration-none d-inline-flex align-items-center">
+          Selengkapnya
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right ms-1" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M10.293 1.5a.5.5 0 0 1 .707 0l4.5 4.5a.5.5 0 0 1 0 .707l-4.5 4.5a.5.5 0 0 1-.707-.707L13.793 7.5H1.5a.5.5 0 0 1 0-1h12.293L10.293 2.207a.5.5 0 0 1 0-.707z"/>
+          </svg>
+        </a>
+      </div>
+
     </div>
-</div> --}}
+  </div>
+
+
+
+
+{{-- <!-- SPACER SECTION BAWAH -->
+<section style="height: 120px;"></section> --}}
 
 <!-- Contact Section -->
 <div class="py-5 bg-white" id="kontak">
     <div class="container">
         <h2 class="text-center fw-bold mb-5">Kontak Kami</h2>
-        <div class="row g-4 justify-content-center">
-            <!-- Alamat -->
-            <div class="col-md-4">
-                <div class="card border-0 text-center" style="background-color: #003030">
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <i class="fas fa-map-marker-alt fa-2x text-white"></i>
-                        </div>
-                        <h5 class="card-title fw-bold text-white">Alamat</h5>
-                        <p class="card-text fw-semibold text-white">Jl. Raya Bandung No. 1, Bandung, Jawa Barat</p>
-                        <a href="#" class="btn border-white text-white">
-                            Lihat di Maps
-                        </a>
-                    </div>
+
+        <div class="row g-4 align-items-stretch">
+
+            <!-- Google Maps -->
+            <div class="col-md-6">
+                <div class="ratio ratio-4x3 h-100">
+                    <iframe class="rounded-4"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13624.303093780829!2d107.64967217886876!3d-6.94350527415583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e68e8172d074f1f%3A0xf309f9b68cb6a7f8!2sDinas%20Energi%20dan%20Sumber%20Daya%20Mineral%20Prov.%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1746086333996!5m2!1sid!2sid"
+                        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
                 </div>
             </div>
 
-            <!-- Kontak -->
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm h-100 text-center" style="background-color: #003030">
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <i class="fas fa-phone-alt fa-2x text-white"></i>
+            <!-- Kontak Info -->
+            <div class="col-md-6">
+                <div class="row g-4">
+                    <!-- Alamat -->
+                    <div class="col-12">
+                        <div class="card h-100 border-0 shadow rounded-4 text-center bg-white">
+                            <div class="card-body d-flex flex-column">
+                                <div class="mb-3">
+                                    <i class="fas fa-map-marker-alt fa-2x text-dark"></i>
+                                </div>
+                                <h5 class="card-title fw-bold text-dark">Alamat</h5>
+                                <p class="card-text fw-semibold text-dark">
+                                    Jl. Soekarno-Hatta No.576, Sekejati, Kec. Buahbatu, Kota Bandung
+                                </p>
+                            </div>
                         </div>
-                        <h5 class="card-title fw-bold text-white">Kontak</h5>
-                        <p class="card-text fw-semibold text-white">+22-3214458</p>
-                        <a href="tel:+223214458" class="btn border-white text-white">
-                            Hubungi Kami
-                        </a>
                     </div>
-                </div>
-            </div>
 
-            <!-- Email -->
-            <div class="col-md-4">
-                <div class="card border-0 shadow-sm h-100 text-center" style="background-color: #003030">
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <i class="fas fa-envelope fa-2x text-white"></i>
+                    <!-- Kontak -->
+                    <div class="col-6">
+                        <div class="card h-100 border-0 shadow rounded-4 text-center bg-white">
+                            <div class="card-body d-flex flex-column">
+                                <div class="mb-3">
+                                    <i class="fas fa-phone-alt fa-2x text-dark"></i>
+                                </div>
+                                <h5 class="card-title fw-bold text-dark">Kontak</h5>
+                                <p class="card-text fw-semibold text-dark">+22-3214458</p>
+                            </div>
                         </div>
-                        <h5 class="card-title fw-bold text-white">Email</h5>
-                        <p class="card-text fw-semibold text-white">admin.Ecopulse@gmail.com</p>
-                        <a href="mailto:admin.Ecopulse@gmail.com" class="btn border-white text-white">
-                            Kirim Email
-                        </a>
                     </div>
+
+                    <!-- Email -->
+                    <div class="col-6">
+                        <div class="card h-100 border-0 shadow rounded-4 text-center bg-white">
+                            <div class="card-body d-flex flex-column">
+                                <div class="mb-3">
+                                    <i class="fas fa-envelope fa-2x text-dark"></i>
+                                </div>
+                                <h5 class="card-title fw-bold text-dark">Email</h5>
+                                <p class="card-text fw-semibold text-dark">admin.Ecopulse@gmail.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Instagram -->
+                    <div class="col-6">
+                        <div class="card h-100 border-0 shadow rounded-4 text-center bg-white">
+                            <div class="card-body d-flex flex-column">
+                                <div class="mb-3">
+                                    <i class="fab fa-instagram fa-2x text-dark" style="font-size:36px"></i>
+                                </div>
+                                <h5 class="card-title fw-bold text-dark">Instagram</h5>
+                                <p class="card-text fw-semibold text-dark">@cabdin4bdg_desdm</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Youtube -->
+                    <div class="col-6">
+                        <div class="card h-100 border-0 shadow rounded-4 text-center bg-white">
+                            <div class="card-body d-flex flex-column">
+                                <div class="mb-3">
+                                    <i class="fab fa-youtube fa-2x text-dark"></i>
+                                </div>
+                                <h5 class="card-title fw-bold text-dark">Youtube</h5>
+                                <p class="card-text fw-semibold text-dark">Dinas ESDM Provinsi Jabar</p>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 
 @endsection

@@ -39,6 +39,13 @@
             </a>
         </li>
 
+        <li class="menu-item menu-role d-none @if (Request::is('pages/kantor_dinas', 'pages/kantor_dinas/*')) active @endif">
+            <a href="/pages/kantor_dinas" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-buildings"></i>
+                <div data-i18n="Office">Kantor Dinas</div>
+            </a>
+        </li>
+
         <!-- Form Section -->
         <li class="menu-header small text-uppercase menu-master-forum d-none"><span class="menu-header-text">Formulir</span></li>
         <li class="menu-item @if (Request::is('pages/kategori', 'pages/kategori/*')) active @endif">

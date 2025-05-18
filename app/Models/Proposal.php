@@ -10,6 +10,7 @@ class Proposal extends Model
         'user_id',
         'title',
         'description',
+        'daerah',
         'attachment',
         'delivery_time',
         'start_date',
