@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (savedTheme) {
         setDarkMode(savedTheme === "dark");
     } else {
-        setDarkMode(prefersDarkScheme.matches);
+        setDarkMode(false);
     }
 
     prefersDarkScheme.addEventListener("change", (e) => {
