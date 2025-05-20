@@ -61,7 +61,7 @@ export const isLogin = async (requiredRole) => {
     } catch (e) {
         console.error('Error parsing authentication data:', e);
         if (window.location.pathname !== "/login") {
-            if (requiredRole === "guest") {
+            if (requiredRole === "Guest") {
                 redirect('/');
             } else {
                 redirect('/login');

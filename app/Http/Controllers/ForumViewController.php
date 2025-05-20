@@ -6,7 +6,6 @@ use App\Models\Forum;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Jorenvh\Share\Share;
 
 class ForumViewController extends Controller
 {
@@ -75,7 +74,7 @@ class ForumViewController extends Controller
         $forum = Forum::find($id);
         $forum->comments()->create([
             'user_id' => $request->user_id, // Pastikan user_id diisi dengan NULL jika tidak ada login
-            'content__' => $request->comment,
+            'content' => $request->comment,
         ]);
         return redirect()->route('forums.index')->with('success', 'Komentar berhasil ditambahkan!');
     }

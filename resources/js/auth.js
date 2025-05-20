@@ -1,5 +1,6 @@
 import { isLogin, redirect, me } from "./Authentication";
 import { authValidation } from "./pages/admin/validation/authValidation";
+import { ClearNotification } from "./pages/notification";
 
 
 $(document).ready(function () {
@@ -34,6 +35,7 @@ $(document).ready(function () {
                     localStorage.setItem("authenticate", JSON.stringify(response));
 
                     me().then(user => {
+                        ClearNotification();
                         if (user && user.role.name === "Admin" || user.role.name === "Petugas") {
                             redirect("/dashboard");
                         }

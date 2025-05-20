@@ -8,6 +8,7 @@ use App\Http\Controllers\pdf\PdfController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ForumViewController;
 use App\Http\Controllers\ProposalController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 include_once __DIR__.'/pages.php';
@@ -47,9 +48,8 @@ Route::get('/register', function () {
     Route::delete('forums/{id}',[ForumViewController::class, 'destroy'])->name('forums.destroy');
     //enduser view
     // dashboard
-    Route::get('/dashboard', function () {
-        return view('admin.pages.dashboard');
-    });
+
+    Route::get('/dashboard', [DashboardController::class, 'view']);
 
     // profile
     Route::get('/edit-profile', function () {
