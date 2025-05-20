@@ -144,9 +144,9 @@ var json = {
     "chart_daerah": data["chart_daerah"],
 };
 
-var color1 = '#264417';
-var color2 = '#437c4f';
-var color3 = '#437c4f';
+var color1 = '#526E48';
+var color2 = '#62825D';
+var color3 = '#9EDF9C';
 var options = {
     chart: {
         height: 350,

@@ -56,12 +56,5 @@ $(document).ready(async function  ()  {
         }else{
 
         }
-    }else{
-        $(".avatars").html(`<a href="/login" class="btn btn-primary me-5">
-                <i class="fas fa-user"></i>
-                Login
-            </a>`);
-
-        console.log("invalid role")
     }
 })

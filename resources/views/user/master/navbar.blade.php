@@ -27,7 +27,7 @@
                 </li>
             </ul>
             <div class="avatars">
-
+                <a href="/login" class="btn text-light fw-semibold me-5" style="background-color: #264417">Login</a>
             </div>
         </div>
     </div>
