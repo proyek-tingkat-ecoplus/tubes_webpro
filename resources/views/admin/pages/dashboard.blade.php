@@ -130,6 +130,29 @@
             <div class="row row-bordered g-0">
                 <div class="col-md-12">
                     <h5 class="card-header m-0 me-2 pb-3 fw-bold ">Rekap proposal</h5>
+                    <!-- Dropdown filter tahun Rekap Proposal-->
+                     <form method="GET" action="" class="px-3 pb-3">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <label for="tahun" class="form-label mb-0 me-2">Tahun:</label>
+                        </div>
+                        <div class="col-auto">
+                            <select name="filter_tahun" id="filter_tahun" class="form-select">
+                                <option value="">-- Semua Tahun --</option>
+                                {{-- @foreach ($tahunList as $tahun)
+                                    <option value="{{ $tahun }}" {{ request('tahun') == $tahun ? 'selected' : '' }}>
+                                        {{ $tahun }}
+                                    </option>
+                                @endforeach --}}
+                                <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
                     <div class="bar_chart p-3 pe-5"></div>
                 </div>
             </div>

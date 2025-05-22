@@ -30,8 +30,8 @@ class KantorDinasController extends Controller
             "no_telp" => "required",
             "email" => "required|email",
             "website" => "required|url",
-            "tanggal_jam_buka" => "required|date_format:H:i:s",
-            "tanggal_jam_tutup" => "required|date_format:H:i:s"
+            "tanggal_jam_buka" => "required",
+            "tanggal_jam_tutup" => "required"
         ]);
 
         $kantorDinas = KantorDinas::create($request->all());
