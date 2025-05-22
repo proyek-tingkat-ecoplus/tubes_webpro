@@ -142,16 +142,40 @@
 </div>
 <div class="row">
     <!-- Total Revenue -->
-    <div class="col-12 col-lg-9 order-2 order-md-3 order-lg-2 mb-4">
-        <div class="card mt-md-0 mt-4">
-            <div class="row row-bordered g-0">
-                <div class="col-md-12">
-                    <h5 class="card-header m-0 me-2 pb-3 fw-bold ">Rekap proposal daerah</h5>
-                    <div class="bar_chart_daerah p-3 pe-5"></div>
-                </div>
+<div class="col-12 col-lg-9 order-2 order-md-3 order-lg-2 mb-4">
+    <div class="card mt-md-0 mt-4">
+        <div class="row row-bordered g-0">
+            <div class="col-md-12">
+                <h5 class="card-header m-0 me-2 pb-3 fw-bold">Rekap Proposal Daerah</h5>
+
+                <!-- Dropdown filter tahun -->
+                <form method="GET" action="" class="px-3 pb-3">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <label for="tahun" class="form-label mb-0 me-2">Tahun:</label>
+                        </div>
+                        <div class="col-auto">
+                            <select name="tahun" id="tahun" class="form-select">
+                                <option value="">-- Semua Tahun --</option>
+                                {{-- @foreach ($tahunList as $tahun)
+                                    <option value="{{ $tahun }}" {{ request('tahun') == $tahun ? 'selected' : '' }}>
+                                        {{ $tahun }}
+                                    </option>
+                                @endforeach --}}
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary">Terapkan</button>
+                        </div>
+                    </div>
+                </form>
+
+                <!-- Chart container -->
+                <div class="bar_chart_daerah p-3 pe-5"></div>
             </div>
         </div>
     </div>
+</div>
     <div class="col-lg-3">
     <div class="card shadow-sm border-0 rounded-3">
         <div class="card-body p-4">
