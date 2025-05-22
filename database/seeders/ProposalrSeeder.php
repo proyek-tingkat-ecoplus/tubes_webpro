@@ -19,9 +19,9 @@ class ProposalrSeeder extends Seeder
         $data = DummyProposal::get(); // Menggunakan kelas yang benar
 
         // Generate proposals dengan status berbeda
-        $this->generateProposals('pending', 12, $data, $faker);
-        $this->generateProposals('approved', 10, $data, $faker);
-        $this->generateProposals('rejected', 12, $data, $faker);
+        $this->generateProposals('pending', 36, $data, $faker);
+        $this->generateProposals('approved', 48, $data, $faker);
+        $this->generateProposals('rejected', 47, $data, $faker);
     }
 
     private function generateProposals($status, $count, $data, $faker): void

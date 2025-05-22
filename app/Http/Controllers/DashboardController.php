@@ -38,14 +38,19 @@ class DashboardController extends Controller
         $comment = Comment::count();
         $pemetaan = ReportAlat::count();
 
+        $tahun = request()->query('tahun');
+        if($tahun == null){
+            $tahun = '2024';
+        }
+
         //$proposal_pending = Proposal::where('status','pending')->selectRaw('MONTH(tanggal_pengajuan) as bulan,YEAR(tanggal_pengajuan) as tahun,COUNT(*) as total')->groupByRaw('bulan,tahun')->orderBy('tahun','desc')->get()->toArray();
         $proposal_pending = $this->map_ARRAY(Proposal::where('status','pending')->selectRaw('MONTH(tanggal_pengajuan) as bulan,COUNT(*) as total')->groupByRaw('bulan')->orderBy('bulan','asc')->get()->toArray());
         $proposal_approved = $this->map_ARRAY(Proposal::where('status','approved')->selectRaw('MONTH(tanggal_pengajuan) as bulan,COUNT(*) as total')->groupByRaw('bulan')->orderBy('bulan','asc')->get()->toArray());
         $proposal_rejected = $this->map_ARRAY(Proposal::where('status','rejected')->selectRaw('MONTH(tanggal_pengajuan) as bulan,COUNT(*) as total')->groupByRaw('bulan')->orderBy( 'bulan','asc')->get()->toArray());
 
-        $proposal_daerah_bandungbarat = $this->map_ARRAY(Proposal::where('daerah','bandung_barat')->selectRaw('MONTH(tanggal_pengajuan) as bulan,COUNT(*) as total')->groupByRaw('bulan')->orderBy('bulan','asc')->get()->toArray());
-        $proposal_daerah_bandungtimur = $this->map_ARRAY(Proposal::where('daerah','bandung_timur')->selectRaw('MONTH(tanggal_pengajuan) as bulan,COUNT(*) as total')->groupByRaw('bulan')->orderBy('bulan','asc')->get()->toArray());
-        $proposal_daerah_bandungselatan = $this->map_ARRAY(Proposal::where('daerah','bandung_selatan')->selectRaw('MONTH(tanggal_pengajuan) as bulan,COUNT(*) as total')->groupByRaw('bulan')->orderBy('bulan','asc')->get()->toArray());
+        $proposal_daerah_bandungbarat = $this->map_ARRAY(Proposal::whereYear('tanggal_pengajuan',"$tahun")->where('daerah','bandung_barat')->selectRaw('MONTH(tanggal_pengajuan) as bulan,COUNT(*) as total')->groupByRaw('bulan')->orderBy('bulan','asc')->get()->toArray());
+        $proposal_daerah_bandungtimur = $this->map_ARRAY(Proposal::whereYear('tanggal_pengajuan',"$tahun")->where('daerah','bandung_timur')->selectRaw('MONTH(tanggal_pengajuan) as bulan,COUNT(*) as total')->groupByRaw('bulan')->orderBy('bulan','asc')->get()->toArray());
+        $proposal_daerah_bandungselatan = $this->map_ARRAY(Proposal::whereYear('tanggal_pengajuan',"$tahun")->where('daerah','bandung_selatan')->selectRaw('MONTH(tanggal_pengajuan) as bulan,COUNT(*) as total')->groupByRaw('bulan')->orderBy('bulan','asc')->get()->toArray());
 
         return response()->json([
             'total_forum' => $forum,

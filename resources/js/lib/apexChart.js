@@ -3,9 +3,14 @@ import { get } from "jquery";
 import {getTokens} from "../Authentication";
 import { colors } from "laravel-mix/src/Log";
 
-const getData = async () => {
+const getData = async (tahun) => {
+    let url = '/api/dashboard';
+    if(tahun){
+        url = '/api/dashboard?tahun=' + tahun;
+    }
+
     const response = await $.get({
-        url: '/api/dashboard',
+        url: `${url}`,
         type: 'GET',
         headers: {
             'Authorization': 'Bearer ' + getTokens()
@@ -138,67 +143,69 @@ chart = new ApexCharts(document.querySelector('.bar_chart'), options)
 }
 
 var chart_daerah;
-const init_daerah = async () => {
-const data = await getData();
-var json = {
-    "chart_daerah": data["chart_daerah"],
-};
+const init_daerah = async (tahun) => {
+    // Check if chart_daerah exists before trying to destroy it
+    if (typeof chart_daerah !== 'undefined' && chart_daerah) {
+        chart_daerah.destroy();
+    }
 
-var color1 = '#526E48';
-var color2 = '#62825D';
-var color3 = '#9EDF9C';
-var options = {
-    chart: {
-        height: 350,
-        type: 'bar',
-        background: '#ffff',
-        foreColor: '#333',
-    },
-    series: json.chart_daerah, // Use data from JSON
-    xaxis: {
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        labels: {
-            style: {
-                colors: '#a1acb8',
+    // Fetch data for the given year, default to '2024' if not provided
+    const data = await getData(tahun || '2024');
+
+    // Prepare chart data
+    const json = {
+        chart_daerah: data.chart_daerah,
+    };
+
+    // Define chart options
+    const options = {
+        chart: {
+            height: 350,
+            type: 'bar',
+            background: '#fff',
+            foreColor: '#333',
+        },
+        series: json.chart_daerah,
+        xaxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            labels: {
+                style: {
+                    colors: '#a1acb8',
+                },
             },
         },
-    },
-    fill: {
-        opacity: 1,
-        colors: [color1, color2,  color3],
-    },
-    legend: {
-        show: true,
-        labels: {
-            colors: '#a1acb8',
-            useSeriesColors: false,
+        fill: {
+            opacity: 1,
+            colors: ['#526E48', '#62825D', '#9EDF9C'],
         },
-    },
-    colors: [color1, color2, color3],
-        // plotOptions: {
-        //     bar: {
-        //         horizontal: false,
-        //         columnWidth: '55%',
-        //         endingShape: 'rounded',
-        //     },
-        // },
-    dataLabels: {
-        enabled: true,
-    },
-    stroke: {
-        show: true,
-        width: 2,
-        colors: ['#fff'],
-    },
-    grid: {
-        borderColor: '#e0e6ed',
-        strokeDashArray: 4,
-    },
+        legend: {
+            show: true,
+            labels: {
+                colors: '#a1acb8',
+                useSeriesColors: false,
+            },
+        },
+        colors: ['#526E48', '#62825D', '#9EDF9C'],
+        dataLabels: {
+            enabled: true,
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['#fff'],
+        },
+        grid: {
+            borderColor: '#e0e6ed',
+            strokeDashArray: 4,
+        },
+    };
+
+    // Initialize and render the chart
+    chart_daerah = new ApexCharts(document.querySelector('.bar_chart_daerah'), options);
+    chart_daerah.render();
 };
-chart_daerah = new ApexCharts(document.querySelector('.bar_chart_daerah'), options)
-}
 init();
-init_daerah();
-export {chart,chart_daerah} ;
+
+export {chart,init_daerah} ;
 
 
