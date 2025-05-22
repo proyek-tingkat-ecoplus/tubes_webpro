@@ -155,17 +155,19 @@
                             <label for="tahun" class="form-label mb-0 me-2">Tahun:</label>
                         </div>
                         <div class="col-auto">
-                            <select name="tahun" id="tahun" class="form-select">
+                            <select name="filter_tahun" id="filter_tahun" class="form-select">
                                 <option value="">-- Semua Tahun --</option>
                                 {{-- @foreach ($tahunList as $tahun)
                                     <option value="{{ $tahun }}" {{ request('tahun') == $tahun ? 'selected' : '' }}>
                                         {{ $tahun }}
                                     </option>
                                 @endforeach --}}
+                                <option value="2025">2025</option>
+                                <option value="2024">2024</option>
+                                <option value="2023">2023</option>
+                                <option value="2022">2022</option>
+                                <option value="2021">2021</option>
                             </select>
-                        </div>
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary">Terapkan</button>
                         </div>
                     </div>
                 </form>

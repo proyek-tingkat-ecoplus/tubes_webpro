@@ -6,7 +6,7 @@ import {
 } from "../../Authentication";
 import {
     chart,
-    chart_daerah
+    init_daerah
 } from "../../lib/apexChart";
 import {
     initializeCalendar
@@ -59,7 +59,12 @@ $(document).ready(async function  ()  {
         if (window.location.pathname == "/dashboard") {
             // render chart
             chart.render();
-            chart_daerah.render();
+            init_daerah();
+            $('#filter_tahun').on('change', function() {
+                var tahun = $(this).val();
+                init_daerah(tahun);
+            });
+
             // rende calendar
             initializeCalendar();
         }
