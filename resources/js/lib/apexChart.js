@@ -4,6 +4,7 @@ import {getTokens} from "../Authentication";
 import { colors } from "laravel-mix/src/Log";
 
 const getData = async (tahun) => {
+
     let url = '/api/dashboard';
     if(tahun){
         url = '/api/dashboard?tahun=' + tahun;
@@ -53,8 +54,15 @@ const getData = async (tahun) => {
     }
 }
 var chart;
-const init = async () => {
-const data = await getData();
+const init = async (tahun) => {
+        // Check if chart_daerah exists before trying to destroy it
+    if (typeof chart_daerah !== 'undefined' && chart_daerah) {
+        chart.destroy();
+    }
+
+    // Fetch data for the given year, default to '2024' if not provided
+    const data = await getData(tahun || '2024');
+
 var json = {
     "totalUser": data["totalUser"],
     "TotalForum": data["TotalForum"],
@@ -140,6 +148,8 @@ var options = {
     },
 };
 chart = new ApexCharts(document.querySelector('.bar_chart'), options)
+
+chart.render();
 }
 
 var chart_daerah;
@@ -204,8 +214,8 @@ const init_daerah = async (tahun) => {
     chart_daerah = new ApexCharts(document.querySelector('.bar_chart_daerah'), options);
     chart_daerah.render();
 };
-init();
 
-export {chart,init_daerah} ;
+
+export {init,init_daerah} ;
 
 

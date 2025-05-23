@@ -5,7 +5,7 @@ import {
     me
 } from "../../Authentication";
 import {
-    chart,
+    init,
     init_daerah
 } from "../../lib/apexChart";
 import {
@@ -58,9 +58,14 @@ $(document).ready(async function  ()  {
         // if dashboard route render char nya
         if (window.location.pathname == "/dashboard") {
             // render chart
-            chart.render();
             init_daerah();
+            init();
             $('#filter_tahun').on('change', function() {
+                var tahun = $(this).val();
+                init_daerah(tahun);
+            });
+
+            $('#filter_tahun_proposal').on('change', function() {
                 var tahun = $(this).val();
                 init_daerah(tahun);
             });
