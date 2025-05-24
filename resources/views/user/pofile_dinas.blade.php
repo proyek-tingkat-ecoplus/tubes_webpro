@@ -1,7 +1,6 @@
 @extends('user.master.master')
 @section('content')
 
-<body style="background-color:white">
 <!-- Section header + konten gabung -->
 <div class="section-230 position-relative">
 
@@ -133,7 +132,6 @@
         <div class="swiper-pagination"></div>
     </div>
 </div>
-</body>
 <!-- SPACER SECTION BAWAH -->
 <section style="height: 120px;"></section>
 </div>
