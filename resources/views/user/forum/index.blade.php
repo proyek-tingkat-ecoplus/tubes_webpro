@@ -11,7 +11,7 @@
     </div>
 </div>
 
-<div class="py-5" style="background-color: #f7f9fb;">
+<div class="py-5" >
     <div class="container mb-5">
         <div class="row g-5">
             <!-- Kolom Utama -->
@@ -30,8 +30,8 @@
 
                 <!-- Tombol Buat Post -->
                 <div class="mb-4">
-                    <a href="{{ route('forums.create') }}" class="btn w-100 shadow-sm btn-post">
-                        <i class="fas fa-pen me-2"></i> Buat Post Baru
+                    <a href="{{ route('forums.create') }}" class="btn shadow-sm btn-post" style="background-color:#003030; color: white;">
+                        <i class="fas fa-pen me-2" style="color: white"></i> Buat Post Baru
                     </a>
                 </div>
 

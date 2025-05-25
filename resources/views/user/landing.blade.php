@@ -8,7 +8,7 @@
         <h1 class="display-4 fw-bold" style="text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);">Together We Can Make a Difference</h1>
         <p class="lead" style="text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);">Join us in bringing hope and help to children around the world.</p>
         <a href="https://www.youtube.com/watch?time_continue=42&v=r7dqPKj1NxI&embeds_referring_euri=https%3A%2F%2Fesdm.jabarprov.go.id%2F&source_ve_path=MTM5MTE3LDI4NjY0LDI4NjY0LDI4NjY0LDEzOTExNywyMzg1MQ"
-        class="btn btn-light text-dark fw-semibold px-4 py-2 mt-3">Watch Video</a>
+        class="btn btn-light text-dark fw-semibold px-4 py-2 mt-3">Tonton Video</a>
     </div>
 
     <!-- FEATURE SECTION OVERLAPPED -->
@@ -81,7 +81,7 @@
 <section style="height: 120px;"></section> --}}
 
 <!-- Contact Section -->
-<div class="py-5 bg-white" id="kontak">
+<div class="py-5" id="kontak">
     <div class="container">
         <h2 class="text-center fw-bold mb-5">Kontak Kami</h2>
 
