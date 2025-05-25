@@ -14,7 +14,7 @@
                         <tr>
                             <th>id</th>
                             <th>name</th>
-                            <th>deskription</th>
+                            <th>deskripsi</th>
                             <th>file</th>
                             <th>tanggal</th>
                             <th>pengajuan</th>

@@ -18,9 +18,9 @@ if (isLogin(["Admin", "Kepala Desa", "Petugas"])) {
         }, 3000);
     }
     let table = new DataTable('#table-proposal', {
-        dom: "<'row'<'col-sm-12 col-md-5 btn-table'><'col-sm-12 col-md-3'<'ms-4'f>><'col-sm-12 col-md-4 pdf-button'>>" +
-            "<'row mt-3'<'col-sm-12'tr>>" +
-            "<'row mt-2'<'col-md-8 col-12'i><'col-md-4 col-12'p>>",
+        dom: "<'row'<'col-sm-12 col-md-5 btn-table'><'col-sm-12 col-md-7'f> >" +
+                "<'row mt-3'<'col-sm-12'tr>>" +
+                "<'row mt-2'<'col-md-8 col-12'i><'col-md-4 col-12'p>>",
         ordering: false,
         info: true,
         filtering: false,
@@ -130,34 +130,6 @@ if (isLogin(["Admin", "Kepala Desa", "Petugas"])) {
     });
 
     $(".btn-table").append('<a href="/pages/proposal/add" class="btn btn-primary">Tambah Proposal</a>');
-    $(".pdf-button").append(
-        '<button class="btn btn-danger mt-md-0 mt-3 me-2 btn-pdf">Export PDF</button>' +
-        '<button class="btn btn-primary mt-md-0 mt-3 me-2 btn-excel">Export Excel</button>'
-    );
-
-    $(".btn-excel").click(function() {
-        $.ajax({
-            url: "/api/exports/proposal/excel",
-            headers: {'Authorization': 'Bearer ' + getTokens()},
-            xhrFields: {responseType: 'blob'},
-            success: function(data) {
-                downloadFile(data, 'proposal.xlsx');
-            },
-            error: handleExportError
-        });
-    });
-
-    $(".btn-pdf").click(function() {
-        $.ajax({
-            url: "/api/exports/proposal/pdf",
-            headers: {'Authorization': 'Bearer ' + getTokens()},
-            xhrFields: {responseType: 'blob'},
-            success: function(data) {
-                downloadFile(data, 'proposal.pdf');
-            },
-            error: handleExportError
-        });
-    });
 }
 });
 

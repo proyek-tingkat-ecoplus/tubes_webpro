@@ -158,7 +158,7 @@ $(document).ready(function () {
                         const link = document.createElement('a');
                         const url = window.URL.createObjectURL(data);
                         link.href = url;
-                        link.setAttribute('download', 'role.xlsx');
+                        link.setAttribute('download', 'kantor_dinas.xlsx');
                         document.body.appendChild(link);
                         link.click();
                         link.remove();
@@ -183,7 +183,7 @@ $(document).ready(function () {
                         const link = document.createElement('a');
                         const url = window.URL.createObjectURL(data);
                         link.href = url;
-                        link.setAttribute('download', 'role.pdf');
+                        link.setAttribute('download', 'kantor_dinas.pdf');
                         document.body.appendChild(link);
                         link.click();
                         link.remove();

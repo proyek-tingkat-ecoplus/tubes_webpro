@@ -60,12 +60,12 @@ $(document).ready(async function  ()  {
             // render chart
             init_daerah();
             init();
-            $('#filter_tahun').on('change', function() {
+            $('#filter_tahun_proposal').on('change', function() {
                 var tahun = $(this).val();
-                init_daerah(tahun);
+                init(tahun);
             });
 
-            $('#filter_tahun_proposal').on('change', function() {
+            $('#filter_tahun').on('change', function() {
                 var tahun = $(this).val();
                 init_daerah(tahun);
             });

@@ -1,4 +1,3 @@
-
 import { get } from "jquery";
 import {getTokens} from "../Authentication";
 import { colors } from "laravel-mix/src/Log";
@@ -217,5 +216,3 @@ const init_daerah = async (tahun) => {
 
 
 export {init,init_daerah} ;
-
-

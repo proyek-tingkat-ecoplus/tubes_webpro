@@ -21,7 +21,7 @@ const setFormCodeAlat = () => {
         success: function (data) {
             data.data.forEach(function (data, index) {
                 console.log(data);
-                $('.select_kode_alat').append(`<option value=" ${data.id}">${data.alat.kode_alat}</option>`);
+                $('.select_kode_alat').append(`<option value=" ${data.id}">${data.alat.kode_alat} - ${data.alat.nama_alat}</option>`);
             });
         },
         error: function (err) {
