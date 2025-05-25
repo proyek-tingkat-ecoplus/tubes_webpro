@@ -6,6 +6,7 @@ use App\Exports\AlatExport;
 use App\Exports\CommentExport;
 use App\Exports\ForumExport;
 use App\Exports\ReportAlatExport;
+use App\Exports\KantorDinasExport;
 use App\Exports\RoleExport;
 use App\Exports\UsersExport;
 use App\Http\Controllers\Controller;
@@ -23,6 +24,11 @@ class ExportController extends Controller
     public function exportRole()
     {
         return (new RoleExport)->download('roles.xlsx');
+    }
+
+    public function exportkantorDinas()
+    {
+        return (new KantorDinasExport)->download('kantor_dinas.xlsx');
     }
 
     public function exportForum()

@@ -137,7 +137,7 @@
                             <label for="tahun" class="form-label mb-0 me-2">Tahun:</label>
                         </div>
                         <div class="col-auto">
-                            <select name="filter_tahun" id="filter_tahun" class="form-select">
+                            <select name="filter_tahun_proposal" id="filter_tahun_proposal" class="form-select">
                                 <option value="">-- Semua Tahun --</option>
                                 {{-- @foreach ($tahunList as $tahun)
                                     <option value="{{ $tahun }}" {{ request('tahun') == $tahun ? 'selected' : '' }}>

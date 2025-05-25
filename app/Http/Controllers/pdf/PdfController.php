@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Alat;
 use App\Models\Comment;
 use App\Models\Forum;
+use App\Models\KantorDinas;
 use App\Models\ReportAlat;
 use App\Models\Role;
 use App\Models\User;
@@ -28,6 +29,13 @@ class PdfController extends Controller
     {
         $role = Role::all();
         $pdf = Pdf::loadView('exports.pdf.roleExport', compact('role'));
+        return $pdf->download('invoice.pdf');
+    }
+
+    public function exportPdfkantorDinas()
+    {
+        $kantor_dinas = KantorDinas::all();
+        $pdf = Pdf::loadView('exports.pdf.kantor_dinasExport', compact('kantor_dinas'));
         return $pdf->download('invoice.pdf');
     }
 

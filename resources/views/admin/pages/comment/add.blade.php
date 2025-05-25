@@ -30,7 +30,7 @@
 
                     <div class="text-start">
                         <a href="/pages/comment" class="btn btn-danger mt-3">Kembali</a>
-                        <button type="submit" class="btn btn-primary mt-3">Simpan</button>
+                        <button type="submit" class="btn btn-success mt-3">Simpan</button>
                     </div>
                 </form>
             </div>

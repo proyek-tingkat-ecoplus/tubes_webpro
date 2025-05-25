@@ -127,6 +127,7 @@ Route::prefix('exports')->middleware(["auth:api","role:Petugas,Admin,Kepala Desa
     Route::get('/proposal/excel', [ExportController::class, 'exportProposal']);
     Route::get('/inventaris/excel', [ExportController::class, 'exportInventaris']);
     Route::get('/pemetaanalat/excel', [ExportController::class, 'exportPemetaan']);
+    Route::get('/kantor_dinas/excel', [ExportController::class, 'exportkantorDinas']);
 
 
     Route::get('/users/pdf', [PdfController::class, 'exportPdfUser']);
@@ -135,6 +136,7 @@ Route::prefix('exports')->middleware(["auth:api","role:Petugas,Admin,Kepala Desa
     Route::get('/comment/pdf', [PdfController::class, 'exportPdfComment']);
     Route::get('/inventaris/pdf', [PdfController::class, 'exportPdfInventaris']);
     Route::get('/pemetaanalat/pdf', [PdfController::class, 'exportPdfPemetaan']);
+    Route::get('/kantor_dinas/pdf', [PdfController::class, 'exportPdfkantorDinas']);
 });
 
 
